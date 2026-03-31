@@ -1,0 +1,40 @@
+{
+  "intermediates": {
+    "garch_omega": {
+      "value": 2.117783538479185e-06
+    },
+    "garch_alpha": {
+      "value": 0.01585125818385666
+    },
+    "garch_beta": {
+      "value": 0.9746670103441321
+    },
+    "garch_persistence": {
+      "value": 0.9905182685279887
+    },
+    "long_run_variance": {
+      "value": 0.00022335409357780115
+    },
+    "garch_vol": {
+      "value": 0.2586800935459663
+    },
+    "bond_pv": {
+      "value": 994.6145537913911
+    },
+    "option_unit_price": {
+      "value": 2.872381201225288
+    },
+    "option_value": {
+      "value": 40.743124255926816
+    },
+    "n_options": {
+      "value": 14.184441897387014
+    },
+    "option_delta": {
+      "value": 0.4220509480060492
+    },
+    "note_delta": {
+      "value": 5.986557149728912
+    }
+  }
+}
