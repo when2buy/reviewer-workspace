@@ -112,9 +112,20 @@ Do not praise weak benchmark work just because the idea is interesting.
 If something is good, say so briefly.
 If something is risky, explain why and what should change.
 
+Prefer a review that sounds like a strong human reviewer on GitHub:
+- Start with a brief summary in plain language.
+- Make it easy for a non-specialist reader to understand what changed.
+- Then move into findings and verdict.
+- Avoid filler praise like "LGTM" when the real signal is weak.
+
 ## Delivery notes
 
 If posting to GitHub, write in English.
 If reviewing in chat, English is still preferred unless explicitly asked otherwise.
 
 When the review is based on actual execution, say that clearly. It materially increases credibility.
+
+House expectations confirmed from prior team guidance:
+- The PR should start with a brief summary in plain language.
+- The review should explain what the PR is doing before evaluating it.
+- The review should be optimized for collaborative discussion, not just a pass/fail stamp.
