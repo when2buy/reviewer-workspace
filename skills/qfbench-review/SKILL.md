@@ -42,8 +42,10 @@ Do not stop at “tests pass”. In this project, passing tests can still hide:
    - Assume the reader may not know the financial method.
    - State what the task is trying to make an agent do.
    - State why it matters for the benchmark.
+   - Do this before diving into findings.
 
 2. Include a "What I did to review this" section.
+   - This is required, not optional.
    - List files inspected.
    - List commands or runs performed.
    - Note any hand-checks, recomputation, or comparisons.
@@ -51,6 +53,7 @@ Do not stop at “tests pass”. In this project, passing tests can still hide:
 
 3. Prefer execution over speculation when feasible.
    - Run the oracle or verifier when access and time allow.
+   - If you did not run anything important, say that plainly.
    - Check whether reward-writing logic is robust.
    - Inspect whether tests recompute from inputs or just pin constants.
 
@@ -59,12 +62,18 @@ Do not stop at “tests pass”. In this project, passing tests can still hide:
    - Do tests verify the right thing?
    - Can an agent game the task without doing the intended work?
    - Does the claimed difficulty match the evidence?
+   - Is the task actually useful for evaluating agent ability, or just a narrow implementation exercise?
 
 5. Be explicit about severity.
    - `[CRITICAL]` blocks merge.
    - `[MAJOR]` should be fixed unless there is a strong reason not to.
    - `[MINOR]` is worthwhile but non-blocking.
    - `[NIT]` is optional.
+
+6. Prefer substantive benchmark comments over line-by-line code nits.
+   - Focus on whether the task is a good benchmark item.
+   - Style comments come last.
+   - If a PR has only minor issues, say that clearly instead of padding the review.
 
 ## QFBench-specific red flags
 
@@ -84,15 +93,17 @@ Treat these as deep-review triggers:
 
 Follow the template in `references/review-template.md`.
 
-The review should usually contain:
+The review should usually contain, in this order:
 - title / PR identifier
 - plain-language explanation of the PR
 - what you did to review it
-- scorecard across benchmark dimensions
+- scorecard across benchmark dimensions when helpful
 - findings with severity labels
 - concise summary
 - final verdict: `APPROVE`, `REQUEST CHANGES`, or `NEEDS DISCUSSION`
 
+The output should read like a real GitHub review comment, not a lab report.
+Front-load the most decision-relevant points.
 ## Tone
 
 Be direct and concrete.
