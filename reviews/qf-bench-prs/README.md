@@ -16,7 +16,7 @@ Status legend:
 | #130 | ml-credit-scoring-fairness | todo |
 | #129 | fx-forward-cross-rate | todo |
 | #128 | etf-cross-asset-lead-lag | todo |
-| #127 | crypto-funding-rate-basis-carry | todo |
+| #127 | crypto-funding-rate-basis-carry | drafted |
 | #126 | merton-cds-copula | todo |
 | #125 | bl-regime-hmm | todo |
 | #124 | pairs-cointegration-kalman | todo |
@@ -30,8 +30,8 @@ Status legend:
 | #116 | cheapest-ETF-creation-basket | todo |
 | #115 | ledoit-wolf-shrinkage | todo |
 | #114 | brinson-sector-attribution | todo |
-| #112 | ewma-portfolio-risk-decomposition | todo |
-| #111 | historical-var-data-prep | todo |
+| #112 | ewma-portfolio-risk-decomposition | drafted |
+| #111 | historical-var-data-prep | drafted |
 | #110 | evt-pot-var | todo |
 | #107 | realized-vol-estimators | todo |
 | #106 | etf-overlap-redemption-pressure | todo |
@@ -57,5 +57,5 @@ Status legend:
 | #81 | lmm-markov-representation | todo |
 | #79 | execution-is-vwap | todo |
 | #78 | fx-carry-trade-backtest | drafted |
-| #74 | black-litterman-allocation | posted-upstream |
+| #74 | black-litterman-allocation | drafted + posted-upstream |
 
