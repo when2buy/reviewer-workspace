@@ -11,3 +11,7 @@ Included:
 
 Source of truth for the vendored skill copy during inspection:
 - `/home/node/.openclaw/skills/code-review/`
+
+Harbor-specific review stance captured here:
+- If agents cannot access `/tests` at runtime, visible verifier logic is **not** treated as leakage by default.
+- Default blockers should focus on runtime-relevant correctness, contract alignment, reproducibility, scope hygiene, and trustworthy grading behavior.

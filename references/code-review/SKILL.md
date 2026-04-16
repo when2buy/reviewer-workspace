@@ -91,9 +91,10 @@ For benchmark-task PRs, prefer the following additions when they improve clarity
 - Use a weighted scorecard, not just loose bullets.
 - Score dimensions that reflect benchmark quality, for example: structural completeness, data quality / ground truth, reasoning & domain knowledge, and evaluation criteria.
 - In each low-scoring section, explain both the benchmark risk and the concrete fix.
-- When a flaw is fundamental, say so directly, for example answer leakage, oracle exposure, contract mismatch, or invalid difficulty evidence.
+- When a flaw is fundamental, say so directly, for example contract mismatch, invalid difficulty evidence, broken failure handling, wrong financial logic, or bad PR scope hygiene.
 - If the task is financially sensitive, call out hidden formula bugs that may be masked by the current test parameters.
 - Prefer actionable fixes such as adding a non-unit horizon test, tightening tolerance, or replacing exposed constants with invariant checks.
+- Important Harbor execution-model rule: do **not** call visible `tests/` logic or public verifier code a leakage blocker when agents cannot access `/tests` at runtime. Under Harbor, that is not runtime leakage. Only raise it if the user explicitly wants public-benchmark-hygiene / contamination-resistance review, or if the verifier logic is somehow actually reachable by the agent during execution.
 
 ### 5. Deliver
 
