@@ -7,6 +7,7 @@ Included:
 - `review-checklist.md`
 - `finbench-standards.md`
 - `anti-patterns.md`
+- `examples-finbench-review.md`
 
 Source of truth for the vendored skill copy during inspection:
 - `/home/node/.openclaw/skills/code-review/`

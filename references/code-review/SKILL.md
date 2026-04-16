@@ -54,7 +54,9 @@ Example: "I ran the oracle script against all 13 test cases and verified
 the DD formula by hand for T=0.5."]
 
 ### Scorecard (for finbench task PRs)
-[Dimensions, scores, weights, weighted total, threshold, verdict color]
+[Use explicit dimensions, numeric scores, weights, weighted total, threshold,
+and verdict color. Prefer a compact table when posting to GitHub or saving
+local review docs.]
 
 ### Findings
 
@@ -74,12 +76,24 @@ File: `path/to/file.py`, line N
 
 ### Summary
 [Concise recap. Lead with the blockers. End with the verdict.]
+[For finbench task PRs, include a short priority/action table when it helps
+make the re-review path obvious.]
 
 ### Verdict
 APPROVE / REQUEST CHANGES / NEEDS DISCUSSION
 
 [One sentence explaining the verdict]
 ```
+
+#### Finbench task review style notes
+For benchmark-task PRs, prefer the following additions when they improve clarity:
+- Start with a plain-language task explanation plus a short "review focus" note explaining what could invalidate the benchmark.
+- Use a weighted scorecard, not just loose bullets.
+- Score dimensions that reflect benchmark quality, for example: structural completeness, data quality / ground truth, reasoning & domain knowledge, and evaluation criteria.
+- In each low-scoring section, explain both the benchmark risk and the concrete fix.
+- When a flaw is fundamental, say so directly, for example answer leakage, oracle exposure, contract mismatch, or invalid difficulty evidence.
+- If the task is financially sensitive, call out hidden formula bugs that may be masked by the current test parameters.
+- Prefer actionable fixes such as adding a non-unit horizon test, tightening tolerance, or replacing exposed constants with invariant checks.
 
 ### 5. Deliver
 
