@@ -140,7 +140,6 @@ Notes:
 | #40 | Dongzhikang | feat: add earnings-surprise-calculator task | — | 2026-04-06 | no | yes | yes | yes | no | todo | [pr-040.md](./pr-040.md) |
 | #39 | Dongzhikang | feat: add corporate-action-adjustment task | — | 2026-04-06 | no | yes | yes | yes | no | todo | [pr-039.md](./pr-039.md) |
 | #38 | Dongzhikang | feat: add zero-coupon-bootstrapping task | — | 2026-04-06 | no | — | yes | yes | no | todo | [pr-038.md](./pr-038.md) |
-| #37 | judy12345 | task proposal | — | 2026-04-21 | no | — | yes | yes | no | todo | [pr-037.md](./pr-037.md) |
 | #28 | Dongzhikang | pq_cat: hull-white-swaption hints + mc-greek-surface-1 task + stochvol benchmark results | foxie-huang, labubububula78-poop | 2026-04-15 | no | yes | no | yes | no | todo | [pr-028.md](./pr-028.md) |
 | #23 | PQCat | Add stochvol-implied-surface-new task | PQCat | 2026-04-15 | yes | yes | yes | yes | no | todo | [pr-023.md](./pr-023.md) |
 | #4 | Dongzhikang | Add 15 medium-hard benchmark tasks (fixed-income, derivatives, risk, quant-strategy) | — | 2026-04-21 | no | — | yes | yes | no | todo | [pr-004.md](./pr-004.md) |
@@ -232,7 +231,6 @@ Open task PRs that currently have **no submitted human review**. This is the mai
 | #40 | Dongzhikang | feat: add earnings-surprise-calculator task | — | 2026-04-06 | yes | yes | yes | no | todo | [pr-040.md](./pr-040.md) |
 | #39 | Dongzhikang | feat: add corporate-action-adjustment task | — | 2026-04-06 | yes | yes | yes | no | todo | [pr-039.md](./pr-039.md) |
 | #38 | Dongzhikang | feat: add zero-coupon-bootstrapping task | — | 2026-04-06 | — | yes | yes | no | todo | [pr-038.md](./pr-038.md) |
-| #37 | judy12345 | task proposal | — | 2026-04-21 | — | yes | yes | no | todo | [pr-037.md](./pr-037.md) |
 | #28 | Dongzhikang | pq_cat: hull-white-swaption hints + mc-greek-surface-1 task + stochvol benchmark results | foxie-huang, labubububula78-poop | 2026-04-15 | yes | no | yes | no | todo | [pr-028.md](./pr-028.md) |
 | #4 | Dongzhikang | Add 15 medium-hard benchmark tasks (fixed-income, derivatives, risk, quant-strategy) | — | 2026-04-21 | — | yes | yes | no | todo | [pr-004.md](./pr-004.md) |
 | #2 | PQCat | Add momentum-backtest task | Dongzhikang, foxie-huang, joyceHe703, labubububula78-poop | 2026-04-21 | yes | yes | yes | no | todo | [pr-002.md](./pr-002.md) |
