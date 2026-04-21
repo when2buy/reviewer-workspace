@@ -8,21 +8,27 @@ Status legend:
 - `posted-upstream` — already posted to the upstream PR
 - `needs-recheck` — draft exists but should be revisited before posting
 
-Last synchronized: 2026-04-19
+Last synchronized: 2026-04-21
 
 Notes:
 - `Human Review` excludes `github-actions` CI comments.
 - `Reviewer(s)` lists submitted human reviewers first; if none exist, it falls back to requested reviewers.
-- `1st Review Label` and `2nd Review Label` reflect the current GitHub labels, not inferred workflow state.
+- `1st Review Label`, `2nd Review Label`, and `Ready to Merge` reflect the current GitHub labels, not inferred workflow state.
 
 ## Open Task PR Tracker
 
 | PR | PR Author | Title | Reviewer(s) | Last Updated | Human Review | 1st Review Label | 2nd Review Label | Ready to Merge | Local Status | Summary |
 |---|---|---|---|---|---|---|---|---|---|---|
+| #151 | gem-mint | Add task/fomc tone event study | — | 2026-04-21 | no | no | no | no | todo | [pr-151.md](./pr-151.md) |
+| #150 | gem-mint | Add task/earnings news event alpha | — | 2026-04-20 | no | no | no | no | todo | [pr-150.md](./pr-150.md) |
+| #149 | gem-mint | Add task/liquidity-adjusted VaR backtesting | — | 2026-04-20 | no | no | no | no | todo | [pr-149.md](./pr-149.md) |
+| #148 | judy12345 | Task3 | — | 2026-04-20 | no | no | no | no | todo | [pr-148.md](./pr-148.md) |
+| #147 | judy12345 | Task2 | — | 2026-04-20 | no | no | no | no | todo | [pr-147.md](./pr-147.md) |
+| #146 | judy12345 | Task1 | — | 2026-04-20 | no | no | no | no | todo | [pr-146.md](./pr-146.md) |
 | #144 | mingjun-sun | Add task stable-residual | — | 2026-04-20 | no | no | no | no | todo | [pr-144.md](./pr-144.md) |
 | #143 | mingjun-sun | Add task residual-momentum | — | 2026-04-20 | no | no | no | no | todo | [pr-143.md](./pr-143.md) |
 | #142 | mingjun-sun | Add task double-sort | — | 2026-04-20 | no | no | no | no | todo | [pr-142.md](./pr-142.md) |
-| #141 | YoutingWang | feat: add swap-curve-bootstrap-ois task (medium, fixed-income) | — | 2026-04-19 | no | no | no | no | todo | [pr-141.md](./pr-141.md) |
+| #141 | YoutingWang | feat: add swap-curve-bootstrap-ois task (medium, fixed-income) | — | 2026-04-21 | no | no | no | no | todo | [pr-141.md](./pr-141.md) |
 | #140 | Jingyi-Jia | feat: add localvol barrier task | PQCat, foxie-huang | 2026-04-19 | no | no | yes | no | todo | [pr-140.md](./pr-140.md) |
 | #139 | Jingyi-Jia | Add MTM XCCY basis desk task and improve Finance-Zero extraction | PQCat, foxie-huang | 2026-04-19 | no | no | yes | no | todo | [pr-139.md](./pr-139.md) |
 | #137 | xushenbo | Add task: multimodal-alpha-fusion-edgar-cot-gdelt | yunfei67 | 2026-04-20 | yes | yes | yes | no | todo | [pr-137.md](./pr-137.md) |
@@ -118,10 +124,16 @@ Open task PRs that currently have **no submitted human review**. This is the mai
 
 | PR | PR Author | Title | Requested / Fallback Reviewer(s) | Last Updated | 1st Review Label | 2nd Review Label | Ready to Merge | Local Status | Summary |
 |---|---|---|---|---|---|---|---|---|---|
+| #151 | gem-mint | Add task/fomc tone event study | — | 2026-04-21 | no | no | no | todo | [pr-151.md](./pr-151.md) |
+| #150 | gem-mint | Add task/earnings news event alpha | — | 2026-04-20 | no | no | no | todo | [pr-150.md](./pr-150.md) |
+| #149 | gem-mint | Add task/liquidity-adjusted VaR backtesting | — | 2026-04-20 | no | no | no | todo | [pr-149.md](./pr-149.md) |
+| #148 | judy12345 | Task3 | — | 2026-04-20 | no | no | no | todo | [pr-148.md](./pr-148.md) |
+| #147 | judy12345 | Task2 | — | 2026-04-20 | no | no | no | todo | [pr-147.md](./pr-147.md) |
+| #146 | judy12345 | Task1 | — | 2026-04-20 | no | no | no | todo | [pr-146.md](./pr-146.md) |
 | #144 | mingjun-sun | Add task stable-residual | — | 2026-04-20 | no | no | no | todo | [pr-144.md](./pr-144.md) |
 | #143 | mingjun-sun | Add task residual-momentum | — | 2026-04-20 | no | no | no | todo | [pr-143.md](./pr-143.md) |
 | #142 | mingjun-sun | Add task double-sort | — | 2026-04-20 | no | no | no | todo | [pr-142.md](./pr-142.md) |
-| #141 | YoutingWang | feat: add swap-curve-bootstrap-ois task (medium, fixed-income) | — | 2026-04-19 | no | no | no | todo | [pr-141.md](./pr-141.md) |
+| #141 | YoutingWang | feat: add swap-curve-bootstrap-ois task (medium, fixed-income) | — | 2026-04-21 | no | no | no | todo | [pr-141.md](./pr-141.md) |
 | #140 | Jingyi-Jia | feat: add localvol barrier task | PQCat, foxie-huang | 2026-04-19 | no | yes | no | todo | [pr-140.md](./pr-140.md) |
 | #139 | Jingyi-Jia | Add MTM XCCY basis desk task and improve Finance-Zero extraction | PQCat, foxie-huang | 2026-04-19 | no | yes | no | todo | [pr-139.md](./pr-139.md) |
 | #134 | Jiahao-Xie-86 | Add task sector-neutral-residual-momentum (hard) | Dongzhikang, Jingyi-Jia | 2026-04-15 | yes | yes | no | todo | [pr-134.md](./pr-134.md) |
