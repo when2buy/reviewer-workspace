@@ -74,6 +74,6 @@ E         ? ++
 Ambitious multi-domain task (HMM + BL + portfolio optimization) with excellent instruction detail. However, all three frontier models fail, and the tight checkpoints on HMM internals create an implementation-matching problem rather than a financial reasoning test. The HMM convergence path is implementation-sensitive.
 
 ### Verdict
-**不建议 Merge**
+**需要 Human Review**
 
-All frontier models fail. The tight HMM checkpoints make this an implementation-matching exercise. Recommend: (1) relax HMM internal checkpoints significantly (or remove them and only check final outputs), (2) accept `hmmlearn`-based solutions, (3) re-run trials after relaxation.
+Task concept is excellent (HMM + BL is genuine quant territory) and Opus achieves 0.92 partial credit — very close to passing. The 0:0:0 strict result is due to tight HMM internal checkpoints, not fundamental incorrectness. As a Hard task, having no model fully pass is acceptable for benchmark discrimination. Recommend: (1) relax HMM internal checkpoints (or only check final portfolio outputs), (2) accept `hmmlearn`-based solutions. With minor tolerance tuning this becomes a strong benchmark item.

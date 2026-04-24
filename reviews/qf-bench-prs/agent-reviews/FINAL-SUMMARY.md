@@ -1,7 +1,8 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 40 (38%) | ❌ 不建议Merge: 42 (40%) | 🟡 需要Human Review: 23 (22%)
+**Total:** ✅ 建议Merge: 40 (38%) | ❌ 不建议Merge: 41 (39%) | 🟡 需要Human Review: 24 (23%)
+| #125 | bl-regime-hmm | GinkgoGao | 0:0.92:0.58 | Opus 接近满分，放宽 HMM tolerance 即可 |
 
 ---
 
@@ -81,7 +82,6 @@
 | #106 | etf-overlap-redemption-pressure | Minxuan-Hu | Docker base image 错误 |
 | #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 |
 | #124 | pairs-cointegration-kalman | GinkgoGao | 非标准 ADF + 不合理经济学 |
-| #125 | bl-regime-hmm | GinkgoGao | HMM checkpoints 太紧 |
 | #127 | crypto-funding-rate-basis-carry | xinlan-technology | 16-32 test 失败，值硬编码 |
 | #136 | quantamental-earnings-jumpfilter | xushenbo | Docker build 失败 |
 | #137 | multimodal-alpha-fusion | xushenbo | 0/0/0 零区分度 |

@@ -21,8 +21,8 @@ Analyze BTCUSDT perpetual funding rate economics: descriptive stats, autocorrela
 
 ### Findings
 
-#### [CRITICAL] All models score 0.0 — massive test failure rates
-H45: 32 failed / 63 total. Opus46: 26 failed. S45: 16 failed / 63 total. The provided scores are (H:0.0, O:0.0, S:0.0). The strict 0/1 verifier means even one failure → reward 0, but the sheer number of failures indicates fundamental specification problems.
+#### [CRITICAL] Unit mismatch: models produce decimal, oracle expects basis points (10000x off)
+All models score 0.0 (H:32/63 failed, O:26/63, S:16/63). The failure output reveals the root cause: models compute `mean=0.547` while oracle expects `5.493e-05`. This is a ~10000x discrepancy, strongly suggesting a decimal-vs-percentage unit bug in either the oracle or the data interpretation. Note: 0:0:0 alone would not block a Hard task, but this is a clear oracle/data bug.
 
 #### [CRITICAL] Test pins exact numeric values with very tight tolerances
 File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/c2fca48/tasks/crypto-funding-rate-basis-carry/tests/test_outputs.py)

@@ -8,7 +8,7 @@ Build a complete pairs trading pipeline: clean price data, run Engle-Granger coi
 ### What I Did to Review This
 - Read: `instruction.md`, `task.toml`, `solution/solve.sh`, `tests/test_outputs.py`, `tests/verifier.py`, `tests/reference_data/expected.json`, `tests/reference_data/checkpoints.json`
 - Checked: oracle correctness, ADF implementation, Kalman filter equations, backtest logic, tolerance calibration
-- Reviewed trial outputs: H45 FAILED, Opus46 FAILED, S45 FAILED — all three models fail
+- Reviewed trial outputs: H45 FAILED, Opus46 FAILED, S45 FAILED - all three models fail
 
 ### Scorecard
 | Dimension | Score |
@@ -21,8 +21,8 @@ Build a complete pairs trading pipeline: clean price data, run Engle-Granger coi
 
 ### Findings
 
-#### [CRITICAL] All three frontier models fail — task may be over-specified or have oracle issues
-All trials (H45, Opus46, S45) produce FAILED results. The provided scores (H:0.38, O:0.79, S:0.71) suggest partial credit in some scoring system, but the strict verifier rejects all. When no model can achieve PERFECT, the task is not discriminating reasoning ability — it's testing whether agents can guess the exact implementation choices of the oracle.
+#### [MAJOR] Oracle uses hand-rolled ADF instead of standard library
+All trials fail (H:0.38, O:0.79, S:0.71 partial credit, but strict verifier requires PERFECT). The root cause is the non-standard ADF implementation — the oracle hand-rolls ADF with `linregress` rather than using `statsmodels.adfuller`, producing different statistics that cascade into cointegration classification failures. Note: 0:0:0 on a Hard task is not inherently bad for benchmark purposes, but here it’s caused by oracle implementation specificity, not task difficulty.
 
 #### [MAJOR] Oracle ADF implementation is non-standard
 File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/161c50c/tasks/pairs-cointegration-kalman/solution/solve.sh)
@@ -34,11 +34,11 @@ The oracle computes half-life as `-log(2)/log(|lag1_autocorr|)` on the Kalman sp
 
 #### [MAJOR] Backtest PnL uses spread change directly without normalization
 File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/161c50c/tasks/pairs-cointegration-kalman/solution/solve.sh)
-`pnl[t] = prev_pos * (-spread_change)` — this trades the raw Kalman innovation spread without normalizing for position sizing or notional. The annualized return of -18.2 and max drawdown of 2.44 (244%!) indicate the strategy is deeply unprofitable, which makes the task test whether agents can reproduce a failing strategy rather than build a correct one.
+`pnl[t] = prev_pos * (-spread_change)` - this trades the raw Kalman innovation spread without normalizing for position sizing or notional. The annualized return of -18.2 and max drawdown of 2.44 (244%!) indicate the strategy is deeply unprofitable, which makes the task test whether agents can reproduce a failing strategy rather than build a correct one.
 
 #### [MINOR] Expected max_drawdown > 1.0 (244%)
 File: [`tests/reference_data/expected.json`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/161c50c/tasks/pairs-cointegration-kalman/tests/reference_data/expected.json)
-`max_drawdown: 2.44` — a drawdown exceeding 100% implies the portfolio can go significantly negative. This is unusual for a pairs strategy benchmark and may confuse agents about the output convention.
+`max_drawdown: 2.44` - a drawdown exceeding 100% implies the portfolio can go significantly negative. This is unusual for a pairs strategy benchmark and may confuse agents about the output convention.
 
 
 ### Trial Evidence
