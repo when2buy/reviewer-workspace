@@ -1,0 +1,45 @@
+# Review: PR #102 - intraday-volume-fitting-and-execution-scheduling
+Reviewer: Agent 🔍 | Date: 2026-04-23
+
+### What This PR Does
+Given intraday OHLCV data, evaluate four volume-share prediction models (mean, median, EWMA, winsorized mean) via rolling walk-forward R², select the best model, and generate an execution schedule for a given order.
+
+### What I Did to Review This
+- Read: `instruction.md`, `task.toml`, `tests/test_outputs.py`, `tests/test.sh`, `environment/Dockerfile`
+- Checked trial results: H45=0.0, Opus46=1.0, S45=1.0
+- Analyzed H45 test stdout for failure mode
+
+### Scorecard
+- Task contract / instruction: 4/5 — very detailed but lengthy
+- Verifier robustness: 4/5 — reference-based with tolerances; schedule quantity tolerance QTY_TOL=1 is tight
+- Difficulty calibration: 4/5 — good separation: H45=0.0, Opus46=1.0, S45=1.0
+- Model discrimination: 3/5 — separates H45 from stronger models but Opus/S45 both pass
+- Benchmark integrity: 4/5 — reference data comparison, hard to game
+- Data realism: 4/5 — realistic intraday volume data
+
+### Findings
+
+#### [MAJOR] H45 fails on schedule construction, not model fitting
+File: H45 test-stdout
+
+H45 passes the model selection tests (excluded days, model performance, best model) but fails on `final_schedule` tests. The schedule cumulative quantity deviates by up to 220 from reference (tolerance is 1). This means H45 correctly identifies the best model but incorrectly constructs the execution schedule — likely a different interpretation of which bars are eligible (the "strictly after order datetime" test also fails).
+
+The instruction specifies the schedule should use bars "strictly after" the order datetime, but this boundary condition is apparently tricky for H45.
+
+#### [MINOR] Hard difficulty rating seems appropriate
+File: `task.toml`
+
+Rated "hard" with expert estimate 90 min. The H45=0.0 vs Opus46/S45=1.0 split supports this — the task requires careful attention to multiple data processing steps, rolling evaluation, and schedule construction.
+
+#### [MINOR] Reference data comparison is byte-sensitive for excluded_days
+File: `tests/test_outputs.py`
+
+`test_excluded_days_matches_reference` uses `pd.testing.assert_frame_equal` with `check_dtype=True`, which is strict. This is appropriate since excluded days should be deterministic.
+
+### Summary
+Well-designed execution/microstructure task with realistic intraday data. Good model separation between H45 and stronger models. The schedule construction boundary condition trips up weaker models, which is legitimate discrimination. The task works as intended.
+
+### Verdict
+**建议 Merge**
+
+Good difficulty calibration (H45=0.0, Opus46=1.0, S45=1.0), clear specification, robust verifier. The schedule boundary condition that trips H45 is a legitimate test of instruction-following precision.
