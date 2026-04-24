@@ -8,7 +8,7 @@ Status legend:
 - `posted-upstream` — already posted to the upstream PR
 - `needs-recheck` — draft exists but should be revisited before posting
 
-Last synchronized: 2026-04-23
+Last synchronized: 2026-04-24
 
 Notes:
 - `Human Review` excludes `github-actions` CI comments.
@@ -20,6 +20,36 @@ Notes:
 
 | PR | PR Author | Title | Reviewer(s) | Last Updated | Human Review | Oracle | Haiku Test | 1st Review Label | 2nd Review Label | Ready to Merge | Local Status | Summary |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
+| #209 | Dongzhikang | Add task weekly-garch-vol-proxy | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-209.md](./pr-209.md) |
+| #208 | Dongzhikang | Add task garch-sp500-fit | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-208.md](./pr-208.md) |
+| #207 | Dongzhikang | Add task jarque-bera-normality-test | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-207.md](./pr-207.md) |
+| #206 | Dongzhikang | Add task gh-distribution-fitting | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-206.md](./pr-206.md) |
+| #205 | Dongzhikang | Add task standard-var-methods | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-205.md](./pr-205.md) |
+| #204 | Dongzhikang | Add task panjer-recursion | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-204.md](./pr-204.md) |
+| #203 | Dongzhikang | Add task block-maxima-gev | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-203.md](./pr-203.md) |
+| #202 | Dongzhikang | Add task intensity-credit-model | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-202.md](./pr-202.md) |
+| #201 | Dongzhikang | Add task copula-sampling-rank-correlation | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-201.md](./pr-201.md) |
+| #200 | Dongzhikang | Add task merton-structural-credit | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-200.md](./pr-200.md) |
+| #199 | Dongzhikang | Add task single-loss-approximation | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-199.md](./pr-199.md) |
+| #198 | Dongzhikang | Add task ljung-box-serial-dependence | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-198.md](./pr-198.md) |
+| #197 | Dongzhikang | Add task one-factor-equity-model | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-197.md](./pr-197.md) |
+| #196 | Dongzhikang | Add task copula-garch-portfolio | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-196.md](./pr-196.md) |
+| #195 | Dongzhikang | Add task creditrisk-plus-model | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-195.md](./pr-195.md) |
+| #194 | Dongzhikang | Add task var-es-coherence | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-194.md](./pr-194.md) |
+| #193 | Dongzhikang | Add task creditmetrics-portfolio-var | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-193.md](./pr-193.md) |
+| #192 | Dongzhikang | Add task pca-equity-returns | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-192.md](./pr-192.md) |
+| #191 | Dongzhikang | Add task rolling-correlation-indices | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-191.md](./pr-191.md) |
+| #190 | Dongzhikang | Add task ewma-correlation-sensitivity | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-190.md](./pr-190.md) |
+| #189 | Dongzhikang | Add task geometric-spacings-test | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-189.md](./pr-189.md) |
+| #188 | Dongzhikang | Add task vasicek-portfolio-credit | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-188.md](./pr-188.md) |
+| #187 | Dongzhikang | Add task delta-gamma-option-var | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-187.md](./pr-187.md) |
+| #186 | Dongzhikang | Add task pot-gpd-bitcoin | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-186.md](./pr-186.md) |
+| #185 | Dongzhikang | Add task gaussian-copula-credit | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-185.md](./pr-185.md) |
+| #184 | Dongzhikang | Add task fft-compound-poisson | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-184.md](./pr-184.md) |
+| #183 | Dongzhikang | Add task pca-yield-curve | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-183.md](./pr-183.md) |
+| #182 | Dongzhikang | Add task var-es-estimation | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-182.md](./pr-182.md) |
+| #181 | Dongzhikang | Add task copula-equity-fitting | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-181.md](./pr-181.md) |
+| #180 | Dongzhikang | Add task smith-tail-index | — | 2026-04-24 | no | yes | - | no | no | no | todo | [pr-180.md](./pr-180.md) |
 | #179 | PQCat | Fix Hull-White trinomial boundary probability signs | — | 2026-04-23 | no | — | - | no | no | no | todo | [pr-179.md](./pr-179.md) |
 | #178 | Dongzhikang | Add task variance-swap-pricing | — | 2026-04-21 | no | — | - | no | no | no | todo | [pr-178.md](./pr-178.md) |
 | #177 | Dongzhikang | Add task spread-option-kirk-margrabe | — | 2026-04-21 | no | — | - | no | no | no | todo | [pr-177.md](./pr-177.md) |
@@ -48,7 +78,7 @@ Notes:
 | #154 | Dongzhikang | Add task barone-adesi-whaley | — | 2026-04-21 | no | — | - | no | no | no | todo | [pr-154.md](./pr-154.md) |
 | #153 | Dongzhikang | Add task asian-option-levy-curran | — | 2026-04-21 | no | — | - | no | no | no | todo | [pr-153.md](./pr-153.md) |
 | #152 | Dongzhikang | Add task american-binomial-tree | — | 2026-04-21 | no | — | - | no | no | no | todo | [pr-152.md](./pr-152.md) |
-| #151 | gem-mint | Add task/fomc tone event study | Jingyi-Jia, beckybyte | 2026-04-21 | no | — | - | yes | yes | no | todo | [pr-151.md](./pr-151.md) |
+| #151 | gem-mint | Add task/fomc tone event study | Jingyi-Jia, beckybyte | 2026-04-24 | no | — | - | yes | yes | no | todo | [pr-151.md](./pr-151.md) |
 | #150 | gem-mint | Add task/earnings news event alpha | github-actions | 2026-04-21 | yes | yes | 0 | yes | yes | no | todo | [pr-150.md](./pr-150.md) |
 | #149 | gem-mint | Add task/liquidity-adjusted VaR backtesting | github-actions | 2026-04-21 | yes | yes | infra issue | yes | yes | no | todo | [pr-149.md](./pr-149.md) |
 | #148 | judy12345 | Task3 | github-actions | 2026-04-21 | yes | yes | infra issue | yes | yes | no | todo | [pr-148.md](./pr-148.md) |
@@ -61,13 +91,13 @@ Notes:
 | #141 | YoutingWang | feat: add swap-curve-bootstrap-ois task (medium, fixed-income) | github-actions | 2026-04-21 | yes | yes | infra issue | yes | yes | no | todo | [pr-141.md](./pr-141.md) |
 | #140 | Jingyi-Jia | feat: add localvol barrier task | PQCat, foxie-huang | 2026-04-21 | no | — | - | no | yes | no | todo | [pr-140.md](./pr-140.md) |
 | #139 | Jingyi-Jia | Add MTM XCCY basis desk task and improve Finance-Zero extraction | foxie-huang, PQCat, PQCat | 2026-04-21 | no | — | - | no | yes | no | todo | [pr-139.md](./pr-139.md) |
-| #137 | xushenbo | Add task: multimodal-alpha-fusion-edgar-cot-gdelt | github-actions, yunfei67 | 2026-04-20 | yes | yes | 0 | yes | yes | no | todo | [pr-137.md](./pr-137.md) |
-| #136 | xushenbo | Add task: quantamental-earnings-jumpfilter-committee | github-actions, yunfei67 | 2026-04-20 | yes | yes | infra issue | yes | yes | no | todo | [pr-136.md](./pr-136.md) |
-| #135 | xushenbo | Add task: prediction-markets-cross-venue-dislocation | github-actions, Dongzhikang | 2026-04-22 | yes | yes | infra issue | yes | yes | no | todo | [pr-135.md](./pr-135.md) |
+| #137 | xushenbo | Add task: multimodal-alpha-fusion-edgar-cot-gdelt | github-actions, yunfei67 | 2026-04-23 | yes | yes | 0 | yes | yes | no | todo | [pr-137.md](./pr-137.md) |
+| #136 | xushenbo | Add task: quantamental-earnings-jumpfilter-committee | github-actions, yunfei67 | 2026-04-23 | yes | yes | infra issue | yes | yes | no | todo | [pr-136.md](./pr-136.md) |
+| #135 | xushenbo | Add task: prediction-markets-cross-venue-dislocation | github-actions, Dongzhikang | 2026-04-23 | yes | yes | infra issue | yes | yes | no | todo | [pr-135.md](./pr-135.md) |
 | #134 | Jiahao-Xie-86 | Add task sector-neutral-residual-momentum (hard) | Dongzhikang, Jingyi-Jia | 2026-04-22 | no | — | - | yes | yes | no | todo | [pr-134.md](./pr-134.md) |
 | #133 | Jiahao-Xie-86 | Add task shrinkage-meanvar-portfolio (medium) | Dongzhikang, github-actions | 2026-04-22 | yes | yes | 0 | yes | yes | no | todo | [pr-133.md](./pr-133.md) |
 | #132 | Jiahao-Xie-86 | Add task dirty-gap-momentum-aapl (easy) | github-actions, yunfei67 | 2026-04-22 | yes | yes | 1 | yes | yes | no | todo | [pr-132.md](./pr-132.md) |
-| #131 | bochencs | feat: add garch-vecm-cointegration task (easy) | copilot-pull-request-reviewer, joyceHe703, bochencs | 2026-04-21 | yes | yes | 1 | yes | yes | no | todo | [pr-131.md](./pr-131.md) |
+| #131 | bochencs | feat: add garch-vecm-cointegration task (easy) | copilot-pull-request-reviewer, joyceHe703, bochencs | 2026-04-24 | yes | yes | 1 | yes | yes | no | todo | [pr-131.md](./pr-131.md) |
 | #130 | bochencs | feat: add ml-credit-scoring-fairness task (medium) | copilot-pull-request-reviewer, Dongzhikang, XiangningLin | 2026-04-18 | yes | yes | 0 | yes | yes | no | todo | [pr-130.md](./pr-130.md) |
 | #129 | bochencs | feat: add fx-forward-cross-rate task (easy) | copilot-pull-request-reviewer, yunfei67 | 2026-04-21 | yes | yes | 0 | yes | yes | no | todo | [pr-129.md](./pr-129.md) |
 | #128 | xinlan-technology | feat: add etf-cross-asset-lead-lag task (medium, cross-asset-analysis) | yunfei67 | 2026-04-16 | yes | yes | 0 | no | yes | no | todo | [pr-128.md](./pr-128.md) |
@@ -88,7 +118,7 @@ Notes:
 | #113 | YoutingWang | feat: add execution-ledger-pnl-reconciliation task | Dongzhikang, github-actions, YoutingWang | 2026-04-19 | yes | yes | 1 | yes | yes | no | todo | [pr-113.md](./pr-113.md) |
 | #112 | YoutingWang | feat: add ewma-portfolio-risk-decomposition task | oyzh888, labubububula78-poop | 2026-04-19 | no | — | - | yes | yes | no | todo | [pr-112.md](./pr-112.md) |
 | #111 | YoutingWang | feat: add historical-var-data-prep (easy, risk-management) | oyzh888, labubububula78-poop | 2026-04-19 | no | — | - | yes | yes | no | todo | [pr-111.md](./pr-111.md) |
-| #110 | boqiny | feat: add evt-pot-var task (Medium) | github-actions, joyceHe703 | 2026-04-21 | yes | yes | 0 | yes | yes | no | todo | [pr-110.md](./pr-110.md) |
+| #110 | boqiny | feat: add evt-pot-var task (Medium) | github-actions, joyceHe703 | 2026-04-24 | yes | yes | 0 | no | yes | no | todo | [pr-110.md](./pr-110.md) |
 | #109 | yyu56253 | feat: add variance-swap-replication task (medium) | github-actions, yunfei67 | 2026-04-14 | yes | yes | 1 | no | yes | no | todo | [pr-109.md](./pr-109.md) |
 | #108 | yyu56253 | feat: add delta-hedging-pnl-simulation task (medium) | github-actions, yunfei67 | 2026-04-14 | yes | yes | 0 | no | yes | no | todo | [pr-108.md](./pr-108.md) |
 | #107 | yyu56253 | feat: add realized-vol-estimators task (medium) | github-actions, yunfei67 | 2026-04-10 | yes | yes | 1 | no | yes | no | todo | [pr-107.md](./pr-107.md) |
@@ -99,22 +129,22 @@ Notes:
 | #102 | liup3424 | feat: add  intraday-volume-fitting-and-execution-scheduling task(Medium) | github-actions, joyceHe703, Jingyi-Jia | 2026-04-22 | yes | yes | 0 | no | yes | no | todo | [pr-102.md](./pr-102.md) |
 | #101 | boqiny | feat: add sec-8k-event-alpha task (Medium) | github-actions, yunfei67 | 2026-04-15 | yes | yes | 0 | yes | yes | no | todo | [pr-101.md](./pr-101.md) |
 | #100 | liup3424 | feat: add minimum-cost-equity-etf-hedger task(medium) | github-actions | 2026-04-23 | yes | yes | 1 | yes | yes | no | todo | [pr-100.md](./pr-100.md) |
-| #99 | Minxuan-Hu | feat: add 13f-amendment-aware-crowding (medium) | github-actions, Jingyi-Jia | 2026-04-21 | yes | yes | infra issue | yes | yes | no | todo | [pr-099.md](./pr-099.md) |
-| #98 | wshi83 | Add task: nelson-siegel-yield-curve-fit (hard) | github-actions, joyceHe703 | 2026-04-15 | yes | yes | 0 | yes | yes | no | todo | [pr-098.md](./pr-098.md) |
-| #97 | wshi83 | Add task: factor-momentum-spanning (hard) | github-actions, yunfei67, wshi83 | 2026-04-15 | yes | yes | 0 | yes | yes | no | todo | [pr-097.md](./pr-097.md) |
-| #96 | wshi83 | Add task: credit-spread-decomposition (hard) | github-actions, Jingyi-Jia | 2026-04-21 | yes | yes | infra issue | yes | yes | no | todo | [pr-096.md](./pr-096.md) |
+| #99 | Minxuan-Hu | feat: add 13f-amendment-aware-crowding (medium) | github-actions, Jingyi-Jia | 2026-04-24 | yes | yes | infra issue | yes | yes | no | todo | [pr-099.md](./pr-099.md) |
+| #98 | wshi83 | Add task: nelson-siegel-yield-curve-fit (medium) | github-actions, joyceHe703 | 2026-04-24 | yes | yes | 0 | no | yes | no | todo | [pr-098.md](./pr-098.md) |
+| #97 | wshi83 | Add task: factor-momentum-spanning (hard) | github-actions, yunfei67, wshi83 | 2026-04-24 | yes | yes | 0 | no | yes | no | todo | [pr-097.md](./pr-097.md) |
+| #96 | wshi83 | Add task: credit-spread-decomposition (medium) | github-actions, Jingyi-Jia | 2026-04-23 | yes | yes | infra issue | yes | yes | no | todo | [pr-096.md](./pr-096.md) |
 | #95 | wshi83 | Add task: fixed-income-market-stress | beckybyte, PQCat | 2026-04-12 | no | — | - | yes | yes | no | todo | [pr-095.md](./pr-095.md) |
 | #94 | wshi83 | Add task: trace-rate-flow-analysis | Dongzhikang, PQCat | 2026-04-12 | no | — | - | yes | yes | no | todo | [pr-094.md](./pr-094.md) |
 | #93 | wshi83 | Add task: yield-curve-pca-dynamics | github-actions, wshi83, yunfei67 | 2026-04-14 | yes | yes | 1 | no | yes | no | todo | [pr-093.md](./pr-093.md) |
 | #92 | owen8877 | feat: add sec-10k-report-long task (medium) | github-actions, joyceHe703 | 2026-04-18 | yes | yes | infra issue | no | yes | no | todo | [pr-092.md](./pr-092.md) |
-| #91 | owen8877 | feat: add polars-api-migration (medium) | github-actions | 2026-04-22 | yes | yes | infra issue | yes | yes | no | drafted | [pr-091.md](./pr-091.md) |
+| #91 | owen8877 | feat: add polars-api-migration (medium) | github-actions, joyceHe703 | 2026-04-24 | yes | yes | infra issue | no | yes | no | drafted | [pr-091.md](./pr-091.md) |
 | #89 | owen8877 | feat: add lob-pc-signal task (medium) | github-actions, joyceHe703, PQCat | 2026-04-18 | yes | yes | infra issue | no | no | yes | todo | [pr-089.md](./pr-089.md) |
-| #88 | harvenstar | feat: add event-study-earnings task (hard) | copilot-pull-request-reviewer, github-actions, joyceHe703, Jingyi-Jia | 2026-04-21 | yes | yes | 0 | yes | yes | no | todo | [pr-088.md](./pr-088.md) |
-| #87 | harvenstar | feat: add yield-curve-bootstrap-immunization task (hard) | copilot-pull-request-reviewer, github-actions, Jingyi-Jia | 2026-04-21 | yes | yes | infra issue | yes | yes | no | todo | [pr-087.md](./pr-087.md) |
+| #88 | harvenstar | feat: add event-study-earnings task (hard) | copilot-pull-request-reviewer, github-actions, joyceHe703, Jingyi-Jia | 2026-04-24 | yes | yes | 0 | no | yes | no | todo | [pr-088.md](./pr-088.md) |
+| #87 | harvenstar | feat: add yield-curve-bootstrap-immunization task (hard) | copilot-pull-request-reviewer, github-actions, Jingyi-Jia | 2026-04-24 | yes | yes | infra issue | yes | yes | no | todo | [pr-087.md](./pr-087.md) |
 | #86 | harvenstar | feat: add dcc-garch-portfolio-var task (hard) | copilot-pull-request-reviewer, github-actions, harvenstar, Dongzhikang, Jingyi-Jia | 2026-04-21 | yes | yes | 0 | yes | yes | no | drafted | [pr-086.md](./pr-086.md) |
 | #84 | xinlan-technology | feat: add CME HDD option pricing task | github-actions | 2026-04-16 | yes | yes | 0 | yes | yes | no | todo | [pr-084.md](./pr-084.md) |
 | #81 | PQCat | Add lmm-markov-representation task to main | github-actions | 2026-04-13 | yes | yes | 0 | yes | yes | no | todo | [pr-081.md](./pr-081.md) |
-| #80 | pangjacque | add task - credit risk - credit transition matrix and markov property (medium, credit-risk, end-to-end) | github-actions | 2026-04-15 | yes | yes | 0 | yes | yes | no | todo | [pr-080.md](./pr-080.md) |
+| #80 | pangjacque | add task - credit risk - credit transition matrix and markov property (medium, credit-risk, end-to-end) | github-actions | 2026-04-24 | yes | yes | 0 | yes | yes | no | todo | [pr-080.md](./pr-080.md) |
 | #79 | Dongzhikang | feat: add execution-is-vwap task | github-actions | 2026-04-13 | yes | yes | 0 | yes | yes | no | todo | [pr-079.md](./pr-079.md) |
 | #78 | Dongzhikang | feat: add fx-carry-trade-backtest task | github-actions | 2026-04-16 | yes | yes | 0 | yes | yes | no | drafted | [pr-078.md](./pr-078.md) |
 | #77 | Dongzhikang | feat: add cds-curve-stripping task | github-actions | 2026-04-06 | yes | yes | 0 | yes | yes | no | todo | [pr-077.md](./pr-077.md) |
@@ -153,6 +183,36 @@ Open task PRs that currently have **no submitted human review**. This is the mai
 
 | PR | PR Author | Title | Requested / Fallback Reviewer(s) | Last Updated | Oracle | Haiku Test | 1st Review Label | 2nd Review Label | Ready to Merge | Local Status | Summary |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+| #209 | Dongzhikang | Add task weekly-garch-vol-proxy | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-209.md](./pr-209.md) |
+| #208 | Dongzhikang | Add task garch-sp500-fit | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-208.md](./pr-208.md) |
+| #207 | Dongzhikang | Add task jarque-bera-normality-test | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-207.md](./pr-207.md) |
+| #206 | Dongzhikang | Add task gh-distribution-fitting | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-206.md](./pr-206.md) |
+| #205 | Dongzhikang | Add task standard-var-methods | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-205.md](./pr-205.md) |
+| #204 | Dongzhikang | Add task panjer-recursion | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-204.md](./pr-204.md) |
+| #203 | Dongzhikang | Add task block-maxima-gev | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-203.md](./pr-203.md) |
+| #202 | Dongzhikang | Add task intensity-credit-model | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-202.md](./pr-202.md) |
+| #201 | Dongzhikang | Add task copula-sampling-rank-correlation | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-201.md](./pr-201.md) |
+| #200 | Dongzhikang | Add task merton-structural-credit | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-200.md](./pr-200.md) |
+| #199 | Dongzhikang | Add task single-loss-approximation | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-199.md](./pr-199.md) |
+| #198 | Dongzhikang | Add task ljung-box-serial-dependence | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-198.md](./pr-198.md) |
+| #197 | Dongzhikang | Add task one-factor-equity-model | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-197.md](./pr-197.md) |
+| #196 | Dongzhikang | Add task copula-garch-portfolio | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-196.md](./pr-196.md) |
+| #195 | Dongzhikang | Add task creditrisk-plus-model | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-195.md](./pr-195.md) |
+| #194 | Dongzhikang | Add task var-es-coherence | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-194.md](./pr-194.md) |
+| #193 | Dongzhikang | Add task creditmetrics-portfolio-var | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-193.md](./pr-193.md) |
+| #192 | Dongzhikang | Add task pca-equity-returns | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-192.md](./pr-192.md) |
+| #191 | Dongzhikang | Add task rolling-correlation-indices | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-191.md](./pr-191.md) |
+| #190 | Dongzhikang | Add task ewma-correlation-sensitivity | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-190.md](./pr-190.md) |
+| #189 | Dongzhikang | Add task geometric-spacings-test | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-189.md](./pr-189.md) |
+| #188 | Dongzhikang | Add task vasicek-portfolio-credit | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-188.md](./pr-188.md) |
+| #187 | Dongzhikang | Add task delta-gamma-option-var | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-187.md](./pr-187.md) |
+| #186 | Dongzhikang | Add task pot-gpd-bitcoin | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-186.md](./pr-186.md) |
+| #185 | Dongzhikang | Add task gaussian-copula-credit | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-185.md](./pr-185.md) |
+| #184 | Dongzhikang | Add task fft-compound-poisson | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-184.md](./pr-184.md) |
+| #183 | Dongzhikang | Add task pca-yield-curve | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-183.md](./pr-183.md) |
+| #182 | Dongzhikang | Add task var-es-estimation | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-182.md](./pr-182.md) |
+| #181 | Dongzhikang | Add task copula-equity-fitting | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-181.md](./pr-181.md) |
+| #180 | Dongzhikang | Add task smith-tail-index | — | 2026-04-24 | yes | - | no | no | no | todo | [pr-180.md](./pr-180.md) |
 | #179 | PQCat | Fix Hull-White trinomial boundary probability signs | — | 2026-04-23 | — | - | no | no | no | todo | [pr-179.md](./pr-179.md) |
 | #178 | Dongzhikang | Add task variance-swap-pricing | — | 2026-04-21 | — | - | no | no | no | todo | [pr-178.md](./pr-178.md) |
 | #177 | Dongzhikang | Add task spread-option-kirk-margrabe | — | 2026-04-21 | — | - | no | no | no | todo | [pr-177.md](./pr-177.md) |
@@ -181,7 +241,7 @@ Open task PRs that currently have **no submitted human review**. This is the mai
 | #154 | Dongzhikang | Add task barone-adesi-whaley | — | 2026-04-21 | — | - | no | no | no | todo | [pr-154.md](./pr-154.md) |
 | #153 | Dongzhikang | Add task asian-option-levy-curran | — | 2026-04-21 | — | - | no | no | no | todo | [pr-153.md](./pr-153.md) |
 | #152 | Dongzhikang | Add task american-binomial-tree | — | 2026-04-21 | — | - | no | no | no | todo | [pr-152.md](./pr-152.md) |
-| #151 | gem-mint | Add task/fomc tone event study | Jingyi-Jia, beckybyte | 2026-04-21 | — | - | yes | yes | no | todo | [pr-151.md](./pr-151.md) |
+| #151 | gem-mint | Add task/fomc tone event study | Jingyi-Jia, beckybyte | 2026-04-24 | — | - | yes | yes | no | todo | [pr-151.md](./pr-151.md) |
 | #140 | Jingyi-Jia | feat: add localvol barrier task | PQCat, foxie-huang | 2026-04-21 | — | - | no | yes | no | todo | [pr-140.md](./pr-140.md) |
 | #139 | Jingyi-Jia | Add MTM XCCY basis desk task and improve Finance-Zero extraction | foxie-huang, PQCat, PQCat | 2026-04-21 | — | - | no | yes | no | todo | [pr-139.md](./pr-139.md) |
 | #134 | Jiahao-Xie-86 | Add task sector-neutral-residual-momentum (hard) | Dongzhikang, Jingyi-Jia | 2026-04-22 | — | - | yes | yes | no | todo | [pr-134.md](./pr-134.md) |
