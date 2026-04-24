@@ -1,4 +1,5 @@
 # Review: PR #101 - sec-8k-event-alpha
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/101](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/101)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -20,7 +21,7 @@ Parse four SEC 8-K filing HTML documents, classify event types (guidance raise/c
 ### Findings
 
 #### [MINOR] test.sh doesn't write reward.txt directly
-File: `tests/test.sh`
+File: [`tests/test.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/e54e946/tasks/sec-8k-event-alpha/tests/test.sh)
 
 Unlike other PRs, `test.sh` doesn't have the `echo 1/0 > reward.txt` pattern — the verifier.py handles reward writing. This is actually cleaner but inconsistent with other PRs in this batch.
 
@@ -29,6 +30,37 @@ The instruction states "Each filing maps to one event type" with exactly 4 filin
 
 #### [NIT] Difficulty rated "medium" but model spread suggests appropriate calibration
 The H45→S45 spread from 0.96 to 0.54 is excellent for a medium task.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.961538 | 154s | 2,511,518in / 19,648out |
+| Opus 4.6 | 1.0 | 98s | 327,537in / 4,422out |
+| Sonnet 4.5 | 0.538462 | 92s | 329,417in / 4,247out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_verification
+E       AssertionError: Verification failed: IMPERFECT
+E       assert 'IMPERFECT' == 'PERFECT'
+E
+E         - PERFECT
+E         + IMPERFECT
+E         ? ++
+```
+
+
+**Sonnet key failures:**
+```
+FAIL: test_verification
+E       AssertionError: Verification failed: WRONG
+E       assert 'WRONG' == 'PERFECT'
+E
+E         - PERFECT
+E         + WRONG
+```
 
 ### Summary
 This is one of the strongest tasks in the batch. It has real SEC filings, requires genuine document understanding, uses a well-designed partial credit verifier, and shows excellent model discrimination. The instruction is clear and the formulas are explicit.

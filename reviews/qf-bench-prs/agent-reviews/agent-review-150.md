@@ -1,4 +1,5 @@
 # Review: PR #150 - earnings-news-event-alpha
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/150](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/150)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does

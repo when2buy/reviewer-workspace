@@ -1,4 +1,5 @@
 # Review: PR #111 - historical-var-data-prep
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/111](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/111)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -25,6 +26,14 @@ The instruction specifies exact step ordering, exact filter thresholds, and exac
 
 #### [NIT] Good use of trading calendar as external reference
 Shipping `trading_calendar.csv` rather than requiring the agent to compute NYSE holidays is a clean design choice.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 63s | 277,470in / 3,472out |
+| Opus 4.6 | 1.0 | 80s | 228,037in / 2,768out |
+| Sonnet 4.5 | 1.0 | 112s | 177,261in / 3,529out |
 
 ### Summary
 Clean, well-specified data-prep task. Correct VaR conventions. The "easy" difficulty rating is honest — all models pass. Useful as a baseline sanity check in the benchmark suite but provides no model discrimination.

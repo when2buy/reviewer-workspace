@@ -1,4 +1,5 @@
 # Review: PR #174 - Power Options
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/174](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/174)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -32,12 +33,29 @@ Haiku (H:0.0) actually produced all files and passed 33/36 tests, failing on:
 The MC tolerance of 5% may be too tight for power options with α=3 (S^3 has enormous variance). The parity failure suggests Haiku's formula derivation was slightly off.
 
 #### [MAJOR] No oracle solution
-File: `solution/solve.py`
+File: [`solution/solve.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/7f5ee4d/tasks/power-options/solution/solve.py)
 Empty. For a task that requires deriving non-trivial formulas, this is a significant gap.
 
 #### [MINOR] Task.toml uses non-standard format
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/7f5ee4d/tasks/power-options/task.toml)
 Uses `[task]` section with `name`, `description`, `authors` instead of the standard `[metadata]` format used by other PRs. Inconsistent.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 317s | 944,093in / 26,109out |
+| Opus 4.6 | 0.0 | 103s | 106,632in / 5,146out |
+| Sonnet 4.5 | 0.0 | 247s | 558,412in / 14,094out |
+
+
+**Haiku key failures:**
+```
+E               AssertionError: alpha=2.0, T=0.5: call_relerr=0.0640
+E               assert np.float64(0.0639563045838552) < 0.05
+E       assert False is True
+E       assert 0.21391904425204755 < 0.05
+```
 
 ### Summary
 The 0/0/0 pattern with Opus and Sonnet producing zero output suggests the instruction is under-specified. The closed-form power option formulas are not provided — agents must derive them, which is a mathematical research task, not an implementation task. Haiku got closest but still failed on MC tolerance. Either provide the formulas explicitly or accept this as a research-difficulty task.

@@ -33,6 +33,14 @@ OLS on dX = a + b*X_lag is the standard discrete OU estimation. Annualization vi
 #### [MINOR] Synthetic data — acceptable for OU but reduces realism
 Instruction says "already generated as synthetic OU process data." This is fine for parameter estimation testing but limits the benchmark's real-world relevance.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | no trial data | — | — |
+| Opus 4.6 | no trial data | — | — |
+| Sonnet 4.5 | no trial data | — | — |
+
 ### Summary
 Sound quant task with correct OU methodology and reasonable trading strategy. Blocked by missing Dockerfile. Tests lack oracle pinning — they verify internal consistency but not correctness against known-good values.
 

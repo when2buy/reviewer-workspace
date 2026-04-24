@@ -1,4 +1,5 @@
 # Review: PR #106 - etf-overlap-redemption-pressure
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/106](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/106)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -18,17 +19,25 @@ Parse SPY and XLK daily holdings Excel files plus SPDR product data, compute fun
 ### Findings
 
 #### [CRITICAL] Docker build fails — base image mismatch
-File: `environment/Dockerfile`
+File: [`environment/Dockerfile`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/a8a93f4/tasks/etf-overlap-redemption-pressure/environment/Dockerfile)
 
 Uses `FROM quantitative-finance-bench-sandbox:latest` but test environment has `finance-bench-sandbox:latest`. All trials failed.
 
 #### [MINOR] Dockerfile installs openpyxl redundantly
-File: `environment/Dockerfile`
+File: [`environment/Dockerfile`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/a8a93f4/tasks/etf-overlap-redemption-pressure/environment/Dockerfile)
 
 `RUN pip install --no-cache-dir pandas>=2.2 openpyxl>=3.1 numpy>=1.26` — if the base image already has pandas/numpy, this may conflict. The version constraints use `>=` which is unpinned.
 
 #### [MINOR] Task is well-scoped for "medium" difficulty
 The ETF overlap and redemption pressure analytics are standard portfolio analysis computations. The main challenge is parsing the SPDR Excel files correctly (dollar fields like "$653,201.93 M").
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | error reading | — | — |
+| Opus 4.6 | error reading | — | — |
+| Sonnet 4.5 | error reading | — | — |
 
 ### Summary
 Well-designed ETF market-structure task with real holdings data. Clean specification and robust verifier. Cannot be evaluated due to Docker build failure.

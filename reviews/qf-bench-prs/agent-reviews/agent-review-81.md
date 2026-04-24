@@ -38,6 +38,39 @@ This is fine since the task only needs SymPy, not financial data tools.
 #### [MINOR] Solution is mathematically correct
 The derivation following Henry-Labordère is correct: C(x)=1+τx causes drift decoupling, Frobenius theorem gives dimension 2 with states (t, z₁).
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 86s | 654,325in / 11,839out |
+| Opus 4.6 | 0.0 | 184s | 316,129in / 8,341out |
+| Sonnet 4.5 | 0.0 | 184s | 246,083in / 7,799out |
+
+
+**Haiku key failures:**
+```
+E       AssertionError: part1_answer is too short
+E       assert 2 > 20
+E       AttributeError: 'dict' object has no attribute 'lower'
+E       AssertionError: Expected markov_dimension=2, got 3
+E       assert 3 == 2
+E       AttributeError: 'list' object has no attribute 'lower'
+E       AssertionError: The reasoning should mention Stratonovich conversion. The Frobenius theorem requires Stratonovich (not Ito) SDEs.
+E       assert False
+```
+
+
+**Opus key failures:**
+```
+E       AssertionError: The reasoning should mention Stratonovich conversion. The Frobenius theorem requires Stratonovich (not Ito) SDEs.
+E       assert False
+E       AssertionError: Missing key: lie_bracket_components
+E       AssertionError: Missing key: bracket_proportional_to_V1
+E       AssertionError: Expected proportionality factor nu'(u)/nu(u), got:
+E       assert (False or ('nu' in ''))
+E        +  where False = text_contains_any('', ['derivative(nu', 'diff(nu', "nu'", 'd/du ln', 'd/du*ln'])
+```
+
 ### Summary
 Interesting mathematical finance task but poorly suited as a benchmark. The verifier relies on keyword matching in free-text fields and exact string formatting of symbolic expressions, making it brittle. The task tests textbook knowledge rather than practical quant skills. All three models fail, but the failures appear to be format/keyword issues rather than lack of mathematical understanding.
 

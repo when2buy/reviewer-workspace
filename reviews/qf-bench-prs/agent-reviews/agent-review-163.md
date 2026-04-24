@@ -1,4 +1,5 @@
 # Review: PR #163 - double-barrier-options
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/163](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/163)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -29,6 +30,36 @@ Opus (1.0) passes all tests. Haiku fails on pinned value `test_dbko_call_085_115
 
 #### [MINOR] MC comparison tests
 MC tests use relative error bounds — good for validation. The tests check wider barriers converge better (larger survival probability, less barrier monitoring bias).
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 161s | 438,947in / 6,999out |
+| Opus 4.6 | 1.0 | 587s | 483,642in / 15,631out |
+| Sonnet 4.5 | 0.0 | 252s | 329,703in / 14,439out |
+
+
+**Haiku key failures:**
+```
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f8264a814f0>(np.float64(12.936462555819883), 11.82, atol=0.5)
+E        +    where <function isclose at 0x7f8264a814f0> = np.isclose
+E       assert False is True
+```
+
+
+**Sonnet key failures:**
+```
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7fd0eb50d730>(np.float64(10.962012066003824), 11.82, atol=0.5)
+E        +    where <function isclose at 0x7fd0eb50d730> = np.isclose
+E       assert np.False_
+E        +  where np.False_ = all()
+E       assert np.False_
+E        +  where np.False_ = all()
+E       assert np.float64(0.1028602815493927) < 0.1
+```
 
 ### Summary
 Solid task with correct financial framework. The Kunitomo-Ikeda Fourier series is a genuinely difficult implementation. Good parity and monotonicity tests. Only Opus passing is consistent with difficulty.

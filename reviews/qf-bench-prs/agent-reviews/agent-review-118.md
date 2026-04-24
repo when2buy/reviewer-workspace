@@ -1,4 +1,5 @@
 # Review: PR #118 - perpetual-funding-ledger-reconciliation
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/118](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/118)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -18,7 +19,7 @@ Reconcile a USDT-margined perpetual futures account: merge fills, fees, funding,
 ### Findings
 
 #### [CRITICAL] Verifier pins ALL expected values — essentially a lookup table
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/d95fa21/tasks/perpetual-funding-ledger-reconciliation/tests/test_outputs.py)
 The test file contains:
 - `EXPECTED_RESULTS` dict with every single output value
 - `EXPECTED_EVENT_IDS` — exact event ordering
@@ -32,15 +33,23 @@ If the agent can read `/tests/test_outputs.py` (violating Harbor assumptions), i
 With only 10 events total, the entire ledger can be reconstructed by hand or by copying expected values. The task's value depends entirely on the Harbor assumption preventing test file access.
 
 #### [MINOR] Good use of Decimal arithmetic in verifier
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/d95fa21/tasks/perpetual-funding-ledger-reconciliation/tests/test_outputs.py)
 The verifier uses Python `Decimal` for exact cash path verification. This is rigorous and appropriate for a ledger reconciliation task.
 
 #### [MINOR] Task is more data-engineering than quant finance
 Despite being in the QF-Bench, this task tests ledger reconciliation / accounting skills rather than financial modeling. The quant content (WAC, mark-to-market) is basic.
 
 #### [NIT] Missing canary GUID in task.toml
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/d95fa21/tasks/perpetual-funding-ledger-reconciliation/task.toml)
 No canary comment, unlike most other tasks. The instruction.md has a different GUID than the standard one.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | error reading | — | — |
+| Opus 4.6 | error reading | — | — |
+| Sonnet 4.5 | error reading | — | — |
 
 ### Summary
 Well-specified ledger reconciliation task with an extremely thorough verifier. However, the small dataset (10 events) combined with complete expected values in the test file creates a significant hardcoding risk under weak Harbor assumptions. The task tests data engineering more than quantitative finance.

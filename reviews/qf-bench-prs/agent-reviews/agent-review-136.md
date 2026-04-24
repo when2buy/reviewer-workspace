@@ -1,4 +1,5 @@
 # Review: PR #136 - quantamental-earnings-jumpfilter-committee
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/136](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/136)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -27,7 +28,7 @@ All three model trials (H45, Opus46, S45) failed with `RuntimeError: Docker comp
 The task requires: (1) parsing 7+ input files with different schemas, (2) computing 3 distinct agent scores with cross-sectional z-scores, vendor reference mismatch detection, and sector-level percentile ranking, (3) fitting 3 stochastic processes and selecting via AIC, (4) portfolio construction with turnover and transaction costs, (5) producing 6 output files. This is at least 2-3x more complex than other "hard" tasks in this batch.
 
 #### [MAJOR] Test pins exact values without tolerance framework
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/e3ce494/tasks/quantamental-earnings-jumpfilter-committee/tests/test_outputs.py)
 Expected values are hard-coded: `num_rebalance_dates: 86`, `num_traded_rows: 73`, `avg_process_conviction: 0.643...`, `annualized_return: -0.00425...`, etc. The test structure uses individual assertions rather than the generic tolerance-based verifier.
 
 #### [MAJOR] Instruction relies heavily on params.json without showing parameter values
@@ -38,6 +39,14 @@ The instruction specifies fitting OU on `x_t = cumsum(log_returns - gbm_mu)` —
 
 #### [POSITIVE] Rich, realistic multi-agent architecture
 The committee + stochastic filter design is a genuinely interesting quantamental approach. The fundamental agent scores capture different aspects (earnings surprise, data quality, peer comparison) that reflect real quant workflows.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | error reading | — | — |
+| Opus 4.6 | error reading | — | — |
+| Sonnet 4.5 | error reading | — | — |
 
 ### Summary
 Ambitious and interesting task design, but completely untested — all trials failed at the Docker build stage. The task's extreme complexity (7+ input files, 3 agent scores, 3 stochastic processes, portfolio construction) makes it likely very difficult even for frontier models. Cannot assess calibration without working trials.

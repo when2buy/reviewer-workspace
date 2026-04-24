@@ -33,6 +33,14 @@ The solution directory appears empty. Oracle solution should be present for repr
 #### [NIT] Instruction says "fictional stock ticker" — synthetic data
 Not real-world data, which weakens benchmark realism.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 54s | 220,519in / 1,369out |
+| Opus 4.6 | 1.0 | 45s | 50,371in / 754out |
+| Sonnet 4.5 | 1.0 | 56s | 102,733in / 1,228out |
+
 ### Summary
 Task is trivially easy with zero model discrimination. Tests are self-referential (verify consistency, not correctness) except for the row count check. The 14-row hardcode is the only meaningful anchor — an agent could produce wrong values for everything else and still pass if internally consistent. No oracle solution present.
 

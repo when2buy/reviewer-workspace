@@ -1,4 +1,5 @@
 # Review: PR #87 - yield-curve-bootstrap-immunization
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/87](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/87)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -19,12 +20,33 @@ Multi-step fixed income task: bootstrap zero-coupon discount curve from par yiel
 ### Findings
 
 #### [MINOR] Claimed difficulty is "hard" but Opus/Sonnet both pass
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/86728be/tasks/yield-curve-bootstrap-immunization/task.toml)
 Both frontier models pass. This may be medium-hard rather than hard, though bootstrapping + immunization + Nelson-Siegel is a substantial multi-step pipeline.
 
 #### [NIT] No solve.py provided
-File: `solution/`
+File: [`solution/`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/86728be/tasks/yield-curve-bootstrap-immunization/solution/)
 Oracle solution is absent. Test consistency checks partially compensate.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 355s | 2,947,082in / 45,187out |
+| Opus 4.6 | 1.0 | 149s | 217,107in / 8,088out |
+| Sonnet 4.5 | 1.0 | 383s | 1,152,759in / 46,708out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_df_forward_rate_from_discount_factors
+E           assert np.False_
+E            +  where np.False_ = <function isclose at 0x7feb6384f4f0>(np.float64(0.0352054448664259), np.float64(0.037699777005655015), atol=1e-06)
+E            +    where <function isclose at 0x7feb6384f4f0> = np.isclose
+FAIL: test_ns_fitted_spot_rates
+E           AssertionError: T=1: Svensson=-0.074351, bootstrapped=0.046884, diff=1212.35bp
+E           assert np.float64(0.12123456174369736) < 0.0005
+E            +  where np.float64(0.12123456174369736) = abs((np.float64(-0.07435097584484686) - np.float64(0.0468835858988505)))
+```
 
 ### Summary
 Excellent fixed-income benchmark task. The multi-step pipeline (bootstrap → analytics → immunization → stress test) is a genuine test of quant finance reasoning. Self-consistency checks in tests are a strength. Good model discrimination.

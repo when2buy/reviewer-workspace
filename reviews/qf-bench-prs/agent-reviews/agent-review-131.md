@@ -1,4 +1,5 @@
 # Review: PR #131 - garch-vecm-cointegration
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/131](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/131)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -24,11 +25,11 @@ VECM cointegration analysis on 3 energy-sector ETFs: clean dirty data (duplicate
 The provided scores are (H:1.0, O:0.0, S:1.0). H45 (weakest) and S45 pass perfectly while Opus46 (strongest) fails 5 tests. This is anomalous — it suggests the task rewards a specific implementation path that H45/S45 happen to follow but Opus46 doesn't. This is the opposite of good calibration.
 
 #### [MAJOR] BIC computation in oracle is non-standard
-File: `solution/solve.sh`
+File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/485e6aa/tasks/garch-vecm-cointegration/solution/solve.sh)
 The oracle computes BIC manually: `bic = -2 * ll + n_params * np.log(T)` with a hand-counted `n_params`. The statsmodels VECM object has its own BIC computation that may differ in parameter counting. This creates a situation where using the library's built-in BIC gives a different lag selection than the oracle's manual BIC.
 
 #### [MAJOR] Adjustment coefficient scaling is ambiguous
-File: `solution/solve.sh`
+File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/485e6aa/tasks/garch-vecm-cointegration/solution/solve.sh)
 The oracle does `alpha_scaled = alpha_col * beta[norm_idx, 0]` — scaling adjustment coefficients by the normalization factor. The instruction says "normalized so the first element equals 1.0" but doesn't specify how alpha should be reported (raw or scaled). The test expects specific values (e.g., `-0.022`, `-0.0157`) — agents must guess the convention.
 
 #### [POSITIVE] Data cleaning rules are well-specified
@@ -38,8 +39,29 @@ The instruction gives exact, ordered cleaning steps: (1) drop duplicates, (2) dr
 Energy-sector ETF data with injected quality problems (duplicates, spikes, missing values) is a realistic benchmark scenario.
 
 #### [MINOR] Task title includes "GARCH" but there's no GARCH modeling
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/485e6aa/tasks/garch-vecm-cointegration/task.toml)
 The task is purely about VECM/cointegration — no GARCH component. The title is misleading.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 141s | 817,350in / 8,639out |
+| Opus 4.6 | 0.0 | 158s | 199,637in / 6,483out |
+| Sonnet 4.5 | 1.0 | 158s | 467,703in / 7,373out |
+
+
+**Opus key failures:**
+```
+FAIL: test_cointegrating_vector_third_element
+E       AssertionError: Third element: got -0.009113970148887986, expected ~0.0201
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f35eed6a970>(-0.009113970148887986, 0.0201, rtol=0.1)
+E        +    where <function isclose at 0x7f35eed6a970> = np.isclose
+FAIL: test_adjustment_coefficient
+E       AssertionError: Alpha[0]: got -0.027186389591988176, expected ~-0.022
+E       assert np.False_
+```
 
 ### Summary
 Good cointegration analysis task with realistic dirty data. The main concern is inverted model discrimination (H45 passes, Opus46 fails) — this suggests the task rewards a specific implementation path rather than reasoning ability. The BIC computation and alpha scaling conventions create implementation-sensitive failure modes.

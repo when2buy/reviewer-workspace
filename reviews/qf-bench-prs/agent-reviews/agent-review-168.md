@@ -1,4 +1,5 @@
 # Review: PR #168 - heston-cf-pricing
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/168](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/168)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -34,6 +35,30 @@ The 74 tests cover put-call parity, BS limits, κ limits, IV smile skew, ρ sens
 
 #### [MINOR] Tolerances are overly generous in some tests
 `test_bs_limit_converges` allows mean reldiff < 0.1 (10%) for ITM options, and `test_kappa_limit_converges` allows 20%. These are very loose and may pass incorrect implementations.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 551s | 1,999,482in / 46,773out |
+| Opus 4.6 | 0.0 | 751s | 2,177,907in / 46,446out |
+| Sonnet 4.5 | 0.0 | 1168s | 4,534,270in / 91,226out |
+
+
+**Haiku key failures:**
+```
+E           assert np.float64(0.0019999999999527063) < 1e-06
+E            +  where np.float64(0.0019999999999527063) = abs((np.float64(549.65) - np.float64(549.648)))
+E       assert 3 == 5
+E       assert 1 >= 2
+```
+
+
+**Opus key failures:**
+```
+E           assert np.float64(0.0019999999999527063) < 1e-06
+E            +  where np.float64(0.0019999999999527063) = abs((np.float64(549.65) - np.float64(549.648)))
+```
 
 ### Summary
 Opus scores 73/74 and is blocked by a single trivial `K_values_correct` test. The task has excellent financial content but the verifier has two schema traps (`K == S0*moneyness` precision, v0/theta definition ambiguity) that prevent any model from passing. Fixing these two tests would likely give Opus reward=1.0.

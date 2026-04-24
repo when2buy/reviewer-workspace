@@ -1,4 +1,5 @@
 # Review: PR #97 - factor-momentum-spanning
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/97](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/97)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -18,7 +19,7 @@ Investigate factor momentum — timing Fama-French factors based on trailing ret
 ### Findings
 
 #### [CRITICAL] All models fail — possible oracle calibration issue
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/ae5f02d/tasks/factor-momentum-spanning/tests/test_outputs.py)
 All three models fail, with 16-26 test failures each. The failures are concentrated in:
 - `alpha_monthly` and `alpha_tstat` for spanning regressions (across periods)
 - Multi-horizon alpha values
@@ -28,12 +29,46 @@ All three models fail, with 16-26 test failures each. The failures are concentra
 Notably, S45 has the fewest failures (16) and passes many structural tests. The failing tests are all pinned numerical values. When all three models consistently fail on the same value-pinning tests, the most likely explanation is that the oracle values are computed with a subtly different implementation than what the instruction specifies.
 
 #### [MAJOR] Multiple potential sources of numerical divergence
-File: `instruction.md`
+File: [`instruction.md`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/ae5f02d/tasks/factor-momentum-spanning/instruction.md)
 The pipeline involves: (1) parsing multi-line header CSVs, (2) compounding daily→monthly returns, (3) 12-1 momentum signal construction, (4) Newey-West t-stats, (5) block bootstrap. Each step introduces potential for small numerical differences that compound. The tolerances (e.g., alpha_monthly ±0.0003) may be too tight for this chain.
 
 #### [MAJOR] Difficulty labeled "hard" but all models fail for wrong reasons
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/ae5f02d/tasks/factor-momentum-spanning/task.toml)
 If all models fail due to tolerance/oracle mismatch rather than inability to implement the pipeline, the task doesn't actually measure difficulty — it measures luck in matching the oracle's exact implementation choices.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 331s | 3,308,098in / 43,766out |
+| Opus 4.6 | 0.0 | 134s | 172,363in / 7,250out |
+| Sonnet 4.5 | 0.0 | 455s | 1,375,207in / 23,674out |
+
+
+**Haiku key failures:**
+```
+E       AssertionError: alpha_monthly for full_sample: got 0.001302, expected 0.000012 (±0.0003)
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f8a1b188bb0>(np.float64(0.001302), 1.2e-05, atol=0.0003)
+E        +    where <function isclose at 0x7f8a1b188bb0> = np.isclose
+E       AssertionError: alpha_monthly for 1963-1980: got -0.002966, expected -0.003914 (±0.0003)
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f8a1b188bb0>(np.float64(-0.002966), -0.003914, atol=0.0003)
+E        +    where <function isclose at 0x7f8a1b188bb0> = np.isclose
+```
+
+
+**Opus key failures:**
+```
+E       AssertionError: alpha_monthly for full_sample: got 0.001310, expected 0.000012 (±0.0003)
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f22832a56b0>(np.float64(0.00131), 1.2e-05, atol=0.0003)
+E        +    where <function isclose at 0x7f22832a56b0> = np.isclose
+E       AssertionError: alpha_monthly for 1963-1980: got -0.002930, expected -0.003914 (±0.0003)
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f22832a56b0>(np.float64(-0.00293), -0.003914, atol=0.0003)
+E        +    where <function isclose at 0x7f22832a56b0> = np.isclose
+```
 
 ### Summary
 The factor momentum concept is strong, and the multi-step pipeline is genuinely challenging. However, all three models failing suggests the oracle values need recalibration or tolerances need loosening. The S45 result (52 pass / 16 fail) shows agents can implement most of the pipeline correctly — they just can't match the exact pinned values.

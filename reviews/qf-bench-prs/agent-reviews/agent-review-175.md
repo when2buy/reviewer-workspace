@@ -1,4 +1,5 @@
 # Review: PR #175 - Rainbow Option Pricing
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/175](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/175)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -19,7 +20,7 @@ Price rainbow options (best-of and worst-of calls on two correlated assets) usin
 ### Findings
 
 #### [CRITICAL] Moneyness grid mismatch between instruction and verifier
-File: `instruction.md` vs `tests/test_outputs.py:106`
+File: [`instruction.md`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/9ef6791/tasks/rainbow-option-pricing/instruction.md) vs `tests/test_outputs.py:106`
 
 The instruction says: "Price calls for Maturities T ∈ {0.25, 0.5, 1.0} and Moneyness m ∈ {0.90, 0.95, 1.00, 1.05, 1.10}" (5 values, 15 total). The verifier checks for exactly these moneyness values.
 
@@ -31,12 +32,41 @@ Sonnet (29/31 passed) failed on moneyness values AND an intrinsic value bound ch
 Haiku (18/31 passed) produced negative c_max prices (-313.7), which is financially impossible for a call option. This indicates a sign error in the bivariate normal formula implementation — a genuine mathematical failure. The 13 failures are all cascading from this core error.
 
 #### [MINOR] No oracle solution
-File: `solution/solve.py`
+File: [`solution/solve.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/9ef6791/tasks/rainbow-option-pricing/solution/solve.py)
 Empty.
 
 #### [MINOR] Decomposition test tolerance is generous
-File: `tests/test_outputs.py:164`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/9ef6791/tasks/rainbow-option-pricing/tests/test_outputs.py#L164)
 `tol = max(0.2, 0.001 * option_value)` — allowing $0.20 absolute error is quite generous for closed-form pricing. This is fine since the instruction mentions MC-based decomposition verification.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 428s | 2,071,606in / 40,764out |
+| Opus 4.6 | 0.0 | 205s | 393,866in / 13,022out |
+| Sonnet 4.5 | 0.0 | 421s | 1,247,121in / 28,686out |
+
+
+**Haiku key failures:**
+```
+E       KeyError: 'n_returns'
+E           AssertionError: Missing key: n_returns
+E           assert 'n_returns' in {'D1': 0.005, 'D2': 0.005, 'S1_0': 273.17, 'S2_0': 487.525, ...}
+E            +  where {'D1': 0.005, 'D2': 0.005, 'S1_0': 273.17, 'S2_0': 487.525, ...} = <test_outputs.TestCalibration object at 0x7fd5e69e00d0>.data
+E           AssertionError: c_max=-320.7818978648104 < 0 at K=342.31275, T=0.25
+E           assert -320.7818978648104 >= 0
+E               AssertionError: C_max non-monotone at T=0.25: -377.4182309682785 < -376.01048090979657
+E               assert -377.4182309682785 >= (-376.01048090979657 - 0.01)
+```
+
+
+**Opus key failures:**
+```
+E       AssertionError: moneyness=[0.8, 0.9, 1.0, 1.1, 1.2]
+E       assert False
+E        +  where False = all(<generator object TestRainbowPrices.test_moneyness_values.<locals>.<genexpr> at 0x7f125fa61300>)
+```
 
 ### Summary
 The instruction is well-specified with explicit formulas. The task genuinely tests the ability to implement bivariate normal pricing correctly. Opus was very close (failed only on moneyness grid interpretation), Sonnet was nearly there, and Haiku had fundamental errors. The moneyness grid issue is a legitimate test of instruction-following, though Opus's error is borderline.

@@ -1,4 +1,5 @@
 # Review: PR #95 - fixed-income-market-stress
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/95](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/95)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -23,8 +24,26 @@ File: trial results
 H45=1.0, O46=0.0, S45=1.0. Opus failing on a "medium" task while Haiku passes suggests either: (1) a subtle spec ambiguity that Opus interprets differently, or (2) unlucky implementation choice. This is concerning for calibration.
 
 #### [MINOR] Complex data merging may introduce ambiguity
-File: `instruction.md`
+File: [`instruction.md`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/db4c264/tasks/fixed-income-market-stress/instruction.md)
 The task requires merging Treasury (MM/DD/YYYY, most-recent-first) with TRACE (YYYY-MM-DD) data. Date format differences and filtering requirements create many points where implementations could diverge.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 146s | 1,084,625in / 24,805out |
+| Opus 4.6 | 0.0 | 94s | 135,565in / 4,731out |
+| Sonnet 4.5 | 1.0 | 106s | 361,674in / 4,601out |
+
+
+**Opus key failures:**
+```
+FAIL: test_adf_statistic
+E       AssertionError: ADF statistic expected ~-1.20, got 0.4632
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f02cd7c90f0>(0.4632, -1.198, rtol=0.05)
+E        +    where <function isclose at 0x7f02cd7c90f0> = np.isclose
+```
 
 ### Summary
 Complex cross-domain task combining yield curve analysis with TRACE flow metrics. The data merging requirements add genuine difficulty. However, the inverted model discrimination (Opus fails, Haiku passes) is a concern worth investigating.

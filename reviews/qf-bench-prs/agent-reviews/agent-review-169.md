@@ -1,4 +1,5 @@
 # Review: PR #169 - implied-vol-approximations
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/169](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/169)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -37,6 +38,40 @@ Unlike other tasks, this uses synthetic BS prices (S₀=500, fixed grid). No dat
 
 #### [NIT] Column ordering test
 `test_approximations_csv_structure` checks exact column order via `list(df.columns) == expected_columns`. This is unnecessarily strict.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 85s | 259,043in / 6,315out |
+| Opus 4.6 | 0.0 | 806s | 1,758,594in / 42,722out |
+| Sonnet 4.5 | 0.0 | 370s | 1,283,580in / 19,545out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_approximations_csv_structure
+E       assert ['sigma_true'..._approx', ...] == ['sigma_true'..._approx', ...]
+E
+E         Left contains one more item: 'nr_converged'
+E         Use -v to get more diff
+FAIL: test_summary_json_oracle_values
+E           AssertionError: rmse_bs_atm: expected 0.03418723590366654, got 0.032055828906328875
+E           assert (0.002131406997337666 / (0.03418723590366654 + 1e-15)) < 1e-06
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_summary_json_oracle_values
+E           AssertionError: rmse_li_atm: expected 0.034911328507646396, got 0.034642467641669325
+E           assert (0.00026886086597707054 / (0.034911328507646396 + 1e-15)) < 1e-06
+E            +  where 0.00026886086597707054 = abs((0.034642467641669325 - 0.034911328507646396))
+E            +  and   0.034911328507646396 = abs(0.034911328507646396)
+FAIL: test_approximations_csv_exists
+FAIL: test_summary_json_exists
+FAIL: test_approximations_csv_structure
+```
 
 ### Summary
 The oracle pinning at 1e-6 tolerance makes this task fundamentally flawed as a benchmark. All models fail because they produce slightly different (but potentially correct) implementations of the approximation formulas. The task tests exact replication of oracle code, not financial understanding.

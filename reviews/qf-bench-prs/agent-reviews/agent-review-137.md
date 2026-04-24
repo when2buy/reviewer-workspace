@@ -1,4 +1,5 @@
 # Review: PR #137 - multimodal-alpha-fusion-edgar-cot-gdelt
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/137](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/137)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does

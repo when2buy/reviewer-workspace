@@ -1,4 +1,5 @@
 # Review: PR #109 - variance-swap-replication
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/109](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/109)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -21,8 +22,16 @@ Agent must clean a dirty option chain, compute fair variance-swap strike via Car
 The task may be too well-specified for its difficulty level. All three model tiers solve it perfectly. The step-by-step instruction essentially serves as a recipe. Consider whether this provides useful signal.
 
 #### [NIT] `test_scenario_pnl_identity` is a good sanity check
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/211cbb3/tasks/variance-swap-replication/tests/test_outputs.py)
 Verifies `pnl = 10_000 * (RV² - K_var²)` independently — good practice.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 81s | 416,575in / 7,984out |
+| Opus 4.6 | 1.0 | 76s | 129,408in / 2,353out |
+| Sonnet 4.5 | 1.0 | 85s | 112,161in / 3,651out |
 
 ### Summary
 Textbook-quality variance swap replication task. Financially correct, well-specified, deterministic. The only concern is weak model discrimination — all tiers pass comfortably, suggesting the instruction over-specifies the solution path. Still a valid benchmark item for testing whether agents can follow a precise quantitative finance recipe.

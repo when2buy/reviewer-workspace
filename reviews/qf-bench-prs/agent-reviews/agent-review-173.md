@@ -1,4 +1,5 @@
 # Review: PR #173 - OU Process with Jumps (Commodity Modeling)
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/173](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/173)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -24,16 +25,31 @@ Sonnet (S:0.0) failed only on `test_mc_validates` — it passed all 25 other tes
 **Recommendation:** Instead of trusting the agent's `mc_validates` flag, compute MC validation in the verifier by checking analytical vs MC moment agreement directly.
 
 #### [MINOR] Task difficulty may be overstated
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/8004608/tasks/ou-jump-commodity/task.toml)
 Claimed "hard" but Haiku passes on first try in ~80 seconds of agent execution. The task is essentially: (1) linear regression, (2) residual analysis with 3-sigma threshold, (3) plugging into known formulas, (4) Euler MC. This is solidly "medium" difficulty.
 
 #### [MINOR] Oracle solution is provided and correct
-File: `solution/solve.py`
+File: [`solution/solve.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/8004608/tasks/ou-jump-commodity/solution/solve.py)
 Full solution is provided. The OU calibration via regression and jump detection via 3-sigma are straightforward and correctly implemented. The σ_OU formula `np.sqrt(2 * kappa * var_resid / (1 - b**2))` is correct for the discrete OU.
 
 #### [MINOR] Test `test_jump_mean_geq_ou` assumes positive jump mean
-File: `tests/test_outputs.py:113`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/8004608/tasks/ou-jump-commodity/tests/test_outputs.py#L113)
 `assert stat['stationary_mean_jump'] >= stat['stationary_mean_ou']` — this assumes μ_J ≥ 0 (jumps push the mean up). For Treasury yields with upward jumps this happens to be true, but the test embeds a data-specific assumption.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 104s | 393,020in / 6,617out |
+| Opus 4.6 | 1.0 | 94s | 172,993in / 4,329out |
+| Sonnet 4.5 | 0.0 | 100s | 110,804in / 5,422out |
+
+
+**Sonnet key failures:**
+```
+E       AssertionError: MC validation failed
+E       assert False
+```
 
 ### Summary
 Clean, well-specified task with a provided oracle solution. Tests are reasonable sanity checks. The Sonnet failure is due to a fragile self-assessment flag rather than substantive mathematical error. Difficulty should be downgraded from "hard" to "medium."

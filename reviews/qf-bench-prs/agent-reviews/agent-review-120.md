@@ -1,4 +1,5 @@
 # Review: PR #120 - barra-cne6-risk + ipca-latent-factors
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/120](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/120)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ## Part A: barra-cne6-risk
@@ -28,7 +29,7 @@ Even Opus only achieves 0.27. This suggests the task may be:
 A task where the best model scores 0.31 provides limited benchmark value — it may be measuring noise rather than capability.
 
 #### [POSITIVE] Multi-phase verifier with partial credit
-File: `tests/verifier.py`
+File: [`tests/verifier.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/d369dbe/tasks/barra-cne6-risk/tests/verifier.py)
 The verifier classifies results as PERFECT (all pass), IMPERFECT (deliverables pass, checkpoints partially fail), or WRONG (deliverables fail). This is sophisticated and allows partial credit.
 
 #### [MAJOR] Instruction may under-specify critical implementation details
@@ -70,3 +71,32 @@ Both tasks use the same excellent multi-phase verifier framework. Financial meth
 ## Combined Verdict
 - **barra-cne6-risk**: **需要 Human Review** — All models score ≤0.31. Need to investigate whether this is under-specification or genuine difficulty. If the former, tighten the instruction.
 - **ipca-latent-factors**: **建议 Merge** — Good discrimination (H:0.33, O:0.69, S:0.29), correct methodology, partial credit verifier. The ALS sensitivity concern is inherent to the method and mitigated by generous tolerances.
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.230769 | 345s | 1,916,232in / 26,367out |
+| Opus 4.6 | 0.269231 | 138s | 293,682in / 5,760out |
+| Sonnet 4.5 | 0.307692 | 358s | 1,248,115in / 16,868out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_verification
+E       AssertionError: Verification failed: WRONG
+E       assert 'WRONG' == 'PERFECT'
+E
+E         - PERFECT
+E         + WRONG
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_verification
+E       AssertionError: Verification failed: WRONG
+E       assert 'WRONG' == 'PERFECT'
+E
+E         - PERFECT
+E         + WRONG
+```

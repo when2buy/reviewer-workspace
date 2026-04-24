@@ -1,4 +1,5 @@
 # Review: PR #124 - pairs-cointegration-kalman
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/124](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/124)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -24,20 +25,50 @@ Build a complete pairs trading pipeline: clean price data, run Engle-Granger coi
 All trials (H45, Opus46, S45) produce FAILED results. The provided scores (H:0.38, O:0.79, S:0.71) suggest partial credit in some scoring system, but the strict verifier rejects all. When no model can achieve PERFECT, the task is not discriminating reasoning ability — it's testing whether agents can guess the exact implementation choices of the oracle.
 
 #### [MAJOR] Oracle ADF implementation is non-standard
-File: `solution/solve.sh`
+File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/161c50c/tasks/pairs-cointegration-kalman/solution/solve.sh)
 The oracle implements ADF by hand using `linregress` on lagged residuals rather than using `statsmodels.tsa.stattools.adfuller`. The hand-rolled ADF computes standard errors differently (no lag augmentation, no constant term in the ADF regression beyond the coefficient). This produces ADF statistics that may differ substantially from what an agent using `statsmodels.adfuller` would get, causing cascading failures in the cointegration classification.
 
 #### [MAJOR] Half-life formula produces unrealistic value
-File: `solution/solve.sh`, `tests/reference_data/expected.json`
+File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/161c50c/tasks/pairs-cointegration-kalman/solution/solve.sh), `tests/reference_data/expected.json`
 The oracle computes half-life as `-log(2)/log(|lag1_autocorr|)` on the Kalman spread, yielding 0.39 days. A half-life < 1 day for a daily pairs trading signal is economically dubious and suggests the spread is nearly white noise. The tolerance (rtol=0.2, atol=5) is generous enough to accept values from 0 to ~5.4, but the reference value itself is suspicious.
 
 #### [MAJOR] Backtest PnL uses spread change directly without normalization
-File: `solution/solve.sh`
+File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/161c50c/tasks/pairs-cointegration-kalman/solution/solve.sh)
 `pnl[t] = prev_pos * (-spread_change)` — this trades the raw Kalman innovation spread without normalizing for position sizing or notional. The annualized return of -18.2 and max drawdown of 2.44 (244%!) indicate the strategy is deeply unprofitable, which makes the task test whether agents can reproduce a failing strategy rather than build a correct one.
 
 #### [MINOR] Expected max_drawdown > 1.0 (244%)
-File: `tests/reference_data/expected.json`
+File: [`tests/reference_data/expected.json`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/161c50c/tasks/pairs-cointegration-kalman/tests/reference_data/expected.json)
 `max_drawdown: 2.44` — a drawdown exceeding 100% implies the portfolio can go significantly negative. This is unusual for a pairs strategy benchmark and may confuse agents about the output convention.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.383929 | 129s | 561,370in / 12,019out |
+| Opus 4.6 | 0.785714 | 210s | 551,308in / 10,683out |
+| Sonnet 4.5 | 0.714286 | 250s | 1,803,092in / 26,262out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_verification
+E       AssertionError: Verification failed: WRONG
+E       assert 'WRONG' == 'PERFECT'
+E
+E         - PERFECT
+E         + WRONG
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_verification
+E       AssertionError: Verification failed: WRONG
+E       assert 'WRONG' == 'PERFECT'
+E
+E         - PERFECT
+E         + WRONG
+```
 
 ### Summary
 The task covers interesting quant territory (cointegration, Kalman filter, pairs trading) but has serious calibration issues. The non-standard ADF implementation creates a single correct path that all three frontier models fail to find. The oracle produces economically implausible results (half-life < 1 day, 244% drawdown, deeply negative returns). The task tests implementation mimicry rather than financial reasoning.

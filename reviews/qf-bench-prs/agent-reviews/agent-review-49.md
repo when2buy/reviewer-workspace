@@ -35,6 +35,14 @@ rBergomi with fBm simulation + BS inversion is genuinely challenging. The "very_
 #### [MINOR] Solution uses FFT convolution — good performance
 O(n log n) per path instead of O(n²) naive loop. This is the right approach.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | no trial data | — | — |
+| Opus 4.6 | no trial data | — | — |
+| Sonnet 4.5 | no trial data | — | — |
+
 ### Summary
 Interesting and genuinely hard rough volatility task. However: missing Dockerfile blocks execution, instruction is confusing with multiple contradictory fBm approaches, and tests are too lenient to validate correctness.
 

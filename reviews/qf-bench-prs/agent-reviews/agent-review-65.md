@@ -1,4 +1,5 @@
 # Review: PR #65 - bond-portfolio-analytics
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/65](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/65)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -29,9 +30,17 @@ All three models (including Haiku, the weakest) pass all tests. The task is clai
 The instruction specifies exact methods (Newton-Raphson with specific initial guesses, tolerances, max iterations), leaving little room for the agent to demonstrate financial understanding vs. just following detailed steps.
 
 #### [NIT] test.sh uses `uv` for dependency installation
-File: `tests/test.sh`
+File: [`tests/test.sh`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/9d6e63e/tasks/bond-portfolio-analytics/tests/test.sh)
 
 Uses `curl -LsSf https://astral.sh/uv/0.9.5/install.sh | sh` which adds network dependency at test time. Not a blocker but differs from the simpler `pip3 install` pattern used in other tasks.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 44s | 138,086in / 1,602out |
+| Opus 4.6 | 1.0 | 47s | 85,672in / 982out |
+| Sonnet 4.5 | 1.0 | 50s | 86,974in / 1,432out |
 
 ### Summary
 Well-crafted fixed-income task with excellent instruction clarity and comprehensive test coverage in the current version. The main concern is that trial results show all models passing on what appears to be a simpler test version. Re-trial with the current comprehensive tests is needed to assess actual discrimination.

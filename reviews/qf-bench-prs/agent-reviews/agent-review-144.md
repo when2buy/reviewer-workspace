@@ -1,4 +1,5 @@
 # Review: PR #144 - double-sort / residual-momentum / stable-residual
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/144](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/144)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 This is a multi-task PR by mingjun-sun. Reviewing each task separately.

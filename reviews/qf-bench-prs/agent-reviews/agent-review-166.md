@@ -1,4 +1,5 @@
 # Review: PR #166 - fx-quanto-options
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/166](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/166)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -31,6 +32,40 @@ The test pins `n_returns` to exactly [692, 693] and requires 10 specific JSON ke
 
 #### [MINOR] Good financial content otherwise
 The rho sensitivity tests (quanto > compo for ρ < 0, reversed for ρ > 0) and put-call parity checks are correct in principle. The MC comparison tolerances (3% for quanto, 5% for compo) are reasonable.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 378s | 1,432,103in / 36,560out |
+| Opus 4.6 | 0.0 | 551s | 658,590in / 21,322out |
+| Sonnet 4.5 | 0.0 | 485s | 507,082in / 32,338out |
+
+
+**Haiku key failures:**
+```
+E           AssertionError: Missing key: S0_f
+E           assert 'S0_f' in {'S_0': 687.06, 'mean_return': 0.0007940656193173516, 'n_returns': 692, 'sigma_S': 0.15099821155186272, ...}
+E       KeyError: 'S0_f'
+E       KeyError: 'r_d'
+E       KeyError: 'r_f'
+E       KeyError: 'D_f'
+E       KeyError: 'sigma_X'
+E       KeyError: 'rho_SX'
+```
+
+
+**Opus key failures:**
+```
+E           AssertionError: Missing key: S0_f
+E           assert 'S0_f' in {'S0': 687.06, 'n_returns': 692, 'sigma_S_annualized': 0.1511074326956573, 'sigma_daily': 0.00951887352776523}
+E       KeyError: 'S0_f'
+E       KeyError: 'sigma_S'
+E       KeyError: 'r_d'
+E       KeyError: 'r_f'
+E       KeyError: 'D_f'
+E       KeyError: 'sigma_X'
+```
 
 ### Summary
 The oracle solution contains a financial error in the compo pricing formula (uses σ_S instead of composite volatility), which makes the `test_rho_zero_gives_same_quanto_compo` test incorrect. Combined with strict calibration key naming that all models fail on, this task has fundamental issues.

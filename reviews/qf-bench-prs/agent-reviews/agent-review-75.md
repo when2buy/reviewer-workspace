@@ -1,4 +1,5 @@
 # Review: PR #75 - var-ebacktest-coverage
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/75](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/75)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -19,7 +20,7 @@ VaR and ES backtesting pipeline: compute historical, parametric, and EWMA VaR/ES
 ### Findings
 
 #### [CRITICAL] E-backtest specification is incomplete — no actual formulas given
-File: `instruction.md`, Steps 7
+File: [`instruction.md`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/4a59bbb/tasks/var-ebacktest-coverage/instruction.md), Steps 7
 
 The instruction says:
 - "compute the backtest e-statistic for VaR" — but gives **no formula**
@@ -46,6 +47,40 @@ The instruction says "Use the empirical distribution of returns in the rolling w
 
 #### [MINOR] Christoffersen test failures for some models
 Haiku fails Christoffersen tests — likely due to transition probability edge cases (zero-count cells in the 2×2 transition matrix). The instruction doesn't specify how to handle degenerate transition matrices.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 200s | 1,785,952in / 29,998out |
+| Opus 4.6 | 0.0 | 199s | 279,246in / 11,131out |
+| Sonnet 4.5 | 0.0 | 207s | 1,226,083in / 30,848out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_es_parametric_day_500
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f4a5d774f70>(0.022180139303193246, 0.02013, atol=0.001)
+E        +    where <function isclose at 0x7f4a5d774f70> = np.isclose
+FAIL: test_christoffersen_historical_lr
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f4a5d774f70>(140.0533035197879, 8.037, atol=0.5)
+E        +    where <function isclose at 0x7f4a5d774f70> = np.isclose
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_var_historical_day_300
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f94e73130f0>(0.031471, 0.02881, atol=0.001)
+E        +    where <function isclose at 0x7f94e73130f0> = np.isclose
+FAIL: test_var_historical_day_500
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f94e73130f0>(0.028018, 0.02574, atol=0.001)
+E        +    where <function isclose at 0x7f94e73130f0> = np.isclose
+```
 
 ### Summary
 Classical VaR/ES pipeline (Steps 1-6) is well-specified and models perform well on those tests. The e-backtest (Step 7) is fatally underspecified — the core e-statistic formulas are missing from the instruction. This makes the task unsolvable for the e-backtest portion.

@@ -33,6 +33,14 @@ Tests check put-call parity, call > intrinsic, call < spot, call > put for posit
 #### [NIT] seed=42 specified but tolerance is 2% — reasonable for 100K paths
 The MC tolerance is well-calibrated for the path count.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | no trial data | — | — |
+| Opus 4.6 | no trial data | — | — |
+| Sonnet 4.5 | no trial data | — | — |
+
 ### Summary
 Well-designed quant derivatives task with correct financial modeling and good structural tests. However, the task is **completely non-functional** due to missing Dockerfile. No trial data exists.
 

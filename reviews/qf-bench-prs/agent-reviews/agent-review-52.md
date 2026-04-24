@@ -33,6 +33,27 @@ Three positions (2Y, 5Y, 10Y) with realistic dirty prices, carry/roll-down value
 #### [NIT] Only 3 positions — could be more complex
 A larger portfolio would increase difficulty, but the current size is sufficient for testing the attribution logic.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 51s | 322,176in / 6,903out |
+| Opus 4.6 | 1.0 | 76s | 152,715in / 3,455out |
+| Sonnet 4.5 | 1.0 | 76s | 120,079in / 4,032out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_results_json_schema_identity_and_expected_totals
+E           assert False
+E            +  where False = <built-in function isclose>(1095375250.0, 10953752.5, abs_tol=1e-06)
+E            +    where <built-in function isclose> = math.isclose
+FAIL: test_position_rows_sum_to_portfolio_totals
+E           AssertionError: assert Decimal('1095375250.000000') == Decimal('10953752.500000')
+E            +  where Decimal('10953752.500000') = Decimal('10953752.500000')
+FAIL: test_solution_json_schema_and_cross_file_checks
+```
+
 ### Summary
 Excellent fixed-income attribution task. Clean specification, exact pinned values, proper cross-file consistency checks. Haiku's failure is substantive (wrong scaling), not trivial (format mismatch), which demonstrates good calibration.
 

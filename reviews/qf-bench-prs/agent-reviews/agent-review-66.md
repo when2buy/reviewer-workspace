@@ -1,4 +1,5 @@
 # Review: PR #66 - portfolio-risk-attribution
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/66](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/66)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -19,7 +20,7 @@ Factor model portfolio construction: price adjustment, monthly resampling, singl
 ### Findings
 
 #### [CRITICAL] OOS Sharpe test fails for ALL models — likely oracle or spec issue
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/4fbc793/tasks/portfolio-risk-attribution/tests/test_outputs.py)
 
 All three models produce `oos_sharpe ≈ 0.092` while the oracle expects `1.0317`. This 10× discrepancy across all models is too consistent to be agent error.
 
@@ -34,12 +35,41 @@ The instruction says: "annualized out-of-sample Sharpe ratio" and "Annualize mon
 **Fix:** Explicitly state in instruction: "OOS Sharpe = (ann_oos_return − risk_free_annual) / ann_oos_vol"
 
 #### [MAJOR] Component VaR tolerance too tight for Haiku
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/4fbc793/tasks/portfolio-risk-attribution/tests/test_outputs.py)
 
 Haiku fails all 5 component_var tests with tolerance of 0.002. The values are close but just outside tolerance — suggests a slightly different VaR computation path. This is reasonable discrimination but combined with the OOS Sharpe bug, makes the task untestable.
 
 #### [MINOR] Task is large and complex for "hard" — appropriate difficulty label
 The task combines 8 distinct computational steps (factor model, covariance, optimization, risk decomposition, walk-forward, VaR). Opus getting 59/60 suggests the difficulty is well-calibrated once the oracle bug is fixed.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 89s | 747,377in / 10,345out |
+| Opus 4.6 | 0.0 | 102s | 159,387in / 4,233out |
+| Sonnet 4.5 | 0.0 | 112s | 149,396in / 4,456out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_oos_sharpe
+E       assert 0.09186786451563766 <= 0.05
+E        +  where 0.09186786451563766 = abs((1.1235678645156377 - 1.0317))
+FAIL: test_component_var
+E       assert 0.007910530838988523 <= 0.002
+E        +  where 0.007910530838988523 = abs((0.007064530838988523 - -0.000846))
+FAIL: test_component_var
+E       assert 0.016773469161011478 <= 0.002
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_oos_sharpe
+E       assert 0.09186786451563766 <= 0.05
+E        +  where 0.09186786451563766 = abs((1.1235678645156377 - 1.0317))
+```
 
 ### Summary
 Strong task design with good model discrimination (Opus >> Haiku >> Sonnet on non-buggy tests). However, the OOS Sharpe specification ambiguity causes universal failure. This is a one-line fix in the instruction.

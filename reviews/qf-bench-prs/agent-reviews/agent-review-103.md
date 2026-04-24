@@ -1,4 +1,5 @@
 # Review: PR #103 - fx-carry-forward-hedge
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/103](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/103)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -30,19 +31,51 @@ Opus46 passes 31/36 tests (86%) but scores 0.0. The 5 failures are:
 The NaN + atol=1e-12 identity check and the n_obs off-by-one are verifier brittleness issues, not fundamental quant errors. The task should use partial credit.
 
 #### [MAJOR] Task scope is enormous — 5 parts covering all of FX quant
-File: `instruction.md`
+File: [`instruction.md`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/763d3fb/tasks/fx-carry-forward-hedge/instruction.md)
 
 This is effectively 5 separate tasks bundled into one. Each part (cross rates, forwards, carry signals, option pricing, risk metrics) is a full task in itself. The hard rating with 120 min expert estimate seems low — this would take an expert much longer.
 
 #### [MAJOR] n_obs off-by-one suggests ambiguous row counting convention
-File: `tests/test_outputs.py` line 279
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/763d3fb/tasks/fx-carry-forward-hedge/tests/test_outputs.py) line 279
 
 The test asserts `self.data[strategy]["n_obs"] == len(self.returns)` but the carry returns DataFrame has 1996 rows while the agent reports 1995. This is likely an edge case around whether the first NaN row counts as an observation. The instruction doesn't clarify this.
 
 #### [MAJOR] NaN-sensitive identity check at 1e-12 tolerance
-File: `tests/test_outputs.py` line 163
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/763d3fb/tasks/fx-carry-forward-hedge/tests/test_outputs.py) line 163
 
 `np.allclose(lhs, rhs, atol=1e-12)` fails because NaN ≠ NaN. The test should use `np.testing.assert_allclose` with `equal_nan=True` or mask NaN rows.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 487s | 4,673,762in / 95,845out |
+| Opus 4.6 | 0.0 | 504s | 1,774,169in / 25,764out |
+| Sonnet 4.5 | 0.0 | 461s | 1,157,057in / 28,112out |
+
+
+**Haiku key failures:**
+```
+E       KeyError: 't_base'
+E       KeyError: 'side_used'
+E       assert False
+E        +  where False = <function isclose at 0x7fcafed38e30>(3.6978497556700645, 3.6182, atol=0.02)
+E        +    where <function isclose at 0x7fcafed38e30> = np.isclose
+E       assert False
+E        +  where False = <function isclose at 0x7fcafed38e30>(1.3329566263773693, 1.4122, atol=0.02)
+E        +    where <function isclose at 0x7fcafed38e30> = np.isclose
+```
+
+
+**Opus key failures:**
+```
+E       KeyError: 'days_from_spot'
+E       KeyError: 'swap_points'
+E       assert 2247 < 2100
+E       assert False
+E        +    where <function allclose at 0x7f502edefef0> = np.allclose
+E           assert 1995 == 1996
+```
 
 ### Summary
 Ambitious and convention-sensitive FX task with real data. The quant content is excellent but the task is too large and the verifier has brittleness issues (NaN handling, off-by-one). All models score 0.0 despite Opus46 passing 86% of tests.

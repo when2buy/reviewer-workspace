@@ -1,4 +1,5 @@
 # Review: PR #156 - bs-greeks-pde
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/156](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/156)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -31,6 +32,22 @@ The PDE formula in the instruction correctly includes the dividend yield D in th
 
 #### [NIT] Some tests pin specific values (e.g., ATM call price ≈ 23.848 with atol=0.5)
 This is fine — the values come from analytical BS formulas with known inputs, so they should be highly deterministic.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 77s | 266,960in / 5,614out |
+| Opus 4.6 | 1.0 | 84s | 101,475in / 3,759out |
+| Sonnet 4.5 | 1.0 | 245s | 436,764in / 14,830out |
+
+
+**Haiku key failures:**
+```
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7f7f10a6d070>(np.float64(2.5701924582363627), 257.02, atol=2.0)
+E        +    where <function isclose at 0x7f7f10a6d070> = np.isclose
+```
 
 ### Summary
 Excellent task design. The PDE residual check is a particularly clever test that validates consistency across all Greeks. Financial content is correct. Tests are comprehensive (39 tests covering structure, values, properties, and PDE). The only weakness is marginal discrimination — Haiku fails by one test.

@@ -39,6 +39,34 @@ The vast majority of tests pass, including transition matrix properties, generat
 #### [MINOR] Real ESMA CEREP data — excellent
 Using actual S&P transition matrices from 2018-2024 provides genuine credit risk realism.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 124s | 740,513in / 8,207out |
+| Opus 4.6 | 0.0 | 97s | 187,110in / 4,056out |
+| Sonnet 4.5 | 0.0 | 108s | 188,562in / 4,858out |
+
+
+**Haiku key failures:**
+```
+E       AssertionError: P-values must be in [0, 1]
+E       assert (np.False_)
+E        +  where np.False_ = <function all at 0x7fdb89b4a970>(array([   nan, 1.e-05, 0.e+00, 0.e+00, 0.e+00, 0.e+00, 0.e+00]) >= 0)
+E        +    where <function all at 0x7fdb89b4a970> = np.all
+E       AssertionError: Cohort size total (22476) != summary total (22497)
+E       assert np.int64(21) < 10
+E        +  where np.int64(21) = abs((np.int64(22476) - 22497))
+```
+
+
+**Opus key failures:**
+```
+E       AssertionError: Cohort size total (22476) != summary total (22497)
+E       assert np.int64(21) < 10
+E        +  where np.int64(21) = abs((np.int64(22476) - 22497))
+```
+
 ### Summary
 Very good credit risk task with real data and comprehensive tests. Close to passing — Opus fails on only 1 test (total_transitions count), which is likely a specification ambiguity about whether Default-row counts should be included. The chi-squared edge cases for sparse ratings (AAA) need clearer handling instructions.
 

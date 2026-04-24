@@ -1,4 +1,5 @@
 # Review: PR #161 - compound-option-geske
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/161](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/161)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -30,6 +31,30 @@ The `verify_parity` function computes `pc_price` (put-on-call) directly *from* t
 
 #### [MINOR] MC seed is shared across call/put pricing
 The seed is reset for each MC call (SEED=42 for calls, SEED+1 for puts), which is fine but the MC comparison is not deeply tested — only `mc_validates` checks max error < 1.0, a very loose bound.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 509s | 3,437,411in / 44,735out |
+| Opus 4.6 | 0.0 | 972s | 628,041in / 24,853out |
+| Sonnet 4.5 | 0.0 | 1713s | 1,202,653in / 26,412out |
+
+
+**Opus key failures:**
+```
+E       AssertionError: Expected 15 call-on-call rows, got 0
+E       assert 0 == 15
+E        +  where 0 = len(Empty DataFrame\nColumns: [type, K1, K2, K2_moneyness, T1, T2, S_star, compound_price, mc_price, mc_std_err]\nIndex: [])
+```
+
+
+**Sonnet key failures:**
+```
+E       AssertionError: Max parity error 5.416038370057535 exceeds threshold 0.01
+E       assert np.float64(5.416038370057535) < 0.01
+E       assert 5.416038370057535 < 0.01
+```
 
 ### Summary
 The parity check is tautological (computes one side from the other). The model discrimination is inverted — Haiku passes while Opus and Sonnet fail on minor schema issues, which is a calibration concern. The financial content (Geske formula, bivariate normal) is solid.

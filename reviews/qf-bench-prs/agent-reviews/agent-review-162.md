@@ -1,4 +1,5 @@
 # Review: PR #162 - digital-barrier-options
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/162](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/162)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -26,6 +27,26 @@ Tests like `test_atm_cash_call_T050` pin to 0.5341 with atol=0.02, and `test_atm
 
 #### [MINOR] Strong parity tests
 The cash parity (CashCall + CashPut = e^{-rT}), asset parity, and BS decomposition tests are mathematically correct and serve as genuine integrity checks. Good.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 213s | 1,355,604in / 17,218out |
+| Opus 4.6 | 1.0 | 109s | 150,562in / 5,535out |
+| Sonnet 4.5 | 1.0 | 306s | 450,457in / 20,189out |
+
+
+**Haiku key failures:**
+```
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7fcdea65d630>(np.float64(0.4948452222378559), 0.533, atol=0.01)
+E        +    where <function isclose at 0x7fcdea65d630> = np.isclose
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7fcdea65d630>(np.float64(0.3060304248455036), 0.437, atol=0.01)
+E        +    where <function isclose at 0x7fcdea65d630> = np.isclose
+E       KeyError: 'cash_call_increases_with_S'
+```
 
 ### Summary
 Well-structured task with correct financial logic. Good parity tests that aren't tautological. Reasonable model discrimination (Haiku fails on harder barrier formulas). No blockers found.

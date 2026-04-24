@@ -1,4 +1,5 @@
 # Review: PR #100 - minimum-cost-equity-etf-hedger
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/100](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/100)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -26,14 +27,22 @@ This could indicate:
 3. The instruction is detailed enough to be mechanical
 
 #### [MINOR] Tolerances are very tight but still passed by all
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/58c6e66/tasks/minimum-cost-equity-etf-hedger/tests/test_outputs.py)
 
 Beta tolerance `rtol=1e-6, atol=1e-8` and hedge notional tolerance `atol=1e-4` are extremely tight. The fact that all models hit these suggests the LP solution is unique and well-conditioned, which is good for determinism but means the task essentially has one correct answer.
 
 #### [NIT] No canary GUID in task.toml
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/58c6e66/tasks/minimum-cost-equity-etf-hedger/task.toml)
 
 Missing the canary comment that other PRs include.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 147s | 1,432,673in / 19,673out |
+| Opus 4.6 | 1.0 | 100s | 176,245in / 4,684out |
+| Sonnet 4.5 | 1.0 | 147s | 293,088in / 7,921out |
 
 ### Summary
 Clean, well-specified task with a working environment and robust verifier. The main concern is that it provides zero model discrimination — all three models pass perfectly. Consider whether this task adds value to the benchmark given that it cannot separate model capabilities.

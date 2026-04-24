@@ -1,4 +1,5 @@
 # Review: PR #84 - cme-hdd-option-pricing
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/84](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/84)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -19,12 +20,28 @@ Prices a CME monthly HDD (Heating Degree Day) call option using burn analysis, O
 ### Findings
 
 #### [MINOR] No solution/solve.py present
-File: `solution/`
+File: [`solution/`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/b2e52a0/tasks/cme-hdd-option-pricing/solution/)
 No oracle solution script is provided. This makes it harder to verify the oracle values independently, though the tests contain well-motivated pinned values.
 
 #### [NIT] Tolerance on OU parameters is generous
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/b2e52a0/tasks/cme-hdd-option-pricing/tests/test_outputs.py)
 `ou_kappa` and `ou_sigma` have ±5.0 atol on values ~72-73 (~7% tolerance). This is reasonable given fitting sensitivity but could allow slightly wrong implementations to pass.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 127s | 644,672in / 10,522out |
+| Opus 4.6 | 1.0 | 106s | 189,963in / 5,625out |
+| Sonnet 4.5 | 1.0 | 165s | 171,985in / 7,672out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_greeks_json_exists_and_valid
+E       AssertionError: bump_sigma_pct=1.0, expected 0.01
+E       assert 1.0 == 0.01
+```
 
 ### Summary
 Well-designed weather derivatives task with strong domain specificity (GHCN data format, OU process, CME conventions). The instruction is thorough and prescriptive where needed. Trial results show good model discrimination: Haiku fails while Opus and Sonnet pass. No significant blockers.

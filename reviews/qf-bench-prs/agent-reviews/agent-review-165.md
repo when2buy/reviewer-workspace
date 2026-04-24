@@ -1,4 +1,5 @@
 # Review: PR #165 - first-passage-time
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/165](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/165)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -29,6 +30,21 @@ Tests include monotonicity (prob decreases with barrier height, increases with t
 
 #### [NIT] MC tolerance of 30% is loose
 The MC comparison allows 30% relative error for running extrema, which is appropriate given discrete vs. continuous monitoring bias, but could mask some implementation errors.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 450s | 3,246,548in / 33,816out |
+| Opus 4.6 | 1.0 | 142s | 203,220in / 6,269out |
+| Sonnet 4.5 | 1.0 | 331s | 1,142,996in / 16,843out |
+
+
+**Haiku key failures:**
+```
+E       assert 0.17157700932923622 < 0.03
+E        +  where 0.17157700932923622 = abs((0.17986299067076375 - 0.35144))
+```
 
 ### Summary
 Clean task with correct financial mathematics. Good use of the reflection principle. Reasonable model discrimination — Haiku fails only on the hardest joint distribution test. Strong parity and monotonicity checks.

@@ -1,4 +1,5 @@
 # Review: PR #153 - asian-option-levy-curran
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/153](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/153)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -28,6 +29,32 @@ The instruction describes the Levy and Curran methods conceptually but doesn't g
 
 #### [NIT] Tests use range-based checks rather than pinned values
 Most tests are structural (positive prices, monotonicity, row counts) with a few pinned ATM ranges. This is good for robustness but means a subtly wrong implementation could still pass.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 523s | 866,921in / 12,745out |
+| Opus 4.6 | 1.0 | 125s | 113,310in / 6,535out |
+| Sonnet 4.5 | 0.0 | 381s | 847,907in / 23,860out |
+
+
+**Haiku key failures:**
+```
+E           AssertionError: geo_exact=47.050447420152864 > mc_arith=46.07294627521128 at K=652.7069999999999, T=0.5
+E           assert 47.050447420152864 <= (46.07294627521128 + 0.01)
+E       AssertionError: geo_less_than_arith_pct=72.22222222222223, expected in [80, 100]
+E       assert 80.0 <= 72.22222222222223
+```
+
+
+**Sonnet key failures:**
+```
+E           AssertionError: geo_exact=55.61010916553004 > mc_arith=48.71423524497567 at K=652.7069999999999, T=0.5
+E           assert 55.61010916553004 <= (48.71423524497567 + 0.01)
+E       AssertionError: geo_less_than_arith_pct=50.0, expected in [80, 100]
+E       assert 80.0 <= 50.0
+```
 
 ### Summary
 Well-designed task with good discrimination. The three pricing methods (exact geometric, Levy, Curran) test genuine quant finance knowledge. Only Opus passes, which is appropriate for "hard" difficulty. Tests are mostly property-based with reasonable tolerances.

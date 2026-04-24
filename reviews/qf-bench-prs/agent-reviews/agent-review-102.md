@@ -1,4 +1,5 @@
 # Review: PR #102 - intraday-volume-fitting-and-execution-scheduling
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/102](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/102)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -27,14 +28,35 @@ H45 passes the model selection tests (excluded days, model performance, best mod
 The instruction specifies the schedule should use bars "strictly after" the order datetime, but this boundary condition is apparently tricky for H45.
 
 #### [MINOR] Hard difficulty rating seems appropriate
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/e818dc5/tasks/intraday-volume-fitting-and-execution-scheduling/task.toml)
 
 Rated "hard" with expert estimate 90 min. The H45=0.0 vs Opus46/S45=1.0 split supports this — the task requires careful attention to multiple data processing steps, rolling evaluation, and schedule construction.
 
 #### [MINOR] Reference data comparison is byte-sensitive for excluded_days
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/e818dc5/tasks/intraday-volume-fitting-and-execution-scheduling/tests/test_outputs.py)
 
 `test_excluded_days_matches_reference` uses `pd.testing.assert_frame_equal` with `check_dtype=True`, which is strict. This is appropriate since excluded days should be deterministic.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 343s | 2,958,939in / 38,484out |
+| Opus 4.6 | 1.0 | 93s | 130,537in / 3,906out |
+| Sonnet 4.5 | 1.0 | 285s | 540,116in / 11,670out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_final_schedule_only_bars_strictly_after_order_datetime
+E       AssertionError: every scheduled bar must be strictly after order.json datetime
+E       assert np.False_
+E        +  where np.False_ = all()
+FAIL: test_final_schedule_matches_reference_datetimes_and_quantities
+E       AssertionError:
+E       Arrays are not equal
+E       datetime column must match reference exactly
+```
 
 ### Summary
 Well-designed execution/microstructure task with realistic intraday data. Good model separation between H45 and stronger models. The schedule construction boundary condition trips up weaker models, which is legitimate discrimination. The task works as intended.

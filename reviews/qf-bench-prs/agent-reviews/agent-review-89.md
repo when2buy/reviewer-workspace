@@ -1,4 +1,5 @@
 # Review: PR #89 - lob-pc-signal
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/89](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/89)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -18,16 +19,24 @@ LOB (Limit Order Book) signal construction: compute Weighted True OFI across 15 
 ### Findings
 
 #### [CRITICAL] Dockerfile uses wrong base image — all trials fail to build
-File: `environment/Dockerfile`
+File: [`environment/Dockerfile`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/2812e40/tasks/lob-pc-signal/environment/Dockerfile)
 Uses `quantitative-finance-bench-sandbox:latest` instead of `finance-bench-sandbox:latest`. All three trials (h45, opus46, s45) fail with: `pull access denied, repository does not exist or may require authorization`. No agent execution or verification occurred.
 
 #### [MAJOR] Full reference values embedded in test file
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/2812e40/tasks/lob-pc-signal/tests/test_outputs.py)
 The `REFERENCE` dict contains all 30+ expected values with full precision. An agent that reads the test file can trivially hardcode these values. This is a significant anti-cheat concern.
 
 #### [MINOR] PCA sign convention not specified in instruction
-File: `instruction.md`
+File: [`instruction.md`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/2812e40/tasks/lob-pc-signal/instruction.md)
 PCA eigenvectors are sign-ambiguous. The instruction doesn't specify a sign convention, but the reference values assume a specific sign. This could cause agents to produce correct but sign-flipped results.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | error reading | — | — |
+| Opus 4.6 | error reading | — | — |
+| Sonnet 4.5 | error reading | — | — |
 
 ### Summary
 Cannot be evaluated — the Dockerfile base image is wrong, preventing any trial from running. Additionally, the test file contains full reference answers, creating an anti-cheat vulnerability.

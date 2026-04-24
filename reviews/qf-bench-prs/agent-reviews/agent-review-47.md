@@ -33,6 +33,14 @@ The instruction provides lambda', r_n, sigma_n formulas explicitly. This makes t
 #### [NIT] test_merton_prices_reasonable hardcodes range [5,25]
 This is a reasonable range for ATM options with these parameters but could be derived from the params.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | no trial data | — | — |
+| Opus 4.6 | no trial data | — | — |
+| Sonnet 4.5 | no trial data | — | — |
+
 ### Summary
 Excellent quant derivatives task with correct Merton jump-diffusion implementation, good financial tests including put-call parity and no-arbitrage checks. The only blocker is the missing Dockerfile.
 

@@ -1,4 +1,5 @@
 # Review: PR #42 - PCA Factor Portfolio
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/42](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/42)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does

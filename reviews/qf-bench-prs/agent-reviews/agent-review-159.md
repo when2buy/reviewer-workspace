@@ -1,4 +1,5 @@
 # Review: PR #159 - cir-bond-pricing
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/159](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/159)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -31,6 +32,14 @@ Tests check: parameter bounds, Feller condition consistency, bond price properti
 
 #### [NIT] Financial correctness is solid
 The Ricatti formulas for A(τ) and B(τ) in the instruction are correct. The CIR transition density via non-central χ² is correct. The Feller condition 2κθ ≥ σ² is stated correctly.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 79s | 265,657in / 6,116out |
+| Opus 4.6 | 1.0 | 98s | 122,148in / 3,881out |
+| Sonnet 4.5 | 1.0 | 719s | 353,291in / 7,547out |
 
 ### Summary
 Excellent task design and verifier quality. The CIR model instruction is thorough and correct. Tests are comprehensive, property-based, and robust. The only issue is zero model discrimination — all models pass. The "hard" label is too aggressive given that the instruction provides all formulas explicitly. Consider "medium" or reduce formula specificity.

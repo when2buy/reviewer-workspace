@@ -1,4 +1,5 @@
 # Review: PR #148 - futures-carry-repair / insider-buy-clusters / post-earnings-drift
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/148](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/148)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 This is a multi-task PR by judy12345. Reviewing each task separately.

@@ -34,6 +34,40 @@ When all three frontier models (including Opus 4.6) fail, the most likely explan
 #### [MINOR] Good domain concept — vendor restatement auditing
 The task itself is a realistic data engineering + domain knowledge problem. Break window detection, bulletin-aware root cause diagnosis, and vintage comparison are genuine quant data ops skills.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 56s | 150,698in / 3,901out |
+| Opus 4.6 | 0.0 | 73s | 114,282in / 2,555out |
+| Sonnet 4.5 | 0.0 | 81s | 102,501in / 4,429out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_results_json_schema_and_summary_counts
+E       AssertionError: assert '2003-03-10' == 'vendor_reference_v1'
+E
+E         - vendor_reference_v1
+E         + 2003-03-10
+FAIL: test_vendor_audit_windows_schema_order_and_window_aggregation
+E       AssertionError: assert [{'break_row_...lletin', ...}] == [{'break_row_...lletin', ...}]
+E
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_results_json_schema_and_summary_counts
+E       AssertionError: assert '2003-03-10' == 'vendor_reference_v1'
+E
+E         - vendor_reference_v1
+E         + 2003-03-10
+FAIL: test_vendor_audit_windows_schema_order_and_window_aggregation
+E       AssertionError: assert [{'break_row_...lletin', ...}] == [{'break_row_...lletin', ...}]
+E
+```
+
 ### Summary
 Promising task concept undermined by specification gaps. All three models fail because `vintage_from` meaning (filename stem vs date) is ambiguous. The instruction should explicitly state: "Use the CSV filename stem (e.g., `vendor_reference_v1`) as the vintage identifier."
 

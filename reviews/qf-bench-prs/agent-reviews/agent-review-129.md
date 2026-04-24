@@ -1,4 +1,5 @@
 # Review: PR #129 - fx-forward-cross-rate
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/129](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/129)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -33,8 +34,36 @@ Day-count (ACT/360 vs ACT/365), bid/ask triangulation, cross-rate construction t
 Forward rate tests use rtol=1e-4, PnL tests use rtol=0.02, spot delta tests use rtol=0.05. These progressively relax for downstream computations, which is the right approach.
 
 #### [MINOR] Difficulty labeled "easy" but involves cross-rate bid/ask and PnL attribution
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/b86732d/tasks/fx-forward-cross-rate/task.toml)
 The task requires correct handling of bid/ask in cross-rate triangulation and PnL decomposition, which is medium complexity. The "easy" label may understate difficulty.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 188s | 1,766,912in / 33,847out |
+| Opus 4.6 | 0.0 | 150s | 140,731in / 8,229out |
+| Sonnet 4.5 | 1.0 | 136s | 149,592in / 8,806out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_portfolio_mtm_pnl
+E       AssertionError: T001 PnL USD: got -3080.0, expected ~3080.0
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7fac0eb9acf0>(-3080.0, 3080.0, rtol=0.02)
+E        +    where <function isclose at 0x7fac0eb9acf0> = np.isclose
+FAIL: test_portfolio_mtm_pnl
+E       AssertionError: T002 PnL USD: got -23037.54, expected ~23037.54
+E       assert np.False_
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_cip_deviation_small
+E           KeyError: 'EUR/USD'
+```
 
 ### Summary
 Strong FX task with excellent model discrimination (S45 passes, Opus46 nearly passes, H45 struggles). The financial content is practical and tests real convention knowledge. Tolerance calibration is good. The single Opus46 failure appears to be a minor structural issue.

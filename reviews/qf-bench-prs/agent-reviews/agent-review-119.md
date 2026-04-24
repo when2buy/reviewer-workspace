@@ -1,4 +1,5 @@
 # Review: PR #119 - option-put-call-parity-forward-audit
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/119](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/119)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -18,11 +19,11 @@ Audit option quotes for put-call parity violations: clean quotes (stale, crossed
 ### Findings
 
 #### [MAJOR] Complete expected values in test file (similar to PR #118)
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/7ab12bd/tasks/option-put-call-parity-forward-audit/tests/test_outputs.py)
 Based on the test structure (I can see it follows the same author pattern as PR #118), expected values are likely fully pinned. With a small option chain, this creates hardcoding risk.
 
 #### [MINOR] Synthetic forward uses bid/ask correctly
-File: `solution/solve.py`
+File: [`solution/solve.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/7ab12bd/tasks/option-put-call-parity-forward-audit/solution/solve.py)
 `synthetic_forward_bid = K + (call_bid - put_ask) / DF` and `_ask = K + (call_ask - put_bid) / DF` — correctly uses the worst-case side for each bound. Good financial practice.
 
 #### [MINOR] Implied borrow rate calculation
@@ -30,6 +31,14 @@ The solution correctly derives `implied_borrow = r - q - ln(F_synth/S) / T`, whi
 
 #### [POSITIVE] Good audit workflow design
 The task represents a realistic options desk workflow: quote cleaning → pair matching → parity check → violation flagging. This is a practical skill.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | error reading | — | — |
+| Opus 4.6 | error reading | — | — |
+| Sonnet 4.5 | error reading | — | — |
 
 ### Summary
 Well-designed options audit task with correct put-call parity implementation. The audit workflow (clean → match → check → flag) is realistic and practical. However, like PR #118 (same author), the task may have complete expected values in the test file, which creates integrity concerns for small datasets.

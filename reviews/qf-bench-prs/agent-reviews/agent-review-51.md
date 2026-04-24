@@ -33,6 +33,14 @@ Uses actual BTCUSDT futures quote/trade data from 2024-01-01, providing genuine 
 #### [NIT] Solution and test both contain full expected values
 The test hardcodes `EXPECTED_RESULTS`, `EXPECTED_SOLUTION_INTERMEDIATES`, and `EXPECTED_SOLUTION_CHECKPOINTS`. While these are in the test (not visible to agent at runtime), this is a strong anti-cheat design.
 
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | error reading | — | — |
+| Opus 4.6 | error reading | — | — |
+| Sonnet 4.5 | error reading | — | — |
+
 ### Summary
 This is one of the best-designed tasks in this batch. Precise specification, deterministic verification from raw inputs, real market data, and strong anti-cheat properties. The only issue is the Docker image availability, which is an infrastructure problem.
 

@@ -1,4 +1,5 @@
 # Review: PR #128 - etf-cross-asset-lead-lag
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/128](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/128)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -24,11 +25,11 @@ Compute lead-lag relationships across 10 ETFs using lagged correlation asymmetry
 The provided scores are (H:0.0, O:0.0, S:0.0), but trial results show Opus46 fails only 1 test (`test_persistence_summary_matches_reference`) and S45 fails only 1 test (`test_dimensions_and_sample_split`). The strict 0/1 reward means near-perfect performance still gets 0.
 
 #### [MAJOR] Test values are pinned to 6 decimal places
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/93ff709/tasks/etf-cross-asset-lead-lag/tests/test_outputs.py)
 Tests check exact values like `raw_top1_asymmetry=0.166512` with atol=1e-6, `tlt_beta_to_spy=-0.273395` with atol=1e-6. While the instruction specifies `numpy.corrcoef` and exact slicing conventions, 6-decimal precision leaves zero room for floating-point differences across implementations.
 
 #### [MAJOR] Answer leakage via pinned test values
-File: `tests/test_outputs.py`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/93ff709/tasks/etf-cross-asset-lead-lag/tests/test_outputs.py)
 The test file contains the complete solution: top leader/lagger pairs ("LQD", "VNQ"), exact asymmetry values, beta coefficients, rank bands, and process counts. This is visible to agents at test time under Harbor assumptions? If agents can read test files, the answers are fully leaked.
 
 #### [POSITIVE] Instruction is exceptionally detailed
@@ -39,6 +40,36 @@ H45 fails 12/24 tests while Opus46 and S45 fail only 1/24. This shows genuine di
 
 #### [MINOR] `test_dimensions_and_sample_split` checks exact dates
 The test checks `in_sample_start: "2018-01-03"` — the first return date. An agent computing returns differently (e.g., including or excluding the first price date) would fail this check.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 106s | 308,506in / 11,000out |
+| Opus 4.6 | 0.0 | 147s | 162,612in / 9,953out |
+| Sonnet 4.5 | 0.0 | 157s | 286,420in / 10,218out |
+
+
+**Haiku key failures:**
+```
+FAIL: test_solution_intermediates_reference_values
+E           assert np.False_
+E            +  where np.False_ = <function isclose at 0x7f7879f271b0>(0.162535, 0.11204929713296363, atol=1e-06)
+E            +    where <function isclose at 0x7f7879f271b0> = np.isclose
+FAIL: test_log_returns_not_simple_returns
+E       assert 0.162535 < 0.116
+FAIL: test_top_lead_lag_pairs_match_reference
+E           assert np.False_
+```
+
+
+**Opus key failures:**
+```
+FAIL: test_persistence_summary_matches_reference
+E       assert np.False_
+E        +  where np.False_ = <function isclose at 0x7fce9105c8b0>(0.089753, 0.08975531935486965, atol=1e-06)
+E        +    where <function isclose at 0x7fce9105c8b0> = np.isclose
+```
 
 ### Summary
 Well-designed lead-lag analysis task with excellent instruction specificity and good model discrimination (H45 clearly worse than Opus46/S45). The main issues are: (1) strict 0/1 scoring wastes the discrimination signal — Opus46 and S45 are essentially correct but score 0, and (2) test values at 1e-6 tolerance are too tight for a benchmark. With tolerance relaxation or partial credit, this would be a strong task.

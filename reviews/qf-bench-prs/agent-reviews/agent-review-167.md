@@ -1,4 +1,5 @@
 # Review: PR #167 - geometric-mean-reverting-jd
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/167](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/167)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -32,6 +33,36 @@ The OU calibration via OLS regression (X_{t+1} = a + b·X_t + ε, then invert to
 
 #### [NIT] MC relative error tolerance
 MC mean error < 5%, var error < 15% — reasonable for 10,000 paths with jumps.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 0.0 | 85s | 222,469in / 5,846out |
+| Opus 4.6 | 1.0 | 98s | 147,277in / 3,970out |
+| Sonnet 4.5 | 0.0 | 108s | 111,419in / 5,348out |
+
+
+**Haiku key failures:**
+```
+E       assert np.False_
+E        +  where np.False_ = all()
+E        +    where all = 0    0.043029\n1    0.080839\n2    0.144116\n3    0.237715\n4    0.415628\nName: Var_X, dtype: float64 <= (0.23621084091434857 + 0.01).all
+E               AssertionError: tau=2.0: relerr=0.1727
+E               assert np.float64(0.1727003327464178) < 0.1
+E       assert 0.40785278123735247 < 0.15
+```
+
+
+**Sonnet key failures:**
+```
+E       assert np.False_
+E        +  where np.False_ = all()
+E        +    where all = 0    0.043236\n1    0.081244\n2    0.144895\n3    0.239185\n4    0.418991\nName: Var_X, dtype: float64 <= (0.319391205907997 + 0.01).all
+E               AssertionError: tau=1.0: relerr=0.1029
+E               assert np.float64(0.10292102597661826) < 0.1
+E       assert 0.414408825878002 < 0.15
+```
 
 ### Summary
 Well-designed task testing a non-trivial stochastic process (OU + jumps). Correct financial mathematics throughout. Good model discrimination where the variance formulas separate Opus from the others.

@@ -1,4 +1,5 @@
 # Review: PR #178 - Variance Swap Pricing
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/178](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/178)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -19,21 +20,38 @@ Compute fair variance swap strikes using model-free replication (OTM option port
 ### Findings
 
 #### [MAJOR] Opus fails on K_var / sigma_var relationship test
-File: `tests/test_outputs.py:132-138`
+File: [`tests/test_outputs.py:132-`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/3865db4/tasks/variance-swap-pricing/tests/test_outputs.py:132-#L138)
 Opus (0.0 reward) failed only on `test_k_var_sigma_var_relationship`, which asserts `K_var ≈ sigma_var^2 * tau` with rtol=0.01. The relationship `K_var = sigma_var^2 * tau` is correct by definition (sigma_var = sqrt(K_var/tau)), but this is a circular check — if the agent computes K_var and sigma_var independently (e.g., K_var from replication and sigma_var from a different formula), they might not match to 1%.
 
 More importantly, Opus's failure here suggests it computed sigma_var differently than `sqrt(K_var/tau)`. The instruction says `sigma_var = sqrt(K_var / tau)` explicitly, so this is a legitimate contract-reading error. Still, the 1% tolerance is tight for what is essentially a definitional consistency check.
 
 #### [MINOR] Heston parameter calibration is ambiguous
-File: `instruction.md`
+File: [`instruction.md`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/3865db4/tasks/variance-swap-pricing/instruction.md)
 The instruction provides Heston closed-form for variance swap strikes but doesn't specify how to calibrate κ, θ, v0. The test checks `calibration_method` is one of `["default", "fitted_sse", "fitted_lsq"]` — allowing multiple approaches is good, but the instruction should be clearer about what calibration is expected.
 
 #### [MINOR] Day-count convention is explicit (365)
 The instruction specifies 365 days/year for tau computation, which avoids common 252 vs 365 confusion. Good.
 
 #### [MINOR] No oracle solution
-File: `solution/solve.py`
+File: [`solution/solve.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/3865db4/tasks/variance-swap-pricing/solution/solve.py)
 Empty.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 161s | 737,648in / 14,415out |
+| Opus 4.6 | 0.0 | 359s | 1,044,536in / 19,718out |
+| Sonnet 4.5 | 1.0 | 425s | 2,106,689in / 45,221out |
+
+
+**Opus key failures:**
+```
+E           AssertionError: K_var=0.2072212 != sigma_var^2*tau=0.005677293260106892 for 2024-03-25
+E           assert np.False_
+E            +  where np.False_ = <function isclose at 0x7faad1ae0c70>(0.2072212, 0.005677293260106892, rtol=0.01)
+E            +    where <function isclose at 0x7faad1ae0c70> = np.isclose
+```
 
 ### Summary
 Good task testing a core volatility derivatives concept. The model-free replication approach is well-specified and the instruction is clear. Haiku and Sonnet pass; Opus fails on a consistency check (K_var vs sigma_var) that reflects a contract-reading error. The task provides meaningful difficulty without being artificially hard.

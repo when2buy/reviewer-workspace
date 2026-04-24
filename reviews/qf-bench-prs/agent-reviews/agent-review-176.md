@@ -1,4 +1,5 @@
 # Review: PR #176 - Realized Volatility Estimators
+PR: [https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/176](https://github.com/QF-Bench/QuantitativeFinance-Bench/pull/176)
 Reviewer: Agent 🔍 | Date: 2026-04-23
 
 ### What This PR Does
@@ -26,19 +27,53 @@ The current `test_outputs.py` tests OHLCV-based vol estimators (CC, Parkinson, G
 The task was apparently rewritten from intraday realized vol to OHLCV-based estimators, but trials were never re-run on the new version.
 
 #### [MAJOR] No oracle solution
-File: `solution/solve.py`
+File: [`solution/solve.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/69be7ec/tasks/realized-vol-estimators/solution/solve.py)
 Empty. Combined with invalid trial data, there's no evidence the current verifier works correctly.
 
 #### [MAJOR] Test pins CC vol to 0.1511 with tight tolerance
-File: `tests/test_outputs.py:52`
+File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/69be7ec/tasks/realized-vol-estimators/tests/test_outputs.py#L52)
 `assert np.isclose(self.data["cc_vol"], 0.1511, atol=0.005)` — this pins close-to-close vol to a specific value. Without an oracle solution or valid trials, we can't confirm this is correct.
 
 #### [MINOR] Task.toml is minimal
-File: `task.toml`
+File: [`task.toml`](https://github.com/QF-Bench/QuantitativeFinance-Bench/blob/69be7ec/tasks/realized-vol-estimators/task.toml)
 Uses minimal format without standard metadata fields (expert_time, junior_time, verifier timeout, etc.)
 
 #### [MINOR] Difficulty labeled "medium" — appropriate if task works
 The OHLCV estimators are well-documented formulas. "Medium" is reasonable.
+
+
+### Trial Evidence
+| Model | Reward | Duration | Tokens |
+|---|---|---|---|
+| Haiku 4.5 | 1.0 | 69s | 479,954in / 9,470out |
+| Opus 4.6 | 0.0 | 82s | 150,786in / 2,853out |
+| Sonnet 4.5 | 0.0 | 146s | 298,183in / 8,065out |
+
+
+**Opus key failures:**
+```
+FAIL: test_noise_var_est
+E       AssertionError: 2024-01-02 noise_var_est=1.449183212380096e-07, expected ~8.457063e-07
+E       assert False
+E        +  where False = <function isclose at 0x7f62f8359130>(1.449183212380096e-07, 8.457063e-07, rtol=0.001)
+E        +    where <function isclose at 0x7f62f8359130> = np.isclose
+FAIL: test_noise_var_est
+E       AssertionError: 2024-01-03 noise_var_est=1.9140204453972472e-07, expected ~8.396994e-07
+E       assert False
+```
+
+
+**Sonnet key failures:**
+```
+FAIL: test_noise_var_est
+E       AssertionError: 2024-01-02 noise_var_est=2.890857703452523e-07, expected ~8.457063e-07
+E       assert False
+E        +  where False = <function isclose at 0x7ff89a4f6930>(2.890857703452523e-07, 8.457063e-07, rtol=0.001)
+E        +    where <function isclose at 0x7ff89a4f6930> = np.isclose
+FAIL: test_noise_var_est
+E       AssertionError: 2024-01-03 noise_var_est=3.8181748060244057e-07, expected ~8.396994e-07
+E       assert False
+```
 
 ### Summary
 The task was fundamentally rewritten between the trial run and the current PR state. All trial results are invalid — they correspond to a completely different task (intraday tick-based RV vs OHLCV estimators). The current task version has never been empirically tested. Cannot recommend merging without re-running trials.
