@@ -65,4 +65,4 @@ E       assert 50.0 < 50.0
 The task is well-designed conceptually but the verifier has two blocking issues: (1) a strict-inequality bug on parameter bounds that rejects valid solutions at the boundary, and (2) ATM price ranges too narrow for a multi-modal MLE problem. The 0/0/0 reward pattern is a calibration problem, not evidence that the task is appropriately hard. No oracle solution is provided.
 
 ### Verdict
-**不建议 Merge** — Verifier boundary bug and narrow tolerances cause false negatives across all models. Fix `<` to `<=` on bounds and widen ATM price ranges.
+**需要 Human Review** — Boundary bug fixed (< → <=), pushed to PR branch. Verifier boundary bug was and narrow tolerances cause false negatives across all models. Fix `<` to `<=` on bounds and widen ATM price ranges.

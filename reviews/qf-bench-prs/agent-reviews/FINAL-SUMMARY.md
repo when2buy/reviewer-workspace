@@ -1,8 +1,7 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 40 (38%) | ❌ 不建议Merge: 40 (38%) | 🟡 需要Human Review: 25 (24%)
-| #125 | bl-regime-hmm | GinkgoGao | 0:0.92:0.58 | Opus 接近满分，放宽 HMM tolerance 即可 |
+**Total:** ✅ 建议Merge: 40 (38%) | ❌ 不建议Merge: 38 (36%) | 🟡 需要Human Review: 27 (26%)
 
 ---
 
@@ -92,8 +91,7 @@
 | #157 | cev-option-pricing | Dongzhikang | Oracle 值有误 (β=0.9) |
 | #158 | chooser-option-pricing | Dongzhikang | 公式可能有误 + 答案泄露 |
 | #164 | dupire-local-vol | Dongzhikang | Spec 太脆弱 |
-| #166 | fx-quanto-options | Dongzhikang | compo 公式可能错 |
-| #170 | kou-double-exponential | Dongzhikang | Verifier 边界 bug |
+
 | #174 | power-options | Dongzhikang | Instruction 缺 closed-form |
 | #176 | realized-vol-estimators | Dongzhikang | Trial 跑的旧版 task |
 
@@ -124,6 +122,9 @@
 | #161 | compound-option-geske | Dongzhikang | 区分度反转 |
 | #168 | heston-cf-pricing | Dongzhikang | Opus 73/74，K rounding |
 | #172 | merton-jump-diffusion | Dongzhikang | 零 trial 数据 |
+| #125 | bl-regime-hmm | GinkgoGao | Opus 0.92，放宽 HMM tolerance 即可 |
+| #169 | implied-vol-approximations | Dongzhikang | 已修 rtol→0.02，Opus 过 (0:1:0) |
+| #170 | kou-double-exponential | Dongzhikang | 已修 boundary <=，待重跑 trial |
 
 ---
 
