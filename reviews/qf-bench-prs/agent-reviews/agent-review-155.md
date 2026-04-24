@@ -43,9 +43,9 @@ The Dockerfile uses `COPY data/ /app/data/` but the instruction references `/app
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 358s | 2,517,966in / 28,128out |
-| Opus 4.6 | 0.0 | 198s | 520,497in / 9,402out |
-| Sonnet 4.5 | 0.0 | 533s | 1,934,552in / 27,509out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-barrier-gbm-analytics) | 0.0 | 358s | 2,517,966in / 28,128out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-barrier-gbm-analytics) | 0.0 | 198s | 520,497in / 9,402out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-barrier-gbm-analytics) | 0.0 | 533s | 1,934,552in / 27,509out |
 
 
 **Haiku key failures:**

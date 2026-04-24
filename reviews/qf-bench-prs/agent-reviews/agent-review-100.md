@@ -40,9 +40,9 @@ Missing the canary comment that other PRs include.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 147s | 1,432,673in / 19,673out |
-| Opus 4.6 | 1.0 | 100s | 176,245in / 4,684out |
-| Sonnet 4.5 | 1.0 | 147s | 293,088in / 7,921out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-minimum-cost-equity-etf-hedger) | 1.0 | 147s | 1,432,673in / 19,673out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-minimum-cost-equity-etf-hedger) | 1.0 | 100s | 176,245in / 4,684out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-minimum-cost-equity-etf-hedger) | 1.0 | 147s | 293,088in / 7,921out |
 
 ### Summary
 Clean, well-specified task with a working environment and robust verifier. The main concern is that it provides zero model discrimination — all three models pass perfectly. Consider whether this task adds value to the benchmark given that it cannot separate model capabilities.

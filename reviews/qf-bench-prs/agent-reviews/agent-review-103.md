@@ -49,9 +49,9 @@ File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 487s | 4,673,762in / 95,845out |
-| Opus 4.6 | 0.0 | 504s | 1,774,169in / 25,764out |
-| Sonnet 4.5 | 0.0 | 461s | 1,157,057in / 28,112out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-fx-carry-forward-hedge) | 0.0 | 487s | 4,673,762in / 95,845out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-fx-carry-forward-hedge) | 0.0 | 504s | 1,774,169in / 25,764out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-fx-carry-forward-hedge) | 0.0 | 461s | 1,157,057in / 28,112out |
 
 
 **Haiku key failures:**

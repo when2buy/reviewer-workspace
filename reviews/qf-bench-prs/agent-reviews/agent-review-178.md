@@ -40,9 +40,9 @@ Empty.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 161s | 737,648in / 14,415out |
-| Opus 4.6 | 0.0 | 359s | 1,044,536in / 19,718out |
-| Sonnet 4.5 | 1.0 | 425s | 2,106,689in / 45,221out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-variance-swap-pricing) | 1.0 | 161s | 737,648in / 14,415out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-variance-swap-pricing) | 0.0 | 359s | 1,044,536in / 19,718out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-variance-swap-pricing) | 1.0 | 425s | 2,106,689in / 45,221out |
 
 
 **Opus key failures:**

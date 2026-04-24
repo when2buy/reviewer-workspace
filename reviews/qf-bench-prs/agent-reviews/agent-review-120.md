@@ -75,9 +75,9 @@ Both tasks use the same excellent multi-phase verifier framework. Financial meth
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.230769 | 345s | 1,916,232in / 26,367out |
-| Opus 4.6 | 0.269231 | 138s | 293,682in / 5,760out |
-| Sonnet 4.5 | 0.307692 | 358s | 1,248,115in / 16,868out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-barra-cne6-risk) | 0.230769 | 345s | 1,916,232in / 26,367out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-barra-cne6-risk) | 0.269231 | 138s | 293,682in / 5,760out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-barra-cne6-risk) | 0.307692 | 358s | 1,248,115in / 16,868out |
 
 
 **Haiku key failures:**

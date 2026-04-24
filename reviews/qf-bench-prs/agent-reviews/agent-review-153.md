@@ -34,9 +34,9 @@ Most tests are structural (positive prices, monotonicity, row counts) with a few
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 523s | 866,921in / 12,745out |
-| Opus 4.6 | 1.0 | 125s | 113,310in / 6,535out |
-| Sonnet 4.5 | 0.0 | 381s | 847,907in / 23,860out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-asian-option-levy-curran) | 0.0 | 523s | 866,921in / 12,745out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-asian-option-levy-curran) | 1.0 | 125s | 113,310in / 6,535out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-asian-option-levy-curran) | 0.0 | 381s | 847,907in / 23,860out |
 
 
 **Haiku key failures:**

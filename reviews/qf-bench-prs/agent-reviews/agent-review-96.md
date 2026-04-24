@@ -31,9 +31,9 @@ Forward-filling TEDRATE after 2022-01 is pragmatic but not financially rigorous.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 146s | 690,861in / 11,962out |
-| Opus 4.6 | 1.0 | 143s | 328,396in / 6,267out |
-| Sonnet 4.5 | 1.0 | 537s | 1,541,890in / 32,940out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-credit-spread-decomposition) | 0.0 | 146s | 690,861in / 11,962out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-credit-spread-decomposition) | 1.0 | 143s | 328,396in / 6,267out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-credit-spread-decomposition) | 1.0 | 537s | 1,541,890in / 32,940out |
 
 
 **Haiku key failures:**

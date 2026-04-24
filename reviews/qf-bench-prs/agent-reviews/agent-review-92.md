@@ -30,9 +30,9 @@ While the data is financial, the core task is information extraction from SEC fi
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-sec-10k-report-long) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-sec-10k-report-long) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-sec-10k-report-long) | error reading | — | — |
 
 ### Summary
 Interesting SEC filing extraction task with real data, but completely blocked by the wrong Docker base image. The cross-domain categorization is appropriate.

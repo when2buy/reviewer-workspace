@@ -41,9 +41,9 @@ Opus matches the oracle exactly, but Haiku/Sonnet fail on price values rather th
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 96s | 446,844in / 7,207out |
-| Opus 4.6 | 1.0 | 81s | 116,556in / 3,296out |
-| Sonnet 4.5 | 0.0 | 137s | 270,480in / 6,964out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-cliquet-ratchet-pricing) | 0.0 | 96s | 446,844in / 7,207out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-cliquet-ratchet-pricing) | 1.0 | 81s | 116,556in / 3,296out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-cliquet-ratchet-pricing) | 0.0 | 137s | 270,480in / 6,964out |
 
 
 **Haiku key failures:**

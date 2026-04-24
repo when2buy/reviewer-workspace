@@ -36,9 +36,9 @@ The task represents a realistic options desk workflow: quote cleaning → pair m
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-option-put-call-parity-forward-audit) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-option-put-call-parity-forward-audit) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-option-put-call-parity-forward-audit) | error reading | — | — |
 
 ### Summary
 Well-designed options audit task with correct put-call parity implementation. The audit workflow (clean → match → check → flag) is realistic and practical. However, like PR #118 (same author), the task may have complete expected values in the test file, which creates integrity concerns for small datasets.

@@ -43,9 +43,9 @@ The test.sh uses `$?` after pytest correctly (no pipefail issue).
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 676s | 763,430in / 9,309out |
-| Opus 4.6 | 0.0 | 428s | 602,722in / 21,830out |
-| Sonnet 4.5 | 0.0 | 689s | 734,631in / 23,204out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-kou-double-exponential) | 0.0 | 676s | 763,430in / 9,309out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-kou-double-exponential) | 0.0 | 428s | 602,722in / 21,830out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-kou-double-exponential) | 0.0 | 689s | 734,631in / 23,204out |
 
 
 **Haiku key failures:**

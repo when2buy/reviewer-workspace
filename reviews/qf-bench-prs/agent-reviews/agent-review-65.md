@@ -38,9 +38,9 @@ Uses `curl -LsSf https://astral.sh/uv/0.9.5/install.sh | sh` which adds network 
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 44s | 138,086in / 1,602out |
-| Opus 4.6 | 1.0 | 47s | 85,672in / 982out |
-| Sonnet 4.5 | 1.0 | 50s | 86,974in / 1,432out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-bond-portfolio-analytics) | 1.0 | 44s | 138,086in / 1,602out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-bond-portfolio-analytics) | 1.0 | 47s | 85,672in / 982out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-bond-portfolio-analytics) | 1.0 | 50s | 86,974in / 1,432out |
 
 ### Summary
 Well-crafted fixed-income task with excellent instruction clarity and comprehensive test coverage in the current version. The main concern is that trial results show all models passing on what appears to be a simpler test version. Re-trial with the current comprehensive tests is needed to assess actual discrimination.

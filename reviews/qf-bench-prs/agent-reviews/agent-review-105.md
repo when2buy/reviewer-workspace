@@ -43,9 +43,9 @@ Two-phase hedge (t0 + t1), 8 instruments including callable and FRN, PCA factor 
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 492s | 4,286,891in / 90,648out |
-| Opus 4.6 | 0.0 | 1670s | 8,248,319in / 101,113out |
-| Sonnet 4.5 | 0.0 | 725s | 3,396,894in / 62,415out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-yield-curve-bond-immunization) | 0.0 | 492s | 4,286,891in / 90,648out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-yield-curve-bond-immunization) | 0.0 | 1670s | 8,248,319in / 101,113out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-yield-curve-bond-immunization) | 0.0 | 725s | 3,396,894in / 62,415out |
 
 
 **Haiku key failures:**

@@ -34,9 +34,9 @@ PCA eigenvectors are sign-ambiguous. The instruction doesn't specify a sign conv
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-lob-pc-signal) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-lob-pc-signal) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-lob-pc-signal) | error reading | — | — |
 
 ### Summary
 Cannot be evaluated — the Dockerfile base image is wrong, preventing any trial from running. Additionally, the test file contains full reference answers, creating an anti-cheat vulnerability.

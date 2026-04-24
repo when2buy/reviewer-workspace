@@ -47,9 +47,9 @@ The recovery sensitivity test requires re-bootstrapping the entire curve with R=
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 145s | 514,268in / 14,196out |
-| Opus 4.6 | 0.0 | 223s | 202,513in / 13,094out |
-| Sonnet 4.5 | 0.0 | 182s | 492,598in / 10,003out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-cds-curve-stripping) | 0.0 | 145s | 514,268in / 14,196out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-cds-curve-stripping) | 0.0 | 223s | 202,513in / 13,094out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-cds-curve-stripping) | 0.0 | 182s | 492,598in / 10,003out |
 
 
 **Haiku key failures:**

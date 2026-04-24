@@ -50,9 +50,9 @@ Expert time of 30 min seems low for an 11-section TCA task. The task is genuinel
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 86s | 576,389in / 16,702out |
-| Opus 4.6 | 0.0 | 173s | 263,984in / 9,766out |
-| Sonnet 4.5 | 0.0 | 179s | 360,562in / 10,446out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-execution-is-vwap) | 0.0 | 86s | 576,389in / 16,702out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-execution-is-vwap) | 0.0 | 173s | 263,984in / 9,766out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-execution-is-vwap) | 0.0 | 179s | 360,562in / 10,446out |
 
 
 **Haiku key failures:**

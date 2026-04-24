@@ -35,9 +35,9 @@ MC tests use relative error bounds — good for validation. The tests check wide
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 161s | 438,947in / 6,999out |
-| Opus 4.6 | 1.0 | 587s | 483,642in / 15,631out |
-| Sonnet 4.5 | 0.0 | 252s | 329,703in / 14,439out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-double-barrier-options) | 0.0 | 161s | 438,947in / 6,999out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-double-barrier-options) | 1.0 | 587s | 483,642in / 15,631out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-double-barrier-options) | 0.0 | 252s | 329,703in / 14,439out |
 
 
 **Haiku key failures:**

@@ -40,9 +40,9 @@ The instruction says "pay attention to: how returns should be preprocessed, whic
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 75s | 712,068in / 4,432out |
-| Opus 4.6 | 1.0 | 80s | 160,562in / 2,510out |
-| Sonnet 4.5 | 1.0 | 98s | 303,776in / 2,920out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-ewma-portfolio-risk-decomposition) | 0.0 | 75s | 712,068in / 4,432out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-ewma-portfolio-risk-decomposition) | 1.0 | 80s | 160,562in / 2,510out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-ewma-portfolio-risk-decomposition) | 1.0 | 98s | 303,776in / 2,920out |
 
 
 **Haiku key failures:**

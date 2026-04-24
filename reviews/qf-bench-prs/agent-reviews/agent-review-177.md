@@ -42,9 +42,9 @@ The test verifies that Margrabe prices decrease with correlation, which is the c
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 155s | 721,007in / 13,917out |
-| Opus 4.6 | 1.0 | 112s | 225,498in / 5,333out |
-| Sonnet 4.5 | 1.0 | 122s | 163,675in / 6,978out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-spread-option-kirk-margrabe) | 0.0 | 155s | 721,007in / 13,917out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-spread-option-kirk-margrabe) | 1.0 | 112s | 225,498in / 5,333out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-spread-option-kirk-margrabe) | 1.0 | 122s | 163,675in / 6,978out |
 
 
 **Haiku key failures:**

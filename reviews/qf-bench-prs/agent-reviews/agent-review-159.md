@@ -37,9 +37,9 @@ The Ricatti formulas for A(τ) and B(τ) in the instruction are correct. The CIR
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 79s | 265,657in / 6,116out |
-| Opus 4.6 | 1.0 | 98s | 122,148in / 3,881out |
-| Sonnet 4.5 | 1.0 | 719s | 353,291in / 7,547out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-cir-bond-pricing) | 1.0 | 79s | 265,657in / 6,116out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-cir-bond-pricing) | 1.0 | 98s | 122,148in / 3,881out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-cir-bond-pricing) | 1.0 | 719s | 353,291in / 7,547out |
 
 ### Summary
 Excellent task design and verifier quality. The CIR model instruction is thorough and correct. Tests are comprehensive, property-based, and robust. The only issue is zero model discrimination — all models pass. The "hard" label is too aggressive given that the instruction provides all formulas explicitly. Consider "medium" or reduce formula specificity.

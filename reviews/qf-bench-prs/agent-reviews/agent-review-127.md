@@ -46,9 +46,9 @@ The instruction explicitly specifies "plug-in Euler" convention vs "exact-discre
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 135s | 723,158in / 10,341out |
-| Opus 4.6 | 0.0 | 151s | 268,365in / 8,145out |
-| Sonnet 4.5 | 0.0 | 195s | 327,728in / 10,961out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-crypto-funding-rate-basis-carry) | 0.0 | 135s | 723,158in / 10,341out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-crypto-funding-rate-basis-carry) | 0.0 | 151s | 268,365in / 8,145out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-crypto-funding-rate-basis-carry) | 0.0 | 195s | 327,728in / 10,961out |
 
 
 **Haiku key failures:**

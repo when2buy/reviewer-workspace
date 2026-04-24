@@ -41,9 +41,9 @@ File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | no trial data | — | — |
-| Opus 4.6 | no trial data | — | — |
-| Sonnet 4.5 | no trial data | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-merton-jump-diffusion) | no trial data | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-merton-jump-diffusion) | no trial data | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-merton-jump-diffusion) | no trial data | — | — |
 
 ### Summary
 The task is financially sound and well-specified, closely paralleling PR#170 but with Merton's normal jumps instead of Kou's double-exponential. The major concern is zero empirical evidence — no trials, no oracle solution. The pinned ATM prices with 5% tolerance may be fragile for multi-modal MLE.

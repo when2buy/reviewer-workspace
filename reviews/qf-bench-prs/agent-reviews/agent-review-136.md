@@ -44,9 +44,9 @@ The committee + stochastic filter design is a genuinely interesting quantamental
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-quantamental-earnings-jumpfilter-committee) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-quantamental-earnings-jumpfilter-committee) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-quantamental-earnings-jumpfilter-committee) | error reading | — | — |
 
 ### Summary
 Ambitious and interesting task design, but completely untested — all trials failed at the Docker build stage. The task's extreme complexity (7+ input files, 3 agent scores, 3 stochastic processes, portfolio construction) makes it likely very difficult even for frontier models. Cannot assess calibration without working trials.

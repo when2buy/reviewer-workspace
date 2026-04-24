@@ -31,9 +31,9 @@ File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 127s | 644,672in / 10,522out |
-| Opus 4.6 | 1.0 | 106s | 189,963in / 5,625out |
-| Sonnet 4.5 | 1.0 | 165s | 171,985in / 7,672out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-cme-hdd-option-pricing) | 0.0 | 127s | 644,672in / 10,522out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-cme-hdd-option-pricing) | 1.0 | 106s | 189,963in / 5,625out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-cme-hdd-option-pricing) | 1.0 | 165s | 171,985in / 7,672out |
 
 
 **Haiku key failures:**

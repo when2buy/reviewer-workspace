@@ -36,9 +36,9 @@ The seed is reset for each MC call (SEED=42 for calls, SEED+1 for puts), which i
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 509s | 3,437,411in / 44,735out |
-| Opus 4.6 | 0.0 | 972s | 628,041in / 24,853out |
-| Sonnet 4.5 | 0.0 | 1713s | 1,202,653in / 26,412out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-compound-option-geske) | 1.0 | 509s | 3,437,411in / 44,735out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-compound-option-geske) | 0.0 | 972s | 628,041in / 24,853out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-compound-option-geske) | 0.0 | 1713s | 1,202,653in / 26,412out |
 
 
 **Opus key failures:**

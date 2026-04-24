@@ -36,9 +36,9 @@ The rolling backtest refits GARCH(1,1) at each step. This is correct but may str
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.707547 | 502s | 2,329,933in / 23,487out |
-| Opus 4.6 | 1.0 | 186s | 187,944in / 5,851out |
-| Sonnet 4.5 | 0.924528 | 218s | 563,415in / 8,729out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-evt-pot-var) | 0.707547 | 502s | 2,329,933in / 23,487out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-evt-pot-var) | 1.0 | 186s | 187,944in / 5,851out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-evt-pot-var) | 0.924528 | 218s | 563,415in / 8,729out |
 
 
 **Haiku key failures:**

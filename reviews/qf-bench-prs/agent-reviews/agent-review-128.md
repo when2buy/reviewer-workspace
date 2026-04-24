@@ -45,9 +45,9 @@ The test checks `in_sample_start: "2018-01-03"` — the first return date. An ag
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 106s | 308,506in / 11,000out |
-| Opus 4.6 | 0.0 | 147s | 162,612in / 9,953out |
-| Sonnet 4.5 | 0.0 | 157s | 286,420in / 10,218out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-etf-cross-asset-lead-lag) | 0.0 | 106s | 308,506in / 11,000out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-etf-cross-asset-lead-lag) | 0.0 | 147s | 162,612in / 9,953out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-etf-cross-asset-lead-lag) | 0.0 | 157s | 286,420in / 10,218out |
 
 
 **Haiku key failures:**

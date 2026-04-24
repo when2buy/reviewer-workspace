@@ -44,9 +44,9 @@ Uses `[task]` section with `name`, `description`, `authors` instead of the stand
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 317s | 944,093in / 26,109out |
-| Opus 4.6 | 0.0 | 103s | 106,632in / 5,146out |
-| Sonnet 4.5 | 0.0 | 247s | 558,412in / 14,094out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-power-options) | 0.0 | 317s | 944,093in / 26,109out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-power-options) | 0.0 | 103s | 106,632in / 5,146out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-power-options) | 0.0 | 247s | 558,412in / 14,094out |
 
 
 **Haiku key failures:**

@@ -40,9 +40,9 @@ If all models fail due to tolerance/oracle mismatch rather than inability to imp
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 331s | 3,308,098in / 43,766out |
-| Opus 4.6 | 0.0 | 134s | 172,363in / 7,250out |
-| Sonnet 4.5 | 0.0 | 455s | 1,375,207in / 23,674out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-factor-momentum-spanning) | 0.0 | 331s | 3,308,098in / 43,766out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-factor-momentum-spanning) | 0.0 | 134s | 172,363in / 7,250out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-factor-momentum-spanning) | 0.0 | 455s | 1,375,207in / 23,674out |
 
 
 **Haiku key failures:**

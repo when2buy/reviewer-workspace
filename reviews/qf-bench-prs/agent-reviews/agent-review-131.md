@@ -46,9 +46,9 @@ The task is purely about VECM/cointegration — no GARCH component. The title is
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 141s | 817,350in / 8,639out |
-| Opus 4.6 | 0.0 | 158s | 199,637in / 6,483out |
-| Sonnet 4.5 | 1.0 | 158s | 467,703in / 7,373out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-garch-vecm-cointegration) | 1.0 | 141s | 817,350in / 8,639out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-garch-vecm-cointegration) | 0.0 | 158s | 199,637in / 6,483out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-garch-vecm-cointegration) | 1.0 | 158s | 467,703in / 7,373out |
 
 
 **Opus key failures:**

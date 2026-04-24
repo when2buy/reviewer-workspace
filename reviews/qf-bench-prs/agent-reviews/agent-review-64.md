@@ -44,9 +44,9 @@ The solution file is empty (0 bytes). While this prevents answer leakage, it als
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 246s | 1,530,408in / 21,147out |
-| Opus 4.6 | 0.0 | 112s | 210,242in / 4,340out |
-| Sonnet 4.5 | 0.0 | 144s | 325,419in / 6,879out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-cta-ewma-cvar) | 0.0 | 246s | 1,530,408in / 21,147out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-cta-ewma-cvar) | 0.0 | 112s | 210,242in / 4,340out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-cta-ewma-cvar) | 0.0 | 144s | 325,419in / 6,879out |
 
 
 **Haiku key failures:**

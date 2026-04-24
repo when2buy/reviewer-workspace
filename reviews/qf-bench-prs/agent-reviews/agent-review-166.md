@@ -37,9 +37,9 @@ The rho sensitivity tests (quanto > compo for ρ < 0, reversed for ρ > 0) and p
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 378s | 1,432,103in / 36,560out |
-| Opus 4.6 | 0.0 | 551s | 658,590in / 21,322out |
-| Sonnet 4.5 | 0.0 | 485s | 507,082in / 32,338out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-fx-quanto-options) | 0.0 | 378s | 1,432,103in / 36,560out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-fx-quanto-options) | 0.0 | 551s | 658,590in / 21,322out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-fx-quanto-options) | 0.0 | 485s | 507,082in / 32,338out |
 
 
 **Haiku key failures:**

@@ -37,9 +37,9 @@ This is fine — the values come from analytical BS formulas with known inputs, 
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 77s | 266,960in / 5,614out |
-| Opus 4.6 | 1.0 | 84s | 101,475in / 3,759out |
-| Sonnet 4.5 | 1.0 | 245s | 436,764in / 14,830out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-bs-greeks-pde) | 0.0 | 77s | 266,960in / 5,614out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-bs-greeks-pde) | 1.0 | 84s | 101,475in / 3,759out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-bs-greeks-pde) | 1.0 | 245s | 436,764in / 14,830out |
 
 
 **Haiku key failures:**

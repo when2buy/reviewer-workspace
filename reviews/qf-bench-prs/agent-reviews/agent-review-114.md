@@ -46,9 +46,9 @@ Uses actual 2024 ETF prices, adding realism.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 98s | 453,624in / 8,094out |
-| Opus 4.6 | 1.0 | 90s | 149,519in / 3,836out |
-| Sonnet 4.5 | 0.0 | 137s | 396,496in / 6,517out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-brinson-sector-attribution) | 0.0 | 98s | 453,624in / 8,094out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-brinson-sector-attribution) | 1.0 | 90s | 149,519in / 3,836out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-brinson-sector-attribution) | 0.0 | 137s | 396,496in / 6,517out |
 
 
 **Haiku key failures:**

@@ -35,9 +35,9 @@ The H45→S45 spread from 0.96 to 0.54 is excellent for a medium task.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.961538 | 154s | 2,511,518in / 19,648out |
-| Opus 4.6 | 1.0 | 98s | 327,537in / 4,422out |
-| Sonnet 4.5 | 0.538462 | 92s | 329,417in / 4,247out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-sec-8k-event-alpha) | 0.961538 | 154s | 2,511,518in / 19,648out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-sec-8k-event-alpha) | 1.0 | 98s | 327,537in / 4,422out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-sec-8k-event-alpha) | 0.538462 | 92s | 329,417in / 4,247out |
 
 
 **Haiku key failures:**

@@ -41,9 +41,9 @@ H:0, O:0, S:0. Even if the oracle were correct, the tight tolerances and hardcod
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 70s | 224,128in / 5,188out |
-| Opus 4.6 | 0.0 | 88s | 103,373in / 4,185out |
-| Sonnet 4.5 | 0.0 | 143s | 186,732in / 7,329out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-chooser-option-pricing) | 0.0 | 70s | 224,128in / 5,188out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-chooser-option-pricing) | 0.0 | 88s | 103,373in / 4,185out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-chooser-option-pricing) | 0.0 | 143s | 186,732in / 7,329out |
 
 
 **Haiku key failures:**

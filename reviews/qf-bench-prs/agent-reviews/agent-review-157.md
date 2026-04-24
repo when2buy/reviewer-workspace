@@ -41,9 +41,9 @@ The instruction's description of `dS = r·S·dt + α·S^β·dW` and the use of n
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 120s | 591,762in / 10,161out |
-| Opus 4.6 | 0.0 | 255s | 365,244in / 13,504out |
-| Sonnet 4.5 | 0.0 | 638s | 1,979,459in / 36,492out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-cev-option-pricing) | 0.0 | 120s | 591,762in / 10,161out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-cev-option-pricing) | 0.0 | 255s | 365,244in / 13,504out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-cev-option-pricing) | 0.0 | 638s | 1,979,459in / 36,492out |
 
 
 **Haiku key failures:**

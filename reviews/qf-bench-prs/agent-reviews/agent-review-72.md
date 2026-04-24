@@ -50,9 +50,9 @@ The constraint "wing notionals sum to belly notional" is clear, but some models 
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 98s | 371,097in / 8,370out |
-| Opus 4.6 | 0.0 | 121s | 147,954in / 5,140out |
-| Sonnet 4.5 | 0.0 | 199s | 208,615in / 7,736out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-treasury-curve-pca-butterfly) | 0.0 | 98s | 371,097in / 8,370out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-treasury-curve-pca-butterfly) | 0.0 | 121s | 147,954in / 5,140out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-treasury-curve-pca-butterfly) | 0.0 | 199s | 208,615in / 7,736out |
 
 
 **Haiku key failures:**

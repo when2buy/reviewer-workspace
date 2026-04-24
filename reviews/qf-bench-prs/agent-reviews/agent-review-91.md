@@ -29,9 +29,9 @@ This is more of a software engineering task than a quantitative finance task. It
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-polars-api-migration) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-polars-api-migration) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-polars-api-migration) | error reading | — | — |
 
 ### Summary
 Cannot be evaluated due to Docker build failure. The task concept (API migration) is more software engineering than quantitative finance. Needs correct base image.

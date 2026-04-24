@@ -35,9 +35,9 @@ The ETF overlap and redemption pressure analytics are standard portfolio analysi
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-etf-overlap-redemption-pressure) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-etf-overlap-redemption-pressure) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-etf-overlap-redemption-pressure) | error reading | — | — |
 
 ### Summary
 Well-designed ETF market-structure task with real holdings data. Clean specification and robust verifier. Cannot be evaluated due to Docker build failure.

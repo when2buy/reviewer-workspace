@@ -31,9 +31,9 @@ Shipping `trading_calendar.csv` rather than requiring the agent to compute NYSE 
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 63s | 277,470in / 3,472out |
-| Opus 4.6 | 1.0 | 80s | 228,037in / 2,768out |
-| Sonnet 4.5 | 1.0 | 112s | 177,261in / 3,529out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-historical-var-data-prep) | 1.0 | 63s | 277,470in / 3,472out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-historical-var-data-prep) | 1.0 | 80s | 228,037in / 2,768out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-historical-var-data-prep) | 1.0 | 112s | 177,261in / 3,529out |
 
 ### Summary
 Clean, well-specified data-prep task. Correct VaR conventions. The "easy" difficulty rating is honest — all models pass. Useful as a baseline sanity check in the benchmark suite but provides no model discrimination.

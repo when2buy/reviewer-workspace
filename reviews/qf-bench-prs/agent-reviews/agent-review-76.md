@@ -46,9 +46,9 @@ The instruction reads like a problem set solution manual. While this is good for
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 208s | 1,371,638in / 37,193out |
-| Opus 4.6 | 0.0 | 142s | 160,612in / 7,667out |
-| Sonnet 4.5 | 0.0 | 236s | 258,553in / 12,975out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-fama-macbeth-risk-premia) | 0.0 | 208s | 1,371,638in / 37,193out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-fama-macbeth-risk-premia) | 0.0 | 142s | 160,612in / 7,667out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-fama-macbeth-risk-premia) | 0.0 | 236s | 258,553in / 12,975out |
 
 
 **Haiku key failures:**

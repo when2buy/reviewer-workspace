@@ -42,9 +42,9 @@ The derivation following Henry-Labordère is correct: C(x)=1+τx causes drift de
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 86s | 654,325in / 11,839out |
-| Opus 4.6 | 0.0 | 184s | 316,129in / 8,341out |
-| Sonnet 4.5 | 0.0 | 184s | 246,083in / 7,799out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-lmm-markov-representation) | 0.0 | 86s | 654,325in / 11,839out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-lmm-markov-representation) | 0.0 | 184s | 316,129in / 8,341out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-lmm-markov-representation) | 0.0 | 184s | 246,083in / 7,799out |
 
 
 **Haiku key failures:**

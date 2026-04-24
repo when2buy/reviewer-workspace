@@ -37,9 +37,9 @@ A larger portfolio would increase difficulty, but the current size is sufficient
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 51s | 322,176in / 6,903out |
-| Opus 4.6 | 1.0 | 76s | 152,715in / 3,455out |
-| Sonnet 4.5 | 1.0 | 76s | 120,079in / 4,032out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-ust-carry-roll-down-attribution) | 0.0 | 51s | 322,176in / 6,903out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-ust-carry-roll-down-attribution) | 1.0 | 76s | 152,715in / 3,455out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-ust-carry-roll-down-attribution) | 1.0 | 76s | 120,079in / 4,032out |
 
 
 **Haiku key failures:**

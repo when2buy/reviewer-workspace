@@ -41,9 +41,9 @@ The task requires correct handling of bid/ask in cross-rate triangulation and Pn
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 188s | 1,766,912in / 33,847out |
-| Opus 4.6 | 0.0 | 150s | 140,731in / 8,229out |
-| Sonnet 4.5 | 1.0 | 136s | 149,592in / 8,806out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-fx-forward-cross-rate) | 0.0 | 188s | 1,766,912in / 33,847out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-fx-forward-cross-rate) | 0.0 | 150s | 140,731in / 8,229out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-fx-forward-cross-rate) | 1.0 | 136s | 149,592in / 8,806out |
 
 
 **Haiku key failures:**

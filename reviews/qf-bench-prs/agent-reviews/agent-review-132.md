@@ -45,9 +45,9 @@ No difficulty level specified. Given all three models pass, this is likely "easy
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 78s | 251,781in / 3,839out |
-| Opus 4.6 | 1.0 | 98s | 163,640in / 3,427out |
-| Sonnet 4.5 | 1.0 | 137s | 315,677in / 5,083out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-dirty-gap-momentum-aapl) | 1.0 | 78s | 251,781in / 3,839out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-dirty-gap-momentum-aapl) | 1.0 | 98s | 163,640in / 3,427out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-dirty-gap-momentum-aapl) | 1.0 | 137s | 315,677in / 5,083out |
 
 ### Summary
 Clean, well-specified task with perfect instruction quality. All three models pass, confirming correctness but providing no discriminative signal. This is a good "easy" benchmark item — it tests data handling and careful specification following. Consider pairing with harder tasks for meaningful difficulty calibration.

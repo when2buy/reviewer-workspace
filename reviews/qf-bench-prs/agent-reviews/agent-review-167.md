@@ -38,9 +38,9 @@ MC mean error < 5%, var error < 15% — reasonable for 10,000 paths with jumps.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 85s | 222,469in / 5,846out |
-| Opus 4.6 | 1.0 | 98s | 147,277in / 3,970out |
-| Sonnet 4.5 | 0.0 | 108s | 111,419in / 5,348out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-geometric-mean-reverting-jd) | 0.0 | 85s | 222,469in / 5,846out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-geometric-mean-reverting-jd) | 1.0 | 98s | 147,277in / 3,970out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-geometric-mean-reverting-jd) | 0.0 | 108s | 111,419in / 5,348out |
 
 
 **Haiku key failures:**

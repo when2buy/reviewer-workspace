@@ -35,9 +35,9 @@ Values like `61.4127` bp are pinned at 4 significant figures with rtol=0.01. Thi
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 74s | 486,538in / 9,368out |
-| Opus 4.6 | 1.0 | 78s | 143,137in / 3,125out |
-| Sonnet 4.5 | 0.0 | 78s | 116,149in / 3,586out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-yield-curve-pca-dynamics) | 1.0 | 74s | 486,538in / 9,368out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-yield-curve-pca-dynamics) | 1.0 | 78s | 143,137in / 3,125out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-yield-curve-pca-dynamics) | 0.0 | 78s | 116,149in / 3,586out |
 
 
 **Sonnet key failures:**

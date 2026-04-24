@@ -45,9 +45,9 @@ The reward writing pattern is clean.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 294s | 620,511in / 9,645out |
-| Opus 4.6 | 0.0 | 291s | 216,275in / 3,030out |
-| Sonnet 4.5 | 0.0 | 337s | 326,678in / 6,738out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-nelson-siegel-yield-curve-fit) | 0.0 | 294s | 620,511in / 9,645out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-nelson-siegel-yield-curve-fit) | 0.0 | 291s | 216,275in / 3,030out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-nelson-siegel-yield-curve-fit) | 0.0 | 337s | 326,678in / 6,738out |
 
 
 **Haiku key failures:**

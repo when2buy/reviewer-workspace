@@ -43,9 +43,9 @@ The instruction says "Both the systematic and idiosyncratic components must shar
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 1827s | 1,698,710in / 26,246out |
-| Opus 4.6 | 1.0 | 191s | 295,948in / 9,706out |
-| Sonnet 4.5 | 0.0 | 562s | 1,743,440in / 30,337out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-credit-portfolio-var-cvar) | 0.0 | 1827s | 1,698,710in / 26,246out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-credit-portfolio-var-cvar) | 1.0 | 191s | 295,948in / 9,706out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-credit-portfolio-var-cvar) | 0.0 | 562s | 1,743,440in / 30,337out |
 
 
 **Haiku key failures:**

@@ -43,9 +43,9 @@ File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 428s | 2,071,606in / 40,764out |
-| Opus 4.6 | 0.0 | 205s | 393,866in / 13,022out |
-| Sonnet 4.5 | 0.0 | 421s | 1,247,121in / 28,686out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-rainbow-option-pricing) | 0.0 | 428s | 2,071,606in / 40,764out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-rainbow-option-pricing) | 0.0 | 205s | 393,866in / 13,022out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-rainbow-option-pricing) | 0.0 | 421s | 1,247,121in / 28,686out |
 
 
 **Haiku key failures:**

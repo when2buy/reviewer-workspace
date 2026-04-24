@@ -34,9 +34,9 @@ The instruction mentions the KP (2010) test but the exact formula implementation
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 101s | 787,103in / 17,806out |
-| Opus 4.6 | 0.0 | 99s | 131,927in / 4,924out |
-| Sonnet 4.5 | 0.0 | 240s | 888,002in / 13,236out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-event-study-earnings) | 0.0 | 101s | 787,103in / 17,806out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-event-study-earnings) | 0.0 | 99s | 131,927in / 4,924out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-event-study-earnings) | 0.0 | 240s | 888,002in / 13,236out |
 
 
 **Haiku key failures:**

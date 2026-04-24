@@ -46,9 +46,9 @@ Haiku fails `test_carry_component_positive` and `test_spot_component_negative` â
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 187s | 1,820,265in / 30,117out |
-| Opus 4.6 | 0.0 | 167s | 154,529in / 8,665out |
-| Sonnet 4.5 | 0.0 | 295s | 1,092,863in / 13,202out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-fx-carry-trade-backtest) | 0.0 | 187s | 1,820,265in / 30,117out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-fx-carry-trade-backtest) | 0.0 | 167s | 154,529in / 8,665out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-fx-carry-trade-backtest) | 0.0 | 295s | 1,092,863in / 13,202out |
 
 
 **Haiku key failures:**

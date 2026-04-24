@@ -43,9 +43,9 @@ Unlike other tasks, this uses synthetic BS prices (S₀=500, fixed grid). No dat
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 85s | 259,043in / 6,315out |
-| Opus 4.6 | 0.0 | 806s | 1,758,594in / 42,722out |
-| Sonnet 4.5 | 0.0 | 370s | 1,283,580in / 19,545out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-implied-vol-approximations) | 0.0 | 85s | 259,043in / 6,315out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-implied-vol-approximations) | 0.0 | 806s | 1,758,594in / 42,722out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-implied-vol-approximations) | 0.0 | 370s | 1,283,580in / 19,545out |
 
 
 **Haiku key failures:**

@@ -40,9 +40,9 @@ File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 104s | 393,020in / 6,617out |
-| Opus 4.6 | 1.0 | 94s | 172,993in / 4,329out |
-| Sonnet 4.5 | 0.0 | 100s | 110,804in / 5,422out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-ou-jump-commodity) | 1.0 | 104s | 393,020in / 6,617out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-ou-jump-commodity) | 1.0 | 94s | 172,993in / 4,329out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-ou-jump-commodity) | 0.0 | 100s | 110,804in / 5,422out |
 
 
 **Sonnet key failures:**

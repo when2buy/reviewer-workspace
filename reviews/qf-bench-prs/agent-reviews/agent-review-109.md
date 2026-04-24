@@ -29,9 +29,9 @@ Verifies `pnl = 10_000 * (RV² - K_var²)` independently — good practice.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 81s | 416,575in / 7,984out |
-| Opus 4.6 | 1.0 | 76s | 129,408in / 2,353out |
-| Sonnet 4.5 | 1.0 | 85s | 112,161in / 3,651out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-variance-swap-replication) | 1.0 | 81s | 416,575in / 7,984out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-variance-swap-replication) | 1.0 | 76s | 129,408in / 2,353out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-variance-swap-replication) | 1.0 | 85s | 112,161in / 3,651out |
 
 ### Summary
 Textbook-quality variance swap replication task. Financially correct, well-specified, deterministic. The only concern is weak model discrimination — all tiers pass comfortably, suggesting the instruction over-specifies the solution path. Still a valid benchmark item for testing whether agents can follow a precise quantitative finance recipe.

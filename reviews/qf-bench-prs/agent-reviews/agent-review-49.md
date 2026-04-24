@@ -39,9 +39,9 @@ O(n log n) per path instead of O(n²) naive loop. This is the right approach.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | no trial data | — | — |
-| Opus 4.6 | no trial data | — | — |
-| Sonnet 4.5 | no trial data | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-rough-vol-rbgergomi) | no trial data | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-rough-vol-rbgergomi) | no trial data | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-rough-vol-rbgergomi) | no trial data | — | — |
 
 ### Summary
 Interesting and genuinely hard rough volatility task. However: missing Dockerfile blocks execution, instruction is confusing with multiple contradictory fBm approaches, and tests are too lenient to validate correctness.

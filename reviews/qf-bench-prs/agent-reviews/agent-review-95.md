@@ -31,9 +31,9 @@ The task requires merging Treasury (MM/DD/YYYY, most-recent-first) with TRACE (Y
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 146s | 1,084,625in / 24,805out |
-| Opus 4.6 | 0.0 | 94s | 135,565in / 4,731out |
-| Sonnet 4.5 | 1.0 | 106s | 361,674in / 4,601out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-fixed-income-market-stress) | 1.0 | 146s | 1,084,625in / 24,805out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-fixed-income-market-stress) | 0.0 | 94s | 135,565in / 4,731out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-fixed-income-market-stress) | 1.0 | 106s | 361,674in / 4,601out |
 
 
 **Opus key failures:**

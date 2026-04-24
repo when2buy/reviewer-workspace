@@ -44,9 +44,9 @@ The instruction correctly specifies to use `grand_mean_noise_var` (not per-day),
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 69s | 479,954in / 9,470out |
-| Opus 4.6 | 0.0 | 82s | 150,786in / 2,853out |
-| Sonnet 4.5 | 0.0 | 146s | 298,183in / 8,065out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-realized-vol-estimators) | 1.0 | 69s | 479,954in / 9,470out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-realized-vol-estimators) | 0.0 | 82s | 150,786in / 2,853out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-realized-vol-estimators) | 0.0 | 146s | 298,183in / 8,065out |
 
 
 **Opus key failures:**

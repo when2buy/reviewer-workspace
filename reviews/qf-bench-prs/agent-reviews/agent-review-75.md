@@ -52,9 +52,9 @@ Haiku fails Christoffersen tests — likely due to transition probability edge c
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 200s | 1,785,952in / 29,998out |
-| Opus 4.6 | 0.0 | 199s | 279,246in / 11,131out |
-| Sonnet 4.5 | 0.0 | 207s | 1,226,083in / 30,848out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-var-ebacktest-coverage) | 0.0 | 200s | 1,785,952in / 29,998out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-var-ebacktest-coverage) | 0.0 | 199s | 279,246in / 11,131out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-var-ebacktest-coverage) | 0.0 | 207s | 1,226,083in / 30,848out |
 
 
 **Haiku key failures:**

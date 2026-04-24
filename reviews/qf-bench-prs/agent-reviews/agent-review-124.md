@@ -44,9 +44,9 @@ File: [`tests/reference_data/expected.json`](https://github.com/QF-Bench/Quantit
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.383929 | 129s | 561,370in / 12,019out |
-| Opus 4.6 | 0.785714 | 210s | 551,308in / 10,683out |
-| Sonnet 4.5 | 0.714286 | 250s | 1,803,092in / 26,262out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-pairs-cointegration-kalman) | 0.383929 | 129s | 561,370in / 12,019out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-pairs-cointegration-kalman) | 0.785714 | 210s | 551,308in / 10,683out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-pairs-cointegration-kalman) | 0.714286 | 250s | 1,803,092in / 26,262out |
 
 
 **Haiku key failures:**

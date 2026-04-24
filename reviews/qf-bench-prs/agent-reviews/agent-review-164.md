@@ -39,9 +39,9 @@ SVI fitting with scipy.optimize.minimize can converge to different local minima 
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 463s | 1,691,487in / 22,965out |
-| Opus 4.6 | 0.0 | 248s | 365,373in / 10,138out |
-| Sonnet 4.5 | 0.0 | 586s | 1,469,555in / 32,990out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-dupire-local-vol) | 0.0 | 463s | 1,691,487in / 22,965out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-dupire-local-vol) | 0.0 | 248s | 365,373in / 10,138out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-dupire-local-vol) | 0.0 | 586s | 1,469,555in / 32,990out |
 
 
 **Haiku key failures:**

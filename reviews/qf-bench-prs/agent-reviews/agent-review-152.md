@@ -35,9 +35,9 @@ Given 3/3 model pass rate, "medium" would be more accurate. The task is a straig
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 1.0 | 220s | 1,111,175in / 13,829out |
-| Opus 4.6 | 1.0 | 129s | 210,629in / 5,986out |
-| Sonnet 4.5 | 1.0 | 277s | 446,307in / 11,339out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-american-binomial-tree) | 1.0 | 220s | 1,111,175in / 13,829out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-american-binomial-tree) | 1.0 | 129s | 210,629in / 5,986out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-american-binomial-tree) | 1.0 | 277s | 446,307in / 11,339out |
 
 ### Summary
 This is a clean, well-structured task with correct financial content. The instruction is thorough, tests cover structural properties well, and the verifier is robust. The main weakness is zero model discrimination — all three models pass easily, making this task uninformative for benchmarking purposes. The canary strings are present. No anti-cheat concerns (tests don't leak exact answers; they check properties and ranges).

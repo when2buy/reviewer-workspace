@@ -43,9 +43,9 @@ The oracle solution is truncated at the data preparation stage.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-13f-amendment-aware-crowding) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-13f-amendment-aware-crowding) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-13f-amendment-aware-crowding) | error reading | — | — |
 
 ### Summary
 The task is well-conceived and tests a real quant workflow (13F amendment-aware portfolio reconstruction). However, it cannot be evaluated because the Docker base image doesn't exist in the test environment. Fix the base image and re-run trials before merge.

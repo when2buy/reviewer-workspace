@@ -40,9 +40,9 @@ The 74 tests cover put-call parity, BS limits, κ limits, IV smile skew, ρ sens
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 551s | 1,999,482in / 46,773out |
-| Opus 4.6 | 0.0 | 751s | 2,177,907in / 46,446out |
-| Sonnet 4.5 | 0.0 | 1168s | 4,534,270in / 91,226out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-heston-cf-pricing) | 0.0 | 551s | 1,999,482in / 46,773out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-heston-cf-pricing) | 0.0 | 751s | 2,177,907in / 46,446out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-heston-cf-pricing) | 0.0 | 1168s | 4,534,270in / 91,226out |
 
 
 **Haiku key failures:**

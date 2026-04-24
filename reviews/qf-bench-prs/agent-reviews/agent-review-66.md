@@ -46,9 +46,9 @@ The task combines 8 distinct computational steps (factor model, covariance, opti
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 89s | 747,377in / 10,345out |
-| Opus 4.6 | 0.0 | 102s | 159,387in / 4,233out |
-| Sonnet 4.5 | 0.0 | 112s | 149,396in / 4,456out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-portfolio-risk-attribution) | 0.0 | 89s | 747,377in / 10,345out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-portfolio-risk-attribution) | 0.0 | 102s | 159,387in / 4,233out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-portfolio-risk-attribution) | 0.0 | 112s | 149,396in / 4,456out |
 
 
 **Haiku key failures:**

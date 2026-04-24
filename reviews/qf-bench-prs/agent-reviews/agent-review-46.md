@@ -37,9 +37,9 @@ Instruction says "already generated as synthetic OU process data." This is fine 
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | no trial data | — | — |
-| Opus 4.6 | no trial data | — | — |
-| Sonnet 4.5 | no trial data | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-ou-pairs-trading) | no trial data | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-ou-pairs-trading) | no trial data | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-ou-pairs-trading) | no trial data | — | — |
 
 ### Summary
 Sound quant task with correct OU methodology and reasonable trading strategy. Blocked by missing Dockerfile. Tests lack oracle pinning — they verify internal consistency but not correctness against known-good values.

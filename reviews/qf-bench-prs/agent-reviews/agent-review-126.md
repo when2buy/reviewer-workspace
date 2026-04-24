@@ -43,9 +43,9 @@ The task meaningfully exercises credit modeling (Merton), derivative pricing (CD
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.9 | 127s | 974,538in / 19,984out |
-| Opus 4.6 | 0.9 | 91s | 157,880in / 3,779out |
-| Sonnet 4.5 | 0.9 | 104s | 118,883in / 5,413out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-merton-cds-copula) | 0.9 | 127s | 974,538in / 19,984out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-merton-cds-copula) | 0.9 | 91s | 157,880in / 3,779out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-merton-cds-copula) | 0.9 | 104s | 118,883in / 5,413out |
 
 
 **Haiku key failures:**

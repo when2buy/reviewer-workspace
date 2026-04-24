@@ -32,9 +32,9 @@ The cash parity (CashCall + CashPut = e^{-rT}), asset parity, and BS decompositi
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 213s | 1,355,604in / 17,218out |
-| Opus 4.6 | 1.0 | 109s | 150,562in / 5,535out |
-| Sonnet 4.5 | 1.0 | 306s | 450,457in / 20,189out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-digital-barrier-options) | 0.0 | 213s | 1,355,604in / 17,218out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-digital-barrier-options) | 1.0 | 109s | 150,562in / 5,535out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-digital-barrier-options) | 1.0 | 306s | 450,457in / 20,189out |
 
 
 **Haiku key failures:**

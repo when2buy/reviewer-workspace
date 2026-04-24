@@ -33,9 +33,9 @@ Tests check positivity, monotonicity, row counts, and field existence — no pin
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 1195s | 6,207,252in / 101,717out |
-| Opus 4.6 | 1.0 | 1261s | 3,953,689in / 77,178out |
-| Sonnet 4.5 | 1.0 | 948s | 2,278,449in / 49,141out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-lookback-options) | 0.0 | 1195s | 6,207,252in / 101,717out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-lookback-options) | 1.0 | 1261s | 3,953,689in / 77,178out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-lookback-options) | 1.0 | 948s | 2,278,449in / 49,141out |
 
 
 **Haiku key failures:**

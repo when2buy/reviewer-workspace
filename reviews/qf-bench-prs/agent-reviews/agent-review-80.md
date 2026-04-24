@@ -43,9 +43,9 @@ Using actual S&P transition matrices from 2018-2024 provides genuine credit risk
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 124s | 740,513in / 8,207out |
-| Opus 4.6 | 0.0 | 97s | 187,110in / 4,056out |
-| Sonnet 4.5 | 0.0 | 108s | 188,562in / 4,858out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-credit-migration-matrix) | 0.0 | 124s | 740,513in / 8,207out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-credit-migration-matrix) | 0.0 | 97s | 187,110in / 4,056out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-credit-migration-matrix) | 0.0 | 108s | 188,562in / 4,858out |
 
 
 **Haiku key failures:**

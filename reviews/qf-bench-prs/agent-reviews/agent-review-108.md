@@ -34,9 +34,9 @@ Clean and readable; no issues.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 348s | 3,078,174in / 31,869out |
-| Opus 4.6 | 1.0 | 69s | 110,216in / 2,172out |
-| Sonnet 4.5 | 1.0 | 87s | 101,275in / 4,045out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-delta-hedging-pnl-simulation) | 0.0 | 348s | 3,078,174in / 31,869out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-delta-hedging-pnl-simulation) | 1.0 | 69s | 110,216in / 2,172out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-delta-hedging-pnl-simulation) | 1.0 | 87s | 101,275in / 4,045out |
 
 
 **Haiku key failures:**

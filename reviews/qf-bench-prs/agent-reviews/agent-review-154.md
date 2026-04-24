@@ -34,9 +34,9 @@ The instruction describes the method conceptually without giving exact formulas.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 195s | 749,169in / 19,312out |
-| Opus 4.6 | 1.0 | 215s | 345,841in / 13,376out |
-| Sonnet 4.5 | 1.0 | 180s | 211,300in / 11,178out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-barone-adesi-whaley) | 0.0 | 195s | 749,169in / 19,312out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-barone-adesi-whaley) | 1.0 | 215s | 345,841in / 13,376out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-barone-adesi-whaley) | 1.0 | 180s | 211,300in / 11,178out |
 
 
 **Haiku key failures:**

@@ -35,9 +35,9 @@ The MC comparison allows 30% relative error for running extrema, which is approp
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 450s | 3,246,548in / 33,816out |
-| Opus 4.6 | 1.0 | 142s | 203,220in / 6,269out |
-| Sonnet 4.5 | 1.0 | 331s | 1,142,996in / 16,843out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-first-passage-time) | 0.0 | 450s | 3,246,548in / 33,816out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-first-passage-time) | 1.0 | 142s | 203,220in / 6,269out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-first-passage-time) | 1.0 | 331s | 1,142,996in / 16,843out |
 
 
 **Haiku key failures:**

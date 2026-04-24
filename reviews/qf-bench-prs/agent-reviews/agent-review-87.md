@@ -31,9 +31,9 @@ Oracle solution is absent. Test consistency checks partially compensate.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 355s | 2,947,082in / 45,187out |
-| Opus 4.6 | 1.0 | 149s | 217,107in / 8,088out |
-| Sonnet 4.5 | 1.0 | 383s | 1,152,759in / 46,708out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-yield-curve-bootstrap-immunization) | 0.0 | 355s | 2,947,082in / 45,187out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-yield-curve-bootstrap-immunization) | 1.0 | 149s | 217,107in / 8,088out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-yield-curve-bootstrap-immunization) | 1.0 | 383s | 1,152,759in / 46,708out |
 
 
 **Haiku key failures:**

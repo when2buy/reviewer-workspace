@@ -47,9 +47,9 @@ No canary comment, unlike most other tasks. The instruction.md has a different G
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | error reading | — | — |
-| Opus 4.6 | error reading | — | — |
-| Sonnet 4.5 | error reading | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-perpetual-funding-ledger-reconciliation) | error reading | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-perpetual-funding-ledger-reconciliation) | error reading | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-perpetual-funding-ledger-reconciliation) | error reading | — | — |
 
 ### Summary
 Well-specified ledger reconciliation task with an extremely thorough verifier. However, the small dataset (10 events) combined with complete expected values in the test file creates a significant hardcoding risk under weak Harbor assumptions. The task tests data engineering more than quantitative finance.

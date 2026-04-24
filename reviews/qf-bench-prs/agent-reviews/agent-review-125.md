@@ -43,9 +43,9 @@ File: [`solution/solve.sh`](https://github.com/QF-Bench/QuantitativeFinance-Benc
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.5 | 390s | 1,323,476in / 16,061out |
-| Opus 4.6 | 0.916667 | 89s | 121,849in / 3,601out |
-| Sonnet 4.5 | 0.583333 | 114s | 107,631in / 5,398out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-bl-regime-hmm) | 0.5 | 390s | 1,323,476in / 16,061out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-bl-regime-hmm) | 0.916667 | 89s | 121,849in / 3,601out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-bl-regime-hmm) | 0.583333 | 114s | 107,631in / 5,398out |
 
 
 **Haiku key failures:**

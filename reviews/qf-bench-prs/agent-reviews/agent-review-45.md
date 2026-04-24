@@ -37,9 +37,9 @@ The MC tolerance is well-calibrated for the path count.
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | no trial data | — | — |
-| Opus 4.6 | no trial data | — | — |
-| Sonnet 4.5 | no trial data | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-heston-mc-pricing) | no trial data | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-heston-mc-pricing) | no trial data | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-heston-mc-pricing) | no trial data | — | — |
 
 ### Summary
 Well-designed quant derivatives task with correct financial modeling and good structural tests. However, the task is **completely non-functional** due to missing Dockerfile. No trial data exists.

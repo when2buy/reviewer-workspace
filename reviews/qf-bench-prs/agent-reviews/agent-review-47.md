@@ -37,9 +37,9 @@ This is a reasonable range for ATM options with these parameters but could be de
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | no trial data | — | — |
-| Opus 4.6 | no trial data | — | — |
-| Sonnet 4.5 | no trial data | — | — |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-merton-jump-diffusion) | no trial data | — | — |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-merton-jump-diffusion) | no trial data | — | — |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-merton-jump-diffusion) | no trial data | — | — |
 
 ### Summary
 Excellent quant derivatives task with correct Merton jump-diffusion implementation, good financial tests including put-call parity and no-arbitrage checks. The only blocker is the missing Dockerfile.

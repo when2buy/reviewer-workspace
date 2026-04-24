@@ -38,9 +38,9 @@ The task itself is a realistic data engineering + domain knowledge problem. Brea
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 56s | 150,698in / 3,901out |
-| Opus 4.6 | 0.0 | 73s | 114,282in / 2,555out |
-| Sonnet 4.5 | 0.0 | 81s | 102,501in / 4,429out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-equity-vendor-restatement-break-audit) | 0.0 | 56s | 150,698in / 3,901out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-equity-vendor-restatement-break-audit) | 0.0 | 73s | 114,282in / 2,555out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-equity-vendor-restatement-break-audit) | 0.0 | 81s | 102,501in / 4,429out |
 
 
 **Haiku key failures:**

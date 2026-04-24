@@ -41,9 +41,9 @@ File: [`tests/test_outputs.py`](https://github.com/QF-Bench/QuantitativeFinance-
 ### Trial Evidence
 | Model | Reward | Duration | Tokens |
 |---|---|---|---|
-| Haiku 4.5 | 0.0 | 343s | 2,958,939in / 38,484out |
-| Opus 4.6 | 1.0 | 93s | 130,537in / 3,906out |
-| Sonnet 4.5 | 1.0 | 285s | 540,116in / 11,670out |
+| [Haiku 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-h45-intraday-volume-fitting-and-execution-scheduling) | 0.0 | 343s | 2,958,939in / 38,484out |
+| [Opus 4.6](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-opus46-intraday-volume-fitting-and-execution-scheduling) | 1.0 | 93s | 130,537in / 3,906out |
+| [Sonnet 4.5](https://github.com/when2buy/fb-bench-tracker/tree/51a42f1/trials/fb-pr-s45-intraday-volume-fitting-and-execution-scheduling) | 1.0 | 285s | 540,116in / 11,670out |
 
 
 **Haiku key failures:**
