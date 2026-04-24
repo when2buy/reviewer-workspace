@@ -1,7 +1,7 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 40 (38%) | ❌ 不建议Merge: 41 (39%) | 🟡 需要Human Review: 24 (23%)
+**Total:** ✅ 建议Merge: 40 (38%) | ❌ 不建议Merge: 40 (38%) | 🟡 需要Human Review: 25 (24%)
 | #125 | bl-regime-hmm | GinkgoGao | 0:0.92:0.58 | Opus 接近满分，放宽 HMM tolerance 即可 |
 
 ---
@@ -93,7 +93,6 @@
 | #158 | chooser-option-pricing | Dongzhikang | 公式可能有误 + 答案泄露 |
 | #164 | dupire-local-vol | Dongzhikang | Spec 太脆弱 |
 | #166 | fx-quanto-options | Dongzhikang | compo 公式可能错 |
-| #169 | implied-vol-approximations | Dongzhikang | Oracle 硬编码到 1e-6 |
 | #170 | kou-double-exponential | Dongzhikang | Verifier 边界 bug |
 | #174 | power-options | Dongzhikang | Instruction 缺 closed-form |
 | #176 | realized-vol-estimators | Dongzhikang | Trial 跑的旧版 task |

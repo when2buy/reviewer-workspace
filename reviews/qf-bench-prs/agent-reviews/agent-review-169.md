@@ -77,4 +77,4 @@ FAIL: test_approximations_csv_structure
 The oracle pinning at 1e-6 tolerance makes this task fundamentally flawed as a benchmark. All models fail because they produce slightly different (but potentially correct) implementations of the approximation formulas. The task tests exact replication of oracle code, not financial understanding.
 
 ### Verdict
-**不建议 Merge** — Oracle values pinned to 1e-6 relative tolerance makes this a code replication test, not a financial reasoning benchmark. Replace pinned oracle values with reasonable range checks (e.g., RMSE_newton < 1e-8, RMSE_BS_ATM in [0.02, 0.05], RMSE_CMH > RMSE_Li_nonatm). All three models are blocked by this design issue.
+**需要 Human Review** — Oracle tolerance of 1e-6 is unreasonably tight — should be relaxed to ~2% (rtol=0.02). With that tolerance, Opus passes (rmse_li_atm off by 0.77%) while Sonnet (3.5% off) and Haiku (6.2% off on rmse_bs_atm) still fail, giving genuine model discrimination (0:1:0). Task content is solid — just needs tolerance tuning.
