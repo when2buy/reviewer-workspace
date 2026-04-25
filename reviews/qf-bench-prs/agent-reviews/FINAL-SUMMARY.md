@@ -101,8 +101,8 @@
 | #157 | cev-option-pricing | Dongzhikang | Oracle 值有误 (β=0.9) |
 | #158 | chooser-option-pricing | Dongzhikang | Oracle discount factor bug |
 
-| #174 | power-options | Dongzhikang | Instruction 缺 closed-form |
-| #176 | realized-vol-estimators | Dongzhikang | Trial 跑的旧版 task |
+| #174 | power-options | Dongzhikang | Output path spec bug: instruction never mentions /app/output/, Opus/Sonnet wrote to /app/ (all correct), Haiku guessed /app/output/ (luck). Needs instruction fix + re-run |
+| #176 | realized-vol-estimators | Dongzhikang | Trial ran wrong task version (141-test intraday microstructure task vs current 33-test daily OHLCV). Trial data invalid. Needs re-run on current PR version |
 
 ## 🟡 需要 Human Review (17)
 
