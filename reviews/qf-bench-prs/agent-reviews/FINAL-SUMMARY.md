@@ -1,11 +1,11 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 50 (47%) | ❌ 不建议Merge: 37 (35%) | 🟡 需要Human Review: 18 (17%)
+**Total:** ✅ 建议Merge: 51 (48%) | ❌ 不建议Merge: 37 (35%) | 🟡 需要Human Review: 17 (16%)
 
 ---
 
-## ✅ 建议 Merge (50)
+## ✅ 建议 Merge (51)
 
 | PR | Task | Author | H:O:S | 备注 |
 |---|---|---|---|---|
@@ -46,6 +46,7 @@
 | #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 |
 | #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium |
 | #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | Opus 17/17, good discrimination |
+| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error |
 | #162 | digital-barrier-options | Dongzhikang | 0:1:1 | 干净 |
 | #163 | double-barrier-options | Dongzhikang | 0:1:0 | Kunitomo-Ikeda 正确 |
 | #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 |
@@ -103,7 +104,7 @@
 | #174 | power-options | Dongzhikang | Instruction 缺 closed-form |
 | #176 | realized-vol-estimators | Dongzhikang | Trial 跑的旧版 task |
 
-## 🟡 需要 Human Review (18)
+## 🟡 需要 Human Review (17)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
@@ -122,7 +123,6 @@
 | #128 | etf-cross-asset-lead-lag | xinlan-technology | 全有全无计分浪费区分度 |
 | #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
-| #161 | compound-option-geske | Dongzhikang | 区分度反转 |
 | #172 | merton-jump-diffusion | Dongzhikang | 零 trial 数据 |
 | #125 | bl-regime-hmm | GinkgoGao | Opus 0.92，放宽 HMM tolerance 即可 |
 
