@@ -1,11 +1,11 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 40 (38%) | ❌ 不建议Merge: 38 (36%) | 🟡 需要Human Review: 27 (26%)
+**Total:** ✅ 建议Merge: 46 (43%) | ❌ 不建议Merge: 37 (35%) | 🟡 需要Human Review: 22 (20%)
 
 ---
 
-## ✅ 建议 Merge (40)
+## ✅ 建议 Merge (46)
 
 | PR | Task | Author | H:O:S | 备注 |
 |---|---|---|---|---|
@@ -18,6 +18,7 @@
 | #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好区分度 |
 | #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium |
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | ⭐ ERC portfolio 区分度好 |
+| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 |
 | #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 |
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |
@@ -29,6 +30,8 @@
 | #110 | evt-pot-var | boqiny | 0.71:1:0.92 | ⭐ 全面尾部风险，partial credit |
 | #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 |
 | #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 |
+| #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination |
+| #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |
 | #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit |
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 |
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分 |
@@ -52,11 +55,8 @@
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 |
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 |
-| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 |
-| #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |
-| #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination |
 
-## ❌ 不建议 Merge (42)
+## ❌ 不建议 Merge (37)
 
 | PR | Task | Author | Blocker 类型 |
 |---|---|---|---|
@@ -99,7 +99,7 @@
 | #174 | power-options | Dongzhikang | Instruction 缺 closed-form |
 | #176 | realized-vol-estimators | Dongzhikang | Trial 跑的旧版 task |
 
-## 🟡 需要 Human Review (23)
+## 🟡 需要 Human Review (22)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
