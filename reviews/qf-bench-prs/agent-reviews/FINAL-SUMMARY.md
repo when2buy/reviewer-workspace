@@ -52,6 +52,8 @@
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 |
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 |
+| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 |
+| #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |
 
 ## ❌ 不建议 Merge (42)
 
@@ -105,8 +107,6 @@
 | #76 | fama-macbeth-risk-premia | Dongzhikang | Opus 59/60，GRS 容差 |
 | #78 | fx-carry-trade-backtest | Dongzhikang | Opus 差 1 test |
 | #79 | execution-is-vwap | Dongzhikang | Sonnet 差 1 test |
-| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 |
-| #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |
 | #95 | fixed-income-market-stress | wshi83 | 区分度反转 |
 | #100 | minimum-cost-equity-etf-hedger | liup3424 | 全过零区分度 |
 | #114 | brinson-sector-attribution | boqiny | Knife-edge，隐式约定 |
