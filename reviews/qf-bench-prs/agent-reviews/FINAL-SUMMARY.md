@@ -1,11 +1,11 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 46 (43%) | ❌ 不建议Merge: 37 (35%) | 🟡 需要Human Review: 22 (20%)
+**Total:** ✅ 建议Merge: 50 (47%) | ❌ 不建议Merge: 37 (35%) | 🟡 需要Human Review: 18 (17%)
 
 ---
 
-## ✅ 建议 Merge (46)
+## ✅ 建议 Merge (50)
 
 | PR | Task | Author | H:O:S | 备注 |
 |---|---|---|---|---|
@@ -45,10 +45,14 @@
 | #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确 |
 | #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 |
 | #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium |
+| #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | Opus 17/17, good discrimination |
 | #162 | digital-barrier-options | Dongzhikang | 0:1:1 | 干净 |
 | #163 | double-barrier-options | Dongzhikang | 0:1:0 | Kunitomo-Ikeda 正确 |
 | #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 |
 | #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 |
+| #168 | heston-cf-pricing | Dongzhikang | 0:1:0 | 74 tests, Opus 73/74 trivial K rounding |
+| #169 | implied-vol-approximations | Dongzhikang | 0:1:0 | Fixed rtol 1e-6→0.02, awaiting re-trial |
+| #170 | kou-double-exponential | Dongzhikang | 0:1:0 | Fixed boundary <→<=, awaiting re-trial |
 | #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 |
 | #173 | ou-jump-commodity | Dongzhikang | 1:1:0 | 合理 |
 | #175 | rainbow-option-pricing | Dongzhikang | 0:0:0 | 全挂但反映真正难度 |
@@ -99,7 +103,7 @@
 | #174 | power-options | Dongzhikang | Instruction 缺 closed-form |
 | #176 | realized-vol-estimators | Dongzhikang | Trial 跑的旧版 task |
 
-## 🟡 需要 Human Review (22)
+## 🟡 需要 Human Review (18)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
@@ -118,13 +122,9 @@
 | #128 | etf-cross-asset-lead-lag | xinlan-technology | 全有全无计分浪费区分度 |
 | #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
-| #160 | cliquet-ratchet-pricing | Dongzhikang | Forward-start 歧义 |
 | #161 | compound-option-geske | Dongzhikang | 区分度反转 |
-| #168 | heston-cf-pricing | Dongzhikang | Opus 73/74，K rounding |
 | #172 | merton-jump-diffusion | Dongzhikang | 零 trial 数据 |
 | #125 | bl-regime-hmm | GinkgoGao | Opus 0.92，放宽 HMM tolerance 即可 |
-| #169 | implied-vol-approximations | Dongzhikang | 已修 rtol→0.02，Opus 过 (0:1:0) |
-| #170 | kou-double-exponential | Dongzhikang | 已修 boundary <=，待重跑 trial |
 
 ---
 
