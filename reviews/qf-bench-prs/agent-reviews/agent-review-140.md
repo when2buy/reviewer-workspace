@@ -41,4 +41,4 @@ The barrier pricing uses MC simulation. The task should specify a seed for deter
 Well-designed derivatives pipeline task. Opus46 nearly passes (27/34 tests), suggesting the task is borderline — a good difficulty level for "hard". The main concern is whether numeric tolerances on intermediate values are too tight, causing a "correct but slightly different" solution to fail.
 
 ### Verdict
-**需要 Human Review** — Close to passing for Opus. Human should verify whether the pinned intermediate tolerances (rtol=5e-3) are fair or need loosening. If Opus is failing for trivial numeric reasons, the task loses signal.
+**建议 Merge** — Good discrimination (Opus 27/34 > Sonnet 20/34 > Haiku 17/34). Opus local vol values off by 17-21%, not a tolerance issue but genuine numerical method errors.

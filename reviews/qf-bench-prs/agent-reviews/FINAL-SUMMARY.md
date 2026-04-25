@@ -33,6 +33,8 @@
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 |
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分 |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | 干净无区分度 |
+| #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 | Hard task, agents substantively wrong |
+| #140 | localvol-barrier | Jingyi-Jia | 0:0:0 | Hard task, Opus 27/34 but local vol off by 17-21% |
 | #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 |
 | #151 | fomc-tone-event-study | gem-mint | 0:1:0 | ⭐ NLP+固收，Opus-only |
 | #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 |
@@ -115,8 +117,6 @@
 | #126 | merton-cds-copula | GinkgoGao | 全部 0.9，差 1 checkpoint |
 | #128 | etf-cross-asset-lead-lag | xinlan-technology | 全有全无计分浪费区分度 |
 | #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
-| #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0/0/0 但设计优秀 |
-| #140 | localvol-barrier | Jingyi-Jia | Opus 接近通过 27/34 |
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
 | #160 | cliquet-ratchet-pricing | Dongzhikang | Forward-start 歧义 |
 | #161 | compound-option-geske | Dongzhikang | 区分度反转 |

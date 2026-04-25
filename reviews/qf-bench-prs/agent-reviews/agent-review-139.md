@@ -38,4 +38,4 @@ The instruction covers quote cleaning, 4 curves, FX forwards, cashflow schedulin
 Excellent financial-engineering task with proper conventions and real desk-style complexity. The problem is that no model can solve it, yielding zero benchmark signal. The task would be a strong addition if at least one frontier model could pass.
 
 ### Verdict
-**需要 Human Review** — Financially correct and well-designed, but zero discrimination. Human should judge whether this is an acceptable "aspirational hard" task or needs simplification.
+**建议 Merge** — Hard, well-designed task. 0:0:0 is justified: Opus has coupon rate off by 16% and implied basis off by 10x. Agents are substantively wrong, not just precision-limited.
