@@ -26,6 +26,8 @@
 | #98 | nelson-siegel-yield-curve-fit | wshi83 | 应该是easy outlier count window 太紧 | |
 | #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | |
 | #102 | intraday-volume-fitting | liup3424 | 0:1:1 | 好校准 | |
+| #103 |fx-carry-forward-hedge|	Jingyi-Jia	|
+| #105 | yield-curve-bond-immunization | Jingyi-Jia | KRD key format bug |
 | #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 需要改instruction, 应该是easy | |
 | #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task | |
 | #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | |
@@ -86,9 +88,7 @@
 | #92 | sec-10k-report-long | owen8877 | Docker base image 错误 |
 | #97 | factor-momentum-spanning | wshi83 | 全挂，oracle 校准问题 |
 | #99 | 13f-amendment-aware-crowding | Minxuan-Hu | Docker base image 错误 |
-| #103 | fx-carry-forward-hedge | Jingyi-Jia | Verifier 脆弱 (NaN + off-by-one) |
 | #104 | form4-cross-sectional-sale-pressure | Minxuan-Hu | Docker base image 错误 |
-| #105 | yield-curve-bond-immunization | Jingyi-Jia | KRD key format bug |
 | #106 | etf-overlap-redemption-pressure | Minxuan-Hu | Docker base image 错误 |
 | #124 | pairs-cointegration-kalman | GinkgoGao | 非标准 ADF + 不合理经济学 |
 | #127 | crypto-funding-rate-basis-carry | xinlan-technology | 16-32 test 失败，值硬编码 |
