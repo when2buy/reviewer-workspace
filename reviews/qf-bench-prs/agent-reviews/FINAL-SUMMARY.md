@@ -46,7 +46,7 @@
 | #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 |
 | #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium |
 | #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | Opus 17/17, good discrimination |
-| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error |
+| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error. Needs re-run |
 | #162 | digital-barrier-options | Dongzhikang | 0:1:1 | 干净 |
 | #163 | double-barrier-options | Dongzhikang | 0:1:0 | Kunitomo-Ikeda 正确 |
 | #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 |
