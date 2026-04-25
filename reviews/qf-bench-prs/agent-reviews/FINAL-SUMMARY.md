@@ -89,6 +89,7 @@
 | #149 | liquidity-var-backtest | gem-mint | Verifier broken |
 | #155 | barrier-gbm-analytics | Dongzhikang | test_mean_fpt_down crash |
 | #157 | cev-option-pricing | Dongzhikang | Oracle 值有误 (β=0.9) |
+| #158 | chooser-option-pricing | Dongzhikang | Oracle discount factor bug |
 
 | #174 | power-options | Dongzhikang | Instruction 缺 closed-form |
 | #176 | realized-vol-estimators | Dongzhikang | Trial 跑的旧版 task |
@@ -107,7 +108,6 @@
 | #100 | minimum-cost-equity-etf-hedger | liup3424 | 全过零区分度 |
 | #114 | brinson-sector-attribution | boqiny | Knife-edge，隐式约定 |
 | #117 | credit-portfolio-var-cvar | pangjacque | Scope 太大需 partial credit |
-| #158 | chooser-option-pricing | Dongzhikang | Oracle discount factor bug, needs fix+re-trial |
 | #164 | dupire-local-vol | Dongzhikang | Instruction clarified, pushed fix, needs re-trial |
 | #118 | perpetual-funding-ledger-reconciliation | Runder-sun | 硬编码风险，无 trial |
 | #119 | option-put-call-parity-forward-audit | Runder-sun | 同 #118，无 trial |
