@@ -105,7 +105,7 @@
 | #76 | fama-macbeth-risk-premia | Dongzhikang | Opus 59/60，GRS 容差 |
 | #78 | fx-carry-trade-backtest | Dongzhikang | Opus 差 1 test |
 | #79 | execution-is-vwap | Dongzhikang | Sonnet 差 1 test |
-| #80 | credit-migration-matrix | pangjacque | 接近通过，edge case |
+| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 |
 | #95 | fixed-income-market-stress | wshi83 | 区分度反转 |
 | #100 | minimum-cost-equity-etf-hedger | liup3424 | 全过零区分度 |
 | #114 | brinson-sector-attribution | boqiny | Knife-edge，隐式约定 |

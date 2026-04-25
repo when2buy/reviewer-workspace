@@ -71,6 +71,6 @@ E        +  where np.int64(21) = abs((np.int64(22476) - 22497))
 Very good credit risk task with real data and comprehensive tests. Close to passing — Opus fails on only 1 test (total_transitions count), which is likely a specification ambiguity about whether Default-row counts should be included. The chi-squared edge cases for sparse ratings (AAA) need clearer handling instructions.
 
 ### Verdict
-**需要 Human Review**
+**建议 Merge** — Task iterated with reviewer feedback, Sonnet 4.6 and Haiku 4.5 now pass 63/63. Well-designed credit risk task with real ESMA data.
 
 Close to merge-ready. Two issues need resolution: (1) clarify whether `total_transitions` includes Default-starting rows; (2) specify chi-squared behavior when contingency table is degenerate after column filtering. These may be fixable with minor instruction/test tweaks.
