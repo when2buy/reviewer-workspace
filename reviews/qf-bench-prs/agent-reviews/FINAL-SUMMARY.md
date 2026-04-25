@@ -23,8 +23,10 @@
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |
 | #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 |
+| #98 | nelson-siegel-yield-curve-fit | wshi83 | 应该是easy outlier count window 太紧 |
 | #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit |
 | #102 | intraday-volume-fitting | liup3424 | 0:1:1 | 好校准 |
+| #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 需要改instruction, 应该是easy |
 | #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task |
 | #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 |
 | #110 | evt-pot-var | boqiny | 0.71:1:0.92 | ⭐ 全面尾部风险，partial credit |
@@ -83,13 +85,11 @@
 | #91 | polars-api-migration | owen8877 | Docker 错误 + 非 QF task |
 | #92 | sec-10k-report-long | owen8877 | Docker base image 错误 |
 | #97 | factor-momentum-spanning | wshi83 | 全挂，oracle 校准问题 |
-| #98 | nelson-siegel-yield-curve-fit | wshi83 | outlier count window 太紧 |
 | #99 | 13f-amendment-aware-crowding | Minxuan-Hu | Docker base image 错误 |
 | #103 | fx-carry-forward-hedge | Jingyi-Jia | Verifier 脆弱 (NaN + off-by-one) |
 | #104 | form4-cross-sectional-sale-pressure | Minxuan-Hu | Docker base image 错误 |
 | #105 | yield-curve-bond-immunization | Jingyi-Jia | KRD key format bug |
 | #106 | etf-overlap-redemption-pressure | Minxuan-Hu | Docker base image 错误 |
-| #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 |
 | #124 | pairs-cointegration-kalman | GinkgoGao | 非标准 ADF + 不合理经济学 |
 | #127 | crypto-funding-rate-basis-carry | xinlan-technology | 16-32 test 失败，值硬编码 |
 | #136 | quantamental-earnings-jumpfilter | xushenbo | Docker build 失败 |
