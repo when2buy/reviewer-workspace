@@ -69,7 +69,9 @@ E       FileNotFoundError: [Errno 2] No such file or directory: '/app/output/cal
 ```
 
 ### Summary
-All three models fail, including Opus failing to even produce output files. The task combines data engineering (options filtering), numerical optimization (SVI), and PDE computation (Dupire) in a way that is too fragile for a benchmark. The complex multi-step pipeline has too many points of failure.
+All three models fail, including Opus failing to even produce output files. Root cause: instruction did not specify exact JSON key names for `calibration.json` and `summary.json`, causing agents to use wrong keys. The financial/numerical content (SVI, Dupire, data pipeline) is sound.
+
+**Update (2026-04-24):** Pushed instruction fix to PR branch — added explicit JSON schemas with exact key names and types. Comment posted on PR. Task difficulty unchanged; needs re-trial to confirm models can now pass the key-matching tests and be evaluated on actual quant content.
 
 ### Verdict
-**不建议 Merge** — Zero model pass rate indicates the task is either underspecified or too fragile. Even Opus cannot produce basic outputs. Needs significant simplification or clearer specification of data format and filtering expectations.
+**需要 Human Review** — Instruction clarified (JSON schemas added), pushed to branch. Re-run trials to see if Opus/Sonnet can now pass with correct key names. The underlying Dupire task is hard and well-designed.
