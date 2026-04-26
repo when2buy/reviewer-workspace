@@ -1,13 +1,15 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 68 (53%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 20 (16%) | ❌ 待定: 3 (2%)
+**Total:** ✅ 建议Merge: 72 (56%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 17 (13%) | ❌ 待定: 3 (2%)
+
+> **2026-04-26 PQCat re-test:** Promoted #119, #125, #172 from 🟡 Human Review → ✅ Merge after fresh Haiku/Sonnet/Opus runs (all H:O:S = 1:1:1). Also added **PR #211** (Docker SHA-pin fix for #119 — *must be merged before #119*). See `HUMAN-REVIEW-SUMMARY.md` for full re-test details and the Corrado-formula concern that may move #88 from ✅ Merge → 🟡 in a future update.
 
 > **2026-04-26 update:** Added 17 Haiku-pass tasks from PR#180-209 to ✅ Merge. Added 3 tasks needing human review (convention/parameterization issues). 3 tasks (var-es-estimation, smith-tail-index, creditrisk-plus-model) pending Sonnet/Opus trials.
 
 ---
 
-## ✅ 建议 Merge (51)
+## ✅ 建议 Merge (55)
 
 | PR | Task | Author | H:O:S | 备注 | Final Approval |
 |---|---|---|---|---|---|
@@ -66,6 +68,11 @@
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 | |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | |
+| --- | --- *PQCat 2026-04-26 re-test additions (appended below)* | --- | --- | --- | --- |
+| #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | |
+| #125 | bl-regime-hmm | GinkgoGao | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 PERFECT after `bl: changeV2`; only Baum-Welch HMM task in entire bench | |
+| #172 | merton-jump-diffusion | Dongzhikang | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 pass 28/28, bit-identical MLE; only Merton 1976 jump-diffusion task | |
+| **#211** | **(Docker fix for #119)** | **PQCat** | **1:1:1*** | **(PQCat 2026-04-26) Removes obsolete `sha256:709847...` SHA pin from #119's Dockerfile — purely infrastructure, no instruction/solution edits.** ⚠️ **Must be merged BEFORE #119**: #119 cannot build on any machine other than the original author's until this lands. H/S/O 1:1:1 reflects post-fix runs on the merged `feat/human_review_beta` branch. | |
 
 ### ✅ 新增 PR#180-209 — Haiku 满分 (2026-04-26 added)
 
@@ -128,7 +135,7 @@
 | #174 | power-options | Dongzhikang | Output path spec bug: instruction never mentions /app/output/, Opus/Sonnet wrote to /app/ (all correct), Haiku guessed /app/output/ (luck). Needs instruction fix + re-run |
 | #176 | realized-vol-estimators | Dongzhikang | Trial ran wrong task version (141-test intraday microstructure task vs current 33-test daily OHLCV). Trial data invalid. Needs re-run on current PR version |
 
-## 🟡 需要 Human Review (17)
+## 🟡 需要 Human Review (14)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
@@ -141,14 +148,11 @@
 | #100 | minimum-cost-equity-etf-hedger | liup3424 | 全过零区分度 |
 | #164 | dupire-local-vol | Dongzhikang | Instruction clarified, pushed fix, needs re-trial |
 | #118 | perpetual-funding-ledger-reconciliation | Runder-sun | 硬编码风险，无 trial |
-| #119 | option-put-call-parity-forward-audit | Runder-sun | 同 #118，无 trial |
 | #120a | barra-cne6-risk | GinkgoGao | 所有模型 ≤0.31 |
 | #126 | merton-cds-copula | GinkgoGao | 全部 0.9，差 1 checkpoint |
 | #128 | etf-cross-asset-lead-lag | xinlan-technology | 全有全无计分浪费区分度 |
 | #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
-| #172 | merton-jump-diffusion | Dongzhikang | 零 trial 数据 |
-| #125 | bl-regime-hmm | GinkgoGao | Opus 0.92，放宽 HMM tolerance 即可 |
 ### 🟡 新增 PR#180-209 — Convention/Parameterization 歧义 (2026-04-26 added)
 
 | PR | Task | Author | 原因 |
