@@ -12,55 +12,55 @@
 | PR | Task | Author | H:O:S | 备注 | Final Approval |
 |---|---|---|---|---|---|
 | #38 | zero-coupon-bootstrapping | Dongzhikang | 1:1:1 | 正确，无区分度 | |
-| #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | |
+| #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ |
 | #40 | earnings-surprise-calculator | Dongzhikang | 1:1:1 | 过于简单 | |
-| #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | |
+| #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | ✅ |
 | #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium | |
-| #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | |
+| #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ |
 | #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好区分度 | |
-| #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | |
+| #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | ⭐ ERC portfolio 区分度好 | |
-| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | |
+| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ |
 | #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 | |
-| #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | |
+| #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task | |
-| #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | |
+| #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ |
 | #98 | nelson-siegel-yield-curve-fit | wshi83 | 应该是easy outlier count window 太紧 | |
-| #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | |
+| #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | ✅ |
 | #102 | intraday-volume-fitting | liup3424 | 0:1:1 | 好校准 | |
 | #103 |fx-carry-forward-hedge|	Jingyi-Jia	|
 | #105 | yield-curve-bond-immunization | Jingyi-Jia | KRD key format bug |
 | #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 需要改instruction, 应该是easy | |
 | #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task | |
-| #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | |
+| #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | ✅ |
 | #110 | evt-pot-var | boqiny | 0.71:1:0.92 | ⭐ 全面尾部风险，partial credit | |
-| #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | |
+| #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | ✅ |
 | #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 | |
-| #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | |
+| #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | ✅ |
 | #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test | |
-| #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | |
+| #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | ✅ |
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | |
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分 | |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | 干净无区分度 | |
 | #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 | Hard task, agents substantively wrong | |
 | #140 | localvol-barrier | Jingyi-Jia | 0:0:0 | Hard task, Opus 27/34 but local vol off by 17-21% | |
-| #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 | |
+| #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 | ✅ |
 | #151 | fomc-tone-event-study | gem-mint | 0:1:0 | ⭐ NLP+固收，Opus-only | |
-| #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 | |
+| #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 | ✅ |
 | #153 | asian-option-levy-curran | Dongzhikang | 0:1:0 | 好区分度 | |
 | #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确 | |
 | #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 | |
-| #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium | |
+| #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | Opus 17/17, good discrimination | |
-| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error. Needs re-run | |
+| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error. Needs re-run | ✅ |
 | #162 | digital-barrier-options | Dongzhikang | 0:1:1 | 干净 | |
 | #163 | double-barrier-options | Dongzhikang | 0:1:0 | Kunitomo-Ikeda 正确 | |
 | #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 | |
-| #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 | |
+| #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 | ✅ |
 | #168 | heston-cf-pricing | Dongzhikang | 0:1:0 | 74 tests, Opus 73/74 trivial K rounding | |
 | #169 | implied-vol-approximations | Dongzhikang | 0:1:0 | Fixed rtol 1e-6→0.02, awaiting re-trial | |
 | #170 | kou-double-exponential | Dongzhikang | 0:1:0 | Fixed boundary <→<=, awaiting re-trial | |
-| #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | |
+| #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | ✅ |
 | #173 | ou-jump-commodity | Dongzhikang | 1:1:0 | 合理 | |
 | #175 | rainbow-option-pricing | Dongzhikang | 0:0:0 | 全挂但反映真正难度 | |
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
