@@ -14,59 +14,59 @@
 | PR | Task | Author | H:O:S | 备注 | Final Approval |
 |---|---|---|---|---|---|
 | #38 | zero-coupon-bootstrapping | Dongzhikang | 1:1:1 | 正确，无区分度 | |
-| #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | |
+| #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ |
 | #40 | earnings-surprise-calculator | Dongzhikang | 1:1:1 | 过于简单 | |
-| #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | |
+| #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | ✅ |
 | #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium | |
-| #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | |
+| #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ |
 | #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好区分度 | |
-| #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | |
+| #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | ⭐ ERC portfolio 区分度好 | |
-| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | |
+| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ |
 | #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 | |
-| #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | |
+| #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task | |
-| #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | |
+| #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ |
 | #98 | nelson-siegel-yield-curve-fit | wshi83 | 应该是easy outlier count window 太紧 | |
-| #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | |
+| #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | ✅ |
 | #102 | intraday-volume-fitting | liup3424 | 0:1:1 | 好校准 | |
-| #103 |fx-carry-forward-hedge|	Jingyi-Jia	|
+| #103 | fx-carry-forward-hedge | Jingyi-Jia | 30/36:30/36:30/36 | **2026-04-26 PQCat re-test: H/S/O all 30/36 with identical 3 universal failures (schema/convention issues, not methodology):** (1) **JSON output keys not pinned** — instruction says "structure like `{...}`" with placeholder syntax, but verifier expects specific keys (`t_base`, `swap_points`, `case_id`) that aren't named in the prose bullet list; (2) **`carry_signals.csv` row-filtering unclear** — instruction says "daily" + "monthly portfolio formation"; agents output all 2247 daily rows, test expects 1900–2100 (reference drops leading rows where some currencies have no forward-filled deposits); (3) **implied-yield bid/offer combination not pinned** — instruction says "correct bid/offer combination" without specifying which side of F/S/r_USD goes into bid vs offer (multiple defensible dealer conventions). Each agent additionally has 3 idiosyncratic failures on different currency pairs. Task content is excellent (one of the highest-quality FX desk tasks in the bench — 5-part dealer-style mechanics with NDF, GK, hedge Greeks); needs schema + convention pins before fair grading. | 🟡 |
 | #105 | yield-curve-bond-immunization | Jingyi-Jia | KRD key format bug |
-| #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 需要改instruction, 应该是easy | |
+| #107 | realized-vol-estimators | yyu56253 | New test: Sonnet 108/141 + Opus 141/141 | 公式未在 instruction 说明 需要改instruction, 应该是easy; **2026-04-26 PQCat re-test: Sonnet 108/141 (BR + BNS variants off), Opus PERFECT 141/141.** Cites Bandi-Russell (2006) Section 3.1 + BNS (2004) Definition 1 — both **post-1994 references** (after Dupire local-vol). These are real but relatively-recent papers; not as universally trained as classical (BS, Black-76) formulas, so this task **also tests how well the agent has learned post-Dupire-era HF-econometrics literature**. Agents who internalized these papers in training pass; those who reconstruct from memory pick variant forms and fail. | ✅ |
 | #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task | |
-| #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | |
+| #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | ✅ |
 | #110 | evt-pot-var | boqiny | 0.71:1:0.92 | ⭐ 全面尾部风险，partial credit | |
-| #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | |
+| #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | ✅ |
 | #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 | |
-| #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | |
+| #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | ✅ |
 | #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test | |
-| #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | |
+| #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | ✅ |
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | |
-| #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分 | |
+| #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT** | ✅ |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | 干净无区分度 | |
-| #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 | Hard task, agents substantively wrong | |
+| #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 → Sonnet 138/145 | **2026-04-26 PQCat re-test (Sonnet alone, solo run, 28:23): 138/145 — only 7 failures, ALL spec/convention issues, no methodology errors.** First 3 confusing parts (out of 7): (1) **`par_basis_bps` definition**: Sonnet=5.65, expected=35.65 — off by *exactly* 30bp = contractual GBP spread. Instruction doesn't pin whether `par_basis_bps` is "incremental spread above contract" or "total par-equivalent spread". (2) **`accrued_usd` sign convention**: Sonnet=+230,791.67, expected=−230,791.67 (same magnitude, opposite sign). Trader-vs-accountant sign convention divergence; instruction doesn't pin. (3) **`forward_points` output unit**: Sonnet=0.00032076 (decimal), expected=3.207644 (pips) — exact 10,000× factor. Instruction says *"forward_points_pips are pips; divide by 10000 before adding to spot"* (telling agent to use decimal **internally**) but doesn't pin what to write in the OUTPUT `forward_points` column. Sonnet's underlying math is correct; it just missed the output convention. Other 4 failures of similar shape (sort key, FRA raw vs adjusted quote semantics, par_basis cascades). Once these 3 conventions are pinned, this becomes a strong dealer-style XCCY task. | 🟡 |
 | #140 | localvol-barrier | Jingyi-Jia | 0:0:0 | Hard task, Opus 27/34 but local vol off by 17-21% | |
-| #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 | |
+| #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 | ✅ |
 | #151 | fomc-tone-event-study | gem-mint | 0:1:0 | ⭐ NLP+固收，Opus-only | |
-| #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 | |
+| #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 | ✅ |
 | #153 | asian-option-levy-curran | Dongzhikang | 0:1:0 | 好区分度 | |
-| #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确 | |
+| #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 36/36 PERFECT.** Extended the agent timeout at harbor/docker level via `--timeout-multiplier 3.0` (600s default → 1800s) — the harbor 600s default is too short for heavy derivatives calculations on this task. Task content unchanged. | ✅ |
 | #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 | |
-| #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium | |
+| #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | Opus 17/17, good discrimination | |
-| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error. Needs re-run | |
+| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error. Needs re-run | ✅ |
 | #162 | digital-barrier-options | Dongzhikang | 0:1:1 | 干净 | |
 | #163 | double-barrier-options | Dongzhikang | 0:1:0 | Kunitomo-Ikeda 正确 | |
 | #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 | |
-| #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 | |
+| #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 | ✅ |
 | #168 | heston-cf-pricing | Dongzhikang | 0:1:0 | 74 tests, Opus 73/74 trivial K rounding | |
-| #169 | implied-vol-approximations | Dongzhikang | 0:1:0 | Fixed rtol 1e-6→0.02, awaiting re-trial | |
+| #169 | implied-vol-approximations | Dongzhikang | 0:1:0 → 0.9:0.9:0.9 | Fixed rtol 1e-6→0.02, awaiting re-trial; **2026-04-26 PQCat re-test: H/S/O each 9/10 — different ATM method fails per agent** (Haiku & Sonnet on Brenner-Subrahmanyam, Opus on Li ATM). Cites Brenner-Subrahmanyam (1988) ATM, **Li (2005) trigonometric**, **Corrado-Miller-Hallerbach** rational approximation — Li and CMH are **post-1994** (after Dupire local-vol). Less universally taught than classical BS; this task **tests how well the agent has learned recent IV-approximation literature**. Each agent picks a different variant from training memory on different methods → empirical confirmation that training-data depth on post-1994 references varies. | ✅ |
 | #170 | kou-double-exponential | Dongzhikang | 0:1:0 | Fixed boundary <→<=, awaiting re-trial | |
-| #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | |
+| #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | ✅ |
 | #173 | ou-jump-commodity | Dongzhikang | 1:1:0 | 合理 | |
-| #175 | rainbow-option-pricing | Dongzhikang | 0:0:0 | 全挂但反映真正难度 | |
+| #175 | rainbow-option-pricing | Dongzhikang | 0:0:0 | 全挂但反映真正难度; **PQCat file-level review found 2 typos in instruction that likely cause the 0:0:0**: (1) **Wrong prose payoff for call-on-min**: instruction says *"Call on minimum: max(S1_T, S2_T) − K (but prices the minimum)"* — the `max(S1, S2)` is the call-on-MAX payoff, should be `max(min(S1, S2) − K, 0)`. **Misleads agents** who try to verify via MC or who read prose before formula. (2) **Undefined `d+` in pricing formulas**: the "Define" block defines `d`, `d1+`, `d1-`, `d2+`, `d2-`, but the C_max/C_min formulas use `d+` (which is not defined; should be `d` per Stulz 1982 standard notation). **Forces agents to think too long / guess** what `d+` means — different agents pick different reasonable interpretations (`d`, `d + σ√τ`, `d + σ²τ/2`, etc.) and produce different numbers. With 3 independent agents, P(all guess correctly) is small → empirically observed 0:0:0. Both typos are trivial 1-line fixes; once corrected, this is a strong rainbow-options task with closed-form Stulz-Johnson formulas + decomposition identity sanity check. | 🟡 |
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
-| #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 | |
+| #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理; **2026-04-26 PQCat re-test (Opus): 36/37 — single failure on `test_parameters_in_reasonable_range` with `kappa=50.0`** (test asserts `kappa ≤ 20`). Methodology valid: model-free Carr-Madan replication formula and Heston closed-form `K_var = θT + (v_0−θ)/κ·(1−e^{−κT})` both explicitly written. **Spec ambiguity (the failure cause)**: Step 4 instruction allows EITHER "use default Heston parameters as initial guess: kappa=2.0, theta=0.04, v0=0.02" OR "fit the three parameters to minimize squared error" — but doesn't specify **fit constraints**. Opus chose to fit and converged to kappa=50 (a valid local optimum given SPY's term structure but outside the test's "typical range" check). The test asserts `0.01 < kappa ≤ 20.0` without telling the agent. **Fix**: instruction should pin bounds on the fit, e.g. *"fit with `kappa ∈ [0.01, 20]`, `theta ∈ [0.0001, 1]`, `v0 ∈ [0.0001, 1]`"*, or specify a regularized calibration (e.g. estimate θ from long-end then fit κ, v0 to short-end). Also recommended: pin extrapolation strategy for deep-OTM strikes ("set option price to zero outside the available strike range"). Once fit-constraints are pinned, Opus would pass and #178 becomes solid (complementary to #109 — practitioner cleaning vs theoretical Heston comparison). **Once this is fixed, this is a good test.** | 🟡 |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | |
 | --- | --- *PQCat 2026-04-26 re-test additions (appended below)* | --- | --- | --- | --- |
 | #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | |
