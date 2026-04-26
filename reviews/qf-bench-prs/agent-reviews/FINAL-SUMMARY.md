@@ -1,7 +1,9 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 51 (48%) | ❌ 不建议Merge: 37 (35%) | 🟡 需要Human Review: 17 (16%)
+**Total:** ✅ 建议Merge: 68 (53%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 20 (16%) | ❌ 待定: 3 (2%)
+
+> **2026-04-26 update:** Added 17 Haiku-pass tasks from PR#180-209 to ✅ Merge. Added 3 tasks needing human review (convention/parameterization issues). 3 tasks (var-es-estimation, smith-tail-index, creditrisk-plus-model) pending Sonnet/Opus trials.
 
 ---
 
@@ -64,6 +66,23 @@
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 | |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | |
+| #185 | gaussian-copula-credit | Dongzhikang | 1:?:? | ✅ Haiku 34/34 满分 | |
+| #187 | delta-gamma-option-var | Dongzhikang | 1:?:? | ✅ Haiku 23/23 满分 | |
+| #188 | vasicek-portfolio-credit | Dongzhikang | 1:?:? | ✅ Haiku 24/24 满分 | |
+| #189 | geometric-spacings-test | Dongzhikang | 1:?:? | ✅ Haiku 29/29 满分 | |
+| #190 | ewma-correlation-sensitivity | Dongzhikang | 1:?:? | ✅ Haiku 22/22 满分 | |
+| #191 | rolling-correlation-indices | Dongzhikang | 1:?:? | ✅ Haiku 24/24 满分 | |
+| #192 | pca-equity-returns | Dongzhikang | 1:?:? | ✅ Haiku 37/37 满分 | |
+| #194 | var-es-coherence | Dongzhikang | 1:?:? | ✅ Haiku 49/49 满分 | |
+| #197 | one-factor-equity-model | Dongzhikang | 1:?:? | ✅ Haiku 32/32 满分 | |
+| #198 | ljung-box-serial-dependence | Dongzhikang | 1:?:? | ✅ Haiku 27/27 满分 | |
+| #199 | single-loss-approximation | Dongzhikang | 1:?:? | ✅ Haiku 24/24 满分 | |
+| #200 | merton-structural-credit | Dongzhikang | 1:?:? | ✅ Haiku 21/21 满分 | |
+| #202 | intensity-credit-model | Dongzhikang | 1:?:? | ✅ Haiku 35/35 满分 | |
+| #203 | block-maxima-gev | Dongzhikang | 1:?:? | ✅ Haiku 16/16 满分 | |
+| #206 | gh-distribution-fitting | Dongzhikang | 1:?:? | ✅ Haiku 43/43 满分 | |
+| #207 | jarque-bera-normality-test | Dongzhikang | 1:?:? | ✅ Haiku 36/36 满分 | |
+| #209 | weekly-garch-vol-proxy | Dongzhikang | 1:?:? | ✅ Haiku 35/35 满分 | |
 
 ## ❌ 不建议 Merge (37)
 
@@ -125,6 +144,9 @@
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
 | #172 | merton-jump-diffusion | Dongzhikang | 零 trial 数据 |
 | #125 | bl-regime-hmm | GinkgoGao | Opus 0.92，放宽 HMM tolerance 即可 |
+| #183 | pca-yield-curve | Dongzhikang | Haiku 22/26, PCA eigenvector sign convention 歧义，test pin exact VaR 值 |
+| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 25/46, GPD shape xi 符号: scipy genpareto c = -xi convention 未在 instruction 说明 |
+| #208 | garch-sp500-fit | Dongzhikang | Haiku 33/47, GARCH-t parameterization: 不同库的 Student-t nu 定义不同，instruction 未指定库 |
 
 ---
 
