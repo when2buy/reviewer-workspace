@@ -40,10 +40,8 @@
 | #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 | |
 | #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | |
 | #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test | |
-| #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | |
 | #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | |
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | |
-| #125 | bl-regime-hmm | GinkgoGao | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 PERFECT after `bl: changeV2`; only Baum-Welch HMM task in entire bench | |
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分 | |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | 干净无区分度 | |
 | #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 | Hard task, agents substantively wrong | |
@@ -65,12 +63,15 @@
 | #169 | implied-vol-approximations | Dongzhikang | 0:1:0 | Fixed rtol 1e-6→0.02, awaiting re-trial | |
 | #170 | kou-double-exponential | Dongzhikang | 0:1:0 | Fixed boundary <→<=, awaiting re-trial | |
 | #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | |
-| #172 | merton-jump-diffusion | Dongzhikang | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 pass 28/28, bit-identical MLE; only Merton 1976 jump-diffusion task | |
 | #173 | ou-jump-commodity | Dongzhikang | 1:1:0 | 合理 | |
 | #175 | rainbow-option-pricing | Dongzhikang | 0:0:0 | 全挂但反映真正难度 | |
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 | |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | |
+| --- | --- *PQCat 2026-04-26 re-test additions (appended below)* | --- | --- | --- | --- |
+| #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | |
+| #125 | bl-regime-hmm | GinkgoGao | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 PERFECT after `bl: changeV2`; only Baum-Welch HMM task in entire bench | |
+| #172 | merton-jump-diffusion | Dongzhikang | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 pass 28/28, bit-identical MLE; only Merton 1976 jump-diffusion task | |
 | **#211** | **(Docker fix for #119)** | **PQCat** | **1:1:1*** | **(PQCat 2026-04-26) Removes obsolete `sha256:709847...` SHA pin from #119's Dockerfile — purely infrastructure, no instruction/solution edits.** ⚠️ **Must be merged BEFORE #119**: #119 cannot build on any machine other than the original author's until this lands. H/S/O 1:1:1 reflects post-fix runs on the merged `feat/human_review_beta` branch. | |
 
 ### ✅ 新增 PR#180-209 — Haiku 满分 (2026-04-26 added)
