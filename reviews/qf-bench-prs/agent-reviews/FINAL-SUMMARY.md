@@ -66,6 +66,11 @@
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 | |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | |
+
+### ✅ 新增 PR#180-209 — Haiku 满分 (2026-04-26 added)
+
+| PR | Task | Author | H:O:S | 备注 | Final Approval |
+|---|---|---|---|---|---|
 | #185 | gaussian-copula-credit | Dongzhikang | 1:?:? | ✅ Haiku 34/34 满分 | |
 | #187 | delta-gamma-option-var | Dongzhikang | 1:?:? | ✅ Haiku 23/23 满分 | |
 | #188 | vasicek-portfolio-credit | Dongzhikang | 1:?:? | ✅ Haiku 24/24 满分 | |
@@ -144,6 +149,10 @@
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
 | #172 | merton-jump-diffusion | Dongzhikang | 零 trial 数据 |
 | #125 | bl-regime-hmm | GinkgoGao | Opus 0.92，放宽 HMM tolerance 即可 |
+### 🟡 新增 PR#180-209 — Convention/Parameterization 歧义 (2026-04-26 added)
+
+| PR | Task | Author | 原因 |
+|---|---|---|---|
 | #183 | pca-yield-curve | Dongzhikang | Haiku 22/26, PCA eigenvector sign convention 歧义，test pin exact VaR 值 |
 | #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 25/46, GPD shape xi 符号: scipy genpareto c = -xi convention 未在 instruction 说明 |
 | #208 | garch-sp500-fit | Dongzhikang | Haiku 33/47, GARCH-t parameterization: 不同库的 Student-t nu 定义不同，instruction 未指定库 |
