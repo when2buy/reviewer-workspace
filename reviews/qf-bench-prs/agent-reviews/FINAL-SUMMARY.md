@@ -48,7 +48,7 @@
 | #151 | fomc-tone-event-study | gem-mint | 0:1:0 | ⭐ NLP+固收，Opus-only | |
 | #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 | ✅ |
 | #153 | asian-option-levy-curran | Dongzhikang | 0:1:0 | 好区分度 | |
-| #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确 | |
+| #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 36/36 PERFECT.** Extended the agent timeout at harbor/docker level via `--timeout-multiplier 3.0` (600s default → 1800s) — the harbor 600s default is too short for heavy derivatives calculations on this task. Task content unchanged. | ✅ |
 | #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 | |
 | #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | Opus 17/17, good discrimination | |
