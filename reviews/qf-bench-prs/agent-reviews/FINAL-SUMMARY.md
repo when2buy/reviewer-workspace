@@ -30,7 +30,7 @@
 | #102 | intraday-volume-fitting | liup3424 | 0:1:1 | 好校准 | |
 | #103 |fx-carry-forward-hedge|	Jingyi-Jia	|
 | #105 | yield-curve-bond-immunization | Jingyi-Jia | KRD key format bug |
-| #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 需要改instruction, 应该是easy | |
+| #107 | realized-vol-estimators | yyu56253 | 公式未在 instruction 说明 需要改instruction, 应该是easy; **2026-04-26 PQCat re-test: Sonnet 108/141 (BR + BNS variants off), Opus PERFECT 141/141.** Cites Bandi-Russell (2006) Section 3.1 + BNS (2004) Definition 1 — both **post-1994 references** (after Dupire local-vol). These are real but relatively-recent papers; not as universally trained as classical (BS, Black-76) formulas, so this task **also tests how well the agent has learned post-Dupire-era HF-econometrics literature**. Agents who internalized these papers in training pass; those who reconstruct from memory pick variant forms and fail. | ✅ |
 | #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task | |
 | #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | ✅ |
 | #110 | evt-pot-var | boqiny | 0.71:1:0.92 | ⭐ 全面尾部风险，partial credit | |
@@ -58,7 +58,7 @@
 | #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 | |
 | #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 | ✅ |
 | #168 | heston-cf-pricing | Dongzhikang | 0:1:0 | 74 tests, Opus 73/74 trivial K rounding | |
-| #169 | implied-vol-approximations | Dongzhikang | 0:1:0 | Fixed rtol 1e-6→0.02, awaiting re-trial | |
+| #169 | implied-vol-approximations | Dongzhikang | 0:1:0 | Fixed rtol 1e-6→0.02, awaiting re-trial; **2026-04-26 PQCat re-test: H/S/O each 9/10 — different ATM method fails per agent** (Haiku & Sonnet on Brenner-Subrahmanyam, Opus on Li ATM). Cites Brenner-Subrahmanyam (1988) ATM, **Li (2005) trigonometric**, **Corrado-Miller-Hallerbach** rational approximation — Li and CMH are **post-1994** (after Dupire local-vol). Less universally taught than classical BS; this task **tests how well the agent has learned recent IV-approximation literature**. Each agent picks a different variant from training memory on different methods → empirical confirmation that training-data depth on post-1994 references varies. | ✅ |
 | #170 | kou-double-exponential | Dongzhikang | 0:1:0 | Fixed boundary <→<=, awaiting re-trial | |
 | #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | ✅ |
 | #173 | ou-jump-commodity | Dongzhikang | 1:1:0 | 合理 | |
