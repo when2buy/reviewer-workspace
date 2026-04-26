@@ -1,15 +1,15 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 71 (55%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 17 (13%) | ❌ 待定: 3 (2%)
+**Total:** ✅ 建议Merge: 72 (56%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 17 (13%) | ❌ 待定: 3 (2%)
 
-> **2026-04-26 PQCat re-test:** Promoted #119, #125, #172 from 🟡 Human Review → ✅ Merge after fresh Haiku/Sonnet/Opus runs (all H:O:S = 1:1:1). See `HUMAN-REVIEW-SUMMARY.md` for full re-test details and the Corrado-formula concern that may move #88 from ✅ Merge → 🟡 in a future update.
+> **2026-04-26 PQCat re-test:** Promoted #119, #125, #172 from 🟡 Human Review → ✅ Merge after fresh Haiku/Sonnet/Opus runs (all H:O:S = 1:1:1). Also added **PR #211** (Docker SHA-pin fix for #119 — *must be merged before #119*). See `HUMAN-REVIEW-SUMMARY.md` for full re-test details and the Corrado-formula concern that may move #88 from ✅ Merge → 🟡 in a future update.
 
 > **2026-04-26 update:** Added 17 Haiku-pass tasks from PR#180-209 to ✅ Merge. Added 3 tasks needing human review (convention/parameterization issues). 3 tasks (var-es-estimation, smith-tail-index, creditrisk-plus-model) pending Sonnet/Opus trials.
 
 ---
 
-## ✅ 建议 Merge (54)
+## ✅ 建议 Merge (55)
 
 | PR | Task | Author | H:O:S | 备注 | Final Approval |
 |---|---|---|---|---|---|
@@ -71,6 +71,7 @@
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理 | |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | |
+| **#211** | **(Docker fix for #119)** | **PQCat** | **1:1:1*** | **(PQCat 2026-04-26) Removes obsolete `sha256:709847...` SHA pin from #119's Dockerfile — purely infrastructure, no instruction/solution edits.** ⚠️ **Must be merged BEFORE #119**: #119 cannot build on any machine other than the original author's until this lands. H/S/O 1:1:1 reflects post-fix runs on the merged `feat/human_review_beta` branch. | |
 
 ### ✅ 新增 PR#180-209 — Haiku 满分 (2026-04-26 added)
 
