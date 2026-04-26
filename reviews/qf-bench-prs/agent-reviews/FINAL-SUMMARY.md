@@ -1,13 +1,15 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 68 (53%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 20 (16%) | ❌ 待定: 3 (2%)
+**Total:** ✅ 建议Merge: 71 (55%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 17 (13%) | ❌ 待定: 3 (2%)
+
+> **2026-04-26 PQCat re-test:** Promoted #119, #125, #172 from 🟡 Human Review → ✅ Merge after fresh Haiku/Sonnet/Opus runs (all H:O:S = 1:1:1). See `HUMAN-REVIEW-SUMMARY.md` for full re-test details and the Corrado-formula concern that may move #88 from ✅ Merge → 🟡 in a future update.
 
 > **2026-04-26 update:** Added 17 Haiku-pass tasks from PR#180-209 to ✅ Merge. Added 3 tasks needing human review (convention/parameterization issues). 3 tasks (var-es-estimation, smith-tail-index, creditrisk-plus-model) pending Sonnet/Opus trials.
 
 ---
 
-## ✅ 建议 Merge (51)
+## ✅ 建议 Merge (54)
 
 | PR | Task | Author | H:O:S | 备注 | Final Approval |
 |---|---|---|---|---|---|
@@ -38,8 +40,10 @@
 | #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 | |
 | #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | |
 | #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test | |
+| #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | |
 | #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | |
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | |
+| #125 | bl-regime-hmm | GinkgoGao | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 PERFECT after `bl: changeV2`; only Baum-Welch HMM task in entire bench | |
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分 | |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | 干净无区分度 | |
 | #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 | Hard task, agents substantively wrong | |
@@ -61,6 +65,7 @@
 | #169 | implied-vol-approximations | Dongzhikang | 0:1:0 | Fixed rtol 1e-6→0.02, awaiting re-trial | |
 | #170 | kou-double-exponential | Dongzhikang | 0:1:0 | Fixed boundary <→<=, awaiting re-trial | |
 | #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | |
+| #172 | merton-jump-diffusion | Dongzhikang | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 pass 28/28, bit-identical MLE; only Merton 1976 jump-diffusion task | |
 | #173 | ou-jump-commodity | Dongzhikang | 1:1:0 | 合理 | |
 | #175 | rainbow-option-pricing | Dongzhikang | 0:0:0 | 全挂但反映真正难度 | |
 | #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 | |
@@ -128,7 +133,7 @@
 | #174 | power-options | Dongzhikang | Output path spec bug: instruction never mentions /app/output/, Opus/Sonnet wrote to /app/ (all correct), Haiku guessed /app/output/ (luck). Needs instruction fix + re-run |
 | #176 | realized-vol-estimators | Dongzhikang | Trial ran wrong task version (141-test intraday microstructure task vs current 33-test daily OHLCV). Trial data invalid. Needs re-run on current PR version |
 
-## 🟡 需要 Human Review (17)
+## 🟡 需要 Human Review (14)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
@@ -141,14 +146,11 @@
 | #100 | minimum-cost-equity-etf-hedger | liup3424 | 全过零区分度 |
 | #164 | dupire-local-vol | Dongzhikang | Instruction clarified, pushed fix, needs re-trial |
 | #118 | perpetual-funding-ledger-reconciliation | Runder-sun | 硬编码风险，无 trial |
-| #119 | option-put-call-parity-forward-audit | Runder-sun | 同 #118，无 trial |
 | #120a | barra-cne6-risk | GinkgoGao | 所有模型 ≤0.31 |
 | #126 | merton-cds-copula | GinkgoGao | 全部 0.9，差 1 checkpoint |
 | #128 | etf-cross-asset-lead-lag | xinlan-technology | 全有全无计分浪费区分度 |
 | #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
-| #172 | merton-jump-diffusion | Dongzhikang | 零 trial 数据 |
-| #125 | bl-regime-hmm | GinkgoGao | Opus 0.92，放宽 HMM tolerance 即可 |
 ### 🟡 新增 PR#180-209 — Convention/Parameterization 歧义 (2026-04-26 added)
 
 | PR | Task | Author | 原因 |
