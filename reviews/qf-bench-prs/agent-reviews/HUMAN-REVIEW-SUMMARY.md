@@ -15,6 +15,14 @@ The 18 PRs cluster into three patterns:
    - **PR #125** `bl-regime-hmm` — only Baum-Welch / hidden-state-estimation task in the entire 105-PR review.
    - **PR #119** `option-put-call-parity-forward-audit` — only put-call-parity arbitrage / market-microstructure / quote-side options task.
 
+## Patches applied during this review
+
+One infrastructure-only patch was made to make a task buildable on machines other than the original author's:
+
+- **PR #119** `option-put-call-parity-forward-audit`: removed a Docker base-image SHA pin that caused `docker pull` to fail on the public registry. The fix is one line in `tasks/option-put-call-parity-forward-audit/environment/Dockerfile` — see commit [`57cbc08`](https://github.com/QF-Bench/QuantitativeFinance-Bench/commit/57cbc08) on the [`feat/human_review_beta`](https://github.com/QF-Bench/QuantitativeFinance-Bench/tree/feat/human_review_beta) branch.
+
+**Policy:** patches are applied only when they are *strictly infrastructure / environment fixes* and do **not** touch the task's `instruction.md`, `solution/`, `tests/`, or `environment/data/` — i.e. nothing that would change what the agent sees, what the agent computes, or what the verifier checks. Any concern that requires modifying task content is left to the PR author to address.
+
 ## Conventions
 
 - Cell format: `✓ N/M` (pass) or `✗ N/M` (fail), where N/M = tests passed / total.
