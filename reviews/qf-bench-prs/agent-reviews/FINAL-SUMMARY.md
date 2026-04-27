@@ -25,9 +25,9 @@
 | #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | 很好的设计，但最新的状态是REQUEST CHANGES？好像还有bug没有来得及修完 | 🟡|
 | #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ |
-| #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 | |
+| #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 |✅ |
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ |
-| #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task | |
+| #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |✅ |
 | #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ |
 | #98 | nelson-siegel-yield-curve-fit | wshi83 | 应该是easy outlier count window 太紧 |✅  |
 | #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | ✅ |
