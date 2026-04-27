@@ -15,13 +15,13 @@
 
 | PR | Task | Author | H:O:S | 备注 | Final Approval |
 |---|---|---|---|---|---|
-| #38 | zero-coupon-bootstrapping | Dongzhikang | 1:1:1 | 正确，无区分度 | |
+| #38 | zero-coupon-bootstrapping | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ |
 | #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ |
-| #40 | earnings-surprise-calculator | Dongzhikang | 1:1:1 | 过于简单 | |
+| #40 | earnings-surprise-calculator | Dongzhikang | 1:1:1 | 过于简单 |✅ |
 | #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | ✅ |
-| #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium | |
+| #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium |✅ |
 | #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ |
-| #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好区分度 | |
+| #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好区分度 | 🟡|
 | #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | ⭐ ERC portfolio 区分度好 | |
 | #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ |
