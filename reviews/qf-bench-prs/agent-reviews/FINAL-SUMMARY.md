@@ -1,7 +1,9 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 72 (56%) | ❌ 不建议Merge: 37 (29%) | 🟡 需要Human Review: 17 (13%) | ❌ 待定: 3 (2%)
+**Total:** ✅ 建议Merge: 83 | ❌ 不建议Merge: 35 | 🟡 需要Human Review: 20
+
+> **2026-04-27 update:** Completed S4.5+O4.6 三模型 deep review of 17 tasks. 14→✅ Merge, 3→🟡 Human Review. Moved #174,#176 from ❌→✅; #172,#164 from 🟡→✅; #169 from ✅→🟡.
 
 > **2026-04-26 PQCat re-test:** Promoted #119, #125, #172 from 🟡 Human Review → ✅ Merge after fresh Haiku/Sonnet/Opus runs (all H:O:S = 1:1:1). Also added **PR #211** (Docker SHA-pin fix for #119 — *must be merged before #119*). See `HUMAN-REVIEW-SUMMARY.md` for full re-test details and the Corrado-formula concern that may move #88 from ✅ Merge → 🟡 in a future update.
 
@@ -96,7 +98,28 @@
 | #207 | jarque-bera-normality-test | Dongzhikang | 1:?:? | ✅ Haiku 36/36 满分 | |
 | #209 | weekly-garch-vol-proxy | Dongzhikang | 1:?:? | ✅ Haiku 35/35 满分 | |
 
-## ❌ 不建议 Merge (37)
+### ✅ 三模型深度 Review 确认 Merge (2026-04-27 added)
+
+> 以下 14 tasks 经 Haiku 4.5 + Sonnet 4.5 + Opus 4.6 三模型 trial 验证，确认为好 benchmark item。Failures 均为 agent 能力差异，非 task/oracle 问题。
+
+| PR | Task | Author | H:S:O | 备注 | Final Approval |
+|---|---|---|---|---|---|
+| #180 | smith-tail-index | Dongzhikang | TO:33/33:33/33 | S/O 满分，Haiku timeout。新 task | |
+| #181 | copula-equity-fitting | Dongzhikang | 27/28:28/28:28/28 | S/O 满分，Haiku nu 收敛差 1。新 task | |
+| #184 | fft-compound-poisson | Dongzhikang | 14/18:14/18:18/18 | Opus-only 满分，连 S/H 都区分。新 task | |
+| #193 | creditmetrics-portfolio-var | Dongzhikang | 25/26:26/26:26/26 | S/O 满分。新 task | |
+| #195 | standard-var-methods | Dongzhikang | 22/25:25/25:25/25 | S/O 满分。新 task | |
+| #201 | copula-sampling-rank-correlation | Dongzhikang | 25/31:31/31:31/31 | Haiku Gumbel copula 实现错误，好区分度。新 task | |
+| #204 | panjer-recursion | Dongzhikang | 18/22:22/22:22/22 | S/O 满分，Haiku 推导不出 (a,b)。新 task | |
+| #205 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task | |
+| #161 | compound-option-geske | Dongzhikang | 34/34:33/34:34/34 | H/O 满分，S MLE 差 1。补充 H:S:O | |
+| #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | H/O 满分，S 差 1。补充 H:S:O | |
+| #172 | merton-jump-diffusion | Dongzhikang | 22/22:22/22:22/22 | 三模型满分。从 🟡→✅ | |
+| #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | 修复后 S/O 满分。从 ❌→✅ | |
+| #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | O 的 0/67 是 subagent 路径问题非 task 问题。从 🟡→✅ | |
+| #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | |
+
+## ❌ 不建议 Merge (35)
 
 | PR | Task | Author | Blocker 类型 |
 |---|---|---|---|
@@ -132,10 +155,10 @@
 | #157 | cev-option-pricing | Dongzhikang | Oracle 值有误 (β=0.9) |
 | #158 | chooser-option-pricing | Dongzhikang | Oracle discount factor bug |
 
-| #174 | power-options | Dongzhikang | Output path spec bug: instruction never mentions /app/output/, Opus/Sonnet wrote to /app/ (all correct), Haiku guessed /app/output/ (luck). Needs instruction fix + re-run |
-| #176 | realized-vol-estimators | Dongzhikang | Trial ran wrong task version (141-test intraday microstructure task vs current 33-test daily OHLCV). Trial data invalid. Needs re-run on current PR version |
+| #174 | ~~power-options~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
+| #176 | ~~realized-vol-estimators~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
 
-## 🟡 需要 Human Review (14)
+## 🟡 需要 Human Review (20)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
@@ -146,7 +169,7 @@
 | #79 | execution-is-vwap | Dongzhikang | Sonnet 差 1 test |
 | #95 | fixed-income-market-stress | wshi83 | 区分度反转 |
 | #100 | minimum-cost-equity-etf-hedger | liup3424 | 全过零区分度 |
-| #164 | dupire-local-vol | Dongzhikang | Instruction clarified, pushed fix, needs re-trial |
+| #164 | ~~dupire-local-vol~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
 | #118 | perpetual-funding-ledger-reconciliation | Runder-sun | 硬编码风险，无 trial |
 | #120a | barra-cne6-risk | GinkgoGao | 所有模型 ≤0.31 |
 | #126 | merton-cds-copula | GinkgoGao | 全部 0.9，差 1 checkpoint |
@@ -160,6 +183,16 @@
 | #183 | pca-yield-curve | Dongzhikang | Haiku 22/26, PCA eigenvector sign convention 歧义，test pin exact VaR 值 |
 | #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 25/46, GPD shape xi 符号: scipy genpareto c = -xi convention 未在 instruction 说明 |
 | #208 | garch-sp500-fit | Dongzhikang | Haiku 33/47, GARCH-t parameterization: 不同库的 Student-t nu 定义不同，instruction 未指定库 |
+
+### 🟡 三模型深度 Review — Oracle/Tolerance 疑问 (2026-04-27 added)
+
+> 以下 3 tasks 经三模型验证后发现 oracle 精度或约定可能有问题。
+
+| PR | Task | Author | H:S:O | 原因 |
+|---|---|---|---|---|
+| #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 |
+| #182 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，Panjer 离散化约定疑问 |
+| #169 | implied-vol-approximations | Dongzhikang | 9/10:9/10:TO | 三模型都 fail 同一个 RMSE tolerance test，公式变体或 tolerance 问题。从 ✅→🟡 |
 
 ---
 
