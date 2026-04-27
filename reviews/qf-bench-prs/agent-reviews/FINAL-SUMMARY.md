@@ -29,7 +29,7 @@
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |✅ |
 | #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ |
-| #98 | nelson-siegel-yield-curve-fit | wshi83 | 应该是easy outlier count window 太紧 |✅  |
+| #98 | nelson-siegel-yield-curve-fit | wshi83 | | 应该是easy outlier count window 太紧 |  ✅|
 | #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | ✅ |
 | #102 | intraday-volume-fitting | liup3424 | 0:1:1 | 好校准 | ✅ |
 | #103 | fx-carry-forward-hedge | Jingyi-Jia | 30/36:30/36:30/36 | **2026-04-26 PQCat re-test: H/S/O all 30/36 with identical 3 universal failures (schema/convention issues, not methodology):** (1) **JSON output keys not pinned** — instruction says "structure like `{...}`" with placeholder syntax, but verifier expects specific keys (`t_base`, `swap_points`, `case_id`) that aren't named in the prose bullet list; (2) **`carry_signals.csv` row-filtering unclear** — instruction says "daily" + "monthly portfolio formation"; agents output all 2247 daily rows, test expects 1900–2100 (reference drops leading rows where some currencies have no forward-filled deposits); (3) **implied-yield bid/offer combination not pinned** — instruction says "correct bid/offer combination" without specifying which side of F/S/r_USD goes into bid vs offer (multiple defensible dealer conventions). Each agent additionally has 3 idiosyncratic failures on different currency pairs. Task content is excellent (one of the highest-quality FX desk tasks in the bench — 5-part dealer-style mechanics with NDF, GK, hedge Greeks); needs schema + convention pins before fair grading. | 🟡 |
