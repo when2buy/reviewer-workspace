@@ -23,7 +23,7 @@
 | #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ |
 | #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好像还没有finish？ It says This PR remains in draft while validation evidence is being collected. | 🟡|
 | #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
-| #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | ⭐ ERC portfolio 区分度好 | |
+| #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | 很好的设计，但最新的状态是REQUEST CHANGES？好像还有bug没有来得及修完 | 🟡|
 | #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ |
 | #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 | |
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ |
