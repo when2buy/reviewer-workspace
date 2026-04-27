@@ -46,7 +46,7 @@
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | ✅|
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT** | ✅ |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | Very easy task with no discrimination. Keep? | 🟡|
-| #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 → Sonnet 138/145 | All suggestions resolved. | ✅ |
+| #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 → Sonnet 138/145 | All suggestions resolved. Added partial credit.| ✅ |
 | #140 | localvol-barrier | Jingyi-Jia | 0:0:0  (Opus 27/34 > Sonnet 20/34 > Haiku 17/34) | 全挂但反映真正难度，区分度好。新增了partial credit。| ✅|
 | #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 | ✅ |
 | #151 | fomc-tone-event-study | gem-mint | 0:1:0 | ⭐ NLP+固收，Opus-only | ✅|
