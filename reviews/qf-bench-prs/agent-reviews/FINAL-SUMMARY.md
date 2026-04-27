@@ -41,11 +41,11 @@
 | #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | ✅ |
 | #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 |✅  |
 | #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | ✅ |
-| #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test | |
+| #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |✅ |
 | #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | ✅ |
-| #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | |
+| #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | ✅|
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT** | ✅ |
-| #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | 干净无区分度 | |
+| #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | Very easy task with no discrimination. Keep? | 🟡|
 | #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 → Sonnet 138/145 | **2026-04-26 PQCat re-test (Sonnet alone, solo run, 28:23): 138/145 — only 7 failures, ALL spec/convention issues, no methodology errors.** First 3 confusing parts (out of 7): (1) **`par_basis_bps` definition**: Sonnet=5.65, expected=35.65 — off by *exactly* 30bp = contractual GBP spread. Instruction doesn't pin whether `par_basis_bps` is "incremental spread above contract" or "total par-equivalent spread". (2) **`accrued_usd` sign convention**: Sonnet=+230,791.67, expected=−230,791.67 (same magnitude, opposite sign). Trader-vs-accountant sign convention divergence; instruction doesn't pin. (3) **`forward_points` output unit**: Sonnet=0.00032076 (decimal), expected=3.207644 (pips) — exact 10,000× factor. Instruction says *"forward_points_pips are pips; divide by 10000 before adding to spot"* (telling agent to use decimal **internally**) but doesn't pin what to write in the OUTPUT `forward_points` column. Sonnet's underlying math is correct; it just missed the output convention. Other 4 failures of similar shape (sort key, FRA raw vs adjusted quote semantics, par_basis cascades). Once these 3 conventions are pinned, this becomes a strong dealer-style XCCY task. | 🟡 |
 | #140 | localvol-barrier | Jingyi-Jia | 0:0:0 | Hard task, Opus 27/34 but local vol off by 17-21% | |
 | #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 | ✅ |
