@@ -21,7 +21,7 @@
 | #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | ✅ |
 | #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium |✅ |
 | #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ |
-| #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好区分度 | 🟡|
+| #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好像还没有finish？ It says This PR remains in draft while validation evidence is being collected. | 🟡|
 | #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ |
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | ⭐ ERC portfolio 区分度好 | |
 | #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ |
