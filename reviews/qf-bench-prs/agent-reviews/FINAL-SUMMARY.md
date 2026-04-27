@@ -59,7 +59,7 @@
 | #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error. Needs re-run | ✅ |
 | #162 | digital-barrier-options | Dongzhikang | 0:1:1 | 干净 | ✅ |
 | #163 | double-barrier-options | Dongzhikang | 0:1:0 | Kunitomo-Ikeda 正确 | |
-| #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 | |
+| #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 |✅ |
 | #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 | ✅ |
 | #168 | heston-cf-pricing | Dongzhikang | 0:1:0 | 74 tests, Opus 73/74 trivial K rounding | |
 | #169 | implied-vol-approximations | Dongzhikang | 0:1:0 → 0.9:0.9:0.9 | Fixed rtol 1e-6→0.02, awaiting re-trial; **2026-04-26 PQCat re-test: H/S/O each 9/10 — different ATM method fails per agent** (Haiku & Sonnet on Brenner-Subrahmanyam, Opus on Li ATM). Cites Brenner-Subrahmanyam (1988) ATM, **Li (2005) trigonometric**, **Corrado-Miller-Hallerbach** rational approximation — Li and CMH are **post-1994** (after Dupire local-vol). Less universally taught than classical BS; this task **tests how well the agent has learned recent IV-approximation literature**. Each agent picks a different variant from training memory on different methods → empirical confirmation that training-data depth on post-1994 references varies. | ✅ |
