@@ -1,7 +1,7 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 89 | ❌ 不建议Merge: 31 | 🟡 需要Human Review: 19
+**Total:** ✅ 建议Merge: 89 | ❌ 不建议Merge: 31 | 🟡 需要Human Review: 18
 
 > **2026-04-27 update:** Completed S4.5+O4.6 三模型 deep review of 17 tasks. 14→✅ Merge, 3→🟡 Human Review. Moved #174,#176 from ❌→✅; #172,#164 from 🟡→✅; #169 from ✅→🟡.
 
@@ -158,7 +158,7 @@
 | #174 | ~~power-options~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
 | #176 | ~~realized-vol-estimators~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
 
-## 🟡 需要 Human Review (13+3+3=19)
+## 🟡 需要 Human Review (13+3+2=18)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
@@ -192,7 +192,6 @@
 |---|---|---|---|---|
 | #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 |
 | #182 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，Panjer 离散化约定疑问 |
-| #169 | implied-vol-approximations | Dongzhikang | 9/10:9/10:TO | Li ATM 公式是 agent 知识测试，9/10 partial credit 合理。新 task | |
 
 ---
 
