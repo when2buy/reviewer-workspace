@@ -1,7 +1,7 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 84 | ❌ 不建议Merge: 35 | 🟡 需要Human Review: 19
+**Total:** ✅ 建议Merge: 89 | ❌ 不建议Merge: 31 | 🟡 需要Human Review: 19
 
 > **2026-04-27 update:** Completed S4.5+O4.6 三模型 deep review of 17 tasks. 14→✅ Merge, 3→🟡 Human Review. Moved #174,#176 from ❌→✅; #172,#164 from 🟡→✅; #169 from ✅→🟡.
 
@@ -11,7 +11,7 @@
 
 ---
 
-## ✅ 建议 Merge (55)
+## ✅ 建议 Merge (55+17+15+2=89)
 
 | PR | Task | Author | H:O:S | 备注 | Final Approval |
 |---|---|---|---|---|---|
@@ -119,7 +119,7 @@
 | #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | O 的 0/67 是 subagent 路径问题非 task 问题。从 🟡→✅ | |
 | #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | |
 
-## ❌ 不建议 Merge (35)
+## ❌ 不建议 Merge (31)
 
 | PR | Task | Author | Blocker 类型 |
 |---|---|---|---|
@@ -158,7 +158,7 @@
 | #174 | ~~power-options~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
 | #176 | ~~realized-vol-estimators~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
 
-## 🟡 需要 Human Review (19)
+## 🟡 需要 Human Review (13+3+3=19)
 
 | PR | Task | Author | 原因 |
 |---|---|---|---|
