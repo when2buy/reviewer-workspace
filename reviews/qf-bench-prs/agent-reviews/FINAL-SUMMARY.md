@@ -71,9 +71,9 @@
 | #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理; **2026-04-26 PQCat re-test (Opus): 36/37 — single failure on `test_parameters_in_reasonable_range` with `kappa=50.0`** (test asserts `kappa ≤ 20`). Methodology valid: model-free Carr-Madan replication formula and Heston closed-form `K_var = θT + (v_0−θ)/κ·(1−e^{−κT})` both explicitly written. **Spec ambiguity (the failure cause)**: Step 4 instruction allows EITHER "use default Heston parameters as initial guess: kappa=2.0, theta=0.04, v0=0.02" OR "fit the three parameters to minimize squared error" — but doesn't specify **fit constraints**. Opus chose to fit and converged to kappa=50 (a valid local optimum given SPY's term structure but outside the test's "typical range" check). The test asserts `0.01 < kappa ≤ 20.0` without telling the agent. **Fix**: instruction should pin bounds on the fit, e.g. *"fit with `kappa ∈ [0.01, 20]`, `theta ∈ [0.0001, 1]`, `v0 ∈ [0.0001, 1]`"*, or specify a regularized calibration (e.g. estimate θ from long-end then fit κ, v0 to short-end). Also recommended: pin extrapolation strategy for deep-OTM strikes ("set option price to zero outside the available strike range"). Once fit-constraints are pinned, Opus would pass and #178 becomes solid (complementary to #109 — practitioner cleaning vs theoretical Heston comparison). **Once this is fixed, this is a good test.** | 🟡 | |
 | #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | ✅ | |
 | --- | --- *PQCat 2026-04-26 re-test additions (appended below)* | --- | --- | --- | --- |
-| #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | | |
-| #125 | bl-regime-hmm | GinkgoGao | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 PERFECT after `bl: changeV2`; only Baum-Welch HMM task in entire bench | | |
-| #172 | merton-jump-diffusion | Dongzhikang | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 pass 28/28, bit-identical MLE; only Merton 1976 jump-diffusion task | | |
+| #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | | ✅ | ✅ |
+| #125 | bl-regime-hmm | GinkgoGao | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 PERFECT after `bl: changeV2`; only Baum-Welch HMM task in entire bench | | ✅ | ✅ |
+| #172 | merton-jump-diffusion | Dongzhikang | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 pass 28/28, bit-identical MLE; only Merton 1976 jump-diffusion task | | ✅ | ✅ |
 | **#211** | **(Docker fix for #119)** | **PQCat** | **1:1:1*** | **(PQCat 2026-04-26) Removes obsolete `sha256:709847...` SHA pin from #119's Dockerfile — purely infrastructure, no instruction/solution edits.** ⚠️ **Must be merged BEFORE #119**: #119 cannot build on any machine other than the original author's until this lands. H/S/O 1:1:1 reflects post-fix runs on the merged `feat/human_review_beta` branch. | | |
 
 ### ✅ 新增 PR#180-209 — Haiku 满分 (2026-04-26 added)
@@ -114,7 +114,7 @@
 | #205 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task | | |
 | #161 | compound-option-geske | Dongzhikang | 34/34:33/34:34/34 | H/O 满分，S MLE 差 1。补充 H:S:O | | ✅ |
 | #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | H/O 满分，S 差 1。补充 H:S:O | | |
-| #172 | merton-jump-diffusion | Dongzhikang | 22/22:22/22:22/22 | 三模型满分。从 🟡→✅ | | |
+| #172 | merton-jump-diffusion | Dongzhikang | 22/22:22/22:22/22 | 三模型满分。从 🟡→✅ | | ✅ | ✅ |
 | #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | 修复后 S/O 满分。从 ❌→✅ | | |
 | #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | O 的 0/67 是 subagent 路径问题非 task 问题。从 🟡→✅ | | |
 | #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | | |
