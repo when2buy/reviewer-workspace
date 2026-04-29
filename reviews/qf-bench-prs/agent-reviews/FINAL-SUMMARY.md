@@ -118,11 +118,10 @@
 | #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | 修复后 S/O 满分。从 ❌→✅ | | |
 | #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | O 的 0/67 是 subagent 路径问题非 task 问题。从 🟡→✅ | | |
 | #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | | |
+| #127 | crypto-funding-rate-basis-carry | xinlan-technology | 0:0.75:0.59 | agent 单位/边界错误非 oracle bug，好 benchmark。从 ❌→✅ | ✅ | ✅ |
+| #128 | etf-cross-asset-lead-lag | xinlan-technology | 0.5:0.96:0.96 | 作者修复后优秀区分度，GPT5.4 满分。从 🟡→✅ | ✅ | ✅ |
 
-
-| #127 | crypto-funding-rate-basis-carry | xinlan-technology | 0:0.75:0.59 | agent 单位/边界错误非 oracle bug，好 benchmark | ✅ | ✅ |
-| #128 | etf-cross-asset-lead-lag | xinlan-technology | 0.5:0.96:0.96 | 作者修复后优秀区分度，GPT5.4 满分 | ✅ | ✅ |
-## ❌ 不建议 Merge (31)
+## ❌ 不建议 Merge (29)
 
 | PR | Task | Author | Blocker 类型 |
 |---|---|---|---|
