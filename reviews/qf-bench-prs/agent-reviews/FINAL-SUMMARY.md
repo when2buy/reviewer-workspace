@@ -119,8 +119,6 @@
 | #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | O 的 0/67 是 subagent 路径问题非 task 问题。从 🟡→✅ | | |
 | #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | | |
 
-| #127 | crypto-funding-rate-basis-carry | xinlan-technology | H:0/63 S:47/63 O:37/63 | 单位/边界处理测试好 benchmark。从 ❌→✅ | | ✅ |
-| #128 | etf-cross-asset-lead-lag | xinlan-technology | H:12/24 O:23/24 S:23/24 | 作者修复后优秀区分度。从 🟡→✅ | | ✅ |
 
 ## ❌ 不建议 Merge (31)
 
@@ -148,7 +146,7 @@
 | #104 | form4-cross-sectional-sale-pressure | Minxuan-Hu | Docker base image 错误 |
 | #106 | etf-overlap-redemption-pressure | Minxuan-Hu | Docker base image 错误 |
 | #124 | pairs-cointegration-kalman | GinkgoGao | 非标准 ADF + 不合理经济学 |
-| #127 | ~~crypto-funding-rate-basis-carry~~ | ~~xinlan-technology~~ | ~~Moved to ✅ (2026-04-29)~~ |
+| #127 | crypto-funding-rate-basis-carry | xinlan-technology | 重新评估：agent 单位错误非 oracle bug，num_obs 确定性，MC seed 固定。好 benchmark | ✅ |
 | #136 | quantamental-earnings-jumpfilter | xushenbo | Docker build 失败 |
 | #137 | multimodal-alpha-fusion | xushenbo | 0/0/0 零区分度 |
 | #144 | double-sort/residual-momentum/stable-residual | mingjun-sun | Verifier broken |
@@ -176,7 +174,7 @@
 | #118 | perpetual-funding-ledger-reconciliation | Runder-sun | 硬编码风险，无 trial |
 | #120a | barra-cne6-risk | GinkgoGao | 所有模型 ≤0.31 |
 | #126 | merton-cds-copula | GinkgoGao | 全部 0.9，差 1 checkpoint |
-| #128 | ~~etf-cross-asset-lead-lag~~ | ~~xinlan-technology~~ | ~~Moved to ✅ (2026-04-29)~~ |
+| #128 | etf-cross-asset-lead-lag | xinlan-technology | 作者修复后 O:23/24 S:23/24 H:12/24 GPT5.4:24/24 优秀区分度 | ✅ |
 | #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
 ### 🟡 新增 PR#180-209 — Convention/Parameterization 歧义 (2026-04-26 added)
