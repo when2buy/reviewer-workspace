@@ -1,7 +1,7 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 89 | ❌ 不建议Merge: 31 | 🟡 需要Human Review: 18
+**Total:** ✅ 建议Merge: 90 | ❌ 不建议Merge: 28 | 🟡 需要Human Review: 18
 
 > **2026-04-27 update:** Completed S4.5+O4.6 三模型 deep review of 17 tasks. 14→✅ Merge, 3→🟡 Human Review. Moved #174,#176 from ❌→✅; #172,#164 from 🟡→✅; #169 from ✅→🟡.
 
@@ -44,6 +44,7 @@
 | #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |✅ | ✅ |
 | #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | ✅ | |
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | ✅| ✅ |
+| #124 | pairs-cointegration-kalman | GinkgoGao | 0:0.79:0.71 | 8/8 checkpoints pass，PnL 符号反 = mean-reversion 方向推理测试。Re-evaluated 2026-04-29: ADF 无差异，方向可从 instruction 推理 | ✅ | ✅ |
 | #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT** | ✅ | |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | Very easy task with no discrimination. Keep? | 🟡| |
 | #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 → Sonnet 138/145 | All suggestions resolved. Added partial credit.| ✅ | ✅ |
@@ -146,7 +147,7 @@
 | #99 | 13f-amendment-aware-crowding | Minxuan-Hu | Docker base image 错误 |
 | #104 | form4-cross-sectional-sale-pressure | Minxuan-Hu | Docker base image 错误 |
 | #106 | etf-overlap-redemption-pressure | Minxuan-Hu | Docker base image 错误 |
-| #124 | pairs-cointegration-kalman | GinkgoGao | 非标准 ADF + 不合理经济学 |
+| #124 | ~~pairs-cointegration-kalman~~ | ~~GinkgoGao~~ | ~~Moved to ✅ (2026-04-29)~~ |
 | #136 | quantamental-earnings-jumpfilter | xushenbo | Docker build 失败 |
 | #137 | multimodal-alpha-fusion | xushenbo | 0/0/0 零区分度 |
 | #144 | double-sort/residual-momentum/stable-residual | mingjun-sun | Verifier broken |
@@ -203,7 +204,7 @@
 | **Oracle/Verifier bug** | 10 | #61,64,88,97,98,103,105,155,157,170 |
 | **Instruction under-specification** | 8 | #53,66,72,75,77,107,169,174 |
 | **答案泄露/硬编码** | 4 | #127,137,169 |
-| **设计问题** | 5 | #81,124,125,176 |
+| **设计问题** | 4 | #81,125,176 |
 | **零区分度（需重新评估）** | 2 | #91,149 |
 
 ## 按作者统计
