@@ -110,7 +110,7 @@
 | #193 | creditmetrics-portfolio-var | Dongzhikang | 25/26:26/26:26/26 | Title/Description a bit misleading: It’s more of default prob estimation v.s. Credit metrics problem | ✅ | |
 | #195 | standard-var-methods | Dongzhikang | 22/25:25/25:25/25 | Intruction.md has an internal contradiction and the oracle implements the parenthetical version (σ_k = std(S_k), Var(S_k) = σ_k²) — NOT the explicit formula ( Var = σ_k²/μ_k²) | 🟡| |
 | #201 | copula-sampling-rank-correlation | Dongzhikang | 25/31:31/31:31/31 | Haiku Gumbel copula 实现错误，好区分度。新 task |✅ | |
-| #204 | panjer-recursion | Dongzhikang | 18/22:22/22:22/22 | SStatement "Starting from P(S = 0) = P(N = 0) (evaluated using the appropriate frequency distribution), use the Panjer recursion..." is wrong. Should be “P(S = 0) = P_N(f_X(0))” instead. |🟡 | |
+| #204 | panjer-recursion | Dongzhikang | 18/22:22/22:22/22 | Statement "Starting from P(S = 0) = P(N = 0) (evaluated using the appropriate frequency distribution), use the Panjer recursion..." is wrong. Should be “P(S = 0) = P_N(f_X(0))” instead. |🟡 | |
 | #205 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task | | |
 | #161 | compound-option-geske | Dongzhikang | 34/34:33/34:34/34 | H/O 满分，S MLE 差 1。补充 H:S:O | | ✅ |
 | #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | H/O 满分，S 差 1。补充 H:S:O | | |
