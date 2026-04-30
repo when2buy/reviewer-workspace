@@ -113,12 +113,12 @@
 | #201 | copula-sampling-rank-correlation | Dongzhikang | 25/31:31/31:31/31 | Haiku Gumbel copula 实现错误，好区分度。新 task |✅ | |
 | #204 | panjer-recursion | Dongzhikang | 18/22:22/22:22/22 | Statement "Starting from P(S = 0) = P(N = 0) (evaluated using the appropriate frequency distribution), use the Panjer recursion..." is wrong. Should be “P(S = 0) = P_N(f_X(0))” instead. |🟡 | |
 | #205 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task | | |
-| #161 | compound-option-geske | Dongzhikang | 34/34:33/34:34/34 | H/O 满分，S MLE 差 1。补充 H:S:O | | ✅ |
-| #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | H/O 满分，S 差 1。补充 H:S:O | | |
+| #161 | compound-option-geske | Dongzhikang | 34/34:33/34:34/34 | The verifier does not independently validate Geske pricing: pc_price is derived from parity, then parity is tested against itself. The parity check is circular at the moment. | | ✅ |
+| #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | The oracle moment-matches double-exponential jumps into normal components rather than implementing the Kou density/series, and the sigma optimizer bound still allows 1.0 despite the spec/test bound of 0.50. | 🟡| |
 | #172 | merton-jump-diffusion | Dongzhikang | 22/22:22/22:22/22 | 三模型满分。从 🟡→✅ |✅ | ✅ |
-| #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | 修复后 S/O 满分。从 ❌→✅ | | |
-| #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | O 的 0/67 是 subagent 路径问题非 task 问题。从 🟡→✅ | | |
-| #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | | |
+| #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | Now the verifier grades based on self-reported MC errors/parity booleans. Will agents lie? Use independent recomputation instead? | 🟡 | |
+| #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | Instruction says valuation date is 2024-03-15, but the oracle uses the last daily close from 2025-12-30 as S0 (687.06); the actual 2024-03-15 close is 509.82. So the option filtering and surface are built with future information. | 🟡| |
+| #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | ✅| |
 | #127 | crypto-funding-rate-basis-carry | xinlan-technology | 0:0.75:0.59 | agent 单位/边界错误非 oracle bug，好 benchmark。从 ❌→✅ | ✅ | ✅ |
 | #128 | etf-cross-asset-lead-lag | xinlan-technology | 0.5:0.96:0.96 | 作者修复后优秀区分度，GPT5.4 满分。从 🟡→✅ | ✅ | ✅ |
 
