@@ -177,22 +177,22 @@
 | #126 | merton-cds-copula | GinkgoGao | 全部 0.9，差 1 checkpoint |
 | #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
-### 🟡 新增 PR#180-209 — Convention/Parameterization 歧义 (2026-04-26 added)
+### 🟡 New PRs #180-209 — Convention/Parameterization Ambiguity (2026-04-26 added)
 
-| PR | Task | Author | 原因 | HumanReview | Merge |
+| PR | Task | Author | Issue | HumanReview | Merge |
 |---|---|---|---|---|---|
-| #183 | pca-yield-curve | Dongzhikang | Haiku 24/26, `var_explained` 存百分比(86.32)而非小数(0.8632)，instruction 缺 scale 说明 | ✅ 根因确认。加1句"decimal fractions 0–1"后 Haiku 26/26 满分 | ✅ 加1句 instruction 即可 |
-| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 46/46 满分（原判断有误：scipy genpareto c = +xi，非 -xi，实测确认） | ✅ 原 scipy 符号疑虑不成立。Task 公式正确，无需修改。注：初始疑虑来自 R 的 `ismev` 包（Stuart Coles 教材配套）用 k = −ξ 约定（k<0 = 重尾），与现代 EVT 文献（McNeil/Frey/Embrechts）及 scipy `genpareto`（c = +ξ，c>0 = 重尾）符号相反。实测 `scipy.stats.genpareto.fit()` 在 true ξ=+0.3 时返回 c=+0.25，确认 scipy 与 EVT 教材同号，R/ismev 为异类。 | ✅ 直接 Merge |
-| #208 | garch-sp500-fit | Dongzhikang | Haiku 35/47，根因为 instruction Step 3 t-likelihood 缺 −log(scale) Jacobian 项，导致 nu→100 上界 | ✅ 根因确认。需重写 Step 3 公式为 `z = X/(σ·scale), L = Σ[logpdf(z,ν) − log(σ) − log(scale)]` | ❌ 修 instruction t-likelihood 公式后再 Merge |
+| #183 | pca-yield-curve | Dongzhikang | Haiku 24/26; `var_explained` written as percentage (86.32) instead of decimal (0.8632); instruction missing scale clarification | ✅ Root cause confirmed. Adding 1 sentence "decimal fractions 0–1" → Haiku 26/26 | ✅ 1-sentence instruction fix |
+| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 46/46 (original concern was wrong: scipy genpareto uses c = +ξ, not −ξ, empirically confirmed) | ✅ scipy sign concern does not hold. Task formula is correct, no changes needed. Note: the concern originated from R's `ismev` package (Stuart Coles textbook) which uses k = −ξ (k < 0 = heavy tail) — opposite to modern EVT literature (McNeil/Frey/Embrechts) and scipy `genpareto` (c = +ξ, c > 0 = heavy tail). Empirically verified: `scipy.stats.genpareto.fit()` returns c = +0.25 for true ξ = +0.3. scipy and EVT textbooks agree; R/ismev is the outlier. | ✅ Merge as-is |
+| #208 | garch-sp500-fit | Dongzhikang | Haiku 35/47; root cause: instruction Step 3 t-likelihood missing −log(scale) Jacobian term, causing optimizer to push ν to upper bound (100) | ✅ Root cause confirmed. Need to rewrite Step 3 formula to `z = X/(σ·scale), L = Σ[logpdf(z,ν) − log(σ) − log(scale)]` | ❌ Fix instruction t-likelihood formula first |
 
-### 🟡 三模型深度 Review — Oracle/Tolerance 疑问 (2026-04-27 added)
+### 🟡 Three-Model Deep Review — Oracle/Tolerance Issues (2026-04-27 added)
 
-> 以下 3 tasks 经三模型验证后发现 oracle 精度或约定可能有问题。
+> The following tasks, after three-model validation, show potential oracle precision or convention problems.
 
-| PR | Task | Author | H:S:O | 原因 | HumanReview | Merge |
+| PR | Task | Author | H:S:O | Issue | HumanReview | Merge |
 |---|---|---|---|---|---|---|
-| #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 | ✅ 确认：GS alpha MLE 多极值，atol=0.03 过紧。Opus 37/38，唯一失败即此 test | ❌ 放宽 `test_gs_alpha_value` atol 至 ~0.08 后 Merge |
-| #195 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，根因为 instruction line 29 矛盾：Var(S_k)=σ_k²/μ_k² 与正文 σ_k=std 冲突 | ✅ 根因确认。删除 line 29 中 /μ_k² 后 Haiku 30/30 满分 | ✅ 1行 instruction 修正即可 |
+| #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` fails across all three models; oracle alpha ≈ 0.073 vs agent 0.10–0.12; tolerance likely too tight | ✅ Confirmed: GS alpha MLE has multiple local optima; atol=0.03 too tight. Opus 37/38 — this test is the only failure. | ❌ Widen `test_gs_alpha_value` atol to ~0.08, then merge |
+| #195 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | Sonnet/Opus VaR **identical** (5.9/7.7/10.2) but systematically off from oracle (6.5/9.0/12.6); root cause: instruction line 29 contradiction — Var(S_k)=σ_k²/μ_k² conflicts with body defining σ_k as std | ✅ Root cause confirmed. Removing /μ_k² from line 29 → Haiku 30/30 | ✅ 1-line instruction fix |
 
 ---
 
