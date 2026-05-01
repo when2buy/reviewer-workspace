@@ -112,7 +112,7 @@
 | #195 | standard-var-methods | Dongzhikang | 22/25:25/25:25/25 | Intruction.md has an internal contradiction and the oracle implements the parenthetical version (σ_k = std(S_k), Var(S_k) = σ_k²) — NOT the explicit formula ( Var = σ_k²/μ_k²) | 🟡| |
 | #201 | copula-sampling-rank-correlation | Dongzhikang | 25/31:31/31:31/31 | Haiku Gumbel copula 实现错误，好区分度。新 task |✅ | |
 | #204 | panjer-recursion | Dongzhikang | 18/22:22/22:22/22 | Statement "Starting from P(S = 0) = P(N = 0) (evaluated using the appropriate frequency distribution), use the Panjer recursion..." is wrong. Should be “P(S = 0) = P_N(f_X(0))” instead. |🟡 | |
-| #205 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task |✅ | |
+| #182 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task |✅ | |
 | #161 | compound-option-geske | Dongzhikang | 34/34:33/34:34/34 | The verifier does not independently validate Geske pricing: pc_price is derived from parity, then parity is tested against itself. The parity check is circular at the moment. Second, MC verification relies on self-report. Finally, the instruction says 300,000 MC paths while the oracle uses 100,000. |🟡| ✅ |
 | #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | The oracle moment-matches double-exponential jumps into normal components rather than implementing the Kou density/series, and the sigma optimizer bound still allows 1.0 despite the spec/test bound of 0.50. | 🟡| |
 | #172 | merton-jump-diffusion | Dongzhikang | 22/22:22/22:22/22 | 三模型满分。从 🟡→✅ |✅ | ✅ |
@@ -187,12 +187,12 @@
 
 ### 🟡 三模型深度 Review — Oracle/Tolerance 疑问 (2026-04-27 added)
 
-> 以下 3 tasks 经三模型验证后发现 oracle 精度或约定可能有问题。
+> 以下 2 tasks 经三模型验证后发现 oracle 精度或约定可能有问题。
 
 | PR | Task | Author | H:S:O | 原因 |
 |---|---|---|---|---|
 | #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 |
-| #182 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，Panjer 离散化约定疑问 |
+| #195 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，Panjer 离散化约定疑问 |
 
 ---
 
