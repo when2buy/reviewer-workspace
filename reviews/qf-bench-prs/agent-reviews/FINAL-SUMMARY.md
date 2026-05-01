@@ -179,20 +179,20 @@
 | #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
 ### 🟡 新增 PR#180-209 — Convention/Parameterization 歧义 (2026-04-26 added)
 
-| PR | Task | Author | 原因 |
-|---|---|---|---|
-| #183 | pca-yield-curve | Dongzhikang | Haiku 22/26, PCA eigenvector sign convention 歧义，test pin exact VaR 值 |
-| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 25/46, GPD shape xi 符号: scipy genpareto c = -xi convention 未在 instruction 说明 |
-| #208 | garch-sp500-fit | Dongzhikang | Haiku 33/47, GARCH-t parameterization: 不同库的 Student-t nu 定义不同，instruction 未指定库 |
+| PR | Task | Author | 原因 | HumanReview | Merge |
+|---|---|---|---|---|---|
+| #183 | pca-yield-curve | Dongzhikang | Haiku 24/26, `var_explained` 存百分比(86.32)而非小数(0.8632)，instruction 缺 scale 说明 | ✅ 根因确认。加1句"decimal fractions 0–1"后 Haiku 26/26 满分 | ✅ 加1句 instruction 即可 |
+| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 46/46 满分（原判断有误：scipy genpareto c = +xi，非 -xi，实测确认） | ✅ 原 scipy 符号疑虑不成立。Task 公式正确，无需修改 | ✅ 直接 Merge |
+| #208 | garch-sp500-fit | Dongzhikang | Haiku 35/47，根因为 instruction Step 3 t-likelihood 缺 −log(scale) Jacobian 项，导致 nu→100 上界 | ✅ 根因确认。需重写 Step 3 公式为 `z = X/(σ·scale), L = Σ[logpdf(z,ν) − log(σ) − log(scale)]` | ❌ 修 instruction t-likelihood 公式后再 Merge |
 
 ### 🟡 三模型深度 Review — Oracle/Tolerance 疑问 (2026-04-27 added)
 
 > 以下 3 tasks 经三模型验证后发现 oracle 精度或约定可能有问题。
 
-| PR | Task | Author | H:S:O | 原因 |
-|---|---|---|---|---|
-| #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 |
-| #182 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，Panjer 离散化约定疑问 |
+| PR | Task | Author | H:S:O | 原因 | HumanReview | Merge |
+|---|---|---|---|---|---|---|
+| #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 | ✅ 确认：GS alpha MLE 多极值，atol=0.03 过紧。Opus 37/38，唯一失败即此 test | ❌ 放宽 `test_gs_alpha_value` atol 至 ~0.08 后 Merge |
+| #195 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，根因为 instruction line 29 矛盾：Var(S_k)=σ_k²/μ_k² 与正文 σ_k=std 冲突 | ✅ 根因确认。删除 line 29 中 /μ_k² 后 Haiku 30/30 满分 | ✅ 1行 instruction 修正即可 |
 
 ---
 
