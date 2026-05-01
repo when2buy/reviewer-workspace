@@ -182,7 +182,7 @@
 | PR | Task | Author | 原因 | HumanReview | Merge |
 |---|---|---|---|---|---|
 | #183 | pca-yield-curve | Dongzhikang | Haiku 24/26, `var_explained` 存百分比(86.32)而非小数(0.8632)，instruction 缺 scale 说明 | ✅ 根因确认。加1句"decimal fractions 0–1"后 Haiku 26/26 满分 | ✅ 加1句 instruction 即可 |
-| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 46/46 满分（原判断有误：scipy genpareto c = +xi，非 -xi，实测确认） | ✅ 原 scipy 符号疑虑不成立。Task 公式正确，无需修改 | ✅ 直接 Merge |
+| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 46/46 满分（原判断有误：scipy genpareto c = +xi，非 -xi，实测确认） | ✅ 原 scipy 符号疑虑不成立。Task 公式正确，无需修改。注：初始疑虑来自 R 的 `ismev` 包（Stuart Coles 教材配套）用 k = −ξ 约定（k<0 = 重尾），与现代 EVT 文献（McNeil/Frey/Embrechts）及 scipy `genpareto`（c = +ξ，c>0 = 重尾）符号相反。实测 `scipy.stats.genpareto.fit()` 在 true ξ=+0.3 时返回 c=+0.25，确认 scipy 与 EVT 教材同号，R/ismev 为异类。 | ✅ 直接 Merge |
 | #208 | garch-sp500-fit | Dongzhikang | Haiku 35/47，根因为 instruction Step 3 t-likelihood 缺 −log(scale) Jacobian 项，导致 nu→100 上界 | ✅ 根因确认。需重写 Step 3 公式为 `z = X/(σ·scale), L = Σ[logpdf(z,ν) − log(σ) − log(scale)]` | ❌ 修 instruction t-likelihood 公式后再 Merge |
 
 ### 🟡 三模型深度 Review — Oracle/Tolerance 疑问 (2026-04-27 added)
