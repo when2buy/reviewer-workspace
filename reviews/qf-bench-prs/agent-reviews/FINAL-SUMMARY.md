@@ -1,230 +1,177 @@
-# QF-Bench PR Review — Complete Summary
+# QF-Bench FINAL-SUMMARY clean tables (2026-05-02)
+Source: reviewer-workspace `FINAL-SUMMARY.md` on `review/zhikang-full-review-2026-04-23`; live check against `QF-Bench/QuantitativeFinance-Bench` `origin/main` (`04a83d6`) and GitHub PR state.
+- Main branch tasks now: **65**
+- Pending ✅ merge candidates after removing already-main/outdated rows: **35**
+- Pending ❌ do-not-merge rows: **24**
+- Pending 🟡 human-review rows: **25**
 
-**Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ 建议Merge: 90 | ❌ 不建议Merge: 28 | 🟡 需要Human Review: 18
+## 1) Already merged on main
+| Task |
+|---|
+| `13f-amendment-aware-crowding` |
+| `alpha-hedge-strategy` |
+| `american-option-fd-new` |
+| `asian-option-levy-curran` |
+| `barrier-garch-var` |
+| `bl-regime-hmm` |
+| `bollinger-backtest-aapl` |
+| `brinson-sector-attribution` |
+| `bs-greeks-pde` |
+| `cliquet-ratchet-pricing` |
+| `cme-hdd-option-pricing` |
+| `compound-option-geske` |
+| `copula-equity-fitting` |
+| `copula-sampling-rank-correlation` |
+| `credit-portfolio-var-cvar` |
+| `credit-spread-decomposition` |
+| `creditmetrics-portfolio-var` |
+| `crypto-funding-rate-basis-carry` |
+| `cta-basel-capital` |
+| `delta-hedging-pnl-simulation` |
+| `digital-barrier-options` |
+| `etf-cross-asset-lead-lag` |
+| `evt-pot-var` |
+| `ewma-portfolio-risk-decomposition` |
+| `fama-french-factor-model-new` |
+| `fft-compound-poisson` |
+| `first-passage-time` |
+| `fomc-tone-event-study` |
+| `fx-carry-forward-hedge` |
+| `geometric-mean-reverting-jd` |
+| `hull-white-swaption` |
+| `implied-vol-approximations` |
+| `interest-rate-cap-floor` |
+| `intraday-volume-fitting-and-execution-scheduling` |
+| `ipca-latent-factors` |
+| `kelly-var-sizing` |
+| `lob-pc-signal` |
+| `localvol-barrier` |
+| `lookback-options` |
+| `mc-greek-surface-1` |
+| `mc-greeks-surface` |
+| `merton-jump-diffusion` |
+| `momentum-backtest` |
+| `mtm-xccy-basis-desk` |
+| `ohlc-realized-vol-estimators` |
+| `option-put-call-parity-forward-audit` |
+| `ou-jump-commodity` |
+| `pairs-cointegration-kalman` |
+| `polars-api-migration` |
+| `realized-vol-estimators` |
+| `regime-cta-vol-target` |
+| `regime-riskparity-cvar` |
+| `sec-10k-report-long` |
+| `sec-8k-event-alpha` |
+| `sentiment-factor-alpha` |
+| `sma-crossover-spy` |
+| `smith-tail-index` |
+| `spread-option-kirk-margrabe` |
+| `standard-var-methods` |
+| `stochvol-implied-surface-new` |
+| `structured-note-risk` |
+| `swap-curve-bootstrap-ois` |
+| `yield-curve-bond-immunization` |
+| `yield-curve-bootstrap-immunization` |
+| `yield-curve-pca-dynamics` |
 
-> **2026-04-27 update:** Completed S4.5+O4.6 三模型 deep review of 17 tasks. 14→✅ Merge, 3→🟡 Human Review. Moved #174,#176 from ❌→✅; #172,#164 from 🟡→✅; #169 from ✅→🟡.
+## 2) ✅ Clean merge candidates / not yet on main
+| PR | Task | Author | Evidence/Note | PR state |
+|---|---|---|---|---|
+| #38 | `zero-coupon-bootstrapping` | Dongzhikang | 1:1:1; 正确，无区分度 | OPEN |
+| #39 | `corporate-action-adjustment` | Dongzhikang | 1:1:1; 正确，无区分度 | OPEN |
+| #40 | `earnings-surprise-calculator` | Dongzhikang | 1:1:1; 过于简单 | OPEN |
+| #42 | `pca-factor-portfolio` | Dongzhikang | 1:1:1; 建议改 hard→medium | OPEN |
+| #51 | `binance-btc-participation-tca` | Runder-sun | N/A; 设计优秀，修 Docker sha256 | OPEN |
+| #62 | `cross-sectional-momentum` | Dongzhikang | 1:1:1; 建议改 hard→medium | OPEN |
+| #80 | `credit-migration-matrix` | pangjacque | 1:1:0→1:1:1; Updated per reviewer feedback, S4.6+H4.5 63/63 | OPEN |
+| #109 | `variance-swap-replication` | yyu56253 | 1:1:1; Carr-Madan 正确 | OPEN |
+| #111 | `historical-var-data-prep` | YoutingWang | 1:1:1; 干净，标 easy 诚实 | OPEN |
+| #129 | `fx-forward-cross-rate` | bochencs | 0:0:1; S45 满分; 2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT | OPEN |
+| #152 | `american-binomial-tree` | Dongzhikang | 1:1:1; 干净无区分度 | OPEN |
+| #154 | `barone-adesi-whaley` | Dongzhikang | 0:1:1; BAW 正确; 2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 36/36 PERFECT. Extended the agent timeout at harbor/docker level via `--timeout-multiplier 3.0` (600s default → 1800s) — the harbor 600s default is too short fo | OPEN |
+| #159 | `cir-bond-pricing` | Dongzhikang | 1:1:1; 建议改 hard→medium | OPEN |
+| #163 | `double-barrier-options` | Dongzhikang | 0:1:0; Kunitomo-Ikeda 正确 | OPEN |
+| #182 | `var-es-estimation` | Dongzhikang | 0/47:46/47:46/47; 极好区分度，Haiku 完全不会。新 task | OPEN |
+| #183 | `pca-yield-curve` | Dongzhikang | Haiku 22/26, PCA eigenvector sign convention 歧义，test pin exact VaR 值; ✅ Root cause confirmed. Added 1 sentence to the `eigenvalues.csv` output schema in `instruction.md`: "`var_explained` and `cumulative_var_explained` a | OPEN |
+| #185 | `gaussian-copula-credit` | Dongzhikang | 1:?:?; ✅ Haiku 34/34 满分 | OPEN |
+| #186 | `pot-gpd-bitcoin` | Dongzhikang | Haiku 25/46, GPD shape xi 符号: scipy genpareto c = -xi convention 未在 instruction 说明; ✅ scipy sign concern does not hold. Task formula is correct, no changes needed. Note: the concern originated from R's `ismev` package (S | OPEN |
+| #187 | `delta-gamma-option-var` | Dongzhikang | 1:?:?; ✅ Haiku 23/23 满分 | OPEN |
+| #188 | `vasicek-portfolio-credit` | Dongzhikang | 1:?:?; ✅ Haiku 24/24 满分 | OPEN |
+| #189 | `geometric-spacings-test` | Dongzhikang | 1:?:?; ✅ Haiku 29/29 满分 | OPEN |
+| #190 | `ewma-correlation-sensitivity` | Dongzhikang | 1:?:?; ✅ Haiku 22/22 满分 | OPEN |
+| #191 | `rolling-correlation-indices` | Dongzhikang | 1:?:?; ✅ Haiku 24/24 满分 | OPEN |
+| #192 | `pca-equity-returns` | Dongzhikang | 1:?:?; ✅ Haiku 37/37 满分 | OPEN |
+| #194 | `var-es-coherence` | Dongzhikang | 1:?:?; ✅ Haiku 49/49 满分 | OPEN |
+| #195 | `creditrisk-plus-model` | Dongzhikang | TO:25/30:25/30; S4.5/O4.6 VaR 完全一致 (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，Panjer 离散化约定疑问 | OPEN |
+| #197 | `one-factor-equity-model` | Dongzhikang | 1:?:?; ✅ Haiku 32/32 满分 | OPEN |
+| #198 | `ljung-box-serial-dependence` | Dongzhikang | 1:?:?; ✅ Haiku 27/27 满分 | OPEN |
+| #199 | `single-loss-approximation` | Dongzhikang | 1:?:?; ✅ Haiku 24/24 满分 | OPEN |
+| #200 | `merton-structural-credit` | Dongzhikang | 1:?:?; ✅ Haiku 21/21 满分 | OPEN |
+| #202 | `intensity-credit-model` | Dongzhikang | 1:?:?; ✅ Haiku 35/35 满分 | OPEN |
+| #203 | `block-maxima-gev` | Dongzhikang | 1:?:?; ✅ Haiku 16/16 满分 | OPEN |
+| #206 | `gh-distribution-fitting` | Dongzhikang | 1:?:?; ✅ Haiku 43/43 满分 | OPEN |
+| #207 | `jarque-bera-normality-test` | Dongzhikang | 1:?:?; ✅ Haiku 36/36 满分 | OPEN |
+| #209 | `weekly-garch-vol-proxy` | Dongzhikang | 1:?:?; ✅ Haiku 35/35 满分 | OPEN |
 
-> **2026-04-26 PQCat re-test:** Promoted #119, #125, #172 from 🟡 Human Review → ✅ Merge after fresh Haiku/Sonnet/Opus runs (all H:O:S = 1:1:1). Also added **PR #211** (Docker SHA-pin fix for #119 — *must be merged before #119*). See `HUMAN-REVIEW-SUMMARY.md` for full re-test details and the Corrado-formula concern that may move #88 from ✅ Merge → 🟡 in a future update.
+## 3) ❌ Clean do-not-merge / blockers
+| PR | Task | Author | Blocker | PR state |
+|---|---|---|---|---|
+| #45 | `heston-mc-pricing` | oyzh888 | 缺 Dockerfile | OPEN |
+| #46 | `ou-pairs-trading` | oyzh888 | 缺 Dockerfile + 无 oracle | OPEN |
+| #48 | `cir-calibration` | Dongzhikang | 缺 Dockerfile | OPEN |
+| #49 | `rough-vol-rbgergomi` | oyzh888 | 缺 Dockerfile + instruction 含糊 | OPEN |
+| #53 | `equity-vendor-restatement-break-audit` | Runder-sun | Spec 歧义 | CLOSED |
+| #61 | `pairs-trading-cointegration` | Dongzhikang | 2 个 verifier bug | OPEN |
+| #64 | `cta-ewma-cvar` | Dongzhikang | Oracle bug (num_valid_obs) | OPEN |
+| #66 | `portfolio-risk-attribution` | Dongzhikang | Sharpe 未说明 excess vs raw | OPEN |
+| #72 | `treasury-curve-pca-butterfly` | Dongzhikang | PCA 符号 + P&L 有误 | OPEN |
+| #75 | `var-ebacktest-coverage` | Dongzhikang | e-backtest 公式缺失 | OPEN |
+| #77 | `cds-curve-stripping` | Dongzhikang | 全模型同样失败 → spec 问题 | OPEN |
+| #81 | `lmm-markov-representation` | PQCat | 关键词匹配 verifier 太脆弱 | OPEN |
+| #88 | `event-study-earnings` | harvenstar | Oracle bug (KP t-stat) | OPEN |
+| #97 | `factor-momentum-spanning` | wshi83 | 全挂，oracle 校准问题 | OPEN |
+| #104 | `form4-cross-sectional-sale-pressure` | Minxuan-Hu | Docker base image 错误 | OPEN |
+| #106 | `etf-overlap-redemption-pressure` | Minxuan-Hu | Docker base image 错误 | OPEN |
+| #136 | `quantamental-earnings-jumpfilter` | xushenbo | Docker build 失败 | OPEN |
+| #137 | `multimodal-alpha-fusion` | xushenbo | 0/0/0 零区分度 | OPEN |
+| #144 | `double-sort/residual-momentum/stable-residual` | mingjun-sun | Verifier broken | OPEN |
+| #148 | `futures-carry/insider-buy/post-earnings` | judy12345 | Docker image broken | OPEN |
+| #149 | `liquidity-var-backtest` | gem-mint | Verifier broken | OPEN |
+| #155 | `barrier-gbm-analytics` | Dongzhikang | test_mean_fpt_down crash | OPEN |
+| #157 | `cev-option-pricing` | Dongzhikang | Oracle 值有误 (β=0.9) | OPEN |
+| #158 | `chooser-option-pricing` | Dongzhikang | Oracle discount factor bug | OPEN |
 
-> **2026-04-26 update:** Added 17 Haiku-pass tasks from PR#180-209 to ✅ Merge. Added 3 tasks needing human review (convention/parameterization issues). 3 tasks (var-es-estimation, smith-tail-index, creditrisk-plus-model) pending Sonnet/Opus trials.
+## 4) 🟡 Clean human-review / fix-before-merge
+| PR | Task | Author | Reason | PR state |
+|---|---|---|---|---|
+| #28 | `data-cleaning` | oyzh888 | 太简单，test 自引用 | OPEN |
+| #52 | `ust-carry-roll-down-attribution` | Runder-sun | 0:1:1; 好像还没有finish？ It says This PR remains in draft while validation evidence is being collected. | OPEN |
+| #63 | `markowitz-efficient-frontier` | Dongzhikang | 0:1:0; 很好的设计，但最新的状态是REQUEST CHANGES？好像还有bug没有来得及修完 | OPEN |
+| #65 | `bond-portfolio-analytics` | Dongzhikang | Trial 旧版需重跑 | OPEN |
+| #76 | `fama-macbeth-risk-premia` | Dongzhikang | Opus 59/60，GRS 容差 | OPEN |
+| #78 | `fx-carry-trade-backtest` | Dongzhikang | Opus 差 1 test | OPEN |
+| #79 | `execution-is-vwap` | Dongzhikang | Sonnet 差 1 test | OPEN |
+| #95 | `fixed-income-market-stress` | wshi83 | 区分度反转 | OPEN |
+| #98 | `nelson-siegel-yield-curve-fit` | wshi83 | 🟡看起来没问题，但缺最新的结果; 应该是easy outlier count window 太紧 | OPEN |
+| #100 | `minimum-cost-equity-etf-hedger` | liup3424 | 全过零区分度 | OPEN |
+| #118 | `perpetual-funding-ledger-reconciliation` | Runder-sun | 硬编码风险，无 trial | OPEN |
+| #120 | `barra-cne6-risk` | GinkgoGao | 所有模型 ≤0.31 | CLOSED |
+| #126 | `merton-cds-copula` | GinkgoGao | 全部 0.9，差 1 checkpoint | OPEN |
+| #131 | `garch-vecm-cointegration` | bochencs | 区分度反转 | OPEN |
+| #132 | `dirty-gap-momentum-aapl` | Jiahao-Xie-86 | 1:1:1; Very easy task with no discrimination. Keep? | OPEN |
+| #150 | `earnings-news-event-alpha` | gem-mint | 0/0/0 零区分度 | OPEN |
+| #164 | `dupire-local-vol` | Dongzhikang | 62/67:65/67:0/67; Instruction says valuation date is 2024-03-15, but the oracle uses the last daily close from 2025-12-30 as S0 (687.06); the actual 2024-03-15 close is 509.82. So the option filtering and surface are built with future information. | OPEN |
+| #168 | `heston-cf-pricing` | Dongzhikang | 0:1:0; 想法很好！最后的小问题是关于浮点计算的rounding error的要求是否需要明确？目前agent的做法应该是对的，但因为rounding error被判错了。 | OPEN |
+| #170 | `kou-double-exponential` | Dongzhikang | 12/12:11/12:12/12; The oracle moment-matches double-exponential jumps into normal components rather than implementing the Kou density/series, and the sigma optimizer bound still allows 1.0 despite the spec/test bound of 0.50. | OPEN |
+| #174 | `power-options` | Dongzhikang | 33/36:36/36:36/36; Now the verifier grades based on self-reported MC errors/parity booleans. Will agents lie? Use independent recomputation instead? | OPEN |
+| #175 | `rainbow-option-pricing` | Dongzhikang | 0:0:0; 全挂但反映真正难度; PQCat file-level review found 2 typos in instruction that likely cause the 0:0:0: (1) Wrong prose payoff for call-on-min: instruction says *"Call on minimum: max(S1_T, S2_T) − K (but prices the minimum)"* — the `max(S1, S2)` is the call-on-MA | OPEN |
+| #178 | `variance-swap-pricing` | Dongzhikang | 1:0:1; Opus 失败合理; 2026-04-26 PQCat re-test (Opus): 36/37 — single failure on `test_parameters_in_reasonable_range` with `kappa=50.0` (test asserts `kappa ≤ 20`). Methodology valid: model-free Carr-Madan replication formula and Heston closed-form `K_var = θT +  | OPEN |
+| #196 | `copula-garch-portfolio` | Dongzhikang | 35/38:35/38:37/38; `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 | OPEN |
+| #204 | `panjer-recursion` | Dongzhikang | 18/22:22/22:22/22; Statement "Starting from P(S = 0) = P(N = 0) (evaluated using the appropriate frequency distribution), use the Panjer recursion..." is wrong. Should be “P(S = 0) = P_N(f_X(0))” instead. | OPEN |
+| #208 | `garch-sp500-fit` | Dongzhikang | Haiku 33/47, GARCH-t parameterization: 不同库的 Student-t nu 定义不同，instruction 未指定库; ✅ Root cause confirmed. The instruction's Step 3 formula defines `z_t = X_t / σ_t` but omits the `scale = sqrt((ν−2)/ν)` factor — both in the z definition and the log-likelihood su | OPEN |
 
----
-
-## ✅ 建议 Merge (55+17+15+2=89)
-
-| PR | Task | Author | H:O:S | 备注 | Final Approval | 已merge |
-|---|---|---|---|---|---|---|
-| #38 | zero-coupon-bootstrapping | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ | |
-| #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ | |
-| #40 | earnings-surprise-calculator | Dongzhikang | 1:1:1 | 过于简单 |✅ | |
-| #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | ✅ | ✅ |
-| #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium |✅ | |
-| #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ | |
-| #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好像还没有finish？ It says This PR remains in draft while validation evidence is being collected. | 🟡| |
-| #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ | |
-| #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | 很好的设计，但最新的状态是REQUEST CHANGES？好像还有bug没有来得及修完 | 🟡| |
-| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ | |
-| #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 |✅ | ✅ |
-| #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ | ✅ |
-| #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |✅ | ✅ |
-| #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ | ✅ |
-| #98 | nelson-siegel-yield-curve-fit | wshi83 |  🟡看起来没问题，但缺最新的结果 | 应该是easy outlier count window 太紧 | 🟡 (✅ after new results) | |
-| #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | ✅ | ✅ |
-| #102 | intraday-volume-fitting | liup3424 | 0:1:1 | 好校准 | ✅ | ✅ |
-| #103 | fx-carry-forward-hedge | Jingyi-Jia | 🟡看起来没问题，但缺最新的结果 | Everything suggested by the AI reviewer is fixed and updated. Should be good to go! | 🟡 (✅ after new results)  | ✅ |
-| #105 | yield-curve-bond-immunization | Jingyi-Jia | 🟡看起来没问题，但缺最新的结果 | Strong task now after fixing everything reviewers suggested | 🟡 (✅ after new results) | ✅ |
-| #107 | realized-vol-estimators | yyu56253 | New test: Sonnet 108/141 + Opus 141/141 | 公式未在 instruction 说明 需要改instruction, 应该是easy; **2026-04-26 PQCat re-test: Sonnet 108/141 (BR + BNS variants off), Opus PERFECT 141/141.** Cites Bandi-Russell (2006) Section 3.1 + BNS (2004) Definition 1 — both **post-1994 references** (after Dupire local-vol). These are real but relatively-recent papers; not as universally trained as classical (BS, Black-76) formulas, so this task **also tests how well the agent has learned post-Dupire-era HF-econometrics literature**. Agents who internalized these papers in training pass; those who reconstruct from memory pick variant forms and fail. | ✅ | ✅ |
-| #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task |✅  | ✅ |
-| #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | ✅ | |
-| #110 | evt-pot-var | boqiny | 0.71:1:0.92 | ⭐ 全面尾部风险，partial credit |✅  | ✅ |
-| #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | ✅ | |
-| #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 |✅  | ✅ |
-| #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | ✅ | ✅ |
-| #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |✅ | ✅ |
-| #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | ✅ | |
-| #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | ✅| ✅ |
-| #124 | pairs-cointegration-kalman | GinkgoGao | 0:0.79:0.71 | 8/8 checkpoints pass，PnL 符号反 = mean-reversion 方向推理测试。Re-evaluated 2026-04-29: ADF 无差异，方向可从 instruction 推理 | ✅ | ✅ |
-| #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT** | ✅ | |
-| #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | Very easy task with no discrimination. Keep? | 🟡| |
-| #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 → Sonnet 138/145 | All suggestions resolved. Added partial credit.| ✅ | ✅ |
-| #140 | localvol-barrier | Jingyi-Jia | 0:0:0  (Opus 27/34 > Sonnet 20/34 > Haiku 17/34) | 全挂但反映真正难度，区分度好。新增了partial credit。| ✅| ✅ |
-| #141 | swap-curve-bootstrap-ois | YoutingWang | 0:1:1 | 好 debug 格式 | ✅ | ✅ |
-| #151 | fomc-tone-event-study | gem-mint | 0:1:0 | ⭐ NLP+固收，Opus-only | ✅| ✅ |
-| #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 | ✅ | |
-| #153 | asian-option-levy-curran | Dongzhikang | 0:1:0 | 好区分度 |✅ | ✅ |
-| #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 36/36 PERFECT.** Extended the agent timeout at harbor/docker level via `--timeout-multiplier 3.0` (600s default → 1800s) — the harbor 600s default is too short for heavy derivatives calculations on this task. Task content unchanged. | ✅ | |
-| #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 | ✅| ✅ |
-| #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ | |
-| #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | 很好的想法，唯一的问题是现在Oracle file和test file混在一起。可以分开一下吗？after that就没问题了！ |✅| ✅ |
-| #161 | compound-option-geske | Dongzhikang | 0:1:0 | Pushed type label fix, parity check catches Sonnet bivariate normal error. Needs re-run | ✅ | ✅ |
-| #162 | digital-barrier-options | Dongzhikang | 0:1:1 | 干净 | ✅ | ✅ |
-| #163 | double-barrier-options | Dongzhikang | 0:1:0 | Kunitomo-Ikeda 正确 | | |
-| #165 | first-passage-time | Dongzhikang | 0:1:1 | 反射原理正确 |✅ | ✅ |
-| #167 | geometric-mean-reverting-jd | Dongzhikang | 0:1:0 | OU+jump 正确 | ✅ | ✅ |
-| #168 | heston-cf-pricing | Dongzhikang | 0:1:0 | 想法很好！最后的小问题是关于浮点计算的rounding error的要求是否需要明确？目前agent的做法应该是对的，但因为rounding error被判错了。| 🟡| |
-| #169 | implied-vol-approximations | Dongzhikang | 0:1:0 → 0.9:0.9:0.9 | Fixed rtol 1e-6→0.02, awaiting re-trial; **2026-04-26 PQCat re-test: H/S/O each 9/10 — different ATM method fails per agent** (Haiku & Sonnet on Brenner-Subrahmanyam, Opus on Li ATM). Cites Brenner-Subrahmanyam (1988) ATM, **Li (2005) trigonometric**, **Corrado-Miller-Hallerbach** rational approximation — Li and CMH are **post-1994** (after Dupire local-vol). Less universally taught than classical BS; this task **tests how well the agent has learned recent IV-approximation literature**. Each agent picks a different variant from training memory on different methods → empirical confirmation that training-data depth on post-1994 references varies. | ✅ | ✅ |
-| #170 | kou-double-exponential | Dongzhikang | 0:1:0 | instruction.md:59 says sigma between 0.01 and 1, while test_outputs.py:58 rejects sigma > 0.50. Everything else looks good! |🟡 | |
-| #171 | lookback-options | Dongzhikang | 0:1:1 | 区分度好 | ✅ | ✅ |
-| #173 | ou-jump-commodity | Dongzhikang | 1:1:0 | 合理 |✅  | ✅ |
-| #175 | rainbow-option-pricing | Dongzhikang | 0:0:0 | 全挂但反映真正难度; **PQCat file-level review found 2 typos in instruction that likely cause the 0:0:0**: (1) **Wrong prose payoff for call-on-min**: instruction says *"Call on minimum: max(S1_T, S2_T) − K (but prices the minimum)"* — the `max(S1, S2)` is the call-on-MAX payoff, should be `max(min(S1, S2) − K, 0)`. **Misleads agents** who try to verify via MC or who read prose before formula. (2) **Undefined `d+` in pricing formulas**: the "Define" block defines `d`, `d1+`, `d1-`, `d2+`, `d2-`, but the C_max/C_min formulas use `d+` (which is not defined; should be `d` per Stulz 1982 standard notation). **Forces agents to think too long / guess** what `d+` means — different agents pick different reasonable interpretations (`d`, `d + σ√τ`, `d + σ²τ/2`, etc.) and produce different numbers. With 3 independent agents, P(all guess correctly) is small → empirically observed 0:0:0. Both typos are trivial 1-line fixes; once corrected, this is a strong rainbow-options task with closed-form Stulz-Johnson formulas + decomposition identity sanity check. | 🟡 | |
-| #177 | spread-option-kirk-margrabe | Dongzhikang | 0:1:1 | ⭐ 设计优秀 |✅  | ✅ |
-| #178 | variance-swap-pricing | Dongzhikang | 1:0:1 | Opus 失败合理; **2026-04-26 PQCat re-test (Opus): 36/37 — single failure on `test_parameters_in_reasonable_range` with `kappa=50.0`** (test asserts `kappa ≤ 20`). Methodology valid: model-free Carr-Madan replication formula and Heston closed-form `K_var = θT + (v_0−θ)/κ·(1−e^{−κT})` both explicitly written. **Spec ambiguity (the failure cause)**: Step 4 instruction allows EITHER "use default Heston parameters as initial guess: kappa=2.0, theta=0.04, v0=0.02" OR "fit the three parameters to minimize squared error" — but doesn't specify **fit constraints**. Opus chose to fit and converged to kappa=50 (a valid local optimum given SPY's term structure but outside the test's "typical range" check). The test asserts `0.01 < kappa ≤ 20.0` without telling the agent. **Fix**: instruction should pin bounds on the fit, e.g. *"fit with `kappa ∈ [0.01, 20]`, `theta ∈ [0.0001, 1]`, `v0 ∈ [0.0001, 1]`"*, or specify a regularized calibration (e.g. estimate θ from long-end then fit κ, v0 to short-end). Also recommended: pin extrapolation strategy for deep-OTM strikes ("set option price to zero outside the available strike range"). Once fit-constraints are pinned, Opus would pass and #178 becomes solid (complementary to #109 — practitioner cleaning vs theoretical Heston comparison). **Once this is fixed, this is a good test.** | 🟡 | |
-| #179 | sma-crossover-spy | PQCat | 1:1:1 | Fix PR，干净 | ✅ | |
-| --- | --- *PQCat 2026-04-26 re-test additions (appended below)* | --- | --- | --- | --- |
-| #119 | option-put-call-parity-forward-audit | Runder-sun | 1:1:1 | (PQCat 2026-04-26 re-test) Docker SHA-pin fix only, content untouched; H/S/O all pass 5/5; PCP arb on bid-ask, no other task covers this | | ✅ | ✅ |
-| #125 | bl-regime-hmm | GinkgoGao | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 PERFECT after `bl: changeV2`; only Baum-Welch HMM task in entire bench | | ✅ | ✅ |
-| #172 | merton-jump-diffusion | Dongzhikang | 1:1:1 | (PQCat 2026-04-26 re-test) All 3 pass 28/28, bit-identical MLE; only Merton 1976 jump-diffusion task | | ✅ | ✅ |
-| **#211** | **(Docker fix for #119)** | **PQCat** | **1:1:1*** | **(PQCat 2026-04-26) Removes obsolete `sha256:709847...` SHA pin from #119's Dockerfile — purely infrastructure, no instruction/solution edits.** ⚠️ **Must be merged BEFORE #119**: #119 cannot build on any machine other than the original author's until this lands. H/S/O 1:1:1 reflects post-fix runs on the merged `feat/human_review_beta` branch. | | |
-
-### ✅ 新增 PR#180-209 — Haiku 满分 (2026-04-26 added)
-
-| PR | Task | Author | H:O:S | 备注 | Final Approval | 已merge |
-|---|---|---|---|---|---|---|
-| #185 | gaussian-copula-credit | Dongzhikang | 1:?:? | ✅ Haiku 34/34 满分 | | |
-| #187 | delta-gamma-option-var | Dongzhikang | 1:?:? | ✅ Haiku 23/23 满分 | | |
-| #188 | vasicek-portfolio-credit | Dongzhikang | 1:?:? | ✅ Haiku 24/24 满分 | | |
-| #189 | geometric-spacings-test | Dongzhikang | 1:?:? | ✅ Haiku 29/29 满分 | | |
-| #190 | ewma-correlation-sensitivity | Dongzhikang | 1:?:? | ✅ Haiku 22/22 满分 | | |
-| #191 | rolling-correlation-indices | Dongzhikang | 1:?:? | ✅ Haiku 24/24 满分 | | |
-| #192 | pca-equity-returns | Dongzhikang | 1:?:? | ✅ Haiku 37/37 满分 | | |
-| #194 | var-es-coherence | Dongzhikang | 1:?:? | ✅ Haiku 49/49 满分 | | |
-| #197 | one-factor-equity-model | Dongzhikang | 1:?:? | ✅ Haiku 32/32 满分 | | |
-| #198 | ljung-box-serial-dependence | Dongzhikang | 1:?:? | ✅ Haiku 27/27 满分 | | |
-| #199 | single-loss-approximation | Dongzhikang | 1:?:? | ✅ Haiku 24/24 满分 | | |
-| #200 | merton-structural-credit | Dongzhikang | 1:?:? | ✅ Haiku 21/21 满分 | | |
-| #202 | intensity-credit-model | Dongzhikang | 1:?:? | ✅ Haiku 35/35 满分 | | |
-| #203 | block-maxima-gev | Dongzhikang | 1:?:? | ✅ Haiku 16/16 满分 | | |
-| #206 | gh-distribution-fitting | Dongzhikang | 1:?:? | ✅ Haiku 43/43 满分 | | |
-| #207 | jarque-bera-normality-test | Dongzhikang | 1:?:? | ✅ Haiku 36/36 满分 | | |
-| #209 | weekly-garch-vol-proxy | Dongzhikang | 1:?:? | ✅ Haiku 35/35 满分 | | |
-
-### ✅ 三模型深度 Review 确认 Merge (2026-04-27 added)
-
-> 以下 14 tasks 经 Haiku 4.5 + Sonnet 4.5 + Opus 4.6 三模型 trial 验证，确认为好 benchmark item。Failures 均为 agent 能力差异，非 task/oracle 问题。
-
-| PR | Task | Author | H:S:O | 备注 | Final Approval | 已merge |
-|---|---|---|---|---|---|---|
-| #180 | smith-tail-index | Dongzhikang | TO:33/33:33/33 | S/O 满分，Haiku timeout。新 task | ✅ | |
-| #181 | copula-equity-fitting | Dongzhikang | 27/28:28/28:28/28 | S/O 满分，Haiku nu 收敛差 1。新 task | ✅ | |
-| #184 | fft-compound-poisson | Dongzhikang | 14/18:14/18:18/18 | Opus-only 满分，连 S/H 都区分。新 task | ✅ | |
-| #193 | creditmetrics-portfolio-var | Dongzhikang | 25/26:26/26:26/26 | Title/Description a bit misleading: It’s more of default prob estimation v.s. Credit metrics problem | ✅ | |
-| #195 | standard-var-methods | Dongzhikang | 22/25:25/25:25/25 | Intruction.md has an internal contradiction and the oracle implements the parenthetical version (σ_k = std(S_k), Var(S_k) = σ_k²) — NOT the explicit formula ( Var = σ_k²/μ_k²) | 🟡| |
-| #201 | copula-sampling-rank-correlation | Dongzhikang | 25/31:31/31:31/31 | Haiku Gumbel copula 实现错误，好区分度。新 task |✅ | |
-| #204 | panjer-recursion | Dongzhikang | 18/22:22/22:22/22 | Statement "Starting from P(S = 0) = P(N = 0) (evaluated using the appropriate frequency distribution), use the Panjer recursion..." is wrong. Should be “P(S = 0) = P_N(f_X(0))” instead. |🟡 | |
-| #182 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task |✅ | |
-| #161 | compound-option-geske | Dongzhikang | 34/34:33/34:34/34 | The verifier does not independently validate Geske pricing: pc_price is derived from parity, then parity is tested against itself. The parity check is circular at the moment. Second, MC verification relies on self-report. Finally, the instruction says 300,000 MC paths while the oracle uses 100,000. |🟡| ✅ |
-| #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | The oracle moment-matches double-exponential jumps into normal components rather than implementing the Kou density/series, and the sigma optimizer bound still allows 1.0 despite the spec/test bound of 0.50. | 🟡| |
-| #172 | merton-jump-diffusion | Dongzhikang | 22/22:22/22:22/22 | 三模型满分。从 🟡→✅ |✅ | ✅ |
-| #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | Now the verifier grades based on self-reported MC errors/parity booleans. Will agents lie? Use independent recomputation instead? | 🟡 | |
-| #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | Instruction says valuation date is 2024-03-15, but the oracle uses the last daily close from 2025-12-30 as S0 (687.06); the actual 2024-03-15 close is 509.82. So the option filtering and surface are built with future information. | 🟡| |
-| #176 | realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | ✅| |
-| #127 | crypto-funding-rate-basis-carry | xinlan-technology | 0:0.75:0.59 | agent 单位/边界错误非 oracle bug，好 benchmark。从 ❌→✅ | ✅ | ✅ |
-| #128 | etf-cross-asset-lead-lag | xinlan-technology | 0.5:0.96:0.96 | 作者修复后优秀区分度，GPT5.4 满分。从 🟡→✅ | ✅ | ✅ |
-
-## ❌ 不建议 Merge (29)
-
-| PR | Task | Author | Blocker 类型 |
-|---|---|---|---|
-| #45 | heston-mc-pricing | oyzh888 | 缺 Dockerfile |
-| #46 | ou-pairs-trading | oyzh888 | 缺 Dockerfile + 无 oracle |
-| #47 | merton-jump-diffusion | oyzh888 | 缺 Dockerfile |
-| #48 | cir-calibration | Dongzhikang | 缺 Dockerfile |
-| #49 | rough-vol-rbgergomi | oyzh888 | 缺 Dockerfile + instruction 含糊 |
-| #53 | equity-vendor-restatement-break-audit | Runder-sun | Spec 歧义 |
-| #61 | pairs-trading-cointegration | Dongzhikang | 2 个 verifier bug |
-| #64 | cta-ewma-cvar | Dongzhikang | Oracle bug (num_valid_obs) |
-| #66 | portfolio-risk-attribution | Dongzhikang | Sharpe 未说明 excess vs raw |
-| #72 | treasury-curve-pca-butterfly | Dongzhikang | PCA 符号 + P&L 有误 |
-| #75 | var-ebacktest-coverage | Dongzhikang | e-backtest 公式缺失 |
-| #77 | cds-curve-stripping | Dongzhikang | 全模型同样失败 → spec 问题 |
-| #81 | lmm-markov-representation | PQCat | 关键词匹配 verifier 太脆弱 |
-| #88 | event-study-earnings | harvenstar | Oracle bug (KP t-stat) |
-| #89 | lob-pc-signal | owen8877 | Docker base image 错误 |
-| #91 | polars-api-migration | owen8877 | Docker 错误 + 非 QF task |
-| #92 | sec-10k-report-long | owen8877 | Docker base image 错误 |
-| #97 | factor-momentum-spanning | wshi83 | 全挂，oracle 校准问题 |
-| #99 | 13f-amendment-aware-crowding | Minxuan-Hu | Docker base image 错误 |
-| #104 | form4-cross-sectional-sale-pressure | Minxuan-Hu | Docker base image 错误 |
-| #106 | etf-overlap-redemption-pressure | Minxuan-Hu | Docker base image 错误 |
-| #124 | ~~pairs-cointegration-kalman~~ | ~~GinkgoGao~~ | ~~Moved to ✅ (2026-04-29)~~ |
-| #136 | quantamental-earnings-jumpfilter | xushenbo | Docker build 失败 |
-| #137 | multimodal-alpha-fusion | xushenbo | 0/0/0 零区分度 |
-| #144 | double-sort/residual-momentum/stable-residual | mingjun-sun | Verifier broken |
-| #148 | futures-carry/insider-buy/post-earnings | judy12345 | Docker image broken |
-| #149 | liquidity-var-backtest | gem-mint | Verifier broken |
-| #155 | barrier-gbm-analytics | Dongzhikang | test_mean_fpt_down crash |
-| #157 | cev-option-pricing | Dongzhikang | Oracle 值有误 (β=0.9) |
-| #158 | chooser-option-pricing | Dongzhikang | Oracle discount factor bug |
-
-| #174 | ~~power-options~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
-| #176 | ~~realized-vol-estimators~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
-
-## 🟡 需要 Human Review (13+3+2=18)
-
-| PR | Task | Author | 原因 |
-|---|---|---|---|
-| #28 | data-cleaning | oyzh888 | 太简单，test 自引用 |
-| #65 | bond-portfolio-analytics | Dongzhikang | Trial 旧版需重跑 |
-| #76 | fama-macbeth-risk-premia | Dongzhikang | Opus 59/60，GRS 容差 |
-| #78 | fx-carry-trade-backtest | Dongzhikang | Opus 差 1 test |
-| #79 | execution-is-vwap | Dongzhikang | Sonnet 差 1 test |
-| #95 | fixed-income-market-stress | wshi83 | 区分度反转 |
-| #100 | minimum-cost-equity-etf-hedger | liup3424 | 全过零区分度 |
-| #164 | ~~dupire-local-vol~~ | ~~Dongzhikang~~ | ~~Moved to ✅ (2026-04-27)~~ |
-| #118 | perpetual-funding-ledger-reconciliation | Runder-sun | 硬编码风险，无 trial |
-| #120a | barra-cne6-risk | GinkgoGao | 所有模型 ≤0.31 |
-| #126 | merton-cds-copula | GinkgoGao | 全部 0.9，差 1 checkpoint |
-| #131 | garch-vecm-cointegration | bochencs | 区分度反转 |
-| #150 | earnings-news-event-alpha | gem-mint | 0/0/0 零区分度 |
-### 🟡 新增 PR#180-209 — Convention/Parameterization 歧义 (2026-04-26 added)
-
-| PR | Task | Author | 原因 | HumanReview | Merge |
-|---|---|---|---|---|---|
-| #183 | pca-yield-curve | Dongzhikang | Haiku 22/26, PCA eigenvector sign convention 歧义，test pin exact VaR 值 | ✅ Root cause confirmed. Added 1 sentence to the `eigenvalues.csv` output schema in `instruction.md`: "`var_explained` and `cumulative_var_explained` are decimal fractions between 0 and 1, not percentages." → Haiku 26/26 | ✅ 1-sentence instruction fix |
-| #186 | pot-gpd-bitcoin | Dongzhikang | Haiku 25/46, GPD shape xi 符号: scipy genpareto c = -xi convention 未在 instruction 说明 | ✅ scipy sign concern does not hold. Task formula is correct, no changes needed. Note: the concern originated from R's `ismev` package (Stuart Coles textbook) which uses k = −ξ (k < 0 = heavy tail) — opposite to modern EVT literature (McNeil/Frey/Embrechts) and scipy `genpareto` (c = +ξ, c > 0 = heavy tail). Empirically verified: `scipy.stats.genpareto.fit()` returns c = +0.25 for true ξ = +0.3. scipy and EVT textbooks agree; R/ismev is the outlier. | ✅ Merge as-is |
-| #208 | garch-sp500-fit | Dongzhikang | Haiku 33/47, GARCH-t parameterization: 不同库的 Student-t nu 定义不同，instruction 未指定库 | ✅ Root cause confirmed. The instruction's Step 3 formula defines `z_t = X_t / σ_t` but omits the `scale = sqrt((ν−2)/ν)` factor — both in the z definition and the log-likelihood sum. A human reader would notice the inconsistency and ask the author for clarification; an LLM agent has no such recourse and will implement the formula literally as written. The reference solution (`solve.sh`) is correct, but the instruction and the code silently diverge. Fix: rewrite Step 3 to explicitly show `scale = sqrt((ν−2)/ν)`, `z = X/(σ·scale)`, `L = Σ[logpdf(z,ν) − log(σ) − log(scale)]`. | ❌ Fix instruction t-likelihood formula first |
-
-### 🟡 三模型深度 Review — Oracle/Tolerance 疑问 (2026-04-27 added)
-
-> 以下 2 tasks 经三模型验证后发现 oracle 精度或约定可能有问题。
-
-| PR | Task | Author | H:S:O | 原因 | HumanReview | Merge |
-|---|---|---|---|---|---|---|
-| #196 | copula-garch-portfolio | Dongzhikang | 35/38:35/38:37/38 | `test_gs_alpha_value` 三模型全挂，oracle alpha≈0.073 vs agent 0.10-0.12，tolerance 可能太紧 | ✅ Confirmed: GS alpha MLE has multiple local optima; atol=0.03 too tight. Opus 37/38 — this test is the only failure. Additional concern: one local optimum lies at ~2.1, which is below the lower bound of 4 used in the optimizer — meaning the solver is artificially excluded from a valid region of the likelihood surface. Rama Cont's empirical work on financial return distributions argues that 4 is not a well-motivated lower bound for the tail index; 2 is a more appropriate lower bound given that equity returns regularly exhibit tail indices in the 2–4 range. If the lower bound were relaxed to 2, the optimizer could reach the 2.1 solution and the test's expected value might shift entirely. | ❌ Widen `test_gs_alpha_value` atol to ~0.08 **and** reconsider lower bound (4 → 2) per Cont, then merge |
-| #195 | creditrisk-plus-model | Dongzhikang | TO:25/30:25/30 | S4.5/O4.6 VaR **完全一致** (5.9/7.7/10.2) 但与 oracle (6.5/9.0/12.6) 系统偏差，Panjer 离散化约定疑问 | ✅ Root cause confirmed. Changed line 29 of `instruction.md` from `Var(S_k) = σ_k² / μ_k²` to `Var(S_k) = σ_k²` (removed the `/μ_k²` term, which incorrectly treated σ_k as a coefficient of variation rather than a standard deviation) → Haiku 30/30 | ✅ 1-line instruction fix |
-
----
-
-## Blocker 模式分析
-
-| 模式 | 数量 | 涉及 PR |
-|---|---|---|
-| **Docker/基础设施问题** | 13 | #45,46,47,48,49,89,91,92,99,104,106,136,148 |
-| **Oracle/Verifier bug** | 10 | #61,64,88,97,98,103,105,155,157,170 |
-| **Instruction under-specification** | 8 | #53,66,72,75,77,107,169,174 |
-| **答案泄露/硬编码** | 4 | #127,137,169 |
-| **设计问题** | 4 | #81,125,176 |
-| **零区分度（需重新评估）** | 2 | #91,149 |
-
-## 按作者统计
-
-| Author | Total | ✅ | ❌ | 🟡 | Merge率 |
-|---|---|---|---|---|---|
-| Dongzhikang | 45 | 21 | 16 | 8 | 47% |
-| GinkgoGao | 6 | 2 | 2 | 2 | 33% |
-| oyzh888 | 5 | 0 | 4 | 1 | 0% |
-| wshi83 | 5 | 2 | 2 | 1 | 40% |
-| Runder-sun | 5 | 1 | 1 | 3 | 20% |
-| YoutingWang | 4 | 3 | 0 | 1 | 75% |
-| boqiny | 3 | 2 | 0 | 1 | 67% |
-| yyu56253 | 3 | 2 | 1 | 0 | 67% |
-| Minxuan-Hu | 3 | 0 | 3 | 0 | 0% |
-| owen8877 | 3 | 0 | 3 | 0 | 0% |
-| Jingyi-Jia | 3 | 0 | 2 | 1 | 0% |
-| xinlan-technology | 3 | 1 | 1 | 1 | 33% |
-| bochencs | 2 | 1 | 0 | 1 | 50% |
-| liup3424 | 2 | 1 | 0 | 1 | 50% |
-| gem-mint | 3 | 1 | 1 | 1 | 33% |
-| pangjacque | 2 | 0 | 0 | 2 | 0% |
-| Others | 5 | 3 | 1 | 1 | 60% |
+## Removed as outdated/noise
+- Removed struck-through “Moved to …” rows.
+- Removed rows whose task is already present on `origin/main` (including old ❌ rows for `lob-pc-signal`, `polars-api-migration`, `sec-10k-report-long`, `13f-amendment-aware-crowding`).
+- Corrected stale row: `standard-var-methods` is PR #205, not #195; #195 is `creditrisk-plus-model`.
+- Corrected stale row: #176 merged as `ohlc-realized-vol-estimators` to avoid duplicate #107 `realized-vol-estimators`.
