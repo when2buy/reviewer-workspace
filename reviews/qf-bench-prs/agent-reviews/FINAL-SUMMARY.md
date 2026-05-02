@@ -112,7 +112,7 @@
 | #205 | standard-var-methods | Dongzhikang | 22/25:25/25:25/25 | Corrected stale PR number from #195 to #205; merged on main. | ✅ | ✅ |
 | #201 | copula-sampling-rank-correlation | Dongzhikang | 25/31:31/31:31/31 | Haiku Gumbel copula 实现错误，好区分度。新 task | ✅ | ✅ |
 | #204 | panjer-recursion | Dongzhikang | 18/22:22/22:22/22 | Statement "Starting from P(S = 0) = P(N = 0) (evaluated using the appropriate frequency distribution), use the Panjer recursion..." is wrong. Should be “P(S = 0) = P_N(f_X(0))” instead. |🟡 | |
-| #182 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task |✅ | |
+| #182 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task | ✅ | ✅ |
 | #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | The oracle moment-matches double-exponential jumps into normal components rather than implementing the Kou density/series, and the sigma optimizer bound still allows 1.0 despite the spec/test bound of 0.50. | 🟡| |
 | #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | Now the verifier grades based on self-reported MC errors/parity booleans. Will agents lie? Use independent recomputation instead? | 🟡 | |
 | #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | Instruction says valuation date is 2024-03-15, but the oracle uses the last daily close from 2025-12-30 as S0 (687.06); the actual 2024-03-15 close is 509.82. So the option filtering and surface are built with future information. | 🟡| |
