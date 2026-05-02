@@ -1,0 +1,5 @@
+litellm>=1.50
+tenacity>=8.2
+tqdm>=4.66
+pandas>=2.0
+matplotlib>=3.7
