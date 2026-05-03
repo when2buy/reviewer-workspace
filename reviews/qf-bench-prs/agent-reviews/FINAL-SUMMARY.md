@@ -13,20 +13,22 @@
 
 > **2026-05-02 clean:** Preserved original layout/columns; removed duplicate moved rows and outdated rows already on `main`; updated `已merge` against current `origin/main` tasks.
 
+> **2026-05-03 merge update:** Merged final-approval-not-merged rows except the path-dependent derivative #152 (`american-binomial-tree`): #38,#39,#40,#42,#51,#62,#80,#109,#111,#129.
+
 ## ✅ 建议 Merge (cleaned，保留 Final Approval / 已merge)
 
 | PR | Task | Author | H:O:S | 备注 | Final Approval | 已merge |
 |---|---|---|---|---|---|---|
-| #38 | zero-coupon-bootstrapping | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ | |
-| #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ | |
-| #40 | earnings-surprise-calculator | Dongzhikang | 1:1:1 | 过于简单 |✅ | |
+| #38 | zero-coupon-bootstrapping | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ | ✅ |
+| #39 | corporate-action-adjustment | Dongzhikang | 1:1:1 | 正确，无区分度 | ✅ | ✅ |
+| #40 | earnings-surprise-calculator | Dongzhikang | 1:1:1 | 过于简单 | ✅ | ✅ |
 | #41 | interest-rate-cap-floor | Dongzhikang | 0:1:1 | ⭐ fixing-time convention 真正quant难度 | ✅ | ✅ |
-| #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium |✅ | |
-| #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ | |
+| #42 | pca-factor-portfolio | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ | ✅ |
+| #51 | binance-btc-participation-tca | Runder-sun | N/A | 设计优秀，修 Docker sha256 | ✅ | ✅ |
 | #52 | ust-carry-roll-down-attribution | Runder-sun | 0:1:1 | 好像还没有finish？ It says This PR remains in draft while validation evidence is being collected. | 🟡| |
-| #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ | |
+| #62 | cross-sectional-momentum | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ | ✅ |
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | 很好的设计，但最新的状态是REQUEST CHANGES？好像还有bug没有来得及修完 | 🟡| |
-| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ | |
+| #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ | ✅ |
 | #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 |✅ | ✅ |
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ | ✅ |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |✅ | ✅ |
@@ -38,16 +40,16 @@
 | #105 | yield-curve-bond-immunization | Jingyi-Jia | 🟡看起来没问题，但缺最新的结果 | Strong task now after fixing everything reviewers suggested | 🟡 (✅ after new results) | ✅ |
 | #107 | realized-vol-estimators | yyu56253 | New test: Sonnet 108/141 + Opus 141/141 | 公式未在 instruction 说明 需要改instruction, 应该是easy; **2026-04-26 PQCat re-test: Sonnet 108/141 (BR + BNS variants off), Opus PERFECT 141/141.** Cites Bandi-Russell (2006) Section 3.1 + BNS (2004) Definition 1 — both **post-1994 references** (after Dupire local-vol). These are real but relatively-recent papers; not as universally trained as classical (BS, Black-76) formulas, so this task **also tests how well the agent has learned post-Dupire-era HF-econometrics literature**. Agents who internalized these papers in training pass; those who reconstruct from memory pick variant forms and fail. | ✅ | ✅ |
 | #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task |✅  | ✅ |
-| #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | ✅ | |
+| #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | ✅ | ✅ |
 | #110 | evt-pot-var | boqiny | 0.71:1:0.92 | ⭐ 全面尾部风险，partial credit |✅  | ✅ |
-| #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | ✅ | |
+| #111 | historical-var-data-prep | YoutingWang | 1:1:1 | 干净，标 easy 诚实 | ✅ | ✅ |
 | #112 | ewma-portfolio-risk-decomposition | YoutingWang | 0:1:1 | ⭐ 优秀 debug task，verifier 重算 |✅  | ✅ |
 | #114 | brinson-sector-attribution | boqiny | 0:1:0 | Reviewer-iterated, full BF framework with drift+rebalance, 3-tier discrimination | ✅ | ✅ |
 | #117 | credit-portfolio-var-cvar | pangjacque | 0:1:0 | Good 3-tier discrimination. Fix: obligor count ~50→991, remove 0.8 multiplier in t-copula tail test |✅ | ✅ |
 | #120b | ipca-latent-factors | GinkgoGao | 0.33:0.69:0.29 | 好区分度，partial credit | ✅ | ✅ |
 | #121 | alpha-hedge-strategy | GinkgoGao | 0.64:1:1 | O+S 过 H 挂 | ✅| ✅ |
 | #124 | pairs-cointegration-kalman | GinkgoGao | 0:0.79:0.71 | 8/8 checkpoints pass，PnL 符号反 = mean-reversion 方向推理测试。Re-evaluated 2026-04-29: ADF 无差异，方向可从 instruction 推理 | ✅ | ✅ |
-| #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT** | ✅ | |
+| #129 | fx-forward-cross-rate | bochencs | 0:0:1 | S45 满分; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 37/37 PERFECT** | ✅ | ✅ |
 | #132 | dirty-gap-momentum-aapl | Jiahao-Xie-86 | 1:1:1 | Very easy task with no discrimination. Keep? | 🟡| |
 | #139 | mtm-xccy-basis-desk | Jingyi-Jia | 0:0:0 → Sonnet 138/145 | All suggestions resolved. Added partial credit.| ✅ | ✅ |
 | #140 | localvol-barrier | Jingyi-Jia | 0:0:0  (Opus 27/34 > Sonnet 20/34 > Haiku 17/34) | 全挂但反映真正难度，区分度好。新增了partial credit。| ✅| ✅ |
