@@ -17,6 +17,8 @@
 
 > **2026-05-03 late sync:** Synced main after #86/#88/#104/#106 merges and duplicate cleanup. Current tracked main has 80 tasks after deleting duplicate `mc-greeks-surface`, keeping/fixing `mc-greek-surface-1`, and merging #88. #88 KP t-stat oracle bug was fixed before merge: formula now uses `BMP * sqrt((1-rho)/(1+(N-1)rho))`; local oracle verification passed 34/34.
 
+> **2026-05-03 full status sweep:** Re-scanned all 131 PR rows against GitHub PR state/checks and `origin/main` tracked tasks. Current main has 80 tracked tasks. No ❌/🟡 section task is present on main. Merge-section rows already present on main: 62; merge-section rows still open/not on main: #52,#63,#98,#132,#152,#154,#159,#163,#168,#175,#178,#185,#187,#188,#189,#190,#191,#192,#194,#197,#198,#199,#200,#202,#203,#206,#207,#209,#204,#170,#174. Main also contains 18 legacy/out-of-scope tasks not represented as rows in this review table, including `mc-greek-surface-1`.
+
 ## ✅ 建议 Merge (cleaned，保留 Final Approval / 已merge)
 
 | PR | Task | Author | H:O:S | 备注 | Final Approval | 已merge |
@@ -37,7 +39,7 @@
 | #88 | event-study-earnings | harvenstar | Local oracle 34/34; GPT rerun fixed-branch all 0.0 | **2026-05-03 merged:** fixed KP adjusted t-stat formula and pinned oracle values before merge. GPT/Codex rerun remains discriminative: gpt-5.4-mini/gpt-5.4/gpt-5.5 all failed. | ✅ | ✅ |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |✅ | ✅ |
 | #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ | ✅ |
-| #98 | nelson-siegel-yield-curve-fit | wshi83 |  🟡看起来没问题，但缺最新的结果 | 应该是easy outlier count window 太紧 | 🟡 (✅ after new results) | |
+| #98 | nelson-siegel-yield-curve-fit | wshi83 | GPT/Codex 2026-05-03: mini=0.0, 5.4=1.0, 5.5=1.0 | Latest GPT rerun resolved the missing-results gap. Mini failed only `TestOutlierDates.test_columns_and_count` (221 vs expected ~180±30); 5.4/5.5 passed 25/25. Still open with GitHub CHANGES_REQUESTED / claude-review failure, so keep unmerged pending reviewer decision on outlier-count convention. | 🟡 | |
 | #101 | sec-8k-event-alpha | boqiny | 0.96:1:0.54 | ⭐ 优秀区分度，partial credit | ✅ | ✅ |
 | #102 | intraday-volume-fitting-and-execution-scheduling | liup3424 | 0:1:1 | 好校准 | ✅ | ✅ |
 | #103 | fx-carry-forward-hedge | Jingyi-Jia | 🟡看起来没问题，但缺最新的结果 | Everything suggested by the AI reviewer is fixed and updated. Should be good to go! | 🟡 (✅ after new results)  | ✅ |
@@ -63,7 +65,7 @@
 | #151 | fomc-tone-event-study | gem-mint | 0:1:0 | ⭐ NLP+固收，Opus-only | ✅| ✅ |
 | #152 | american-binomial-tree | Dongzhikang | 1:1:1 | 干净无区分度 | ✅ | |
 | #153 | asian-option-levy-curran | Dongzhikang | 0:1:0 | 好区分度 |✅ | ✅ |
-| #154 | barone-adesi-whaley | Dongzhikang | 0:1:1 | BAW 正确; **2026-04-26 PQCat re-test: H:O:S = 1:1:1, all 36/36 PERFECT.** Extended the agent timeout at harbor/docker level via `--timeout-multiplier 3.0` (600s default → 1800s) — the harbor 600s default is too short for heavy derivatives calculations on this task. Task content unchanged. | ✅ | |
+| #154 | barone-adesi-whaley | Dongzhikang | H:O:S=1:1:1; GPT/Codex 2026-05-03 all 1.0 | BAW implementation appears correct, but latest GPT/Codex rerun (`gpt-5.4-mini`, `gpt-5.4`, `gpt-5.5`) also passed 36/36 with `--timeout-multiplier 3.0` after local-only Harbor metadata compatibility patch. This confirms low discriminative power under current tests; still open/not on main. | 🟡 low-discrimination review | |
 | #156 | bs-greeks-pde | Dongzhikang | 0:1:1 | PDE 残差优秀 | ✅| ✅ |
 | #159 | cir-bond-pricing | Dongzhikang | 1:1:1 | 建议改 hard→medium | ✅ | |
 | #160 | cliquet-ratchet-pricing | Dongzhikang | 0:1:0 | 很好的想法，唯一的问题是现在Oracle file和test file混在一起。可以分开一下吗？after that就没问题了！ |✅| ✅ |
