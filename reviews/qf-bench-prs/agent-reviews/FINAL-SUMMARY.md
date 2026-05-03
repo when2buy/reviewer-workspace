@@ -1,7 +1,7 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ Merge 表行数: 89 | ❌ 不建议Merge: 24 | 🟡 Human Review 表行数: 17
+**Total:** ✅ Merge 表行数: 92 | ❌ 不建议Merge: 21 | 🟡 Human Review 表行数: 17 | main tracked tasks: 79
 
 > **2026-04-27 update:** Completed S4.5+O4.6 三模型 deep review of 17 tasks. 14→✅ Merge, 3→🟡 Human Review. Moved #174,#176 from ❌→✅; #172,#164 from 🟡→✅; #169 from ✅→🟡.
 
@@ -14,6 +14,8 @@
 > **2026-05-02 clean:** Preserved original layout/columns; removed duplicate moved rows and outdated rows already on `main`; updated `已merge` against current `origin/main` tasks.
 
 > **2026-05-03 merge update:** Merged final-approval-not-merged rows except the path-dependent derivative #152 (`american-binomial-tree`): #38,#39,#40,#42,#51,#62,#80,#109,#111,#129.
+
+> **2026-05-03 late sync:** Synced main after #86/#104/#106 merges and duplicate cleanup. Current tracked main has 79 tasks after deleting duplicate `mc-greeks-surface` and keeping/fixing `mc-greek-surface-1`. #88 remains unmerged: KP t-stat oracle bug confirmed locally; fixed formula + pinned values pass oracle locally but PR branch is not fixed.
 
 ## ✅ 建议 Merge (cleaned，保留 Final Approval / 已merge)
 
@@ -30,6 +32,7 @@
 | #63 | markowitz-efficient-frontier | Dongzhikang | 0:1:0 | 很好的设计，但最新的状态是REQUEST CHANGES？好像还有bug没有来得及修完 | 🟡| |
 | #80 | credit-migration-matrix | pangjacque | 1:1:0→1:1:1 | Updated per reviewer feedback, S4.6+H4.5 63/63 | ✅ | ✅ |
 | #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 |✅ | ✅ |
+| #86 | dcc-garch-portfolio-var | harvenstar | Oracle 1.0; GPT rerun mini/5.4=0.0 (FHS VaR/ES pinned), gpt-5.5=1.0 | **2026-05-03 merged:** author fixed reviewer concerns by adding pinned DCC/loglik/backtest tests; fresh GPT/Codex shows valid model discrimination. | ✅ | ✅ |
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ | ✅ |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |✅ | ✅ |
 | #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ | ✅ |
@@ -38,6 +41,8 @@
 | #102 | intraday-volume-fitting-and-execution-scheduling | liup3424 | 0:1:1 | 好校准 | ✅ | ✅ |
 | #103 | fx-carry-forward-hedge | Jingyi-Jia | 🟡看起来没问题，但缺最新的结果 | Everything suggested by the AI reviewer is fixed and updated. Should be good to go! | 🟡 (✅ after new results)  | ✅ |
 | #105 | yield-curve-bond-immunization | Jingyi-Jia | 🟡看起来没问题，但缺最新的结果 | Strong task now after fixing everything reviewers suggested | 🟡 (✅ after new results) | ✅ |
+| #104 | form4-cross-sectional-sale-pressure | Minxuan-Hu | revised, merged | **2026-05-03 merged:** Docker/base-image issue resolved before merge; task now on main. | ✅ | ✅ |
+| #106 | etf-overlap-redemption-pressure | Minxuan-Hu | revised, merged | **2026-05-03 merged:** Docker/base-image issue resolved before merge; task now on main. | ✅ | ✅ |
 | #107 | realized-vol-estimators | yyu56253 | New test: Sonnet 108/141 + Opus 141/141 | 公式未在 instruction 说明 需要改instruction, 应该是easy; **2026-04-26 PQCat re-test: Sonnet 108/141 (BR + BNS variants off), Opus PERFECT 141/141.** Cites Bandi-Russell (2006) Section 3.1 + BNS (2004) Definition 1 — both **post-1994 references** (after Dupire local-vol). These are real but relatively-recent papers; not as universally trained as classical (BS, Black-76) formulas, so this task **also tests how well the agent has learned post-Dupire-era HF-econometrics literature**. Agents who internalized these papers in training pass; those who reconstruct from memory pick variant forms and fail. | ✅ | ✅ |
 | #108 | delta-hedging-pnl-simulation | yyu56253 | 0:1:1 | 干净衍生品 task |✅  | ✅ |
 | #109 | variance-swap-replication | yyu56253 | 1:1:1 | Carr-Madan 正确 | ✅ | ✅ |
@@ -138,10 +143,8 @@
 | #75 | var-ebacktest-coverage | Dongzhikang | e-backtest 公式缺失 |
 | #77 | cds-curve-stripping | Dongzhikang | 全模型同样失败 → spec 问题 |
 | #81 | lmm-markov-representation | PQCat | 关键词匹配 verifier 太脆弱 |
-| #88 | event-study-earnings | harvenstar | Oracle bug (KP t-stat) |
+| #88 | event-study-earnings | harvenstar | Oracle bug (KP t-stat): current PR uses `BMP / sqrt(1+(N-1)rho)` but KP adjusted BMP should multiply by `sqrt((1-rho)/(1+(N-1)rho))`. Local-only fix updates `kp_t_full 0.26409569→0.25755781`, `kp_t_day0 0.33249276→0.32426166`; oracle passes locally, PR not fixed/merged. |
 | #97 | factor-momentum-spanning | wshi83 | 全挂，oracle 校准问题 |
-| #104 | form4-cross-sectional-sale-pressure | Minxuan-Hu | Docker base image 错误 |
-| #106 | etf-overlap-redemption-pressure | Minxuan-Hu | Docker base image 错误 |
 | #136 | quantamental-earnings-jumpfilter | xushenbo | Docker build 失败 |
 | #137 | multimodal-alpha-fusion | xushenbo | 0/0/0 零区分度 |
 | #144 | double-sort/residual-momentum/stable-residual | mingjun-sun | Verifier broken |
@@ -187,11 +190,15 @@
 
 ---
 
+## 2026-05-03 main cleanup note
+
+- Removed duplicate task `mc-greeks-surface` from main and kept `mc-greek-surface-1` after comparing instruction/solution/tests. Rationale: same benchmark item; retained version has clearer output schema and consistent `/app/output`; fixed retained instruction canary prefix. Main tracked task count is now 79.
+
 ## Blocker 模式分析
 
 | 模式 | 数量 | 涉及 PR |
 |---|---|---|
-| **Docker/基础设施问题** | 8 | #45,46,48,49,104,106,136,148 |
+| **Docker/基础设施问题** | 6 | #45,46,48,49,136,148 |
 | **Oracle/Verifier bug** | 8 | #61,64,88,97,98,155,157,170 |
 | **Instruction under-specification** | 6 | #53,66,72,75,77,174 |
 | **答案泄露/硬编码** | 1 | #137 |
