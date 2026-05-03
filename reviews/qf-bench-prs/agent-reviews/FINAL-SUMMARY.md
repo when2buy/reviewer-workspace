@@ -115,7 +115,7 @@
 | #182 | var-es-estimation | Dongzhikang | 0/47:46/47:46/47 | **极好区分度**，Haiku 完全不会。新 task | ✅ | ✅ |
 | #170 | kou-double-exponential | Dongzhikang | 12/12:11/12:12/12 | The oracle moment-matches double-exponential jumps into normal components rather than implementing the Kou density/series, and the sigma optimizer bound still allows 1.0 despite the spec/test bound of 0.50. | 🟡| |
 | #174 | power-options | Dongzhikang | 33/36:36/36:36/36 | Now the verifier grades based on self-reported MC errors/parity booleans. Will agents lie? Use independent recomputation instead? | 🟡 | |
-| #164 | dupire-local-vol | Dongzhikang | 62/67:65/67:0/67 | Instruction says valuation date is 2024-03-15, but the oracle uses the last daily close from 2025-12-30 as S0 (687.06); the actual 2024-03-15 close is 509.82. So the option filtering and surface are built with future information. | 🟡| |
+| #164 | dupire-local-vol | Dongzhikang | H/S/O old 62/67:65/67:0/67; GPT rerun 1:0:1 | **2026-05-03 fixed + merged:** valuation-date leakage fixed: oracle now uses the 2024-03-15 close S0=509.82 instead of future 2025-12-30 close 687.06, with pinned `calibration["S0"] == 509.82`; follow-up oracle passed and latest GPT/Codex rerun passed on gpt-5.4 and gpt-5.5 (mini still fails). Merged as PR #164. | ✅ | ✅ |
 | #176 | ohlc-realized-vol-estimators | Dongzhikang | 29/33:29/33:30/33 | Renamed on merge to avoid duplicate with #107 realized-vol-estimators. 三模型一致 ~30/33，agent 能力问题。从 ❌→✅ | ✅ | ✅ |
 | #127 | crypto-funding-rate-basis-carry | xinlan-technology | 0:0.75:0.59 | agent 单位/边界错误非 oracle bug，好 benchmark。从 ❌→✅ | ✅ | ✅ |
 | #128 | etf-cross-asset-lead-lag | xinlan-technology | 0.5:0.96:0.96 | 作者修复后优秀区分度，GPT5.4 满分。从 🟡→✅ | ✅ | ✅ |
