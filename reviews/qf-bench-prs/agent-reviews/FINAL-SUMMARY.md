@@ -1,7 +1,7 @@
 # QF-Bench PR Review — Complete Summary
 
 **Date:** 2026-04-23 | **Reviewed:** 105 PRs (excluding #4 mega-PR and #145 docs-only)
-**Total:** ✅ Merge 表行数: 92 | ❌ 不建议Merge: 21 | 🟡 Human Review 表行数: 17 | main tracked tasks: 79
+**Total:** ✅ Merge 表行数: 93 | ❌ 不建议Merge: 20 | 🟡 Human Review 表行数: 17 | main tracked tasks: 80
 
 > **2026-04-27 update:** Completed S4.5+O4.6 三模型 deep review of 17 tasks. 14→✅ Merge, 3→🟡 Human Review. Moved #174,#176 from ❌→✅; #172,#164 from 🟡→✅; #169 from ✅→🟡.
 
@@ -15,7 +15,7 @@
 
 > **2026-05-03 merge update:** Merged final-approval-not-merged rows except the path-dependent derivative #152 (`american-binomial-tree`): #38,#39,#40,#42,#51,#62,#80,#109,#111,#129.
 
-> **2026-05-03 late sync:** Synced main after #86/#104/#106 merges and duplicate cleanup. Current tracked main has 79 tasks after deleting duplicate `mc-greeks-surface` and keeping/fixing `mc-greek-surface-1`. #88 remains unmerged: KP t-stat oracle bug confirmed locally; fixed formula + pinned values pass oracle locally but PR branch is not fixed.
+> **2026-05-03 late sync:** Synced main after #86/#88/#104/#106 merges and duplicate cleanup. Current tracked main has 80 tasks after deleting duplicate `mc-greeks-surface`, keeping/fixing `mc-greek-surface-1`, and merging #88. #88 KP t-stat oracle bug was fixed before merge: formula now uses `BMP * sqrt((1-rho)/(1+(N-1)rho))`; local oracle verification passed 34/34.
 
 ## ✅ 建议 Merge (cleaned，保留 Final Approval / 已merge)
 
@@ -34,6 +34,7 @@
 | #84 | cme-hdd-option-pricing | xinlan-technology | 0:1:1 | 好设计 |✅ | ✅ |
 | #86 | dcc-garch-portfolio-var | harvenstar | Oracle 1.0; GPT rerun mini/5.4=0.0 (FHS VaR/ES pinned), gpt-5.5=1.0 | **2026-05-03 merged:** author fixed reviewer concerns by adding pinned DCC/loglik/backtest tests; fresh GPT/Codex shows valid model discrimination. | ✅ | ✅ |
 | #87 | yield-curve-bootstrap-immunization | harvenstar | 0:1:1 | 优秀多步固收 task | ✅ | ✅ |
+| #88 | event-study-earnings | harvenstar | Local oracle 34/34; GPT rerun fixed-branch all 0.0 | **2026-05-03 merged:** fixed KP adjusted t-stat formula and pinned oracle values before merge. GPT/Codex rerun remains discriminative: gpt-5.4-mini/gpt-5.4/gpt-5.5 all failed. | ✅ | ✅ |
 | #93 | yield-curve-pca-dynamics | wshi83 | 1:1:0 | 好 PCA task |✅ | ✅ |
 | #96 | credit-spread-decomposition | wshi83 | 0:1:1 | 优秀信用分析 | ✅ | ✅ |
 | #98 | nelson-siegel-yield-curve-fit | wshi83 |  🟡看起来没问题，但缺最新的结果 | 应该是easy outlier count window 太紧 | 🟡 (✅ after new results) | |
@@ -143,7 +144,6 @@
 | #75 | var-ebacktest-coverage | Dongzhikang | e-backtest 公式缺失 |
 | #77 | cds-curve-stripping | Dongzhikang | 全模型同样失败 → spec 问题 |
 | #81 | lmm-markov-representation | PQCat | 关键词匹配 verifier 太脆弱 |
-| #88 | event-study-earnings | harvenstar | Oracle bug (KP t-stat): current PR uses `BMP / sqrt(1+(N-1)rho)` but KP adjusted BMP should multiply by `sqrt((1-rho)/(1+(N-1)rho))`. Local-only fix updates `kp_t_full 0.26409569→0.25755781`, `kp_t_day0 0.33249276→0.32426166`; oracle passes locally, PR not fixed/merged. |
 | #97 | factor-momentum-spanning | wshi83 | 全挂，oracle 校准问题 |
 | #136 | quantamental-earnings-jumpfilter | xushenbo | Docker build 失败 |
 | #137 | multimodal-alpha-fusion | xushenbo | 0/0/0 零区分度 |
@@ -192,14 +192,14 @@
 
 ## 2026-05-03 main cleanup note
 
-- Removed duplicate task `mc-greeks-surface` from main and kept `mc-greek-surface-1` after comparing instruction/solution/tests. Rationale: same benchmark item; retained version has clearer output schema and consistent `/app/output`; fixed retained instruction canary prefix. Main tracked task count is now 79.
+- Removed duplicate task `mc-greeks-surface` from main and kept `mc-greek-surface-1` after comparing instruction/solution/tests. Rationale: same benchmark item; retained version has clearer output schema and consistent `/app/output`; fixed retained instruction canary prefix. Main tracked task count was 79 after duplicate cleanup; after merging #88 it is 80.
 
 ## Blocker 模式分析
 
 | 模式 | 数量 | 涉及 PR |
 |---|---|---|
 | **Docker/基础设施问题** | 6 | #45,46,48,49,136,148 |
-| **Oracle/Verifier bug** | 8 | #61,64,88,97,98,155,157,170 |
+| **Oracle/Verifier bug** | 7 | #61,64,97,98,155,157,170 |
 | **Instruction under-specification** | 6 | #53,66,72,75,77,174 |
 | **答案泄露/硬编码** | 1 | #137 |
 | **设计问题** | 1 | #81 |
