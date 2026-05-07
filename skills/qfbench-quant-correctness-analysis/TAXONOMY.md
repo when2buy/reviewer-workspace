@@ -1,6 +1,6 @@
 # QF-Bench Quantitative Correctness Failure Taxonomy
 
-The 9 modes used by this skill, grounded in 75+ real PR reviews on the QF-Bench repository. Each mode has the same shape:
+The 10 modes used by this skill (9 quant + 1 non-quant), grounded in 75+ real PR reviews on the QF-Bench repository plus the v10 batch analysis (May 2026). Each mode has the same shape:
 
 - **Framing** — what the mode is and is not.
 - **Decision Procedure** — numbered steps the judge follows.
@@ -8,15 +8,18 @@ The 9 modes used by this skill, grounded in 75+ real PR reviews on the QF-Bench 
 - **Sub-rubrics** — recurring sub-patterns within the mode (each tied to specific PRs).
 - **Finance examples** — POSITIVE and NEGATIVE worked examples.
 
-Every mode is independently judged. A trial may match zero, one, or several modes. **Cascade rule:** when one root computational error causes many test failures (typical in QF-Bench), classify the root cause once, not each cascade.
+Every mode is independently judged. **A trial may (and often should) match more than one mode** — see "Independent vs cascading" below. The cascade rule collapses *symptoms of one root cause* into one match; it does NOT suppress *genuinely independent root causes*.
 
 ## High-level classes
 
 | Class | Question | Modes |
 |---|---|---|
-| **A. Model & Formula** | What was computed? | A1 Wrong Model / Measure · A2 Missing or Extra Formula Term · A3 Wrong Parameterization / Convention Default |
-| **B. Convention & Units** | How was it expressed? | B1 Unit / Scale Error · B2 Sign Convention Error · B3 Time / Date / Calendar Convention |
-| **C. Data & Numerics** | How was it fed in / solved? | C1 Data Fabrication / Wrong Source · C2 Numerical / Optimization Failure · C3 Statistical Variant Mismatch |
+| **A. Model & Formula** *(quant)* | What was computed? | A1 Wrong Model / Measure · A2 Missing or Extra Formula Term · A3 Wrong Parameterization / Convention Default |
+| **B. Convention & Units** *(quant)* | How was it expressed? | B1 Unit / Scale Error · B2 Sign Convention Error · B3 Time / Date / Calendar Convention |
+| **C. Data & Numerics** *(quant)* | How was it fed in / solved? | C1 Data Fabrication / Wrong Source · C2 Numerical / Optimization Failure · C3 Statistical Variant Mismatch |
+| **D. Spec & Output Compliance** *(non-quant — orthogonal axis)* | Does the output match the spec's schema? | D1 Output Schema & Spec Compliance |
+
+**Important:** Class D is the **non-quant axis** — it captures failures where the agent's quantitative content is correct but the *output format / schema / vocabulary* doesn't match what the verifier expects. Class D fires **independently of A/B/C** (orthogonal); a trial can match both D1 (wrong schema vocabulary) and A2 (missing formula term) simultaneously when both are present.
 
 ## Single-shot applicability (finance-zero)
 
@@ -63,6 +66,189 @@ bucket from real LLM-judged "no match" labels — the former tells you the
 trial had no evaluable signal, the latter tells you the agent's solution
 was sound on that axis. Lumping them together inflates the "agent's
 solution was sound" count.
+
+---
+
+## Trajectory-failure sub-classification (when no quant content can be judged)
+
+When `root_cause_class = insufficient` the trial has no evaluable quant content,
+but **the reason matters** for downstream interpretation — one trajectory
+failure can be the agent's fault, another can be infrastructure noise, a third
+can be a known harness UX issue. The skill subdivides `insufficient` into
+three sub-types, each with distinct treatment in aggregate reporting:
+
+| Sub-type | Root-cause `class` | Counts as agent failure? | Excluded from quality score? |
+|----------|---------------------|--------------------------|------------------------------|
+| **`agent_engineering_weakness`** (Pattern A — wall-time / context overrun on intentional limits) | `agent_coding` | **Yes** (engineering signal) | **No** — counted as legitimate fail |
+| **`agent_ux_bug`** (Pattern B — Plan-mode trap, ExitPlanMode misinterpretation, mode-management) | `agent_ux_bug` (NEW) | **Special** (flag for harness/UX feedback; counts toward agent score with caveat) | Track separately in reports |
+| **`infra_failure`** (Pattern C — provider 429, container path mismatch, network) | `infra_failure` (NEW) | **No** (external) | **Yes** — exclude from agent quality score |
+
+### Pattern A — Agent engineering weakness (wall-time / context overrun)
+
+**Diagnostic signature:**
+- Agent generated non-trivial code (often partial)
+- Trial terminated by harness wall-clock or context-budget cap (`AgentTimeoutError`,
+  exception_message: "execution timed out after 1800.0 seconds", or context-window
+  exhaustion before any Write call)
+- Inspection of agent's strategy reveals an **engineering choice** that caused
+  the overrun: non-vectorized inner loop, naive `scipy.integrate.quad` per grid
+  point instead of precompute-and-reuse, repeated reading of input files,
+  excessive environment probing, debugging dead ends
+
+**Why this is `agent_coding`, not `infra_failure`:**
+
+The wall-clock and context-budget caps are **part of the task's difficulty
+design**. Tasks like `stochvol-implied-surface-new` deliberately include
+expensive grids that test whether the agent can write efficient code. An
+agent that can't fit a Chiarella-Ziveyi pricer + IV inversion + Dupire local-vol
+into 30 minutes of wall time has demonstrated **real engineering weakness**:
+they didn't recognize the need for vectorization, didn't precompute the
+characteristic-function on a shared grid, didn't cache intermediate quantities.
+A capable agent would have produced output within the budget.
+
+**Worked examples (QF-Bench v323):**
+- `fb-v10-s45-stochvol-implied-surface-new` (sonnet 4.5 R1) — naive `scipy.quad`
+  per (K, T, branch) → 288 quad calls per surface, hit 1800s wall before
+  Step 3 (IV inversion) finished. **Label: `agent_coding`** with sub-rubric
+  `agent_engineering_weakness`. The slow inner loop is the bug; the time
+  limit is the test.
+- `fb-v11-opus46-yield-curve-bond-immunization` (Opus 4.6 R1, R2) — burnt
+  30-min budget on input-file reading and environment probing (4 Reads + 3
+  Bash, zero Write calls before kill). Strategy choice (over-investigating
+  before acting) is the bug. **Label: `agent_coding`**.
+
+**What `notes` should record:**
+"Agent self-induced budget exhaustion via [specific engineering choice].
+A capable implementation would have completed within the [N-second / N-token]
+budget. Counts as legitimate agent failure (Pattern A: engineering weakness)."
+
+### Pattern B — Agent UX-design bug (Plan-mode trap)
+
+**Diagnostic signature:**
+- Agent enters Plan mode (Claude Code feature)
+- Drafts a plan via `ExitPlanMode` tool call
+- Harness rejects (no user to approve in non-interactive context)
+- Agent treats rejection as a clarifying-question prompt → re-asks, exits, or
+  loops on the plan rather than falling back to direct code execution
+- Final result: zero output files, plan markdown sometimes saved to logs but
+  no executable code ever written
+
+**Why this is `agent_ux_bug`, not `agent_coding` or `agent_conceptual`:**
+
+The agent's quant reasoning is **demonstrably correct** — the trial entries
+show "complete and quant-correct plans" drafted (e.g., all 5 IV approximation
+formulas with sanity-checked numerical values, FFT+MC plans for compound
+Poisson). The failure is **mode-management**, specifically:
+- Misreading harness's `ExitPlanMode` rejection as a user clarifying-question
+  signal
+- Treating Plan mode as a hard contract requiring approval before execution
+- Failing to detect non-interactive benchmark context (no canary/OUTPUT_DIR
+  cue translation into "skip planning, execute directly")
+
+This is **not** a quant-skill failure (model knows the math) and **not** an
+infrastructure failure (the API/provider is responding fine). It's a
+specifically-Claude Code agent-UX bug that manifests in benchmark harnesses.
+
+**Worked examples (QF-Bench v323):**
+- 6 trials across 5 distinct tasks (`implied-vol-approximations` ×2,
+  `compound-option-geske`, `merton-jump-diffusion`, `digital-barrier-options`,
+  `fft-compound-poisson`) — all Claude Code variants (Haiku 4.5, Opus 4.6,
+  Sonnet 4.5). Each agent drafted a complete and quant-correct plan, then
+  failed to escape Plan mode.
+
+**What `notes` should record:**
+"Agent UX bug (Pattern B): Plan-mode trap. Agent drafted complete plan via
+ExitPlanMode; harness rejected (non-interactive context); agent treated
+rejection as clarifying-question and exited without executing. Quant
+reasoning was correct; failure is in mode-management. Cross-reference for
+Claude Code harness/UX feedback."
+
+**Aggregator treatment:** count toward agent score *with explicit caveat* —
+this signals a UX bug that should be fixed in Claude Code, not a model
+capability gap. Best-of-N reporting may legitimately retry through the
+trap and succeed on a later round.
+
+### Pattern C — Infrastructure failure
+
+**Diagnostic signature:**
+- HTTP 429 from provider (Bedrock `ThrottlingException`,
+  Anthropic-direct rate_limit_error, OpenAI rate-limit), or
+- Container/volume path-isolation mismatch (agent writes files at path P;
+  verifier reads from path P; verifier sees empty directory despite
+  agent-side `ls -la` confirming files written), or
+- Network errors, DNS failures, transient provider 5xx
+- Critically: **the model never received the prompt** (for 429s), or the
+  agent's outputs are correct but invisible to the verifier (for path
+  mismatches)
+
+**Why this is `infra_failure`, not `agent_coding`:**
+
+The agent has no agency over whether the provider returns 200 vs 429, or
+whether the harness mounts `/output` correctly across the agent and verifier
+containers. These are **external** to the agent's behavior. Including
+infra-failure trials in the quality score conflates infrastructure quality
+with model quality.
+
+**Worked examples (QF-Bench v323):**
+- `fb-v10r2-h45-cme-hdd-option-pricing`, `fb-v10r2-h45-swap-curve-bootstrap-ois`
+  — Bedrock 429 cascade across 10 retries → harness raised
+  NonZeroAgentExitCodeError. Agent's reasoning was never invoked for the
+  failed attempts. **Label: `infra_failure`**.
+- `fb-v10-opus46-r2-hull-white-swaption` — agent's `ls -la $OUTPUT_DIR`
+  showed all 7 expected files written; verifier (separate container view)
+  saw empty `/output/`. Quant code was correct; container path-visibility
+  bug. **Label: `infra_failure`**.
+
+**What `notes` should record:**
+"Infrastructure failure (Pattern C): [provider 429 / container path /
+network error]. Agent's [reasoning was not invoked / outputs were
+correct but invisible to verifier]. EXCLUDE from agent quality score —
+this is a benchmark infrastructure quality signal, not a model capability
+signal."
+
+**Aggregator treatment:** **exclude** from per-model quality score.
+Track separately as an `infra_failure_rate` metric — high rates indicate
+benchmark plumbing issues (lower concurrency, increase retry budget, switch
+provider routing) rather than model weakness.
+
+### Decision flow
+
+```
+Failure has no evaluable quant content (no outputs, or outputs all wrong-shape)
+  │
+  ├── Was the agent's prompt invoked at all?
+  │     │
+  │     ├── No (provider 429, network error)              → infra_failure (Pattern C)
+  │     └── Yes
+  │           │
+  │           ├── Did agent enter Plan mode and never escape?
+  │           │     │   (drafted complete plan, ExitPlanMode rejected,
+  │           │     │    no Write/Bash for actual code)
+  │           │     └── YES                              → agent_ux_bug (Pattern B)
+  │           │
+  │           ├── Did agent run code that was correct, but verifier
+  │           │   couldn't see outputs (container path mismatch)?
+  │           │     └── YES                              → infra_failure (Pattern C)
+  │           │
+  │           └── Did agent run code that was inefficient and hit
+  │               wall-clock or context-budget cap?
+  │                 └── YES                              → agent_coding (Pattern A)
+  │
+  └── Otherwise (agent generated 0 chars, or pure pre-flight gate)
+        → keep generic `insufficient` label
+```
+
+### Why this matters for benchmark reporting
+
+Without sub-classification, "insufficient = trajectory failure" lumps
+together three very different signals:
+1. The agent is engineering-weak (Pattern A, valid signal)
+2. Claude Code has a Plan-mode UX bug (Pattern B, fixable in harness)
+3. AWS Bedrock throttled (Pattern C, fixable in infrastructure)
+
+A model-capability score that treats all three identically is misleading.
+The v3.2.6 sub-classification preserves the right interpretation in the
+aggregate report.
 
 ---
 
@@ -122,8 +308,49 @@ Agent's formula is wrong. Was the formula expectation:
 │   └── if named method has multiple variants → match C3.a instead
 └── Case 3 (agent invented under under-specified spec) →
     ├── agent's formula defensible & dimensionally consistent → match C3.c
+    │   └── BUT see "Mathematical equivalence ≠ literal compliance" sub-rule below
     └── agent's formula dimensionally broken → match A2 + flag task-side issue
 ```
+
+### Sub-rule: "Mathematical equivalence ≠ literal compliance" (added v3.2.11)
+
+When the spec describes a procedure with multiple **mathematically-equivalent implementations** that consume RNG state, evaluate floating-point in different orders, or take different code paths to produce the same final distribution, the agent must follow the **literal reading** of the spec procedure. Mathematical shortcuts that bypass the literal procedure are **A3.f / agent_conceptual**, NOT C3.c / task_side.
+
+**Diagnostic — the shortcut signature:**
+
+The agent's code is "mathematically equivalent" to the spec's procedure but:
+- Uses fewer RNG calls (e.g., `z * scales` instead of separate per-component draws)
+- Replaces an explicit loop with a vectorized identity
+- Substitutes an analytic equivalent for a Monte-Carlo simulation when both are valid
+- Uses a closed-form transform of one sample to "be" multiple samples (e.g., `N(0,9) = 3·N(0,1)`)
+
+These produce the same *distribution* but a different *concrete sample sequence* under a shared RNG seed. When the test pins specific numeric outputs (RMSE values, point estimates, comparisons), the difference cascades into the failed assertion.
+
+**Two strong signals that a "shortcut" is `A3.f`, not `C3.c`:**
+
+1. **Test pins specific numeric values** (e.g., `assert RMSE_close_to(0.1036, rtol=0.10)`) rather than **shape invariants** (e.g., `assert RMSE > 0`, `assert RMSE_in_band(0.05, 0.15)`). Pinned numerics mean the maintainer ran a canonical implementation and pinned ITS output. Deviating to a mathematical equivalent breaks the canonical implementation; the maintainer had ONE recipe in mind.
+
+2. **The spec uses verbs like "draw from", "sample from", "select", "compute"** with explicit subjects. Each verb has a literal reading that determines the canonical execution path. The agent's vectorized identity bypasses the literal procedure.
+
+**Conversely, C3.c / task_side genuinely fits when ALL hold:**
+
+- Tests use shape invariants only (`positive`, `in_band`, `ratio_close_to_one`, `monotonic`, etc.)
+- Spec literally describes a *goal* without a procedure (e.g., "compute the alpha" without naming a regression form)
+- Multiple non-equivalent procedures exist (e.g., OLS vs robust regression vs IV)
+- No maintainer-implied default (e.g., no canonical reference in the literature for this combination)
+
+**Worked example (var-es-estimation v323/v12 audit):**
+
+Spec L22: *"Implementation: generate N uniform draws to decide the component, then draw from the selected component accordingly."*
+
+| Reading | Implementation | RNG calls | RMSE produced |
+|---|---|---|---|
+| **Literal** ("draw from N(0,9) when selected") | `np.where(u<p, draws_high, draws_low)` with two N(0,·) draws | 3 | matches test pin `0.1036` |
+| **Shortcut** (`N(0,9) = 3·N(0,1)`) | `z * scales` with one N(0,1) draw | 2 | `0.0899` — fails the pin |
+
+Test pins `RMSE = 0.1036` (specific numeric, not a band). Spec uses verb "draw from the selected component." Both diagnostic signals indicate the maintainer had the literal 3-RNG-call implementation in mind. **Verdict: A3.f / agent_conceptual** ("agent took a math-equivalence shortcut that bypassed the literal spec procedure"), NOT C3.c / task_side.
+
+This sub-rule was added after a v12 audit re-judge (May 6 2026) where strict literal application of "spec doesn't pin → C3.c" routed 3 var-es-estimation Opus 4.7 trials to task_side. The literal reading + pinned-test signal both indicated A3.f. The mis-routing was caught by manual review — this sub-rule encodes the lesson so future sub-agents apply the right discriminator automatically.
 
 ---
 
@@ -482,13 +709,88 @@ NEGATIVE — Instruction explicitly writes out the Newey-West formula in full. A
 
 ---
 
+## D. Spec & Output Compliance *(non-quant — orthogonal axis)*
+
+### D1. Output Schema & Spec Compliance
+
+**Framing.** The agent's *quantitative content* is correct — formulas right, conventions right, data sources right, numerical solvers converged — but the *output format / schema / vocabulary* doesn't match what the verifier expects. The failure is a "shape" or "labeling" mismatch on the way out, not a math error on the way in. This mode was added in May 2026 after the v10 batch analysis showed ~30–40% of finance-bench tasks are dominantly data-engineering / pipeline-reconstruction tasks where this is the dominant failure axis.
+
+**Why a separate class.** Classes A/B/C target *quant content*: formula correctness, unit/sign/calendar conventions, data sourcing, numerical methods, statistical-method variants. Schema/vocabulary failures live on a different axis — the agent could be a perfect quant and still fail D1 by guessing the wrong column ordering or label spelling. Treating D1 as a forced fit under A3 or C3.c was creating high inter-judge variance (validation found 3 different mode picks across 5 sub-agents on the same root cause). Class D resolves that.
+
+**Decision Procedure.**
+1. Identify the failing tests. Are they checking *numerical output values* (vague match-by-value) or *schema artifacts* (string equality on labels, list shape, column ordering, type assertions like `isinstance(x, list)`, exact-match dictionary keys)?
+2. If the failing tests are **schema/format-only** AND the agent's numerical computations *that ARE checked* all pass → D1 fires.
+3. If the trial has BOTH schema failures AND numerical failures → match D1 *and* the appropriate quant mode(s). D fires independently of A/B/C (orthogonal axis).
+4. **Authorship sub-question.** Did the *prose* enumerate the canonical vocabulary/shape? If yes → D1 with `root_cause_class = agent_coding` (agent should have followed) OR `agent_conceptual` (if the agent substituted a real-world concept the spec disallowed — e.g., LLM-prior attractor on a controlled vocabulary). If no → D1 with `root_cause_class = task_side` (spec under-specified). In all cases D1 fires; the `root_cause_class` differentiates blame.
+
+   **Carve-outs**:
+   - **D1.g** has its own routing (see § "D1.g routing" below): defaults to `agent_coding`, reserves `task_side` only for explicit-buggy-spec cases (v3.2.7).
+   - **D1.e (JSON precision)**: defaults to `agent_coding` when oracle achieves the threshold without manual rounding (the typical case — standard `json.dumps` preserves 17 sig digits, well under 1e-12). Reserve `task_side` only for the rarer spec-test inconsistency where the spec mandates intermediate rounding (e.g., *"round correlation outputs to 6 decimals"*) but a downstream test pins values computed without rounding — see L696.
+5. Cite the specific schema mismatch in evidence (e.g., `agent action='RESET' vs expected 'replace_initial'`). Quote the agent's wrong output and the test's expected literal.
+
+**Exclusions.**
+- Tolerance issues on numerical values (small float drift): *not D1.* That's a `qf-bench-review` task-side issue (test tolerance set too tight) — flag as `task_side` but match=false on D1.
+- Missing output files entirely (`FileNotFoundError` on a required output): *not D1*; that's a trajectory-side termination issue → trajectory-error skill.
+- Complete output absence with non-empty agent code (Case 2 of insufficient-solution): *not D1*; the agent didn't fail to comply with schema, it didn't produce output at all.
+
+**Sub-rubrics.**
+- **D1.a — Vocabulary / label mismatch.** Agent invents a defensible string token where the spec/test pins a specific literal. (v10 example: `13f-amendment-aware-crowding` — agent emitted `RESET / RESTATEMENT / APPEND` derived from `AMENDMENTTYPE` while the test pinned `replace_initial / replace_restatement / append_new_holdings`. All 5 model-rounds hit this.) Often surfaces as: uppercase-vs-snake_case, abbreviated-vs-full, agent invents from data-vocabulary vs spec-pinned canonical labels.
+- **D1.b — Shape mismatch (scalar/string vs list/struct).** `summary.max_overlap_pair` written as `"DAVIDSON_KEMPNER-FULCRUM"` (string) vs expected `["DAVIDSON_KEMPNER", "FULCRUM"]` (2-element list); `holder_list` joined with `,` vs `|`; tuple emitted as JSON array of distinct types. Test asserts `isinstance(x, list)` or `len(x) == 2` and the agent fails on shape, not on content.
+- **D1.c — Column ordering / missing columns.** `effective_holdings.csv` has `weight` at the wrong index; `crowded_securities_latest.csv` missing the leading `rank` column. Tests assert `df.columns[i] == "weight"` or `"rank" in df.columns at position 0`.
+- **D1.d — Type serialization (str-vs-int/bool, identity-column convention).** `summary.json` numeric counts written as `"79"` (string) instead of `79` (int); `all_checks_passed: "True"` instead of `True`; `ISAMENDMENT` round-tripped through `bool()` to produce Python `'True'/'False'` strings instead of preserving raw `Y/N/''`. Also: agent emits `manager_order` (int 2) where test expects `manager_label` (str `"OXFORD"`) — same identity but wrong column.
+- **D1.e — JSON float-precision / serialization rounding.** Agent rounds `max_turnover_value` to 9 decimals during JSON serialization (`0.78043996`); test pins to `0.7804399659638062` at `atol=1e-12`. **Routing depends on whether oracle achieves the test tolerance:**
+  - **Default = `agent_coding`** (v3.2.5 hidden-quality-threshold). Standard Python `json.dumps(x)` preserves ~17 significant digits, well under any `atol=1e-12` threshold. If oracle achieves the threshold with margin, the agent's manual-rounding-before-serialization is engineering carelessness — they should know `json.dumps` preserves full float64 precision and not pre-round when the test tolerance is tight.
+  - **`task_side` only** if the spec mandates intermediate rounding (e.g., *"round correlation outputs to 6 decimals"*) and a downstream test pins values computed without rounding — that's a genuine spec-test inconsistency (the agent followed the spec's rounding instruction faithfully). Example: `fb-v10-opus46-etf-cross-asset-lead-lag` (avg_abs_asymmetry_ratio computed from 6dp-rounded inputs vs full-precision test pin).
+- **D1.f — Date / timestamp serialization format.** Agent emits `'2025-12-31 00:00:00'` (ISO with time) where test expects `'2025-12-31'` (date-only string). Distinct from B3 because there is no calendar-convention error — the underlying date is correct, only the serialization differs. (Subsumes one earlier B3-partial match in the validation entries.)
+- **D1.g — Library/API default-induced numerical drift (engineering bug, not QF bug).** The agent's QF reasoning is correct — right model, right formula, right convention pick — but a *library API default* corrupts the numerical output that reaches the verifier. The failing test asserts on a numerical *value* (not a schema artifact), but the root cause lives at the data-engineering layer, not the quant-knowledge layer. This is the only D1 sub-rubric where the failing test is on a numeric value rather than a schema/format artifact — it earns its place in D because the **mechanism is engineering, not finance**.
+
+  Canonical examples:
+  - **Non-stable sort + `drop_duplicates(keep='last')`.** When the input has duplicate keys with *different values*, `pandas.DataFrame.sort_values('date')` with the default unstable algorithm can flip duplicate-row positions. A subsequent `drop_duplicates(keep='last')` then keeps the wrong row, silently corrupting one input value. Cascades through all downstream computations as small numerical drift. (v10 example: `cross-sectional-momentum` — Opus 0/3 rounds passing across all 9 cells of the canonical run; Haiku 1/3 passes by luck of pandas-version. After a one-line spec fix that pins `kind='stable'` in the sort, Haiku passes 1/1.)
+  - **Floating-point JSON round-trip drift.** Agent computes `0.7804399659638062` correctly, but `json.dump(..., default=float)` or `np.float32` casting truncates to `0.78043997`. Test asserts at `atol=1e-12`. (Adjacent to D1.e but distinct: D1.e is about *rounding the agent applied*; D1.g is about *library defaults the agent didn't override*.)
+  - **`numpy.argsort` / `np.sort` default `kind` differs from oracle's tie-break.** Agent's argsort returns different tie-break order on integer-equal scores, picking different stocks at portfolio-formation tie boundaries.
+  - **`pandas.read_csv` dtype inference.** Agent reads price column as `int64` instead of `float64` because all visible values are integer-valued, then a later division silently truncates.
+  - **`pandas.merge` non-deterministic row ordering.** Agent merges on a key with duplicates; the result row order is implementation-defined and depends on hash-collision details, so subsequent `.iloc[0]` picks a different row than oracle.
+  - **`json.dumps` non-deterministic dict-key ordering.** Pre-Python-3.7 or with `sort_keys` mismatch.
+
+  **How to distinguish D1.g from A3:**
+  - **A3 (parameterization)** is when the agent's *QF reasoning* picked the wrong convention (e.g., chose `ddof=0` because they thought MLE; chose conditional MLE because that's what they remember from a textbook). The agent would defend the choice in plain English. → `agent_conceptual`.
+  - **D1.g** is when the agent's *QF reasoning* is correct but a *library default* silently picked a different convention than oracle's. The agent would be surprised and fix it instantly when shown. → `agent_coding`.
+  - **Test:** if you can rewrite the agent's code with one keyword-argument change (e.g., `kind='stable'`, `dtype=float`, `keep='last'`) and the answer becomes correct, it's D1.g. If you'd need to change a formula, a convention pick, or a model class, it's A/B/C.
+
+**Finance examples.**
+
+POSITIVE — `fb-v10-h45-13f-amendment-aware-crowding`: agent's HHI / turnover / weighted-overlap / crowding computations all pass their numeric tests; 13 schema failures (action vocab, holder_list joiner, ISAMENDMENT typing, summary.json string-vs-int, max_overlap_pair shape, datetime format). Match D1 (D1.a + D1.b + D1.c + D1.d + D1.f). **`root_cause_class = infra_failure / stale_spec_checkout`** (corrected 2026-05-06; see Cross-cutting § "infra_failure / stale_spec_checkout" below). The trial-time `agent/trajectory.json` step-2 user message DOES NOT contain the L41-45 enumeration — agents received a pre-`75d5f1a` (Apr-23) snapshot of the instruction in which only the verbose verb description appears (*"non-amendment filing resets / RESTATEMENT replaces / NEW HOLDINGS appends"*). Verified bit-identical to remote LFS hash; not a local mutation. The maintainer's `origin/main` spec is correct since Apr 23, but the harness operator's `tasks/` checkout was stale at the May 1-4 v12 sweep. The 21/21 universal failure is a benchmark infrastructure bug, NOT an LLM pretraining-prior attractor — agents reasoned correctly from the (older) instruction they actually received.
+
+POSITIVE — Hypothetical: agent computes Sharpe ratio correctly (numeric test passes) but writes it as a percentage string `"1.23"` instead of float `1.23`. Test asserts `isinstance(sharpe, float)` → fails. Match D1.d.
+
+POSITIVE — `cross-sectional-momentum` 9 of 9 canonical cells (Haiku/Sonnet/Opus × R1/R2/R3): agent's momentum logic is structurally identical to oracle's (`iloc[t-12:t-1].sum()` arithmetic-sum formation, `[:3]` long / `[-3:]` short, simple monthly returns, `prod(1+r) - 1` total return). The failing test is on `total_return = 1.6172649012281468` (Opus produces 1.5898, all 5 metric-anchors fail). Code-line root cause: `df.sort_values('date').drop_duplicates(subset='date', keep='last')` — pandas's default unstable sort flips two duplicate rows on `2017-12-31`, then `keep='last'` silently keeps the wrong one. **Empirical:** a single-line `kind='stable'` addition lifts Haiku 0/3 → 1/1 on the same prices.csv. Match D1.g + co-fire A3 with `notes: "Subsumed by D1.g engineering layer; agent's QF reasoning correct, root cause is pandas sort-default."`. **`root_cause_class = agent_coding`** — the spec says "sort by date ascending" without specifying stability; this is *silent on the kwarg*, NOT *mandating the buggy idiom*. A senior engineer who sees `drop_duplicates(keep='last')` AND knows the data has duplicates with different values is expected to add `kind='stable'` defensively. The spec is testing exactly this engineering judgment; agents who don't apply it are showing real engineering weakness, not victims of a spec trap. (See § "D1.g routing" below for the precise discrimination between `agent_coding` and `task_side`.)
+
+**D1.g routing — when is it `agent_coding` vs `task_side`?**
+
+The default routing is **`agent_coding`** (the agent should add the right kwarg; defaults to library defaults that misbehave is engineering carelessness, especially in time-series/duplicate-key contexts). Reserve **`task_side`** ONLY for cases where the spec **explicitly writes the buggy library call verbatim with the wrong kwarg specified** — e.g., the spec literally instructs `df.sort_values('date', kind='quicksort').drop_duplicates(keep='last')`. Specs that are **silent on the kwarg** (like cross-sectional-momentum, which says only "sort by date ascending") are testing the agent's engineering judgment, NOT mandating the buggy idiom. Cross-check this against v3.2.5 (hidden-quality-threshold): if the oracle achieves the answer with margin (oracle_drift ≪ test_threshold), the test is a quality gate, not a brittle pin → `agent_coding`.
+
+NEGATIVE — Agent computes Sharpe ratio with the wrong annualization factor (`√365` instead of `√252`). Numeric test fails because the *value* is wrong. This is B3 (calendar convention), not D1.
+
+NEGATIVE — Agent's `max_turnover_value` is `0.45` instead of `0.78`. Numeric test fails because the *computation* is wrong (e.g., agent forgot to divide by 2). This is A2 / A3 / B1 depending on the upstream cause, not D1.
+
+NEGATIVE — Agent uses `ddof=0` because they reasoned "MLE Gaussian density requires biased-variance estimator." Test expects `ddof=1`. The agent would defend the choice in plain English; the QF reasoning is the variable that needs to change. This is **A3 with `agent_conceptual`**, NOT D1.g.
+
+**Cross-class interactions (independent matches).**
+- D1 fires **independently** of A/B/C. A trial can match A2 (missing formula term) AND D1.a (wrong action vocabulary) when both bugs are present and uncorrelated.
+- The cascade rule applies *within* D (one D1.a vocabulary error producing 5 cascading test failures = one D1.a match). It does NOT collapse D into A/B/C or vice versa.
+- **D1.g special case (engineering layer subsuming a quant-axis match).** When D1.g fires, an A3 (or A2/B1) match is *also* technically firing on the same root cause — the wrong numerical value. Apply a **D1.g-precedence rule** in this case: match D1.g as primary (since the mechanism is engineering, not QF), and mark the parallel A3 with `match: false` plus `notes: "Subsumed by D1.g — wrong value caused by library API default, not by agent's QF reasoning."`. This is the *only* place where D subsumes a quant-axis mode. Rationale: classifying as A3 with `agent_conceptual` would mis-attribute an engineering bug as a finance-knowledge gap, polluting capability assessments.
+
+**Provenance.** D1 added 2026-05 from v10 batch analysis. Initial sub-rubrics seeded from `13f-amendment-aware-crowding` (5 model-rounds). D1.g added 2026-05-04 from `cross-sectional-momentum` deep-dive — first canonical case where an engineering-layer bug (pandas non-stable sort + `drop_duplicates`) produced wrong-value test failures while QF logic was provably correct. Verified end-to-end with a one-line spec fix that lifted Haiku 0/3 → 1/1.
+
+---
+
 ## Cross-cutting: cascade rule (strict — priority-enforced)
 
 A finance bug often touches multiple modes at once: e.g., a single missing `/S₀` in an LR delta score is simultaneously (i) a missing formula term [A2], (ii) a wrong score-function parameterization [A3], and (iii) a 100× unit-scale symptom [B1]. All three rubrics technically fire on the same code line.
 
 **The cascade rule says:** classify the root cause ONCE, under the most upstream / most structurally-deep rubric. Return `match: false` for the downstream rubrics with `notes` pointing to the chosen mode (e.g., *"Subsumed by A2.a: same /S₀ omission. Same root cause."*).
 
-### Priority hierarchy for shared root causes (high → low)
+### Priority hierarchy for shared root causes within the QUANT axis (A/B/C, high → low)
 
 | Priority | Mode | Captures | Subsumed-by-others-when |
 |---|---|---|---|
@@ -502,9 +804,21 @@ A finance bug often touches multiple modes at once: e.g., a single missing `/S�
 | 8 | **C2** | Math right, solver/numerics failed | Subsumed by A1/A2/A3 (Step-0 prerequisite already enforces this) |
 | 9 | **C3** | Math right, but a method-variant choice the spec didn't pin | Subsumed by A1/A2/A3 unless authorship pre-check Case 3 applies |
 
+### Class D — separate axis, fires independently
+
+| Mode | Captures | Subsumption |
+|---|---|---|
+| **D1** | Output schema/format/vocabulary doesn't match spec; quant content is correct or off-axis | **Never subsumed by A/B/C and never subsumes them.** A trial can match D1 *and* any A/B/C mode simultaneously. |
+
+The cascade rule operates *within* an axis, not across axes. D1 fires whenever the schema-mismatch criteria in its decision procedure are met, independent of whether A/B/C also fire on the same trial.
+
 ### When the cascade rule does NOT collapse modes
 
 **Independent root causes get independent matches.** If one trial has both a wrong Heston char-fn coefficient (root cause #1 → A2.g) AND wrong RNG state in the FD Greeks (root cause #2 → C2.j), these are separate code lines and separate mechanisms — both modes match.
+
+**Multiple major errors → multiple matches (not just one).** When you encounter a trial with several genuinely independent quant errors, mark **every** mode whose rubric fires — do NOT artificially pick "the most upstream" if the bugs are on different code lines or different mechanisms. The cascade rule's purpose is to suppress *symptoms of one root cause being counted twice* (A2 + B1 from one missing factor), not to suppress *legitimately different bugs being counted separately*. When in doubt: ask "are these the same code line / same mechanism / same mathematical step?" — if yes, collapse; if no, both match.
+
+**Cross-axis matches always co-fire.** D1 + A2 + C1 can all match simultaneously on a trial that has (i) a wrong formula term, (ii) wrong input data, AND (iii) wrong output schema. These are three orthogonal failures.
 
 **B1.e vs A3.c special case.** These target genuinely different mechanisms even though they often share symptoms:
 - A3.c = "agent picked wrong-but-CONSISTENT convention" (one bug, applied uniformly)
@@ -517,6 +831,264 @@ When only one applies, match it. When the agent applied `/100` in BS-vega but no
 - PR #130 (1 → 8): WoE smoothing error → IV → feature selection → logistic regression → AUC + Gini + KS + KS-threshold + DPR + EOD + top-3-features-by-IV + iv_top_feature. **One root cause → A2 match only**, all downstream tests recorded in notes as cascades.
 - PR #98 (1 → 6,253 dates): single bad warm-start poisoning a time-series fit. **C2.g match only.**
 - PR #208 (1 → 12): `−log(scale)` Jacobian missing → ν pinned at 100 → wrong volatility → all parameter tests fail. **A2.a match only**; the C2.c boundary-binding is subsumed (downstream symptom of the missing Jacobian, not a separate numerical issue).
+
+## Cross-cutting: MANDATORY task_side self-check (added v3.2.12)
+
+`task_side` is a high-bar classification — it tells the maintainer "your spec on `origin/main` has a defect." Calling something `task_side` when it isn't misroutes action to the wrong owner and damages audit credibility. Empirical track record from v3.2.x → v3.2.11 shows that sub-agents systematically over-route to `task_side` under literal application of "spec doesn't pin → C3.c." This self-check is a doubt mechanism that fires automatically when a sub-agent provisionally classifies a trial as `task_side`.
+
+### When to run
+
+Run this self-check **before finalizing** any classification with `root_cause_class = task_side`. Output JSON MUST include a `task_side_self_check` field documenting the answer to each question. If even one question downgrades, **reclassify away from task_side** and explain in `judge_notes`.
+
+### The 7-question doubt checklist (Q0 + Q1–Q6)
+
+**Q0 is the gatekeeper** — it forces a deep re-examination of the entire claim before the remaining six discriminator questions are answered. Q0 must be answered FIRST and in the deepest detail; the other six questions only proceed if Q0 has been answered carefully.
+
+#### Q0 — MANDATORY deep re-examination (added v3.2.13)
+
+> **"Are you sure this is a task issue? Re-examine deeply using the full skill before continuing."**
+
+Before answering Q1–Q6, the sub-agent MUST:
+
+1. **Re-read the spec end-to-end on `origin/main`** — not just the section that seems relevant. `git show origin/main:tasks/<task>/instruction.md` in full. Skim the entire instruction with fresh eyes for any pin you missed: cited papers, library function names, numerical pins, schema enumerations, formula blocks, eponym references, day-count specifications, library kwargs.
+2. **Re-read the failing test assertion(s) verbatim** from `verifier/test-stdout.txt`. Look at the actual numeric values, comparison operators, tolerances. Is it `assert x > 0` (shape invariant) or `assert isclose(x, K, rtol=R)` (pinned numeric with K and R explicit)? Quote the literal assertion line.
+3. **Re-read the agent's actual code** from `agent/<agent-name>.txt` or trajectory writes. Find the EXACT lines where the agent diverged from what would have produced the test-passing value. Don't paraphrase — quote the agent code.
+4. **Cross-check against the skill's discriminators**: read § "Pre-check: who authored the formula?" (3 cases), § "Industry-Standard pre-check", § "Sub-rule: Mathematical equivalence ≠ literal compliance", § "Cross-cutting: hidden quality thresholds". Do any of these route the trial AWAY from task_side?
+5. **Cross-check against the existing canonical examples** in TAXONOMY.md POSITIVE/NEGATIVE finance examples. Does the trial's pattern match an established `agent_conceptual` or `agent_coding` example better than a `task_side` example?
+6. **Write out the task_side claim explicitly** in 2–3 sentences: *what specifically is wrong with the maintainer's `origin/main` spec, what evidence shows the spec defect, why no other classification fits*. If you cannot write this in concrete terms (specific spec line, specific defect, specific test pin that the spec couldn't have intended) — that is itself a signal the trial isn't task_side.
+
+**Q0 output format** — the JSON output MUST include a `q0_deep_recheck` field with the following sub-fields:
+
+```json
+"q0_deep_recheck": {
+  "spec_full_reread": "<one-sentence summary of what spec says, end-to-end>",
+  "test_assertion_verbatim": "<copy-paste the assert line>",
+  "agent_code_verbatim": "<copy-paste the relevant agent code lines>",
+  "discriminator_checks": {
+    "case1_spec_authored": "<no/yes — did spec write formula or cite paper?>",
+    "case2_canonical": "<no/yes — is this a canonical model the agent should know?>",
+    "industry_standard_check": "<no_standard / standard-name>",
+    "math_shortcut_check": "<literal_compliance / shortcut_taken>",
+    "hidden_threshold_ratio": "<oracle-margin / N-A>"
+  },
+  "task_side_claim_in_concrete_terms": "<2–3 sentences naming spec defect + test pin + why no other mode fits>",
+  "confidence_after_deep_recheck": <0–1>
+}
+```
+
+If `confidence_after_deep_recheck < 0.8` after the deep re-examination, **STOP and reclassify** — do not proceed to Q1–Q6. The sub-agent's own uncertainty is itself a signal that task_side is not the right answer.
+
+If `confidence_after_deep_recheck ≥ 0.8`, proceed to Q1–Q6.
+
+#### Q1–Q6 — Specific discriminator questions
+
+For each question, answer Y / N / N-A. The right column shows what each YES/NO triggers.
+
+| # | Question | If YES → | If NO → |
+|---|---|---|---|
+| **Q1** | Are the failing tests **shape invariants only** (positivity, monotonicity, in-band, ratio-close-to-one, exists, len(x) == n)? | task_side plausible (continue) | **DOWNGRADE to A3.f / agent_conceptual** — pinned numeric tests indicate the maintainer ran a canonical implementation and pinned ITS output; the spec is NOT genuinely under-specified |
+| **Q2** | Is there **NO clear industry-standard** implementation for the named convention? (Run the Industry-Standard pre-check from § Pre-check.) | task_side plausible (continue) | **DOWNGRADE to A3.f / agent_conceptual** — agent should have used the industry standard; deviation is a knowledge gap |
+| **Q3** | Does the spec **NOT mention** any paper, textbook section, library function, named author, eponym, or convention shorthand for the procedure? | task_side plausible (continue) | **DOWNGRADE to A1/A2/A3 (Case 1)** — citation pins the convention; agent must follow it |
+| **Q4** | Did the agent's code **NOT take a mathematical shortcut** bypassing the literal spec procedure (per v3.2.11 sub-rule)? | task_side plausible (continue) | **DOWNGRADE to A3.f / agent_conceptual** — math-equivalence shortcut is an A3.f signal, not under-spec |
+| **Q5** | Does the spec **NOT use literal verbs** ("draw from", "sample from", "select Z", "compute Y") whose literal reading would determine canonical execution? | task_side plausible (continue) | **DOWNGRADE to A3.f / agent_conceptual** — literal verb reading is the canonical procedure |
+| **Q6** | Have **sister trials of the same task in other batches** been classified consistently (NOT all classified differently)? | task_side plausible (continue) | **FLAG for cross-batch review** — if sisters are `agent_conceptual`, reconsider; if sisters are `infra_failure`, check stale-spec |
+
+**Decision rule:** task_side stands ONLY if Q0 passed (`confidence_after_deep_recheck ≥ 0.8`) AND ALL 6 of Q1–Q6 answer "task_side plausible" (no DOWNGRADE). If Q0 fails confidence threshold OR any of Q1–Q6 downgrades, reclassify to whichever mode the failing question pointed to, with confidence noted.
+
+### Required output JSON addendum
+
+When finalizing a `task_side` label, the output JSON MUST include the full Q0 deep re-check + the 6 discriminator answers:
+
+```json
+{
+  ...standard fields...,
+  "root_cause_class": "task_side",
+  "task_side_self_check": {
+    "q0_deep_recheck": {
+      "spec_full_reread":           "<one-sentence summary of what spec says, end-to-end>",
+      "test_assertion_verbatim":    "<copy-paste the failing assert line>",
+      "agent_code_verbatim":        "<copy-paste the agent's diverging code>",
+      "discriminator_checks": {
+        "case1_spec_authored":      "<no/yes — did spec write formula or cite paper?>",
+        "case2_canonical":          "<no/yes — canonical model agent should know?>",
+        "industry_standard_check":  "<no_standard | standard-name>",
+        "math_shortcut_check":      "<literal_compliance | shortcut_taken>",
+        "hidden_threshold_ratio":   "<oracle-margin | N-A>"
+      },
+      "task_side_claim_in_concrete_terms": "<2–3 sentences: spec defect + test pin + why no other mode fits>",
+      "confidence_after_deep_recheck": <0–1>
+    },
+    "q1_test_type":         "shape_invariants",      // or "pinned_numeric" → DOWNGRADE
+    "q2_industry_standard": "no_standard_exists",    // or "<standard-name>" → DOWNGRADE
+    "q3_spec_citation":     "no_citation",           // or "<paper/textbook ref>" → DOWNGRADE
+    "q4_math_shortcut":     "literal_compliance",    // or "math_equivalent_shortcut" → DOWNGRADE
+    "q5_literal_verb":      "no_literal_verb",       // or "<verb-line>" → DOWNGRADE
+    "q6_sister_consistency": "consistent",           // or "inconsistent" → FLAG
+    "passed": true                                    // false if Q0 conf < 0.8 OR any Q1–Q6 DOWNGRADE
+  },
+  "task_side_evidence": {
+    "what_spec_doesnt_pin":         "...",
+    "why_no_industry_standard":     "...",
+    "agent_choice_defensibility":   "..."
+  }
+}
+```
+
+If Q0's `confidence_after_deep_recheck < 0.8`, **STOP and reclassify** without proceeding to Q1–Q6.
+If Q0 passes but any of Q1–Q6 DOWNGRADEs, set `passed: false` and reclassify.
+
+### Audit aggregator enforcement
+
+The audit aggregator MUST reject any `task_side` label lacking the full `task_side_self_check.q0_deep_recheck` block (with all sub-fields populated) AND `task_side_self_check.passed = true` (with all 7 questions documented). Sub-agents that produce undocumented `task_side` labels — or labels with `q0_deep_recheck.confidence_after_deep_recheck < 0.8` but `passed: true` (a contradiction) — get re-judged with this checklist explicitly required.
+
+### Why this exists
+
+Three months of v3.2.x audits show a consistent pattern: when a sub-agent applies the literal "spec doesn't pin → C3.c task_side" rule, it under-weights the pinned-numeric-test signal, the literal-verb signal, and the math-shortcut signal. The result is over-attribution to `task_side`. This doubt checklist forces the sub-agent to walk through each signal explicitly, with evidence in the output JSON, before finalizing the high-bar `task_side` label.
+
+**Worked example (var-es-estimation, the case that motivated this rule):**
+
+A v12 audit Opus 4.7 sub-agent provisionally classified `fb-v12-opus47-r3-var-es-estimation` as `C3.c / task_side` because spec L22 *"draw from the selected component accordingly"* doesn't explicitly pin the RNG-call sequence. Running the doubt checklist:
+
+- Q1: Failing tests are `assert isclose(RMSE, 0.1036, rtol=0.10)` — **PINNED NUMERIC** → DOWNGRADE
+- Q5: Spec uses verb "draw from" — **LITERAL VERB** → DOWNGRADE
+- Q4: Agent wrote `z * scales` instead of separate per-component draws — **MATH SHORTCUT** → DOWNGRADE
+
+Three downgrades → reclassify to **A3.f / agent_conceptual** (math-equivalence shortcut bypassed literal spec procedure). The doubt checklist catches the over-routing automatically.
+
+---
+
+## Cross-cutting: hidden quality thresholds — NOT brittle pins
+
+A common task-design pattern in QF-Bench is to **state the metric formula in the spec but withhold the threshold value**. The agent is told *"compute and report `rmse_bps`"* but not *"RMSE must be < 5 bps"*; the threshold lives only in the test. This is intentional difficulty design — the agent is forced to write production-quality code rather than aiming for the minimum that passes a stated gate.
+
+**Diagnostic for a hidden-threshold task:**
+
+1. The spec asks the agent to compute and report a quality metric (RMSE, max-abs-error, monotonicity, residual norm, etc.) in an output file
+2. The spec does NOT state the numerical threshold the metric must satisfy
+3. The test code imposes a numerical bound (e.g., `assert rmse < 5.0`)
+4. **The oracle passes the bound with comfortable margin** (typically 30%+ headroom)
+
+When all four hold, the task is **intentionally hard**, NOT brittle. The hidden threshold is a quality bar the agent must meet by writing correct code, not by tuning to the bound.
+
+**Decision rule for failures on hidden-threshold tests:**
+
+- **Oracle passes the bound by a comfortable margin** (e.g., RMSE 1.06 vs threshold 5; worst caplet 1.59 vs threshold 3) AND **agent fails** despite using the same calibrated parameters / pinned method / pinned init: this is `agent_coding` — a subtle implementation difference from oracle that the bound caught. Do NOT label `task_side`. The bound is doing its job.
+
+- **Oracle barely passes the bound** (within 10-20% of threshold) AND **agent fails by ≤2x the same margin**: borderline. Look at whether the failure point is where the formula has known intrinsic bias (Kirk-deep-ITM, SABR-ATM, Bjerksund-Stensland-near-zero-T) — if yes, then `task_side / brittle pin` per industry-standards § D.4 etc. If the formula is well-behaved at the failure point, agent is `agent_coding`.
+
+- **Oracle FAILS the bound** (oracle's `pytest tests/` does not pass): this is genuine task-side breakage, file an issue with maintainer.
+
+**Worked example** (from QF-Bench v323): `hull-white-swaption` test_caplet_diffs_below_3bps. Spec gives RMSE definition only, no threshold. Oracle: RMSE = 1.06 bps, worst caplet = 1.59 bps (47% headroom under 3-bps bound). Agent codex-55 R3: identical calibrated `(a, σ) = (0.10008, 0.01107)` as oracle, but worst caplet = 3.50 bps. With identical params, the residual difference comes from the agent's HW caplet pricing function — a subtle long-T implementation bug. **Correct label: `agent_coding`, not `task_side`.** The 3-bps test is catching a real bug, not imposing a brittle pin.
+
+**Counterexample** (from QF-Bench v323): `spread-option-kirk-margrabe` test_kirk_mc_agreement. Spec pins Kirk (1995) by name. Oracle uses Kirk and fails this test at the deepest-ITM grid point because Kirk has documented 3-5% intrinsic bias there (Harutyunyan & Borrás 2018; see `INDUSTRY_STANDARDS.md` § D.4). Multiple agents reproduce identically. Bound is tighter than the formula's known bias. **Correct label: `task_side / brittle pin`.** Bound is the bug, not the agents.
+
+**Gap diagnostic — quick mental test:**
+
+```
+Oracle vs threshold ratio              | Verdict
+---------------------------------------|------------------------------
+Oracle ≤ 0.5 × threshold (≥50% margin) | Hidden-threshold quality gate.
+                                         Agent failures = agent_coding.
+Oracle 0.5-0.95 × threshold            | Borderline. Check formula's
+                                         intrinsic bias at failure point.
+Oracle > 1 × threshold (oracle FAILS)  | Genuine task-side breakage.
+```
+
+## Cross-cutting: `infra_failure / stale_spec_checkout` (added v3.2.9, expanded v3.2.10)
+
+Some failures look like agent capability gaps but are actually **benchmark infrastructure bugs** — the harness operator's `tasks/` checkout diverged from `origin/main` at trial-launch time, so the agent received a non-canonical instruction.md while the verifier evaluated against `origin/main`-aligned test expectations. The maintainer's `origin/main` spec is correct; the trial environment served a different snapshot.
+
+This pattern is **categorically different** from `task_side` (which means the spec on `origin/main` itself has a defect). It belongs to `root_cause_class = infra_failure` because the bug lives in the harness pipeline, not in the maintainer's spec or in agent reasoning.
+
+### Two sub-patterns of stale_spec_checkout (both fire `infra_failure`)
+
+**Sub-pattern 1: stale checkout of `origin/main`.** Operator's local `tasks/` is older than `origin/main` HEAD. Common cause: forgot to `git pull` before launching sweep. The agent receives a pre-edit snapshot of an instruction that has since been revised on `origin/main`.
+
+**Sub-pattern 2 (added v3.2.10): pre-merge PR-branch served instead of merged `origin/main`.** Operator's `tasks/` is checked out to a *feature branch* HEAD that the maintainer subsequently revised before squash-merging. The agent gets a draft that differs from what eventually merged. **The verifier still ran the post-merge tests, because tests are typically packaged from a separate path or pulled fresh, while instruction.md was packaged from the stale branch checkout.** This sub-pattern is harder to detect because:
+
+- The literal "spec edit predates trial" check from v3.2.9 may NOT fire (the squash-merge commit on origin/main can post-date the trial).
+- The agent's instruction matches a real, committed git ref — just not `origin/main`.
+- The data files may also be stale (e.g., form4 trials got PDF data files matching the pre-revision PR branch while origin/main had switched to XML — agents physically cannot succeed when input format mismatches reference data).
+
+**v3.2.10 generalized rule:** stale_spec_checkout fires when there is ANY divergence between (a) the instruction the agent received and (b) the spec the verifier's tests assume — regardless of literal date ordering. The infrastructure failure is the divergence itself, not specifically that one is "older."
+
+### Diagnostic — mandatory three-source verification
+
+Apply BEFORE any classification on uniform-failure (κ ≥ 0.7) D1.* cases, AND any time a sister trial of the same task is suspected stale:
+
+1. **Read the trial's literal instruction**: `agent/trajectory.json` step 2 (the user-role message sent to the LLM). This is what the agent actually saw.
+
+2. **Read the canonical spec on `origin/main`**: `git show origin/main:tasks/<task>/instruction.md`. The simplest comparison; if the trial msg matches this, the trial got the canonical spec.
+
+3. **If trial msg doesn't match `origin/main`**: identify distinctive binding clauses in `origin/main` (lines containing "must be one of", "must use exact", "exactly these keys", `--- enumerated list`, numbered formulas, etc.) and check if they appear in the trial msg. If clauses are absent, the trial got a non-canonical version.
+
+4. **MANDATORY (v3.2.10): test-name verification.** Extract failing test function names from `verifier/test-stdout.txt`, then compare against `git show origin/main:tasks/<task>/tests/test_outputs.py` (extract `def test_*` names). The match ratio is the discriminator:
+
+   | Match ratio | Verdict |
+   |---|---|
+   | All failing tests present on origin/main (100%) | **Real stale_spec_checkout** — verifier ran post-merge tests against pre-merge instruction. Flip to `infra_failure`. |
+   | Some present, some not (mixed, e.g., 2/4) | Likely real (verifier was post-merge, but a few failing tests were renamed). Flip on majority match. |
+   | None present (0%) | **Consistently stale** — verifier ran pre-merge test version; matches the pre-merge instruction. Agent's failure is *internal* to the pre-merge framework. NOT `stale_spec_checkout`. Use original A/B/C/D classification. |
+
+   Without this check, audits over-flip "consistently stale" cases (where instruction and test were aligned, just at an older version) and miss the actual infra issue. Empirical: 3 mtm-xccy trials in v323 audit had 0/N test-name match → correctly NOT flipped per v3.2.10 strict reading.
+
+5. **Cross-batch consistency check (added v3.2.10).** When sister trials of the same task are split across multiple sub-agent batches in a parallel audit, every sister trial that exhibits the same trajectory-vs-spec divergence MUST receive the same classification. If one batch flips a trial and another doesn't on indistinguishable evidence, that's a sub-agent inconsistency bug, not a real classification difference. The audit aggregator MUST run a final consistency pass:
+
+   ```
+   for each task in audit:
+       trials = labels-of-task
+       if any trial has root_cause_class = infra_failure AND
+          another sister trial has identical trajectory-step-2 hash AND
+          identical failing-test pattern AND
+          different root_cause_class:
+              flag for re-judge
+   ```
+
+### Routing
+
+- If trial msg lacks distinctive content from `origin/main` AND failing-test names are present on `origin/main` (≥50% match) → `root_cause_class = infra_failure`, `top_mode_subrubric = D1.a` (or D1.b, D1.c, D1.f as applicable), `infra_subrubric = stale_spec_checkout`.
+
+- If trial msg matches `origin/main` → standard A/B/C/D classification.
+
+- If trial msg lacks distinctive content AND failing-test names are NOT on `origin/main` (0% match) → "consistently stale" — leave at original A/B/C/D classification, note the staleness in `judge_notes` for maintainer awareness but do NOT flip.
+
+### Empirical scope (v323 audit final, 2026-05-06)
+
+Systemic deep-read across all 75 v323 tasks (10-Opus-sub-agent re-judge + manual cross-batch consistency check) found stale_spec_checkout in **8 task families, 91 trials total**:
+
+| Task | # Trials | Sub-pattern | Spec mismatch type |
+|---|---|---|---|
+| `13f-amendment-aware-crowding` | 21 | 1 (stale checkout) | Missing L41-44 enum (added Apr-23 `75d5f1a`) |
+| `dupire-local-vol` | 21 | 1 / 2 (pre-merge) | Missing `/app/output/` pin (commit `5f750bc` post-dates some trials) |
+| `etf-overlap-redemption-pressure` | 18 | 2 (PR-branch) | Missing L213 binding directives (commit `ef594c9` May-3) |
+| `form4-cross-sectional-sale-pressure` | 17 | 2 (PR-branch + data-file mismatch) | PDF data files vs origin/main XML; missing per_filing schema |
+| `compound-option-geske` | 4 | 1 | Missing L41 `must use exact` clause (commit `9903799` Apr-27) |
+| `credit-migration-matrix` | 3 | 1 (severely stale) | Missing entire Steps 7-9 (commit `c2d4fbb` May-3) |
+| `fx-carry-forward-hedge` | 2 | 1 (non-canonical draft) | Missing date_diagnostics.json key enumeration |
+| `yield-curve-bond-immunization` | 1 | 1 | Missing KRD bucket key labels |
+
+Other suspect uniform-failure tasks (`ipca-latent-factors`, `mtm-xccy-basis-desk`, `dcc-garch-portfolio-var`, `event-study-earnings`, `yield-curve-pca-dynamics`, `sec-10k-report-long`, `cliquet-ratchet-pricing`, `bl-regime-hmm`, `realized-vol-estimators`) all either received the date-appropriate spec OR were "consistently stale" per the test-name match check — their failures are real agent errors, not infrastructure.
+
+**Lesson from the v323 deep-read pass:** the original v3.2.9 entry stated "exactly one" stale-spec case. That was wrong by 90 trials. The error was a methodology gap — v3.2.9 only checked the literal "spec edit predates trial" condition, missing sub-pattern 2 (PR-branch served before merge, where the trial date can predate the `origin/main` merge commit). v3.2.10 closes this gap.
+
+### Why this matters for benchmark methodology
+
+A κ=1.0 universal-failure signature on a controlled-vocabulary or schema task can be either:
+- (a) genuine LLM-prior attractor (when agent received the spec and ignored the pin), or
+- (b) stale_spec_checkout (when agent never received the pin),
+- and is **distinguishable only by reading `trajectory.json` step-2** (and ideally also checking failing-test-name match for the sub-pattern discriminator).
+
+Without trajectory verification, (a) and (b) are visually identical from aggregate metrics. The empirical v323 finding (91 of 807 = 11.3% of failures are infra) shows this is not a fringe issue — auditing without trajectory verification systematically over-attributes failures to model capability.
+
+**Why this isn't `task_side`:**
+
+`task_side` says "fix the spec" — but the spec on `origin/main` is correct. Calling stale-checkout failures `task_side` would mislead the maintainer into editing a working spec. The actionable owner is the harness operator (sync `tasks/` before launching, or pin `git_commit_id` in `config.json`), not the task maintainer.
+
+**Distinguishing from `agent_conceptual / D1.a`:**
+
+D1.a / agent_conceptual is "agent ignored explicit controlled vocabulary the spec enumerates." That requires the spec to actually enumerate the vocabulary IN THE INSTRUCTION TEXT THE AGENT RECEIVED. If the trajectory's step-2 user message lacks the enumeration, the agent isn't ignoring anything — they don't see it.
+
+Before flagging the headline pattern of "universal vocabulary substitution despite explicit pin," verify the agent actually received the pin. If trajectory step-2 lacks it → `infra_failure / stale_spec_checkout`, not `agent_conceptual`.
 
 ## Provenance
 

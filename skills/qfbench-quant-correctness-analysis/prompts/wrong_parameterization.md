@@ -19,12 +19,20 @@ Distinguish from C3: C3 is *named-method variants* (Newey-West NW87 vs NW94 — 
 7. **A3 vs B1**: B1 is unit/scale of a well-defined number; A3 is the definition itself.
 8. **A3 vs A2 (cascade priority — important).** A3 fires when the agent's code is **internally consistent under a chosen convention** that disagrees with the test's pinned convention. If the agent's formula is structurally wrong (missing/wrong chain-rule term, missing factor, dimensional inconsistency) and the output landing in a different-looking convention is a *consequence* of that structural bug rather than an explicit convention choice, **A2 owns it**; A3 returns `match: false` with notes redirecting to A2. Concrete test: ask "did the agent INTENTIONALLY pick a convention, or did they write a wrong formula that happens to produce wrong-convention output?" If the latter, A2.
 
+9. **A3 vs D1.g (engineering-layer — mandatory pre-check).** Before matching A3, ask: **does the agent's wrong value come from their QF reasoning, or from a library API default they didn't think to override?**
+   - **Plain-English defense test:** can the agent defend the choice in plain English? "I picked ddof=0 because the Gaussian MLE requires biased variance" — defensible reasoning → A3 with `agent_conceptual`. "I just used `df.sort_values()` — didn't realize it was unstable" — no reasoning, library default surprised them → **D1.g**, redirect.
+   - **One-keyword-fix test:** can the agent's code be made correct by changing exactly one keyword argument (`kind='stable'`, `keep='last'`, `dtype=float`, `errors='raise'`, `sort_keys=True`, etc.) without touching any formula, model class, or convention pick? Yes → **D1.g**.
+   - **Mechanism-locality test:** is the bug at the data-engineering layer (CSV parsing, sort, dedup, merge, type coercion, JSON round-trip, regex)? Engineering layer → **D1.g**. Quant-formula layer → A3.
+   - When D1.g applies, return A3 `match: false` with notes redirecting to D1.g. This is the only quant-axis mode that gets subsumed by a D-axis mode (see TAXONOMY § "D1.g special case"). Rationale: classifying a pandas API quirk as "wrong parameterization" mis-attributes engineering bugs as QF-knowledge gaps.
+   - Concrete example: `cross-sectional-momentum` agent writes `df.sort_values('date').drop_duplicates(keep='last')` → wrong total_return. Code's QF logic is identical to oracle's; bug is pandas non-stable-sort default. Redirect to D1.g, NOT A3.
+
 ## Exclusions
 
 - Wrong numeric value of a well-defined parameter (that's a code error, not a convention error).
 - Pure unit/scale (% vs decimal) → B1.
 - Pure sign (+ vs −) → B2.
 - Methodological variants of a named method → C3.
+- **Library/API default-induced wrong values where QF logic is correct → D1.g.** See decision-procedure step 9 above. Do NOT match A3 for these.
 
 ## Sub-rubrics
 
@@ -37,6 +45,11 @@ Distinguish from C3: C3 is *named-method variants* (Newey-West NW87 vs NW94 — 
   - Annualization basis: `(1+r)^(252/N)−1` where N = trading days *with position* vs total trading days.
   - Return-frequency conversion: simple `r_monthly = r_annual/12` vs compound `(1+r_annual)^(1/12)−1`.
 - **A3.d — Backtest state-tracking convention.** Between rebalances, portfolio tracks *target weights* (held constant, no drift) vs *actual weights* (drifted by daily returns, snapped back at rebalance). Same for `w_old` in turnover: previous target vs current drifted weight. Both defensible; tests pin one.
+- **A3.f — Agent overthink / non-industry-standard convention default.** *(Added May 2026 v3.1; refined v3.2.)* The agent picks a less-common variant of an under-specified convention where a clear industry-standard variant exists. A senior quant with industry experience would either (i) check the instruction for a citation/reference and use that variant, or (ii) apply the industry-standard default. The agent's failure to do either reflects a knowledge gap about industry common sense, not spec ambiguity. **`root_cause_class = agent_conceptual`** (not `task_side`).
+  - **v3.2 prerequisite (mandatory).** Before classifying as A3.f, run the **Spec-Citation Extraction Pre-check** in `prompts/system_judge.md`. A3.f only fires when the regime is `spec-delegates` (eponym named, formula not pinned) or `silent` AND a clear industry-standard variant still exists. If the regime is `spec-authored` (any of the 8 patterns: author cite, section ref, cross-file ref, inline TeX, library kwarg, pinned param, day-count pin, pseudocode fence), the failure is **A2 / A3.a–e — failure to follow an explicit pin**, not A3.f. See `references/spec_citation_patterns.md` for the full pattern catalog and the empirical examples that motivated the v3.2 refinement (~31 V11 cells were misrouted to A3.f under v3.1 because the pre-check missed cross-file refs and pseudocode fences).
+  - *Examples.* `ddof=0` for sample std when industry default is `ddof=1`; `× √365` annualization for trading-day returns when standard is `× √252`; loss-space VaR reported as a return (negative sign) when standard is positive loss; threshold-form ES `E[L|L>VaR]` when industry typically uses the rank-based Acerbi-Tasche form; `pct_change` with `fill_method` defaults to `pad` (deprecated) when explicit handling is required; non-stable PCA eigenvector signs without an anchor when standard practice is "first loading positive" or "anchor to reference series".
+  - *Distinguishing A3.f from A3.a/b/c.* A3.a/b/c describe specific named conventions where the agent's choice is internally consistent but disagrees with the test. A3.f is the meta-rubric: the agent's variant is *less common in industry* than the test's variant, AND the spec offered no signal to prefer the agent's choice over the industry default.
+  - *Distinguishing A3.f from `task_side`.* Apply the Industry-Standard pre-check (system_judge.md). If the spec has any citation/reference, OR a clear industry standard exists, the failure is A3.f `agent_conceptual`. Only when neither condition holds is `task_side` appropriate. **By construction, A3.f raises the bar for `task_side` significantly:** under v3.1, `task_side` should fire only on (i) genuinely under-specified procedural goals with no industry default, (ii) brittle test anchors on non-portable internal values (e.g., scipy iteration counts), or (iii) genuine spec ambiguity / oracle bugs.
 
 ## Single-shot applicability
 

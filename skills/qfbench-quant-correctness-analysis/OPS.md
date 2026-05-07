@@ -378,6 +378,112 @@ upstream.
 
 ---
 
+## Skill maintenance — rule-consistency self-check
+
+**Mandatory step when adding a new general rule** (introduced v3.2.7).
+
+Rule-based skills accrete worked examples over time. New general rules
+are correct in the abstract but can silently contradict old worked
+examples. Judges (correctly) follow the more-specific older example,
+so the new rule has no effect.
+
+**The cross-sectional-momentum mislabel** (v3.2.5/v3.2.6 → v3.2.7) is the
+canonical case: when v3.2.5 added the hidden-quality-threshold rule
+("oracle drift ≪ test threshold → agent_coding"), the older v3.2.1 worked
+example for cross-sectional-momentum had inline pre-labeling
+("(or task_side... as it does here for cross-sectional-momentum)") that
+contradicted the new rule. Judges followed the more-specific older
+example. 8 trials in v323 mislabeled.
+
+**Self-check procedure** to run when adding ANY new rule that affects
+routing or classification:
+
+1. **Search for inline pre-labelings** that hardcode a verdict for a
+   specific task or trial:
+   ```bash
+   grep -nE "as it does here|canonical .*case|canonical case explicitly|\
+   for [a-z-]+ specifically|task_side .*if .*spec mandated|\
+   (route|label|classify) .* as `[a-z_]+`" SKILL.md TAXONOMY.md
+   ```
+2. **For each match**: verify the example's pre-labeled verdict is still
+   consistent with the new rule. Apply the new rule's diagnostic test
+   (e.g., for v3.2.5: compute oracle / threshold ratio; for v3.2.6:
+   classify into Pattern A/B/C).
+3. **If inconsistent**: update the example to match the new rule, OR
+   remove the pre-labeling and replace with "see § new-rule" cross-reference.
+4. **Document in CHANGELOG**: list every example you audited and whether
+   it was updated, removed, or already consistent.
+
+**Never** add a new rule without running steps 1-4. The cost of skipping
+is measured in mis-attributed labels across the entire benchmark corpus.
+
+---
+
+## Parallel sub-agent audit pipeline rules (added v3.2.10)
+
+When running large-scale audits via parallel sub-agents (the typical pattern: 8–16 sub-agents fanning out a 100–800 trial corpus), the following rules are MANDATORY to prevent cross-batch inconsistencies that would otherwise undermine audit reliability.
+
+### Rule 1: Uniform prompt template across all sub-agents
+
+**Bug pattern (observed v323 Phase 4):** batches 0/1 ran with leaner prompts (3 skill files: TAXONOMY, CHANGELOG, memory) while batches 5–9 had the full bundle (5 skill files + 2 memory files + batch list). Result: batches 0/1 took a stricter literal reading of the rule and missed 2 flips that batches 5–9 correctly identified on identical evidence.
+
+**Required:** all sub-agents in one audit run MUST get the same set of skill files in their prompt. Concretely, every sub-agent prompt must include:
+
+```
+1. SKILL.md
+2. TAXONOMY.md (the operative rules)
+3. prompts/system_judge.md (formal routing)
+4. CHANGELOG.md (latest version semantics)
+5. INDUSTRY_STANDARDS.md
+6. Relevant memory notes (at minimum the canonical examples for each rule)
+7. Per-trial batch list
+```
+
+If memory files are task-specific, every sub-agent gets ALL of them — even sub-agents working on tasks that don't reference a particular memory note. Cost is small (a few extra tokens per agent); cost of inconsistency is large (audit reliability).
+
+### Rule 2: Mandatory cross-batch consistency check
+
+**Bug pattern:** sister trials of the same task split across batches sometimes get inconsistent classifications — one batch flips, another doesn't, on indistinguishable evidence. The aggregator only catches this via post-hoc inspection.
+
+**Required:** the audit aggregator MUST run a final consistency pass before publishing results:
+
+```python
+for task in distinct_tasks_in_audit:
+    trial_groups = group_by_signature(trials_of_task)
+    # signature = (trajectory-step-2 hash, failing-test-set, agent_code_pattern)
+    for sig, trials_with_sig in trial_groups:
+        classes = {trial.root_cause_class for trial in trials_with_sig}
+        if len(classes) > 1:
+            flag_for_re_judge(trials_with_sig, reason="cross-batch inconsistency on indistinguishable evidence")
+```
+
+The flag-for-re-judge cases should be re-audited by a single sub-agent (with the full prompt template per Rule 1) to settle the disagreement. Empirically v323 Phase 4 had 2 such cases that were settled by manual cross-check.
+
+### Rule 3: Test-name verification is a precondition for stale_spec_checkout flips
+
+**Bug pattern:** sub-agents see a trajectory missing distinctive content from origin/main, conclude "stale checkout," and flip without checking whether the failing tests actually exist on origin/main. When tests don't exist on origin/main (i.e., test was renamed or task pre-merge had different test names), the trial is "consistently stale" — instruction and verifier were aligned at an older version, so the agent's failure is genuine within that older framework. Flipping such cases over-attributes to infrastructure.
+
+**Required:** before classifying any trial as `infra_failure / stale_spec_checkout`, the sub-agent prompt must explicitly require this check, and the output JSON must include the match ratio:
+
+```json
+{
+  "old_class": "agent_conceptual",
+  "new_class": "infra_failure",
+  "test_name_verification": "4/5 on origin/main",  // MUST be present
+  ...
+}
+```
+
+The aggregator rejects any flip where `test_name_verification` is missing or shows 0% match (flag for re-judge).
+
+### Rule 4: Ratio-test exit criteria for batch quota
+
+When a batch's "verified-correct" count exceeds 90% of trials with 0 flips (e.g., batch 0 returned 14/15 verified-correct with 0 flips), the aggregator should sample-spot-check 2-3 of the "verified-correct" trials in that batch by comparing to sister trials in other batches. If sister trials of the same task were flipped elsewhere, those "verified-correct" calls are suspect — re-judge them with a fresh sub-agent and full prompt context.
+
+Empirically: Phase 4 batches 0 and 1 had this ratio (14/15 and 14/15 verified-correct, 0 flips). Spot-check found 2 missed flips that were flipped in batches 5–9 on identical task patterns.
+
+---
+
 ## Configuration
 
 | Variable | Purpose |

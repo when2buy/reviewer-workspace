@@ -269,6 +269,87 @@ All 7 file-existence tests fail (no outputs produced — the agent wrote to `./o
 
 ---
 
+## Example 5 — Class D (Spec & Output Compliance): D1.a Schema vocabulary contradicting instruction prose
+
+*Empirical source: QF-Bench V11 / V12 `asian-option-levy-curran` task; round R3 of multiple Codex agent variants. Identified during the v3.2.1 routing audit (May 5 2026) — see `references/v321_routing_changes.md`.*
+
+### Trial
+
+- `agent_harness=claude-code` and `agent_harness=codex` (multiple variants — same root cause across H4.5, S4.5, O4.6, G5.5, etc.)
+- `task_name=asian-option-levy-curran`
+- `solution_kind=multi-step` (claude-code) or `single-shot` (codex)
+
+### `instruction.md` (excerpt)
+
+> ## Step 1: Data Preparation
+>
+> Load `/app/spy_daily.csv` (columns: date, open, high, low, close, volume).
+> Compute daily log-returns `x_i = log(close_i / close_{i-1})`. **Report:**
+> - **Number of log-returns**
+> - Mean and standard deviation of returns
+> - S0 = last closing price
+
+### Output schema (also from instruction.md)
+
+```json
+{
+    "n_prices": <int>,
+    "sigma": <float>,
+    "S0": <float>,
+    "return_mean": <float>,
+    "return_std": <float>
+}
+```
+
+### Test assertion (from `tests/test_outputs.py`)
+
+```python
+def test_n_prices(self):
+    """Number of prices must match SPY data (693 close prices)."""
+    assert self.data["n_prices"] == 693, (
+        f"n_prices={self.data['n_prices']}, expected 693"
+    )
+```
+
+### Oracle (from `solution/solve.sh`)
+
+```python
+n_prices = len(prices)            # = 693 (number of close prices)
+# ...
+"n_prices": n_prices,
+```
+
+### Empirical ground truth (verified directly)
+
+Data file: `spy_daily.csv` has **694 rows** (1 header + 693 close prices). Daily log-returns from 693 closes = **692** values (one fewer, because `log(close_i / close_{i-1})` requires i ≥ 2).
+
+### Agent's behavior
+
+The agent reads the instruction prose literally, computes `n_prices = len(log_returns) = 692`, emits `{"n_prices": 692, ...}`. All 23 of 24 quant-correctness tests **PASS** (Levy moment-matching, Curran geometric conditioning, MC benchmark, geo ≤ arith, monotonicity in K and T, etc.). The only failing test is `test_n_prices` because the test asserts 693.
+
+### `labels.json` snippet (D1.a match)
+
+```json
+{
+  "match": true,
+  "evidence_step_ids": [21, 22, 23, 104, 48],
+  "quote": "Report: Number of log-returns | n_prices: <int> | assert self.data[\"n_prices\"] == 693",
+  "confidence": 0.95,
+  "root_cause_class": "task_side",
+  "notes": "Triple-contradiction in spec. Instruction prose (line 21–23) says 'Report: Number of log-returns' (= 692). Schema field name is 'n_prices' suggesting count of close prices (= 693). Test asserts 693. Oracle computes 693. Agent followed prose literally and emitted 692 — 23/24 quant tests pass. The single failure is purely vocabulary mismatch: D1.a / task_side. Spec-Citation Pre-check (v3.2.1) routes Levy(1992)+Curran(1994) author-year cites to Authorship Case 2 (canonical methods) and confirms 23/24 quant tests passing makes A2 structurally implausible."
+}
+```
+
+### Why this matters (v3.2.1 routing fix)
+
+Under v3.1, this trial was misclassified as **A2 / agent_conceptual** ("Curran's two-moment lognormal approximation has wrong second-moment expression"). The misclassification arose because v3.1 generalized across the trial's cells: some R1/R2 cells DID have legitimate A2 issues (geo > arith violations), and that diagnosis was applied trial-wide.
+
+For this R3 cell specifically, **only the schema-vocabulary test fails**. v3.2.1's Spec-Citation Pre-check + per-cell ctrf reading correctly routes to D1.a / task_side. The fix is a one-line edit in instruction.md (replace "Report: Number of log-returns" with "Report `n_prices`: number of close prices").
+
+This is the canonical example of v3.2.1 catching a task-side spec defect that v3.1 mistook for an agent finance error.
+
+---
+
 ## Sample report snippet (after batch judging)
 
 After running the LLM judge across all failed trials and aggregating:

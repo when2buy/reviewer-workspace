@@ -54,6 +54,7 @@ ALL_MODES: list[str] = [
     "data_fabrication_wrong_source",
     "numerical_optimization_failure",
     "statistical_variant_mismatch",
+    "spec_output_compliance",
 ]
 
 # Unlike the trajectory skill, ALL 9 quant-correctness modes apply to single-shot
@@ -67,8 +68,10 @@ DEFAULT_PRICING: dict[str, dict[str, float]] = {
     "gpt-4o": {"input": 2.50 / 1000, "output": 10.00 / 1000},
     "claude-opus-4-5": {"input": 15.00 / 1000, "output": 75.00 / 1000},
     "claude-opus-4-6": {"input": 15.00 / 1000, "output": 75.00 / 1000},
+    "claude-opus-4-7": {"input": 15.00 / 1000, "output": 75.00 / 1000},
     "claude-sonnet-4-5": {"input": 3.00 / 1000, "output": 15.00 / 1000},
     "claude-sonnet-4-6": {"input": 3.00 / 1000, "output": 15.00 / 1000},
+    "claude-sonnet-4-7": {"input": 3.00 / 1000, "output": 15.00 / 1000},
     "gemini-2.5-pro": {"input": 1.25 / 1000, "output": 10.00 / 1000},
     "gemini-2.5-flash": {"input": 0.30 / 1000, "output": 2.50 / 1000},
 }
@@ -271,10 +274,20 @@ async def acomplete_judge(
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        "temperature": cfg.temperature,
         "max_tokens": cfg.max_tokens,
         "timeout": cfg.timeout,
     }
+    # claude-opus-4-7+ and gpt-5/o-family reasoning models reject `temperature`.
+    # Older Anthropic + GPT-4 family still accept it.
+    _model_lower = cfg.model.lower()
+    _no_temperature = (
+        _model_lower.startswith(("gpt-5", "o1", "o3", "o4")) or
+        "claude-opus-4-7" in _model_lower or
+        "claude-sonnet-4-7" in _model_lower or
+        "claude-haiku-4-7" in _model_lower
+    )
+    if not _no_temperature:
+        kwargs["temperature"] = cfg.temperature
     if cfg.reasoning_effort and cfg.model.startswith(("gpt-5", "o1", "o3", "o4")):
         kwargs["reasoning_effort"] = cfg.reasoning_effort
     try:
